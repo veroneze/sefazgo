@@ -84,9 +84,17 @@
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="antialiased flex flex-col md:flex-row min-h-screen">
+<body>
     <div id="menu-slot" data-menu-slot></div>
     <script src="menu-loader.js" data-menu="menu.html" data-base="" data-home-base="../"></script>
+
+    <div class="wrap">
+        <div class="paper">
+            <header data-page-header>
+                <h1 data-page-title></h1>
+                <p data-page-subtitle></p>
+            </header>
+            <div class="page-main">
 
     <!-- Chosen Palette: Slate and Blue tones for a professional, academic feel. -->
 
@@ -662,5 +670,9 @@
         };
 
     </script>
+            </div>
+        </div>
+    </div>
+    <script src="page-shell.js"></script>
 </body>
 </html>

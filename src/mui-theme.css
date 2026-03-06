@@ -582,7 +582,7 @@ main, #main {
 }
 .paper header h1, .paper > header h1 { margin: 0 0 8px; font-size: 2rem; line-height: 1.2; }
 .paper header p, .paper > header p { margin: 6px 0; opacity: 0.98; }
-.paper main, .paper > main { padding: 28px 32px 40px; }
+.paper main, .paper > main, .paper .page-main { padding: 28px 32px 40px; }
 .small { font-size: 0.9rem; color: var(--mui-text-secondary); }
 .card.soft { background: var(--mui-alert-info-bg); }
 .card.warn { background: var(--mui-alert-warning-bg); }
