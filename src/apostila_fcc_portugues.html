@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
@@ -964,7 +964,7 @@ function irPara(n) {
     sec.classList.add('active');
     secAtual = num;
     document.querySelector('#nav select').value = String(num);
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    const navEl = document.getElementById('nav'); const navH = navEl ? navEl.offsetHeight : 0; window.scrollTo({top: navH, behavior: 'smooth'});
   }
 }
 function responder(el, escolha, gabarito) {

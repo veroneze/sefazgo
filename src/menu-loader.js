@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   const script = document.currentScript;
   const menuPath = script?.dataset.menu || "menu.html";
   const base = script?.dataset.base || "";
@@ -22,40 +22,61 @@
       const currentPath = window.location.pathname.split("/").pop();
       const topbar = container.querySelector(".mui-topbar");
       const toggle = container.querySelector(".mui-topbar__toggle");
-      container
-        .querySelectorAll("[data-page]")
-        .forEach((link) => {
-          const page = link.getAttribute("data-page");
-          if (page) {
-            link.setAttribute("href", `${base}${page}`);
-            if (currentPath && page === currentPath) {
-              link.setAttribute("aria-current", "page");
-            }
+      const backdrop = container.querySelector(".mui-topbar__backdrop");
+      const closeBtn = container.querySelector(".mui-topbar__close");
+
+      container.querySelectorAll("[data-page]").forEach((link) => {
+        const page = link.getAttribute("data-page");
+        if (page) {
+          link.setAttribute("href", `${base}${page}`);
+          const decodedPage = decodeURIComponent(page);
+          if (currentPath && (page === currentPath || decodedPage === currentPath)) {
+            link.setAttribute("aria-current", "page");
           }
-        });
-      container
-        .querySelectorAll("[data-home]")
-        .forEach((link) => {
-          const page = link.getAttribute("data-home");
-          if (page) {
-            link.setAttribute("href", `${homeBase}${page}`);
-            if (currentPath && page === currentPath) {
-              link.setAttribute("aria-current", "page");
-            }
+        }
+      });
+
+      container.querySelectorAll("[data-home]").forEach((link) => {
+        const page = link.getAttribute("data-home");
+        if (page) {
+          link.setAttribute("href", `${homeBase}${page}`);
+          if (currentPath && page === currentPath) {
+            link.setAttribute("aria-current", "page");
           }
-        });
+        }
+      });
+
+      function openMenu() {
+        topbar.classList.add("mui-topbar--open");
+        toggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        topbar.classList.remove("mui-topbar--open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      }
 
       if (topbar && toggle) {
-        toggle.addEventListener("click", () => {
-          const isOpen = topbar.classList.toggle("mui-topbar--open");
-          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        toggle.addEventListener("click", openMenu);
+
+        if (closeBtn) {
+          closeBtn.addEventListener("click", closeMenu);
+        }
+
+        if (backdrop) {
+          backdrop.addEventListener("click", closeMenu);
+        }
+
+        container.querySelectorAll(".mui-topbar__drawer nav a").forEach((link) => {
+          link.addEventListener("click", closeMenu);
         });
 
-        container.querySelectorAll(".mui-topbar__links a").forEach((link) => {
-          link.addEventListener("click", () => {
-            topbar.classList.remove("mui-topbar--open");
-            toggle.setAttribute("aria-expanded", "false");
-          });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && topbar.classList.contains("mui-topbar--open")) {
+            closeMenu();
+          }
         });
       }
     })

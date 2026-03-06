@@ -86,75 +86,31 @@
     <div id="menu-slot" data-menu-slot></div>
     <script src="menu-loader.js" data-menu="menu.html" data-base="" data-home-base="../"></script>
 
-    <div class="wrap">
-        <div class="paper">
-            <header data-page-header>
-                <h1 data-page-title></h1>
-                <p data-page-subtitle></p>
-            </header>
-            <div class="page-main">
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900 bg-opacity-50 z-20 hidden md:hidden" onclick="toggleMobileMenu()"></div>
-
-    <!-- Sidebar Navigation -->
-    <aside id="sidebar" class="w-64 bg-white border-r border-slate-200 flex flex-col fixed md:relative z-30 h-full transition-transform transform -translate-x-full md:translate-x-0">
-        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
-            <div>
-                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Tributário I</h1>
-                <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">Foco Banca FCC</p>
-            </div>
-            <button class="md:hidden text-slate-500 text-2xl focus:outline-none" onclick="toggleMobileMenu()">&#10005;</button>
+    <!-- Nav bar: module switcher -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 flex items-center gap-1 overflow-x-auto py-2">
+            <button onclick="switchSection('s-visao')" class="nav-btn whitespace-nowrap px-4 py-2 rounded text-sm font-medium text-blue-600 bg-blue-50 border border-blue-200 transition-colors" data-target="s-visao">
+                📊 Visão Geral
+            </button>
+            <button onclick="switchSection('s-cf')" class="nav-btn whitespace-nowrap px-4 py-2 rounded text-sm font-medium text-slate-600 hover:bg-slate-100 border border-transparent transition-colors" data-target="s-cf">
+                📖 Constituição Federal
+            </button>
+            <button onclick="switchSection('s-competencia')" class="nav-btn whitespace-nowrap px-4 py-2 rounded text-sm font-medium text-slate-600 hover:bg-slate-100 border border-transparent transition-colors" data-target="s-competencia">
+                🏛 Competências
+            </button>
+            <button onclick="switchSection('s-ctn')" class="nav-btn whitespace-nowrap px-4 py-2 rounded text-sm font-medium text-slate-600 hover:bg-slate-100 border border-transparent transition-colors" data-target="s-ctn">
+                ⚙ CTN
+            </button>
+            <button onclick="switchSection('s-legis')" class="nav-btn whitespace-nowrap px-4 py-2 rounded text-sm font-medium text-slate-600 hover:bg-slate-100 border border-transparent transition-colors" data-target="s-legis">
+                📜 Leis & STF
+            </button>
         </div>
-        
-        <nav class="flex-1 overflow-y-auto py-4">
-            <ul class="space-y-1">
-                <li>
-                    <button onclick="switchSection('s-visao')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-blue-600 bg-blue-50 border-r-4 border-blue-600 transition-colors" data-target="s-visao">
-                        &#128202; Visão Geral & Espécies
-                    </button>
-                </li>
-                <li>
-                    <button onclick="switchSection('s-cf')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-cf">
-                        &#128214; Constituição Federal
-                    </button>
-                </li>
-                <li>
-                    <button onclick="switchSection('s-competencia')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-competencia">
-                        &#127963; Competências (União, EE, MM)
-                    </button>
-                </li>
-                <li>
-                    <button onclick="switchSection('s-ctn')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-ctn">
-                        &#9881; Código Tributário Nacional
-                    </button>
-                </li>
-                <li>
-                    <button onclick="switchSection('s-legis')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-legis">
-                        &#128220; Leis Complementares & STF
-                    </button>
-                </li>
-            </ul>
-        </nav>
-        
-        <div class="p-4 border-t border-slate-200">
-            <div class="bg-slate-100 rounded p-3 text-xs text-slate-500 text-center">
-                Material de Revisão Interativo
-            </div>
-        </div>
-    </aside>
+    </nav>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50 relative">
-        
-        <!-- Mobile Header -->
-        <header class="md:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between sticky top-0 z-10">
-            <span class="font-bold text-slate-800">Direito Tributário I</span>
-            <button onclick="toggleMobileMenu()" class="text-slate-600 text-2xl focus:outline-none">&#9776;</button>
-        </header>
-
-        <!-- Content Area -->
-        <div class="flex-1 overflow-y-auto p-4 md:p-8 lg:px-12">
+    <main class="max-w-5xl mx-auto px-4 py-8 w-full">
+        <div class="">
             
             <!-- SECTION: Visão Geral -->
             <section id="s-visao" class="section-content active max-w-5xl mx-auto">
@@ -514,7 +470,7 @@
 
         </div>
     </main>
-
+    
     <script>
         // --- Navigation Logic ---
         function switchSection(sectionId) {
@@ -526,35 +482,21 @@
             // Show target section
             document.getElementById(sectionId).classList.add('active');
             
-            // Update sidebar buttons
+            // Update nav buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-600');
+                btn.classList.remove('text-blue-600', 'bg-blue-50', 'border-blue-200');
                 btn.classList.add('text-slate-600', 'border-transparent');
                 
                 if (btn.getAttribute('data-target') === sectionId) {
                     btn.classList.remove('text-slate-600', 'border-transparent');
-                    btn.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-600');
+                    btn.classList.add('text-blue-600', 'bg-blue-50', 'border-blue-200');
                 }
             });
 
-            // Close mobile menu if open
-            if(window.innerWidth < 768) {
-                toggleMobileMenu();
-            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function toggleMobileMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobile-menu-overlay');
-            
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
+        function toggleMobileMenu() { /* no-op: sidebar removed */ }
 
         // --- Accordion Logic (CF Section) ---
         function toggleAccordion(id) {
@@ -679,9 +621,6 @@
         });
 
     </script>
-            </div>
-        </div>
-    </div>
     <script src="page-shell.js"></script>
 </body>
 </html>

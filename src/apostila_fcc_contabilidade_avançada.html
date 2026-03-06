@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -27,7 +27,6 @@
   --red:     #dc2626;
   --green:   #16a34a;
   --amber:   #d97706;
-  --sidebar: 300px;
   --radius:  8px;
 }
 
@@ -149,7 +148,8 @@ body {
 
 /* ── MAIN ── */
 #main {
-  margin-left: var(--sidebar);
+  padding: 0 40px;
+  
   min-height: 100vh;
 }
 
@@ -697,19 +697,7 @@ li strong { color: var(--navy2); }
 .btn-print:hover { background: var(--navy3); }
 
 /* ── TOGGLE SIDEBAR ── */
-.toggle-btn {
-  display: none;
-  position: fixed;
-  top: 12px; left: 12px;
-  z-index: 200;
-  background: var(--navy);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-size: 16px;
-  cursor: pointer;
-}
+
 
 /* ── PROGRESS BAR ── */
 #progress {
@@ -770,8 +758,9 @@ li strong { color: var(--navy2); }
 
 /* ── PRINT ── */
 @media print {
-  #sidebar, #progress, .topbar, .toggle-btn { display: none !important; }
-  #main { margin-left: 0; }
+  #sidebar, #progress, .topbar, 
+  #main {
+  padding: 0 40px; margin-left: 0; }
   .content { padding: 20px; }
   .hero { padding: 30px 40px; }
   .part-header { padding: 20px 40px; }
@@ -785,7 +774,7 @@ li strong { color: var(--navy2); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  :root { --sidebar: 260px; }
+  :root { }
   .content { padding: 32px 28px; }
   .hero { padding: 48px 28px; }
   .topbar { padding: 10px 28px; }
@@ -795,9 +784,10 @@ li strong { color: var(--navy2); }
 @media (max-width: 640px) {
   #sidebar { transform: translateX(-100%); }
   #sidebar.open { transform: translateX(0); }
-  #main { margin-left: 0; }
+  #main {
+  padding: 0 40px; margin-left: 0; }
   #progress { left: 0; }
-  .toggle-btn { display: block; }
+  
   .compare-grid { grid-template-columns: 1fr; }
   .topbar { padding: 10px 16px 10px 60px; }
   .content { padding: 28px 16px; }
@@ -832,65 +822,6 @@ li strong { color: var(--navy2); }
         <p data-page-subtitle></p>
       </header>
       <div class="page-main">
-
-<div id="progress"></div>
-
-<button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-
-<!-- SIDEBAR -->
-<nav id="sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-brand">Apostila FCC<br>Contabilidade</div>
-    <div class="sidebar-sub">Módulo 12 · Avançada &amp; Custos</div>
-  </div>
-  <div class="sidebar-search">
-    <input type="text" id="searchInput" placeholder="Buscar tópico…" oninput="filterNav(this.value)">
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-label">Parte 1 · Avançada</div>
-    <a class="nav-link" href="#cap1">1. Políticas Contábeis</a>
-    <a class="nav-link sub" href="#cap1-1">— Mudança de Estimativa</a>
-    <a class="nav-link sub" href="#cap1-2">— Retificação de Erro</a>
-    <a class="nav-link" href="#cap2">2. Valor Justo (CPC 46)</a>
-    <a class="nav-link sub" href="#cap2-1">— Hierarquia de Inputs</a>
-    <a class="nav-link" href="#cap3">3. Ajuste a Valor Presente</a>
-    <a class="nav-link" href="#cap4">4. Instrumentos Financeiros</a>
-    <a class="nav-link sub" href="#cap4-1">— Classificação CPC 48</a>
-    <a class="nav-link sub" href="#cap4-2">— ECL / Debêntures</a>
-    <a class="nav-link" href="#cap5">5. Propriedade p/ Investimento</a>
-    <a class="nav-link" href="#cap6">6. Arrendamento Mercantil</a>
-    <a class="nav-link" href="#cap7">7. Participações Societárias</a>
-    <a class="nav-link sub" href="#cap7-1">— MEP e LNR</a>
-    <a class="nav-link sub" href="#cap7-2">— Dividendos</a>
-    <a class="nav-link" href="#cap8">8. Reorganização Societária</a>
-    <a class="nav-link sub" href="#cap8-1">— Goodwill e Mais-valia</a>
-    <a class="nav-link" href="#cap9">9. Subvenção Governamental</a>
-    <a class="nav-link" href="#cap10">10. Câmbio (CPC 02)</a>
-    <a class="nav-link" href="#cap11">11. DFC e DVA</a>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-label">Parte 2 · Custos</div>
-    <a class="nav-link" href="#cap12">12. Terminologia</a>
-    <a class="nav-link" href="#cap13">13. Classificação dos Custos</a>
-    <a class="nav-link" href="#cap14">14. Apropriação e Rateio</a>
-    <a class="nav-link" href="#cap15">15. Departamentalização</a>
-    <a class="nav-link" href="#cap16">16. Taxa de CIF</a>
-    <a class="nav-link" href="#cap17">17. Fluxo de Produção</a>
-    <a class="nav-link" href="#cap18">18. Equivalentes de Produção</a>
-    <a class="nav-link" href="#cap19">19. Tipos de Produção</a>
-    <a class="nav-link" href="#cap20">20. Tipos de Custeio</a>
-    <a class="nav-link" href="#cap21">21. Custo Padrão e Variações</a>
-    <a class="nav-link" href="#cap22">22. Margem de Contribuição</a>
-    <a class="nav-link" href="#cap23">23. Análise CVL e PE</a>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-label">Resumo</div>
-    <a class="nav-link" href="#resumo">Resumo Estratégico FCC</a>
-  </div>
-</nav>
 
 <!-- MAIN -->
 <div id="main">
@@ -2213,26 +2144,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('[id]').forEach(el => observer.observe(el));
 
-// Sidebar toggle
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-}
 
-// Search filter
-function filterNav(q) {
-  q = q.toLowerCase();
-  navLinks.forEach(link => {
-    const text = link.textContent.toLowerCase();
-    link.style.display = (!q || text.includes(q)) ? '' : 'none';
-  });
-}
-
-// Smooth nav click on mobile
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    if (window.innerWidth <= 640) {
-      document.getElementById('sidebar').classList.remove('open');
-    }
   });
 });
 </script>
