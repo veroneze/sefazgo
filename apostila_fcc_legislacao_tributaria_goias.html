@@ -4,133 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apostila FCC – Legislação Tributária Estadual de Goiás</title>
+  <link rel="stylesheet" href="mui-theme.css">
   <style>
-    :root {
-      --bg: #f7f9fc;
-      --paper: #ffffff;
-      --ink: #1f2937;
-      --muted: #6b7280;
-      --primary: #0f766e;
-      --primary-2: #115e59;
-      --accent: #d97706;
-      --line: #dbe4ee;
-      --soft: #eef6f5;
-      --warn: #fff7ed;
-      --danger: #fef2f2;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font: 16px/1.6 "Inter", "Segoe UI", Arial, sans-serif;
-    }
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 32px 20px 80px;
-    }
-    .hero {
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: white;
-      border-radius: 24px;
-      padding: 32px;
-      box-shadow: 0 18px 40px rgba(15, 118, 110, 0.18);
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-    .hero p { margin: 8px 0; }
-    .paper {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-      margin-bottom: 20px;
-    }
-    h2, h3, h4 { line-height: 1.25; }
-    h2 {
-      margin-top: 0;
-      color: var(--primary-2);
-      font-size: 1.6rem;
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 10px;
-    }
-    h3 {
-      color: var(--primary);
-      margin-top: 28px;
-      font-size: 1.2rem;
-    }
-    h4 {
-      margin-bottom: 8px;
-      font-size: 1rem;
-      color: #0b4f4a;
-    }
-    p, li { color: var(--ink); }
-    .muted { color: var(--muted); }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-      background: #fff;
-    }
-    .soft { background: var(--soft); }
-    .warn { background: var(--warn); }
-    .danger { background: var(--danger); }
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .02em;
-      background: rgba(255,255,255,.2);
-      border: 1px solid rgba(255,255,255,.25);
-      margin-bottom: 12px;
-    }
-    ul { padding-left: 20px; }
-    .toc a {
-      text-decoration: none;
-      color: var(--primary-2);
-      font-weight: 600;
-    }
-    .toc li { margin: 6px 0; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0 18px;
-      font-size: 0.96rem;
-    }
-    th, td {
-      border: 1px solid var(--line);
-      padding: 10px 12px;
-      text-align: left;
-      vertical-align: top;
-    }
-    th { background: #f0f7f6; }
+    .hero { background: linear-gradient(135deg, #2e7d32, #388e3c); color: white; border-radius: var(--mui-radius); padding: 32px; margin-bottom: 24px; }
+    .hero .badge { background: rgba(255,255,255,0.2); color: white; border-color: rgba(255,255,255,0.3); }
     .checklist li { list-style: "☐ "; padding-left: 6px; }
     .flash li { list-style: "💡 "; padding-left: 6px; }
     .fcc li { list-style: "⚠️ "; padding-left: 6px; }
-    .footer {
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-    code {
-      background: #f3f4f6;
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: .93em;
-    }
     @media print {
       body { background: white; }
       .wrap { max-width: 100%; padding: 0; }
