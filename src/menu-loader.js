@@ -20,6 +20,8 @@
     .then((html) => {
       container.innerHTML = html;
       const currentPath = window.location.pathname.split("/").pop();
+      const topbar = container.querySelector(".mui-topbar");
+      const toggle = container.querySelector(".mui-topbar__toggle");
       container
         .querySelectorAll("[data-page]")
         .forEach((link) => {
@@ -42,6 +44,20 @@
             }
           }
         });
+
+      if (topbar && toggle) {
+        toggle.addEventListener("click", () => {
+          const isOpen = topbar.classList.toggle("mui-topbar--open");
+          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        container.querySelectorAll(".mui-topbar__links a").forEach((link) => {
+          link.addEventListener("click", () => {
+            topbar.classList.remove("mui-topbar--open");
+            toggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
     })
     .catch((error) => {
       console.error("Erro ao carregar menu:", error);
