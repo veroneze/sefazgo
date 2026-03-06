@@ -19,12 +19,16 @@
     })
     .then((html) => {
       container.innerHTML = html;
+      const currentPath = window.location.pathname.split("/").pop();
       container
         .querySelectorAll("[data-page]")
         .forEach((link) => {
           const page = link.getAttribute("data-page");
           if (page) {
             link.setAttribute("href", `${base}${page}`);
+            if (currentPath && page === currentPath) {
+              link.setAttribute("aria-current", "page");
+            }
           }
         });
       container
@@ -33,6 +37,9 @@
           const page = link.getAttribute("data-home");
           if (page) {
             link.setAttribute("href", `${homeBase}${page}`);
+            if (currentPath && page === currentPath) {
+              link.setAttribute("aria-current", "page");
+            }
           }
         });
     })
