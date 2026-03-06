@@ -663,6 +663,81 @@ code { font-family: 'Roboto Mono', monospace; font-size: 0.9rem; background: #f5
 .errado { color: var(--mui-error); font-weight: 600; }
 .muted { color: var(--mui-text-secondary); }
 
+/* ═══ TOP MENU (Material-like AppBar) ═══ */
+:root { --mui-topbar-height: 56px; }
+
+.mui-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--mui-topbar-height);
+  z-index: 2000;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--mui-divider);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mui-topbar__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mui-topbar__brand {
+  font-weight: 700;
+  color: var(--mui-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mui-topbar__links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  padding: 4px 0;
+  flex: 1;
+}
+
+.mui-topbar__links::-webkit-scrollbar { height: 6px; }
+.mui-topbar__links::-webkit-scrollbar-track { background: transparent; }
+.mui-topbar__links::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 999px; }
+
+.mui-topbar__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(25,118,210,0.25);
+  background: rgba(25,118,210,0.08);
+  color: var(--mui-primary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform .12s ease, background .2s ease, border-color .2s ease;
+}
+
+.mui-topbar__links a:hover {
+  background: rgba(25,118,210,0.14);
+  border-color: rgba(25,118,210,0.35);
+  transform: translateY(-1px);
+}
+
+/* Empurra conteúdo para não ficar sob o menu */
+body { padding-top: var(--mui-topbar-height) !important; }
+
+/* Evitar sobreposição com o nav interno das apostilas (capa -> conteúdo) */
+#nav { top: var(--mui-topbar-height); }
+
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }
   aside, #sidebar { position: relative; height: auto; }
