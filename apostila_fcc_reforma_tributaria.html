@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apostila FCC – Direito Tributário II – Reforma Tributária</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #1f2937;
+      --muted: #475569;
+      --line: #dbe4f0;
+      --primary: #0f4c81;
+      --primary-2: #1d6fb8;
+      --accent: #eef6ff;
+      --warn: #fff8e6;
+      --ok: #edf9f0;
+      --danger: #fff1f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .paper {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      padding: 40px 32px 28px;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    header p {
+      margin: 6px 0;
+      opacity: 0.98;
+    }
+    main { padding: 28px 32px 40px; }
+    h2 {
+      margin-top: 34px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--line);
+      color: var(--primary);
+    }
+    h3 {
+      margin-top: 28px;
+      color: #123c63;
+    }
+    h4 {
+      margin-top: 22px;
+      color: #0f4c81;
+    }
+    .box, .alert, .tip, .fcc {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 16px 0;
+    }
+    .box { background: #fafcff; }
+    .alert { background: var(--warn); }
+    .tip { background: var(--ok); }
+    .fcc { background: var(--accent); }
+    .danger { background: var(--danger); }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 22px;
+      font-size: 0.97rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #f1f6fb;
+      color: #123c63;
+    }
+    .sumario a {
+      text-decoration: none;
+      color: var(--primary);
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin: 8px 8px 0 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .small { font-size: 0.92rem; color: var(--muted); }
+    .footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 2px solid var(--line);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+    @media print {
+      body { background: white; }
+      .wrap { max-width: 100%; padding: 0; }
+      .paper { box-shadow: none; border: none; border-radius: 0; }
+      header, main { padding-left: 22px; padding-right: 22px; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="paper">
+      <header>
+        <h1>Apostila FCC – Direito Tributário II</h1>
+        <p><strong>Reforma Tributária</strong> | EC nº 132/2023 + LC nº 214/2025</p>
+        <p>Material em formato revisional, voltado para prova de concursos da banca FCC.</p>
+        <div>
+          <span class="tag">Foco em lei seca + compreensão sistemática</span>
+          <span class="tag">Mapa mental textual</span>
+          <span class="tag">Pegadinhas da FCC</span>
+        </div>
+      </header>
+      <main>
+        <section class="alert">
+          <strong>Leitura estratégica:</strong> esta apostila resume os pontos mais cobrados e organiza o conteúdo do edital. Em matéria de reforma tributária, a FCC tende a explorar: conceito, estrutura do sistema, hipótese de incidência, não cumulatividade, créditos, regimes diferenciados, regimes específicos, cashback, cesta básica, importação/exportação e administração do IBS/CBS.
+        </section>
+
+        <section class="danger">
+          <strong>Atenção de atualização:</strong> o eixo central do material é a <strong>EC nº 132/2023</strong> e a <strong>LC nº 214/2025</strong>. Para o tema <strong>Comitê Gestor do IBS</strong>, convém registrar que houve atualização superveniente pela <strong>LC nº 227/2026</strong>, de modo que, em revisão final, vale conferir a redação vigente sobre gestão e administração federativa do IBS.
+        </section>
+
+        <h2 id="sumario">Sumário</h2>
+        <ol class="sumario">
+          <li><a href="#visao-geral">Visão geral da reforma tributária</a></li>
+          <li><a href="#ec132">EC nº 132/2023</a></li>
+          <li><a href="#livro1">LC nº 214/2025 – Livro I – Normas Gerais do IBS e da CBS</a></li>
+          <li><a href="#titulo3">Título III – Cashback e Cesta Básica Nacional</a></li>
+          <li><a href="#titulo4">Título IV – Regimes Diferenciados do IBS e da CBS</a></li>
+          <li><a href="#titulo5">Título V – Regimes Específicos do IBS e da CBS</a></li>
+          <li><a href="#titulo7">Título VII – Administração do IBS e da CBS</a></li>
+          <li><a href="#livro3">Livro III – Demais Disposições</a></li>
+          <li><a href="#revisao">Quadro final de revisão</a></li>
+        </ol>
+
+        <h2 id="visao-geral">1. Visão geral da reforma tributária</h2>
+        <p>A reforma do consumo instituiu um <strong>IVA dual</strong> no Brasil. Em vez de um tributo único, o modelo adota dois tributos principais sobre bens e serviços:</p>
+        <ul>
+          <li><strong>IBS</strong> – imposto de competência de estados, Distrito Federal e municípios;</li>
+          <li><strong>CBS</strong> – contribuição de competência da União.</li>
+        </ul>
+        <p>Ao lado deles, surge o <strong>Imposto Seletivo (IS)</strong>, de finalidade extrafiscal, voltado a desestimular bens e serviços prejudiciais à saúde e ao meio ambiente.</p>
+
+        <div class="grid">
+          <div class="card">
+            <h4>Ideia central</h4>
+            <p>Substituir múltiplos tributos sobre o consumo por um sistema mais racional, não cumulativo, com tributação no destino e maior transparência.</p>
+          </div>
+          <div class="card">
+            <h4>Objetivos</h4>
+            <p>Reduzir cumulatividade, simplificar obrigações, diminuir litigiosidade, neutralizar distorções econômicas e mitigar guerra fiscal.</p>
+          </div>
+          <div class="card">
+            <h4>Lógica de prova</h4>
+            <p>A FCC gosta de diferenciar regra geral, regimes diferenciados, regimes específicos e hipóteses de redução/zero/cashback.</p>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ponto</th>
+              <th>Essência</th>
+              <th>Palavra-chave para prova</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IBS + CBS</td>
+              <td>Tributação ampla sobre operações com bens e serviços</td>
+              <td>IVA dual</td>
+            </tr>
+            <tr>
+              <td>Crédito financeiro</td>
+              <td>Regra de não cumulatividade ampla, com abatimento do tributo incidente nas etapas anteriores</td>
+              <td>neutralidade</td>
+            </tr>
+            <tr>
+              <td>Destino</td>
+              <td>Arrecadação concentrada no local de consumo</td>
+              <td>tributação no destino</td>
+            </tr>
+            <tr>
+              <td>Cashback</td>
+              <td>Devolução personalizada para reduzir regressividade</td>
+              <td>justiça fiscal</td>
+            </tr>
+            <tr>
+              <td>Regimes diferenciados</td>
+              <td>Reduções ou ajustes setoriais específicos</td>
+              <td>exceção à regra geral</td>
+            </tr>
+            <tr>
+              <td>Regimes específicos</td>
+              <td>Estruturas próprias de tributação para setores com peculiaridades</td>
+              <td>tratamento setorial</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="fcc">
+          <strong>FCC cobra contraste.</strong> Estude sempre comparando: regra geral × exceção; incidência interna × importação × exportação; regime regular × regime diferenciado × regime específico.
+        </div>
+
+        <h2 id="ec132">2. EC nº 132/2023</h2>
+        <p>A EC nº 132/2023 alterou a Constituição para criar a nova arquitetura da tributação do consumo. Ela é a base constitucional da reforma; a LC nº 214/2025 faz a regulamentação infraconstitucional de grande parte do sistema.</p>
+
+        <div class="box">
+          <strong>Pilares constitucionais da EC nº 132/2023:</strong>
+          <ul>
+            <li>criação do <strong>IBS</strong> e da <strong>CBS</strong>;</li>
+            <li>criação do <strong>Imposto Seletivo</strong>;</li>
+            <li>adoção da <strong>não cumulatividade</strong> com creditamento amplo;</li>
+            <li>tributação orientada pelo <strong>princípio do destino</strong>;</li>
+            <li>possibilidade de <strong>alíquotas diferenciadas, reduzidas ou zero</strong> em hipóteses previstas;</li>
+            <li>previsão de <strong>cashback</strong> e de <strong>cesta básica nacional</strong>;</li>
+            <li>transição entre o sistema antigo e o novo.</li>
+          </ul>
+        </div>
+
+        <h3>Pontos constitucionais que merecem memorização</h3>
+        <ul>
+          <li>o modelo busca ampla incidência sobre bens, serviços e direitos com conteúdo econômico;</li>
+          <li>a não cumulatividade é estruturante, com abatimento do que foi cobrado anteriormente;</li>
+          <li>a reforma separa a tributação geral do consumo do imposto seletivo, que tem função regulatória;</li>
+          <li>há espaço constitucional para regimes favorecidos, inclusive com redução e alíquota zero;</li>
+          <li>a repartição federativa do IBS exige administração compartilhada.</li>
+        </ul>
+
+        <div class="tip">
+          <strong>Macete:</strong> a EC monta o esqueleto; a LC nº 214/2025 põe carne nos ossos.
+        </div>
+
+        <h2 id="livro1">3. LC nº 214/2025 – Livro I – Normas Gerais do IBS e da CBS</h2>
+
+        <h3>Capítulo I – Disposições Preliminares</h3>
+        <p>O capítulo preliminar apresenta a estrutura básica do sistema e os conceitos inaugurais. Aqui a banca pode cobrar finalidade, abrangência e princípios informadores do IBS e da CBS.</p>
+        <ul>
+          <li>o IBS e a CBS são tributos sobre o consumo, com desenho de IVA;</li>
+          <li>a regra geral é a tributação de operações com bens e serviços;</li>
+          <li>o sistema é orientado por <strong>neutralidade</strong>, <strong>não cumulatividade</strong>, <strong>transparência</strong> e <strong>tributação no destino</strong>;</li>
+          <li>a legislação busca reduzir efeitos econômicos distorcivos sobre produção e investimento.</li>
+        </ul>
+
+        <div class="fcc">
+          <strong>Pegadinha:</strong> neutralidade não significa ausência de tributação; significa evitar que o tributo distorça a decisão econômica mais do que o necessário.
+        </div>
+
+        <h3>Capítulo II – IBS e CBS sobre operações com bens e serviços</h3>
+        <p>É o núcleo material do regime geral.</p>
+
+        <h4>1) Fato gerador / hipótese de incidência</h4>
+        <ul>
+          <li>incidem sobre <strong>operações com bens e serviços</strong>;</li>
+          <li>a noção é ampla, alcançando fornecimentos onerosos, inclusive com bens materiais, imateriais, direitos e utilidades;</li>
+          <li>a banca pode explorar a amplitude do conceito de serviço no novo sistema, que supera a velha dicotomia rígida entre mercadoria e serviço.</li>
+        </ul>
+
+        <h4>2) Base de cálculo</h4>
+        <ul>
+          <li>em regra, corresponde ao <strong>valor da operação</strong>;</li>
+          <li>o foco é o valor da operação tributável, com critérios próprios da lei complementar;</li>
+          <li>devem ser observadas regras específicas quando houver descontos, ajustes, devoluções e operações complexas.</li>
+        </ul>
+
+        <h4>3) Não cumulatividade e créditos</h4>
+        <ul>
+          <li>o contribuinte pode se creditar do IBS e da CBS incidentes nas aquisições anteriores, nos termos legais;</li>
+          <li>o objetivo é evitar tributação em cascata;</li>
+          <li>o crédito funciona como técnica central do sistema, especialmente no regime regular.</li>
+        </ul>
+
+        <h4>4) Sujeição passiva</h4>
+        <ul>
+          <li>em regra, contribuinte é quem realiza a operação tributada;</li>
+          <li>a lei pode prever responsabilidade de terceiros e hipóteses específicas de recolhimento;</li>
+          <li>operações em plataformas, intermediações e ambientes digitais exigem atenção prática.</li>
+        </ul>
+
+        <h4>5) Momento de incidência</h4>
+        <p>O sistema trabalha com critérios próprios para determinação do momento da ocorrência do fato gerador e do dever de recolher, ponto importante para apuração, créditos e fiscalização.</p>
+
+        <div class="box">
+          <strong>Resumo de prova:</strong> no regime geral, memorize o circuito: <em>operação tributável → base de cálculo → alíquota → débito → crédito financeiro → saldo a recolher / compensar</em>.
+        </div>
+
+        <h3>Capítulo III – Operacionalização do IBS e da CBS</h3>
+        <p>A operacionalização disciplina a mecânica concreta de apuração, recolhimento, compensação, ressarcimento e obrigações acessórias.</p>
+        <ul>
+          <li>padronização de regras para apuração e recolhimento;</li>
+          <li>integração entre administração tributária e ambiente declaratório;</li>
+          <li>tratamento do crédito, ressarcimento e compensação;</li>
+          <li>mecanismos que favorecem simplicidade e rastreabilidade.</li>
+        </ul>
+
+        <div class="fcc">
+          <strong>O que a FCC pode perguntar:</strong> quem apura, quando recolhe, como se compensa, quando há ressarcimento e como a operacionalização preserva a não cumulatividade.
+        </div>
+
+        <h3>Capítulo IV – IBS e CBS sobre importações</h3>
+        <p>As importações são tratadas para assegurar isonomia entre produto/serviço nacional e estrangeiro e para preservar a neutralidade competitiva.</p>
+        <ul>
+          <li>há incidência sobre importações de bens e serviços;</li>
+          <li>o importador ou tomador pode ocupar a posição de sujeito passivo, conforme o caso;</li>
+          <li>a lógica é tributar o consumo interno, mesmo quando a origem econômica está fora do país;</li>
+          <li>regras específicas de base de cálculo e recolhimento devem ser observadas.</li>
+        </ul>
+
+        <h3>Capítulo V – IBS e CBS sobre exportações</h3>
+        <p>As exportações seguem a diretriz de <strong>desoneração</strong>, típica de IVA moderno.</p>
+        <ul>
+          <li>exportação não deve carregar o peso do tributo doméstico;</li>
+          <li>o sistema preserva créditos ou mecanismos de devolução/ressarcimento, conforme o desenho legal;</li>
+          <li>a meta é evitar exportação de tributos e aumentar competitividade externa.</li>
+        </ul>
+
+        <div class="tip">
+          <strong>Frase de revisão:</strong> <em>importação tributa para igualar; exportação desonera para competir.</em>
+        </div>
+
+        <h3>Capítulo III (Título II) – Regimes de Bens de Capitais</h3>
+        <h4>Seção IV – Desoneração da aquisição de bens de capital</h4>
+        <p>O objetivo é impedir que o investimento produtivo seja onerado de forma indevida pelo novo sistema.</p>
+        <ul>
+          <li>bens de capital recebem tratamento voltado à neutralidade do investimento;</li>
+          <li>a aquisição pode ser desonerada ou gerar mecanismos equivalentes de alívio financeiro;</li>
+          <li>a lógica econômica é clara: tributar consumo, não investimento produtivo.</li>
+        </ul>
+
+        <div class="fcc">
+          <strong>Pegadinha clássica:</strong> não confundir desoneração de bem de capital com benefício assistencial ou benefício setorial puro. Aqui a razão central é preservar investimento e produtividade.</div>
+
+        <h2 id="titulo3">4. Título III – Devolução Personalizada do IBS e CBS (Cashback) e Cesta Básica Nacional de Alimentos</h2>
+
+        <h3>Cashback</h3>
+        <p>O cashback é mecanismo de <strong>devolução personalizada</strong> do IBS e da CBS, voltado a mitigar a regressividade da tributação sobre o consumo.</p>
+        <ul>
+          <li>não é isenção geral;</li>
+          <li>não elimina a incidência do tributo na operação;</li>
+          <li>atua <strong>depois da tributação</strong>, devolvendo total ou parcialmente valores a grupos definidos em lei;</li>
+          <li>tem finalidade distributiva e de justiça fiscal.</li>
+        </ul>
+
+        <h3>Cesta Básica Nacional de Alimentos</h3>
+        <p>A cesta básica nacional integra a estratégia de proteção ao consumo essencial. Em prova, a cobrança costuma girar em torno de:</p>
+        <ul>
+          <li>tratamento favorecido a itens essenciais;</li>
+          <li>relação entre alíquota reduzida/zero e combate à regressividade;</li>
+          <li>diferença entre <strong>benefício objetivo</strong> (produto) e <strong>cashback</strong> (pessoa/beneficiário).</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Instituto</th>
+              <th>Foco</th>
+              <th>Lógica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cashback</td>
+              <td>Pessoa/beneficiário</td>
+              <td>devolve tributo para reduzir regressividade</td>
+            </tr>
+            <tr>
+              <td>Cesta básica</td>
+              <td>Produto essencial</td>
+              <td>reduz ou elimina carga sobre bens essenciais</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="titulo4">5. Título IV – Regimes Diferenciados do IBS e da CBS</h2>
+
+        <h3>Capítulo I – Disposições Gerais</h3>
+        <p>Os regimes diferenciados são exceções legalmente desenhadas dentro do próprio sistema. Não rompem o modelo do IVA dual, mas ajustam a tributação de determinados bens, serviços ou agentes econômicos.</p>
+
+        <h3>Capítulo II – Redução de 30% das alíquotas</h3>
+        <p>Há hipóteses expressamente previstas em lei para redução de 30% das alíquotas. Em prova, o mais importante é reconhecer que:</p>
+        <ul>
+          <li>a redução é <strong>parcial</strong>, não total;</li>
+          <li>depende de previsão legal específica;</li>
+          <li>não se confunde com alíquota zero.</li>
+        </ul>
+
+        <h3>Capítulo III – Redução de 60% das alíquotas</h3>
+        <p>É regime mais intenso de favorecimento tributário. A banca pode cobrar os setores beneficiados ou simplesmente a diferença de intensidade entre as reduções.</p>
+        <ul>
+          <li>redução maior que a do capítulo anterior;</li>
+          <li>aplica-se a grupos selecionados pela LC;</li>
+          <li>preserva a incidência, mas com carga substancialmente menor.</li>
+        </ul>
+
+        <h3>Capítulo IV – Redução a zero das alíquotas</h3>
+        <p>Aqui a tributação é zerada em hipóteses legalmente definidas. É fundamental distinguir:</p>
+        <ul>
+          <li><strong>alíquota zero</strong> = a hipótese está dentro do campo de incidência, mas a carga é zerada;</li>
+          <li><strong>não incidência/imunidade</strong> = lógica jurídica diversa, derivada da Constituição ou da delimitação do campo material.</li>
+        </ul>
+
+        <div class="fcc">
+          <strong>FCC adora esse contraste:</strong> redução de alíquota, alíquota zero e cashback não são sinônimos.</div>
+
+        <h3>Capítulo VII – Produtor Rural e Produtor Rural Integrado não contribuintes</h3>
+        <p>A LC estabelece tratamento próprio para produtor rural e produtor rural integrado não contribuintes, reconhecendo especificidades do setor primário e da cadeia agroindustrial.</p>
+        <ul>
+          <li>há disciplina especial para operações envolvendo esses agentes;</li>
+          <li>o regime visa compatibilizar simplicidade, controle e preservação da não cumulatividade nas etapas seguintes;</li>
+          <li>o examinador pode cobrar a expressão <strong>não contribuinte</strong> como elemento distintivo.</li>
+        </ul>
+
+        <h3>Capítulo VIII – Transportador Autônomo de Carga Pessoa Física Não Contribuinte</h3>
+        <p>Recebe disciplina própria por sua condição de pessoa física não contribuinte no regime ordinário.</p>
+        <ul>
+          <li>há solução legal para encaixar a operação na sistemática do IBS/CBS;</li>
+          <li>o objetivo é evitar quebra da cadeia econômica e ineficiência operacional;</li>
+          <li>a prova pode explorar responsabilidade, creditamento ou tratamento do adquirente/tomador.</li>
+        </ul>
+
+        <h3>Capítulo X – Bens Móveis Usados adquiridos de Pessoa Física Não Contribuinte para Revenda</h3>
+        <p>Esse regime enfrenta um problema clássico: o revendedor adquire bem usado de pessoa física sem crédito anterior destacável. A lei cria disciplina própria para evitar distorção econômica excessiva na revenda.</p>
+        <ul>
+          <li>há tratamento específico para a revenda de usados adquiridos de não contribuinte;</li>
+          <li>a lógica é ajustar a base econômica tributável e preservar racionalidade concorrencial;</li>
+          <li>a FCC pode perguntar o <strong>porquê</strong> do regime: ausência de crédito anterior na compra do bem usado.</li>
+        </ul>
+
+        <h2 id="titulo5">6. Título V – Regimes Específicos do IBS e da CBS</h2>
+        <p>Nos regimes específicos, a lei cria técnicas setoriais próprias de tributação porque a regra geral não resolve bem peculiaridades econômicas, operacionais ou regulatórias de certos mercados.</p>
+
+        <h3>Capítulo I – Combustíveis</h3>
+        <p>O edital destaca: disposições gerais, base de cálculo, sujeição passiva, EAC e créditos em tributação monofásica.</p>
+        <ul>
+          <li>setor com grande sensibilidade arrecadatória e operacional;</li>
+          <li>pode haver concentração da tributação em uma etapa da cadeia (<strong>monofasia</strong>);</li>
+          <li>a lei disciplina base de cálculo própria, sujeito passivo e creditamento adequado ao modelo.</li>
+        </ul>
+
+        <div class="box">
+          <strong>EAC:</strong> em prova, trate como mecanismo operacional próprio do regime de combustíveis, ligado ao controle e à apuração setorial. Se a questão pedir definição literal, confira a redação seca atualizada da LC.</div>
+
+        <h3>Capítulo II – Serviços Financeiros</h3>
+        <p>Serviços financeiros possuem dificuldade histórica para tributação em IVA tradicional por causa da remuneração implícita, spreads e operações complexas.</p>
+        <ul>
+          <li>o regime específico ajusta base de cálculo e técnica de incidência;</li>
+          <li>busca compatibilizar tributação com a natureza das operações bancárias e financeiras;</li>
+          <li>a FCC pode cobrar a razão da especificidade: inadequação parcial da técnica geral para o setor.</li>
+        </ul>
+
+        <h3>Capítulo III – Planos de Assistência à Saúde</h3>
+        <p>A lei disciplina esse setor com técnica própria, considerando sua estrutura contratual e a relevância social da atividade.</p>
+        <ul>
+          <li>há peculiaridade na determinação da materialidade e da base econômica;</li>
+          <li>o examinador pode explorar a distinção entre prestação comum de serviço e modelo setorial regulado.</li>
+        </ul>
+
+        <h3>Capítulo IV – Concursos de Prognósticos</h3>
+        <p>O regime específico abrange disposições gerais e também importação/exportação de serviços relacionados.</p>
+        <ul>
+          <li>é atividade com desenho econômico e regulatório singular;</li>
+          <li>o edital chama atenção para a projeção internacional das prestações, o que recomenda revisar também a lógica geral de importação e exportação.</li>
+        </ul>
+
+        <h3>Capítulo V – Bens Imóveis</h3>
+        <p>É um dos temas com maior potencial de cobrança. O edital já destaca os pontos exatos:</p>
+        <ul>
+          <li><strong>fato gerador</strong>;</li>
+          <li><strong>base de cálculo</strong>;</li>
+          <li><strong>redutor de ajuste</strong>;</li>
+          <li><strong>redutor social</strong>;</li>
+          <li><strong>alíquota</strong>;</li>
+          <li><strong>sujeição passiva</strong>.</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ponto</th>
+              <th>Como pensar para a prova</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fato gerador</td>
+              <td>identificar quais operações imobiliárias entram na tributação do IBS/CBS</td>
+            </tr>
+            <tr>
+              <td>Base de cálculo</td>
+              <td>valor econômico tributável da operação imobiliária</td>
+            </tr>
+            <tr>
+              <td>Redutor de ajuste</td>
+              <td>mecanismo de equalização previsto na lei</td>
+            </tr>
+            <tr>
+              <td>Redutor social</td>
+              <td>instrumento de mitigação de carga em situações legalmente definidas</td>
+            </tr>
+            <tr>
+              <td>Alíquota</td>
+              <td>observar se é geral ou específica do regime</td>
+            </tr>
+            <tr>
+              <td>Sujeição passiva</td>
+              <td>quem responde pelo tributo na operação imobiliária</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="fcc">
+          <strong>Alerta:</strong> em bens imóveis, a FCC pode montar enunciado combinando regra geral + redutores + sujeito passivo. Esse capítulo merece leitura literal antes da prova.</div>
+
+        <h3>Capítulo VI – Sociedades Cooperativas</h3>
+        <p>O regime específico considera a natureza cooperativa e a distinção entre atos cooperativos e relações com terceiros.</p>
+        <ul>
+          <li>cooperativas exigem cuidado conceitual;</li>
+          <li>o histórico tributário do tema é contencioso, então a lei busca racionalizar o tratamento no IBS/CBS;</li>
+          <li>em prova, a palavra-chave é <strong>especificidade do modelo cooperativo</strong>.</li>
+        </ul>
+
+        <h3>Capítulo VII – Bares, Restaurantes, Hotelaria, Parques de Diversão e Parques Temáticos</h3>
+        <p>São setores com operações múltiplas, consumo final imediato e peculiaridades de composição de preço, o que justifica tratamento setorial próprio.</p>
+        <ul>
+          <li>a lei disciplina incidência e apuração adaptadas ao setor;</li>
+          <li>a banca pode cobrar a ideia de simplificação operacional e adequação à realidade econômica dessas atividades.</li>
+        </ul>
+
+        <h2 id="titulo7">7. Título VII – Administração do IBS e da CBS</h2>
+        <p>A administração do IBS e da CBS exige coordenação intensa entre entes federativos e administração federal.</p>
+        <ul>
+          <li>o IBS demanda governança compartilhada, dada sua titularidade por estados, DF e municípios;</li>
+          <li>a CBS permanece na esfera federal;</li>
+          <li>o desenho administrativo busca uniformidade, padronização e segurança operacional.</li>
+        </ul>
+
+        <div class="alert">
+          <strong>Ponto sensível:</strong> como houve evolução normativa posterior sobre a estrutura do Comitê Gestor do IBS, revise a redação vigente mais recente antes da prova, sem abandonar a sistemática originária estudada na LC nº 214/2025.</div>
+
+        <h2 id="livro3">8. Livro III – Demais Disposições</h2>
+
+        <h3>Capítulo I – Avaliação Quinquenal</h3>
+        <p>Prevê reavaliação periódica do sistema, importante para aferir neutralidade, eficiência, justiça fiscal e efeitos econômicos dos regimes criados.</p>
+        <ul>
+          <li>a lógica é de monitoramento institucional da reforma;</li>
+          <li>permite revisão técnica de resultados e ajustes normativos futuros.</li>
+        </ul>
+
+        <h3>Capítulo II – Compensação de eventual redução do montante entregue nos termos do art. 159, I e II, da CF, em razão da substituição do IPI pelo Imposto Seletivo</h3>
+        <p>Esse capítulo trata da dimensão federativa e distributiva da reforma.</p>
+        <ul>
+          <li>a substituição do IPI pelo Imposto Seletivo poderia afetar repasses constitucionais vinculados ao produto de arrecadação;</li>
+          <li>a lei cria mecanismo compensatório para evitar perda abrupta de receitas transferidas;</li>
+          <li>tema típico de prova conceitual sobre federalismo fiscal.</li>
+        </ul>
+
+        <h3>Capítulo III – Comitê Gestor do IBS</h3>
+        <p>O Comitê Gestor é peça central da administração do IBS, pois o tributo pertence conjuntamente a estados, DF e municípios e precisa de coordenação nacional.</p>
+        <ul>
+          <li>atua na gestão, arrecadação, distribuição e padronização do IBS, conforme o desenho normativo vigente;</li>
+          <li>é expressão prática do federalismo cooperativo na reforma tributária do consumo;</li>
+          <li>deve ser estudado com redação atualizada, dada a evolução legislativa posterior.</li>
+        </ul>
+
+        <h2 id="revisao">9. Quadro final de revisão</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tema</th>
+              <th>O que memorizar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EC nº 132/2023</td>
+              <td>cria a base constitucional do IBS, CBS, IS, cashback, cesta básica, não cumulatividade e tributação no destino</td>
+            </tr>
+            <tr>
+              <td>Cap. I</td>
+              <td>princípios e estrutura do sistema: neutralidade, não cumulatividade, transparência</td>
+            </tr>
+            <tr>
+              <td>Cap. II</td>
+              <td>operações com bens e serviços; fato gerador, base de cálculo, sujeito passivo, créditos</td>
+            </tr>
+            <tr>
+              <td>Cap. III</td>
+              <td>apuração, recolhimento, compensação, ressarcimento, operacionalização</td>
+            </tr>
+            <tr>
+              <td>Cap. IV</td>
+              <td>importação tributa o consumo interno</td>
+            </tr>
+            <tr>
+              <td>Cap. V</td>
+              <td>exportação desonerada, sem exportar tributo</td>
+            </tr>
+            <tr>
+              <td>Bens de capital</td>
+              <td>desoneração do investimento produtivo</td>
+            </tr>
+            <tr>
+              <td>Cashback</td>
+              <td>devolução personalizada para reduzir regressividade</td>
+            </tr>
+            <tr>
+              <td>Cesta básica</td>
+              <td>tratamento favorecido a produtos essenciais</td>
+            </tr>
+            <tr>
+              <td>Regimes diferenciados</td>
+              <td>reduções de 30%, 60%, zero e hipóteses específicas por categoria/agente</td>
+            </tr>
+            <tr>
+              <td>Regimes específicos</td>
+              <td>combustíveis, financeiros, saúde, prognósticos, imóveis, cooperativas, hotelaria e afins</td>
+            </tr>
+            <tr>
+              <td>Administração</td>
+              <td>governança integrada do IBS + administração federal da CBS</td>
+            </tr>
+            <tr>
+              <td>Livro III</td>
+              <td>avaliação quinquenal, compensação federativa e Comitê Gestor</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="fcc">
+          <strong>Checklist final para a FCC:</strong>
+          <ol>
+            <li>saiba diferenciar <strong>regra geral</strong>, <strong>regime diferenciado</strong> e <strong>regime específico</strong>;</li>
+            <li>revise importação e exportação em paralelo;</li>
+            <li>não misture cashback com alíquota zero;</li>
+            <li>em bens imóveis, leia a literalidade do capítulo;</li>
+            <li>em combustíveis, memorize monofasia, sujeição passiva e créditos;</li>
+            <li>revise a atualização do Comitê Gestor do IBS.</li>
+          </ol>
+        </div>
+
+        <div class="footer">
+          <p><strong>Base normativa de estudo:</strong> Emenda Constitucional nº 132/2023 e Lei Complementar nº 214/2025, com observação de atualização posterior sobre o Comitê Gestor do IBS.</p>
+          <p><strong>Uso recomendado:</strong> 1) leitura corrida; 2) revisão por capítulos; 3) grifo dos contrastes; 4) conferência final da lei seca.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

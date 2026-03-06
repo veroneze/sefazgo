@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apostila FCC – Direito Administrativo</title>
+<style>
+:root{--az:#1a3a5c;--azm:#2563a8;--azc:#dbeafe;--vd:#15803d;--vdc:#dcfce7;--vm:#b91c1c;--vmc:#fee2e2;--am:#b45309;--amc:#fef3c7;--es:#065f46;--esc:#d1fae5;--cz:#f1f5f9;--tx:#1e293b;--bd:#cbd5e1;--ro:#7c3aed;--roc:#ede9fe;--la:#0e7490;--lac:#cffafe}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f8fafc;color:var(--tx)}
+#capa{background:linear-gradient(135deg,#1a3a5c 0%,#b45309 100%);color:#fff;text-align:center;padding:60px 20px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#capa .badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 20px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+#capa h1{font-size:2.5rem;font-weight:800;line-height:1.2;margin-bottom:10px}
+#capa h2{font-size:1.1rem;font-weight:400;opacity:.85;margin-bottom:36px}
+#capa .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:720px}
+#capa .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:5px 12px;font-size:.75rem}
+#capa .btn-s{margin-top:44px;background:#fff;color:#1a3a5c;padding:13px 38px;border-radius:50px;border:none;font-size:1rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+#capa .btn-s:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+#nav{background:var(--az);color:#fff;padding:10px 16px;display:none;align-items:center;gap:12px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
+#nav .nt{font-weight:700;font-size:.85rem;white-space:nowrap}
+#nav select{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 10px;font-size:.82rem;cursor:pointer;flex:1;min-width:200px}
+#nav select option{background:var(--az)}
+#nav .bc{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:5px 12px;font-size:.78rem;cursor:pointer;white-space:nowrap}
+#content{display:none;max-width:940px;margin:0 auto;padding:28px 18px 70px}
+.section{display:none}.section.active{display:block}
+.sh{border-radius:12px;padding:26px 30px;margin-bottom:26px;color:#fff}
+.sh .num{font-size:.78rem;opacity:.7;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.sh h2{font-size:1.65rem;font-weight:800}
+.sh p{margin-top:7px;opacity:.85;font-size:.92rem}
+.sh-az{background:linear-gradient(135deg,#1a3a5c,#2563a8)}
+.sh-vd{background:linear-gradient(135deg,#065f46,#15803d)}
+.sh-am{background:linear-gradient(135deg,#78350f,#b45309)}
+.sh-ro{background:linear-gradient(135deg,#5b21b6,#7c3aed)}
+.sh-la{background:linear-gradient(135deg,#164e63,#0e7490)}
+h3{color:var(--az);font-size:1.05rem;margin:24px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--azc)}
+h4{color:var(--azm);font-size:.93rem;margin:13px 0 7px;font-weight:700}
+p{line-height:1.75;margin-bottom:9px;font-size:.93rem}
+ul,ol{padding-left:20px;margin-bottom:11px}
+li{line-height:1.75;font-size:.93rem;margin-bottom:4px}
+.card{background:#fff;border-radius:10px;padding:18px 22px;border:1px solid var(--bd);margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.box-d{background:var(--amc);border-left:4px solid var(--am);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-d strong{color:var(--am)}
+.box-a{background:var(--vmc);border-left:4px solid var(--vm);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-a strong{color:var(--vm)}
+.box-i{background:var(--azc);border-left:4px solid var(--azm);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-i strong{color:var(--azm)}
+.box-ok{background:var(--vdc);border-left:4px solid var(--vd);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-ok strong{color:var(--vd)}
+.box-ro{background:var(--roc);border-left:4px solid var(--ro);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-ro strong{color:var(--ro)}
+.box-la{background:var(--lac);border-left:4px solid var(--la);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-la strong{color:var(--la)}
+.ex{background:var(--cz);border-radius:8px;padding:13px 16px;margin:9px 0;font-size:.9rem;border:1px solid var(--bd)}
+.artigo{background:#fff;border:2px solid var(--azc);border-radius:8px;padding:13px 18px;margin:10px 0;font-size:.9rem;line-height:1.7}
+.artigo .an{font-weight:800;color:var(--azm);font-size:.82rem;display:block;margin-bottom:3px}
+table{width:100%;border-collapse:collapse;margin:11px 0 14px;font-size:.88rem}
+th{background:var(--az);color:#fff;padding:9px 13px;text-align:left}
+td{padding:8px 13px;border-bottom:1px solid var(--bd);vertical-align:top}
+tr:nth-child(even) td{background:var(--cz)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:13px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;margin:13px 0}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.questao{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:18px 22px;margin:13px 0}
+.questao .en{font-weight:600;margin-bottom:11px;line-height:1.6;font-size:.93rem}
+.questao .alt{list-style:none;padding:0}
+.questao .alt li{padding:7px 11px;border-radius:6px;margin:5px 0;cursor:pointer;border:1.5px solid var(--bd);transition:all .15s;font-size:.9rem}
+.questao .alt li:hover{border-color:var(--azm);background:var(--azc)}
+.questao .alt li.correta{background:var(--vdc);border-color:var(--vd)}
+.questao .alt li.errada{background:var(--vmc);border-color:var(--vm)}
+.questao .gab{display:none;margin-top:11px;padding:11px;background:var(--cz);border-radius:8px;font-size:.87rem;line-height:1.65}
+.questao .gab.show{display:block}
+.nb{display:flex;gap:11px;margin-top:38px;justify-content:space-between}
+.nbtn{background:var(--az);color:#fff;border:none;border-radius:8px;padding:11px 22px;cursor:pointer;font-size:.88rem;font-weight:600;transition:background .2s}
+.nbtn:hover{background:var(--azm)}
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:11px;margin:18px 0}
+.ii{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:15px;cursor:pointer;transition:all .2s;text-align:center}
+.ii:hover{border-color:var(--azm);background:var(--azc);transform:translateY(-2px)}
+.ii .n{font-size:1.2rem;font-weight:800;color:var(--az)}
+.ii .nm{font-size:.77rem;color:#64748b;margin-top:3px;line-height:1.3}
+.steps{counter-reset:st;list-style:none;padding-left:0}
+.steps li{counter-increment:st;padding:9px 12px 9px 42px;position:relative;margin-bottom:7px;background:var(--cz);border-radius:8px;border:1px solid var(--bd);font-size:.9rem;line-height:1.6}
+.steps li::before{content:counter(st);position:absolute;left:11px;top:50%;transform:translateY(-50%);background:var(--az);color:#fff;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;line-height:21px;text-align:center}
+.tag{display:inline-block;border-radius:4px;padding:1px 7px;font-size:.74rem;font-weight:700;margin-right:3px}
+.t-az{background:var(--azc);color:var(--az)}
+.t-vd{background:var(--vdc);color:var(--vd)}
+.t-am{background:var(--amc);color:var(--am)}
+.t-vm{background:var(--vmc);color:var(--vm)}
+.t-ro{background:var(--roc);color:var(--ro)}
+.t-la{background:var(--lac);color:var(--la)}
+</style>
+</head>
+<body>
+<!-- CAPA -->
+<div id="capa">
+  <div class="badge">Banca FCC</div>
+  <h1>Direito Administrativo</h1>
+  <h2>Apostila Completa para Concursos Públicos · Lei 14.133/2021 · LGPD · LAI · Improbidade</h2>
+  <div class="pills">
+    <span class="pill">Ato Administrativo</span><span class="pill">Agentes Públicos</span>
+    <span class="pill">Poderes da Adm.</span><span class="pill">Responsabilidade Civil</span>
+    <span class="pill">Serviços Públicos</span><span class="pill">Org. Administrativa</span>
+    <span class="pill">Licitações – Lei 14.133/21</span><span class="pill">Improbidade</span>
+    <span class="pill">Bens Públicos</span><span class="pill">LAI · LGPD</span>
+  </div>
+  <button class="btn-s" onclick="iniciar()">📜 Começar a Estudar</button>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <span class="nt">📜 FCC – Dir. Adm.</span>
+  <select onchange="irPara(this.value)">
+    <option value="0">📋 Índice Geral</option>
+    <option value="1">1. Estado, Governo e Adm. Pública</option>
+    <option value="2">2. Direito Administrativo</option>
+    <option value="3">3. Ato Administrativo</option>
+    <option value="4">4. Agentes Públicos</option>
+    <option value="5">5. Poderes da Administração</option>
+    <option value="6">6. Regime Jurídico-Administrativo</option>
+    <option value="7">7. Responsabilidade Civil do Estado</option>
+    <option value="8">8. Serviços Públicos</option>
+    <option value="9">9. Organização Administrativa</option>
+    <option value="10">10. Controle da Adm. Pública</option>
+    <option value="11">11. Improbidade Administrativa</option>
+    <option value="12">12. Lei Anticorrupção (12.846/2013)</option>
+    <option value="13">13. Licitações – Lei 14.133/2021</option>
+    <option value="14">14. Bens Públicos</option>
+    <option value="15">15. LAI – Lei 12.527/2011</option>
+    <option value="16">16. LGPD – Lei 13.709/2018</option>
+  </select>
+  <button class="bc" onclick="voltarCapa()">⬅ Capa</button>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<!-- ÍNDICE -->
+<div class="section active" id="sec-0">
+  <div class="sh sh-az"><div class="num">Apostila FCC</div><h2>📋 Índice Geral</h2><p>16 seções cobrindo todo o edital de Direito Administrativo, incluindo legislações específicas do Estado de Goiás.</p></div>
+  <div class="ig">
+    <div class="ii" onclick="irPara('1')"><div class="n">01</div><div class="nm">Estado, Governo e Adm. Pública</div></div>
+    <div class="ii" onclick="irPara('2')"><div class="n">02</div><div class="nm">Direito Administrativo</div></div>
+    <div class="ii" onclick="irPara('3')"><div class="n">03</div><div class="nm">Ato Administrativo</div></div>
+    <div class="ii" onclick="irPara('4')"><div class="n">04</div><div class="nm">Agentes Públicos</div></div>
+    <div class="ii" onclick="irPara('5')"><div class="n">05</div><div class="nm">Poderes da Administração</div></div>
+    <div class="ii" onclick="irPara('6')"><div class="n">06</div><div class="nm">Regime Jurídico-Administrativo</div></div>
+    <div class="ii" onclick="irPara('7')"><div class="n">07</div><div class="nm">Responsabilidade Civil do Estado</div></div>
+    <div class="ii" onclick="irPara('8')"><div class="n">08</div><div class="nm">Serviços Públicos</div></div>
+    <div class="ii" onclick="irPara('9')"><div class="n">09</div><div class="nm">Organização Administrativa</div></div>
+    <div class="ii" onclick="irPara('10')"><div class="n">10</div><div class="nm">Controle da Adm. Pública</div></div>
+    <div class="ii" onclick="irPara('11')"><div class="n">11</div><div class="nm">Improbidade Administrativa</div></div>
+    <div class="ii" onclick="irPara('12')"><div class="n">12</div><div class="nm">Lei Anticorrupção</div></div>
+    <div class="ii" onclick="irPara('13')"><div class="n">13</div><div class="nm">Licitações – Lei 14.133/2021</div></div>
+    <div class="ii" onclick="irPara('14')"><div class="n">14</div><div class="nm">Bens Públicos</div></div>
+    <div class="ii" onclick="irPara('15')"><div class="n">15</div><div class="nm">LAI – Lei 12.527/2011</div></div>
+    <div class="ii" onclick="irPara('16')"><div class="n">16</div><div class="nm">LGPD – Lei 13.709/2018</div></div>
+  </div>
+</div>
+
+<!-- SEC 1 -->
+<div class="section" id="sec-1">
+  <div class="sh sh-az"><div class="num">Tema 01</div><h2>Estado, Governo e Administração Pública</h2><p>Distinções conceituais fundamentais que embasam todo o Direito Administrativo.</p></div>
+  <h3>1.1 Conceitos e Distinções</h3>
+  <div class="g3">
+    <div class="card"><h4>Estado</h4><p>Pessoa jurídica de direito público com soberania, composto por <strong>povo, território e governo soberano</strong>. Tem personalidade jurídica própria.</p></div>
+    <div class="card"><h4>Governo</h4><p>Conjunto de órgãos e agentes que exercem o <strong>poder político</strong>. Função de direção suprema e geral do Estado.</p></div>
+    <div class="card"><h4>Administração Pública</h4><p>Conjunto de órgãos, pessoas e agentes que <strong>executam</strong> as decisões governamentais, perseguindo o interesse público.</p></div>
+  </div>
+
+  <h3>1.2 Sentidos da Administração Pública</h3>
+  <div class="g2">
+    <div class="card"><h4>Sentido Subjetivo / Orgânico / Formal</h4><p>Conjunto de <strong>órgãos, entidades e agentes</strong> que exercem a função administrativa. <em>Quem</em> administra.</p></div>
+    <div class="card"><h4>Sentido Objetivo / Material / Funcional</h4><p>A <strong>atividade</strong> administrativa em si — função exercida pelo Estado. <em>O que</em> é feito: fomento, serviço público, poder de polícia, intervenção.</p></div>
+  </div>
+
+  <h3>1.3 Elementos do Estado</h3>
+  <ul>
+    <li><strong>Povo:</strong> elemento humano; vinculação jurídico-política com o Estado (nacionalidade).</li>
+    <li><strong>Território:</strong> base física; espaço geográfico sobre o qual o Estado exerce soberania.</li>
+    <li><strong>Governo soberano:</strong> poder de se auto-organizar e se auto-governar, sem submissão a outro poder externo.</li>
+  </ul>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> A banca costuma cobrar a distinção entre <em>Administração Pública em sentido amplo</em> (inclui o Governo) e em sentido estrito (apenas a função administrativa/executiva). Governo = atividade política; Administração = atividade técnica de execução.</div>
+
+  <h3>1.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Em sentido objetivo ou material, a Administração Pública pode ser definida como:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) O conjunto de órgãos, entidades e agentes que integram o aparato estatal.</li>
+      <li onclick="resp(this,'b','c')">b) A cúpula diretiva do Estado, responsável pelas decisões políticas fundamentais.</li>
+      <li onclick="resp(this,'c','c')">c) A atividade concreta e imediata desenvolvida pelo Estado para consecução dos interesses públicos.</li>
+      <li onclick="resp(this,'d','c')">d) O conjunto de leis e normas que regem a relação entre o Estado e os administrados.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> O sentido objetivo/material refere-se à <em>atividade</em> administrativa (serviço público, poder de polícia, fomento e intervenção). O sentido subjetivo/orgânico (opção A) refere-se aos sujeitos/órgãos.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('0')">⬅ Índice</button><button class="nbtn" onclick="irPara('2')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 2 -->
+<div class="section" id="sec-2">
+  <div class="sh sh-az"><div class="num">Tema 02</div><h2>Direito Administrativo</h2><p>Conceito, objeto, fontes e sistemas de Direito Administrativo.</p></div>
+  <h3>2.1 Conceito</h3>
+  <p>Ramo do direito público que estuda os <strong>princípios e normas</strong> que disciplinam o exercício da <strong>função administrativa</strong> e as relações entre a Administração Pública e os administrados.</p>
+  <div class="card"><h4>Critérios para definição:</h4><ul><li><strong>Escola do serviço público (Duguit):</strong> organização e prestação dos serviços públicos.</li><li><strong>Critério do Poder Executivo:</strong> atividade jurídica do PE (superado — outros poderes também administram).</li><li><strong>Critério residual:</strong> o que sobra após excluir a função legislativa e judicial.</li><li><strong>Critério da distinção entre atividade jurídica e social:</strong> atividade jurídica do Estado não legislativa.</li></ul></div>
+
+  <h3>2.2 Fontes do Direito Administrativo</h3>
+  <table>
+    <tr><th>Fonte</th><th>Descrição</th><th>Hierarquia</th></tr>
+    <tr><td><strong>Lei (lato sensu)</strong></td><td>Constituição, leis complementares, ordinárias, MPs, decretos</td><td>Principal/primária</td></tr>
+    <tr><td><strong>Doutrina</strong></td><td>Estudos dos publicistas — orienta interpretação</td><td>Secundária</td></tr>
+    <tr><td><strong>Jurisprudência</strong></td><td>Decisões reiteradas dos tribunais; súmulas vinculantes</td><td>Secundária (SV = normativa)</td></tr>
+    <tr><td><strong>Costumes</strong></td><td>Prática reiterada com convicção de obrigatoriedade</td><td>Complementar</td></tr>
+    <tr><td><strong>Princípios Gerais</strong></td><td>Valores fundamentais do sistema jurídico</td><td>Informadora</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> No Brasil, o DA não tem um Código Único — é fragmentado em leis esparsas e princípios constitucionais. A CF/88 é a principal fonte normativa.</div>
+
+  <h3>2.3 Sistemas Administrativos</h3>
+  <div class="g2">
+    <div class="card"><h4>Sistema Inglês (Jurisdição Única)</h4><p>Adotado pelo Brasil. O Poder Judiciário tem a palavra final sobre qualquer ato administrativo. Não há jurisdição administrativa separada.</p></div>
+    <div class="card"><h4>Sistema Francês (Dualidade de Jurisdição)</h4><p>Contencioso administrativo paralelo ao judiciário. Atos administrativos são julgados por tribunais administrativos (Conseil d'État).</p></div>
+  </div>
+
+  <h3>2.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">O Brasil adota o sistema de jurisdição única (sistema inglês), o que significa que:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Os litígios administrativos são julgados por tribunais administrativos especializados, com decisões definitivas.</li>
+      <li onclick="resp(this,'b','b')">b) Todos os litígios, inclusive os que envolvem a Administração Pública, podem ser apreciados pelo Poder Judiciário.</li>
+      <li onclick="resp(this,'c','b')">c) A Administração Pública possui jurisdição própria e suas decisões têm força de coisa julgada.</li>
+      <li onclick="resp(this,'d','b')">d) O sistema divide-se entre jurisdição ordinária e administrativa, sendo esta última representada pelo TCU.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> No sistema de jurisdição única (inglês), adotado pelo Brasil, qualquer conflito — inclusive contra o Estado — pode ser levado ao Poder Judiciário, que proferirá decisão com força de coisa julgada definitiva.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('1')">⬅ Anterior</button><button class="nbtn" onclick="irPara('3')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 3 -->
+<div class="section" id="sec-3">
+  <div class="sh sh-az"><div class="num">Tema 03</div><h2>Ato Administrativo</h2><p>Requisitos, atributos, classificação, extinção e decadência — tema central nas provas FCC.</p></div>
+  <h3>3.1 Conceito</h3>
+  <p>Declaração unilateral do Estado no exercício de prerrogativas públicas, como manifestação de vontade da Administração Pública, destinada a produzir efeitos jurídicos imediatos, com observância da lei, sob o regime jurídico de direito público, e sujeita a controle pelo Poder Judiciário.</p>
+
+  <h3>3.2 Requisitos (Elementos) do Ato Administrativo</h3>
+  <div class="box-d"><strong>⭐ Mnemônico COFIM:</strong> <strong>CO</strong>mpetência · <strong>F</strong>orma · <strong>O</strong>bjeto · <strong>M</strong>otivo · <strong>F</strong>inalidade → <strong>COMFF</strong> ou use: <em>Com Forma, O Motivo Finaliza.</em></div>
+  <table>
+    <tr><th>Elemento</th><th>Conceito</th><th>Vício gera</th></tr>
+    <tr><td><strong>Competência</strong></td><td>Atribuição legal do agente para praticar o ato</td><td>Nulidade (salvo convalidação)</td></tr>
+    <tr><td><strong>Finalidade</strong></td><td>Resultado de interesse público perseguido (desvio = vício)</td><td>Nulidade (desvio de finalidade)</td></tr>
+    <tr><td><strong>Forma</strong></td><td>Modo de exteriorização — geralmente escrita</td><td>Nulidade (salvo convalidação)</td></tr>
+    <tr><td><strong>Motivo</strong></td><td>Pressupostos de fato e de direito que autorizam o ato</td><td>Nulidade (teoria dos motivos determinantes)</td></tr>
+    <tr><td><strong>Objeto</strong></td><td>Conteúdo do ato — efeito jurídico produzido</td><td>Nulidade (se ilícito ou impossível)</td></tr>
+  </table>
+  <div class="box-la"><strong>ℹ Teoria dos Motivos Determinantes:</strong> A Administração fica vinculada aos motivos declarados. Se o motivo for falso ou inexistente, o ato é nulo, mesmo que não fosse obrigatório declará-lo.</div>
+
+  <h3>3.3 Atributos do Ato Administrativo</h3>
+  <div class="g2">
+    <div class="card"><h4>Presunção de Legitimidade/Veracidade</h4><p>Presume-se legal, verdadeiro e válido. Inversão do ônus da prova para o particular.</p></div>
+    <div class="card"><h4>Imperatividade (Coercibilidade)</h4><p>Impõe obrigações unilateralmente, independente de concordância do destinatário.</p></div>
+    <div class="card"><h4>Autoexecutoriedade</h4><p>Executado pela Adm. sem necessidade de intervenção judicial prévia. <em>Não presente em todos os atos.</em></p></div>
+    <div class="card"><h4>Tipicidade</h4><p>Ato deve corresponder a um tipo previsto na lei como apto a produzir determinado efeito. Veda atos inominados.</p></div>
+  </div>
+
+  <h3>3.4 Extinção do Ato Administrativo</h3>
+  <table>
+    <tr><th>Forma</th><th>Quem</th><th>Fundamento</th><th>Efeitos</th></tr>
+    <tr><td><strong>Anulação</strong></td><td>Adm. (autotutela) ou Judiciário</td><td>Ilegalidade</td><td>Ex tunc (retroativo)</td></tr>
+    <tr><td><strong>Revogação</strong></td><td>Somente a Administração</td><td>Conveniência e oportunidade</td><td>Ex nunc (prospectivo)</td></tr>
+    <tr><td><strong>Cassação</strong></td><td>Administração</td><td>Descumprimento de condição pelo destinatário</td><td>Ex nunc</td></tr>
+    <tr><td><strong>Convalidação</strong></td><td>Administração</td><td>Sana vício de competência ou forma (sanável)</td><td>Ex tunc (retroage à origem)</td></tr>
+    <tr><td><strong>Caducidade</strong></td><td>Operação da lei</td><td>Surgimento de norma que incompatibiliza o ato</td><td>Ex nunc</td></tr>
+  </table>
+  <div class="box-a"><strong>⚠ Ato vinculado e ato discricionário:</strong> Ato vinculado = todos os elementos determinados em lei. Ato discricionário = Administração tem liberdade no motivo e objeto (mérito administrativo). <strong>Revogação só cabe em atos discricionários.</strong></div>
+
+  <h3>3.5 Decadência Administrativa — Art. 54 da Lei 9.784/1999</h3>
+  <div class="artigo"><span class="an">Art. 54 — Lei 9.784/99</span>O direito da Administração de anular os atos administrativos de que decorram efeitos favoráveis para os destinatários decai em <strong>5 anos</strong>, contados da data em que foram praticados, salvo comprovada má-fé.</div>
+  <div class="box-i"><strong>ℹ Atenção:</strong> O prazo decadencial de 5 anos protege a segurança jurídica dos destinatários de boa-fé. Havendo má-fé, o prazo não corre e a anulação pode ocorrer a qualquer tempo.</div>
+
+  <h3>3.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A Administração Pública verificou que um ato administrativo foi praticado com vício de competência sanável. Pode ela, nessa hipótese:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Apenas anulá-lo, pois vício de competência gera nulidade absoluta.</li>
+      <li onclick="resp(this,'b','c')">b) Revogar o ato, por razões de conveniência e oportunidade.</li>
+      <li onclick="resp(this,'c','c')">c) Convalidar o ato, sanando retroativamente o vício de competência.</li>
+      <li onclick="resp(this,'d','c')">d) Cassar o ato, pois o agente descumpriu condição imposta.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Vícios de <em>competência</em> (exceto exclusiva) e de <em>forma</em> (quando não essencial) são sanáveis por convalidação, com efeitos ex tunc. Cassação = descumprimento pelo destinatário. Revogação = mérito. Anulação = ilegalidade insanável.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('2')">⬅ Anterior</button><button class="nbtn" onclick="irPara('4')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 4 -->
+<div class="section" id="sec-4">
+  <div class="sh sh-az"><div class="num">Tema 04</div><h2>Agentes Públicos</h2><p>Espécies, cargos, provimento, estabilidade, PAD e legislação específica de Goiás.</p></div>
+  <h3>4.1 Espécies de Agentes Públicos</h3>
+  <table>
+    <tr><th>Espécie</th><th>Características</th><th>Exemplos</th></tr>
+    <tr><td><strong>Agentes políticos</strong></td><td>Mandato eletivo ou nomeação especial; regime estatutário especial</td><td>Presidente, Governador, Ministros, Parlamentares</td></tr>
+    <tr><td><strong>Servidores públicos estatutários</strong></td><td>Cargo público, regime estatutário (lei específica)</td><td>Servidores federais (Lei 8.112/90), estaduais</td></tr>
+    <tr><td><strong>Empregados públicos</strong></td><td>Emprego público, regime CLT</td><td>Servidores de EP e SEM</td></tr>
+    <tr><td><strong>Servidores temporários</strong></td><td>Contrato por prazo determinado — art. 37, IX CF</td><td>Recenseadores, professores substitutos</td></tr>
+    <tr><td><strong>Particulares em colaboração</strong></td><td>Sem vínculo permanente; função pública esporádica</td><td>Jurados, mesários, concessionários</td></tr>
+  </table>
+
+  <h3>4.2 Cargo, Emprego e Função Pública</h3>
+  <div class="g3">
+    <div class="card"><h4>Cargo Público</h4><p>Conjunto de atribuições e responsabilidades cometidas a um servidor estatutário. Criado por lei. Pode ser efetivo (concurso) ou em comissão (livre nomeação).</p></div>
+    <div class="card"><h4>Emprego Público</h4><p>Vínculo celetista (CLT) com entidades públicas. Não há estabilidade (salvo EC 19/98 para admitidos antes).</p></div>
+    <div class="card"><h4>Função Pública</h4><p>Atribuição sem cargo correspondente. Geralmente exercida por servidores em comissão, temporários ou em cargos efetivos (função de confiança).</p></div>
+  </div>
+
+  <h3>4.3 Estabilidade, Efetividade e Vitaliciedade</h3>
+  <table>
+    <tr><th>Instituto</th><th>Quem</th><th>Prazo</th><th>Perda do cargo</th></tr>
+    <tr><td><strong>Efetividade</strong></td><td>Servidor aprovado em concurso para cargo efetivo</td><td>Admissão</td><td>Processo administrativo ou judicial</td></tr>
+    <tr><td><strong>Estabilidade</strong></td><td>Servidor efetivo</td><td>3 anos de efetivo exercício + avaliação de desempenho</td><td>Sentença judicial, PAD, avaliação insuficiente, LRF</td></tr>
+    <tr><td><strong>Vitaliciedade</strong></td><td>Magistrados, MP, TCU</td><td>2 anos (1ª instância); imediata (nomeação direta)</td><td>Somente sentença judicial transitada em julgado</td></tr>
+  </table>
+
+  <h3>4.4 Processo Administrativo Disciplinar (PAD)</h3>
+  <ol class="steps">
+    <li><strong>Instauração</strong> — portaria da autoridade competente designa comissão processante (3 membros estáveis).</li>
+    <li><strong>Inquérito administrativo</strong> — instrução (coleta de provas), defesa (prazo mínimo de 10 dias) e relatório.</li>
+    <li><strong>Julgamento</strong> — autoridade competente decide no prazo de 20 dias após o relatório.</li>
+  </ol>
+  <div class="box-a"><strong>⚠ Penas disciplinares (Lei 8.112/90):</strong> Advertência → Suspensão (até 90 dias) → Demissão → Cassação de aposentadoria/disponibilidade → Destituição de cargo em comissão. Demissão prescinde de PAD para algumas hipóteses (abandono de cargo, inassiduidade).</div>
+
+  <h3>4.5 Estatuto dos Servidores de Goiás — Lei 20.756/2020</h3>
+  <div class="card">
+    <h4>Títulos cobrados (I ao V):</h4>
+    <ul>
+      <li><strong>Título I — Disposições Gerais:</strong> âmbito de aplicação, servidor público civil estadual de Goiás.</li>
+      <li><strong>Título II — Provimento, Vacância, Remoção, Redistribuição e Substituição.</strong></li>
+      <li><strong>Título III — Direitos e Vantagens:</strong> vencimento, remuneração, diárias, ajuda de custo, licenças, afastamentos.</li>
+      <li><strong>Título IV — Deveres, Proibições e Responsabilidades:</strong> regime disciplinar, penalidades.</li>
+      <li><strong>Título V — Processo Administrativo Disciplinar:</strong> sindicância, PAD, revisão. Prazo: sindicância = 30 dias (prorrogável por igual período); PAD = 60 dias (prorrogável).</li>
+    </ul>
+    <div class="box-la"><strong>ℹ Lei 13.266/1998 — Carreira do Fisco de Goiás:</strong> Institui as carreiras da Secretaria da Fazenda de Goiás (SEFAZ-GO): Auditor Fiscal de Controle Externo, Técnico de Controle Externo e demais cargos. Ingresso por concurso público. Regime estatutário. Prerrogativas e vedações específicas (sigilo fiscal, exclusividade de funções).</div>
+  </div>
+
+  <h3>4.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Servidor público estável somente perderá o cargo mediante, EXCETO:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Sentença judicial transitada em julgado.</li>
+      <li onclick="resp(this,'b','d')">b) Processo administrativo disciplinar com ampla defesa.</li>
+      <li onclick="resp(this,'c','d')">c) Procedimento de avaliação periódica de desempenho, com direito a ampla defesa.</li>
+      <li onclick="resp(this,'d','d')">d) Decisão administrativa de autoridade hierárquica superior, independentemente de processo formal.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> Art. 41, §1º, CF/88: o servidor estável perde o cargo apenas por sentença judicial transitada em julgado (I), PAD com ampla defesa (II), avaliação periódica insuficiente (III) ou excesso de despesa com pessoal (LRF). Jamais por simples decisão hierárquica sem processo formal.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('3')">⬅ Anterior</button><button class="nbtn" onclick="irPara('5')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 5 -->
+<div class="section" id="sec-5">
+  <div class="sh sh-vd"><div class="num">Tema 05</div><h2>Poderes da Administração Pública</h2><p>Prerrogativas instrumentais ao cumprimento da função administrativa.</p></div>
+  <h3>5.1 Poder Vinculado e Poder Discricionário</h3>
+  <div class="g2">
+    <div class="card"><h4>Poder Vinculado</h4><p>Lei define <strong>todos os elementos</strong> do ato. Adm. não tem liberdade de escolha. Ex.: concessão de aposentadoria quando preenchidos os requisitos.</p></div>
+    <div class="card"><h4>Poder Discricionário</h4><p>Lei deixa margem de <strong>conveniência e oportunidade</strong> (mérito) no motivo e/ou objeto. Não pode ser revisto pelo Judiciário no mérito.</p></div>
+  </div>
+
+  <h3>5.2 Poder Hierárquico</h3>
+  <p>Poder de <strong>organizar, coordenar e controlar</strong> os órgãos e agentes subordinados. Decorrências:</p>
+  <ul>
+    <li>Dar ordens; fiscalizar; rever atos; avocar e delegar competências.</li>
+    <li>Aplicar sanções disciplinares.</li>
+    <li><strong>Delegação:</strong> transfere o exercício (não a titularidade) da competência. Exceção: competência exclusiva, recurso e normatização.</li>
+    <li><strong>Avocação:</strong> chama para si competência normalmente atribuída a subordinado — ato excepcional e temporário.</li>
+  </ul>
+
+  <h3>5.3 Poder Disciplinar</h3>
+  <p>Faculdade de punir internamente as infrações funcionais dos servidores e demais sujeitos à disciplina administrativa (contratados, etc.).</p>
+  <div class="box-d"><strong>⭐ Dica:</strong> O poder disciplinar é discricionário quanto à <em>tipificação da infração</em> e à <em>escolha da pena</em> (proporcionalidade). Não confundir com poder punitivo do Estado em sentido amplo (que inclui o penal).</div>
+
+  <h3>5.4 Poder Regulamentar (Normativo)</h3>
+  <p>Competência para editar atos normativos gerais e abstratos, complementando a lei. Principais instrumentos:</p>
+  <ul>
+    <li><strong>Decreto regulamentador</strong> (art. 84, IV, CF): regulamenta leis para fiel execução.</li>
+    <li><strong>Decreto autônomo</strong> (art. 84, VI, CF): organização da Adm. federal e extinção de cargos vagos — não pode criar direitos ou obrigações para particulares.</li>
+    <li>Resoluções, portarias, instruções normativas dos órgãos.</li>
+  </ul>
+
+  <h3>5.5 Poder de Polícia</h3>
+  <div class="artigo"><span class="an">Art. 78 — CTN</span>Considera-se poder de polícia a atividade da Administração Pública que, limitando ou disciplinando direito, interesse ou liberdade, regula a prática de ato ou abstenção de fato, em razão de interesse público concernente à segurança, à higiene, à ordem, aos costumes, à disciplina da produção e do mercado, ao exercício de atividades econômicas dependentes de concessão ou autorização do Poder Público, à tranquilidade pública ou ao respeito à propriedade e aos direitos individuais ou coletivos.</div>
+  <div class="card">
+    <h4>Atributos do Poder de Polícia:</h4>
+    <ul>
+      <li><strong>Discricionariedade:</strong> liberdade de escolha da medida mais adequada.</li>
+      <li><strong>Autoexecutoriedade:</strong> execução independente de autorização judicial.</li>
+      <li><strong>Coercibilidade:</strong> imposição mediante força, se necessário.</li>
+    </ul>
+    <h4>Ciclo do Poder de Polícia (STJ — REsp 817.534):</h4>
+    <p>Ordem → Consentimento → Fiscalização → Sanção. As fases de <em>consentimento</em> e <em>fiscalização</em> podem ser delegadas a particulares; as demais (ordem e sanção), não.</p>
+  </div>
+
+  <h3>5.6 Abuso de Poder</h3>
+  <div class="g2">
+    <div class="card"><h4>Excesso de Poder</h4><p>Agente age além dos limites de sua competência. Vício de <strong>competência</strong>.</p></div>
+    <div class="card"><h4>Desvio de Finalidade (Desvio de Poder)</h4><p>Agente pratica ato com fim diverso do previsto em lei. Vício de <strong>finalidade</strong>. Nulidade.</p></div>
+  </div>
+
+  <h3>5.7 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um servidor público é punido com suspensão por ter praticado infração disciplinar leve, quando deveria ter recebido apenas advertência. Trata-se de exemplo de:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Desvio de finalidade, pois a punição não cumpriu seu objetivo.</li>
+      <li onclick="resp(this,'b','c')">b) Excesso de poder, pois o agente agiu além de sua competência disciplinar.</li>
+      <li onclick="resp(this,'c','c')">c) Excesso de poder, pois a sanção ultrapassou os limites proporcionais cabíveis ao caso.</li>
+      <li onclick="resp(this,'d','c')">d) Ato nulo por ausência de motivo, pois a infração leve não justifica suspensão.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Excesso de poder ocorre quando o agente ultrapassa os limites legais — aplicar punição desproporcional à infração é excesso de poder. Desvio de finalidade seria buscar um fim que não o interesse público (ex.: punir por vingança pessoal).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('4')">⬅ Anterior</button><button class="nbtn" onclick="irPara('6')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 6 -->
+<div class="section" id="sec-6">
+  <div class="sh sh-vd"><div class="num">Tema 06</div><h2>Regime Jurídico-Administrativo</h2><p>Princípios expressos e implícitos que regem toda a atividade administrativa.</p></div>
+  <h3>6.1 Conceito</h3>
+  <p>Conjunto de prerrogativas e sujeições a que está submetida a Administração Pública, diferenciando-a dos sujeitos privados. Baseia-se em dois pilares opostos e complementares:</p>
+  <div class="g2">
+    <div class="card"><h4>Supremacia do Interesse Público</h4><p>A Administração possui prerrogativas especiais frente ao particular (imperatividade, autoexecutoriedade, desapropriação, etc.).</p></div>
+    <div class="card"><h4>Indisponibilidade do Interesse Público</h4><p>A Administração não pode dispor do interesse público. Está sujeita à lei, à moral, à publicidade, à eficiência — sujeições especiais.</p></div>
+  </div>
+
+  <h3>6.2 Princípios Expressos — Art. 37, caput CF/88</h3>
+  <div class="box-d"><strong>⭐ LIMPE:</strong> <strong>L</strong>egalidade · <strong>I</strong>mpessoalidade · <strong>M</strong>oralidade · <strong>P</strong>ublicidade · <strong>E</strong>ficiência.</div>
+  <table>
+    <tr><th>Princípio</th><th>Conteúdo essencial</th><th>Consequências práticas</th></tr>
+    <tr><td><strong>Legalidade</strong></td><td>Adm. só faz o que a lei autoriza (art. 5º, II — inverso ao particular)</td><td>Nulidade de atos sem previsão legal</td></tr>
+    <tr><td><strong>Impessoalidade</strong></td><td>Vedação a discriminações; atos em nome do órgão, não do agente</td><td>Vedação à promoção pessoal em publicidade oficial</td></tr>
+    <tr><td><strong>Moralidade</strong></td><td>Ética, boa-fé, lealdade, probidade</td><td>Nepotismo — SV 13 STF</td></tr>
+    <tr><td><strong>Publicidade</strong></td><td>Transparência dos atos; condição de eficácia</td><td>Sigilo somente quando previsto em lei</td></tr>
+    <tr><td><strong>Eficiência</strong></td><td>Melhor relação custo-benefício; resultados; avaliação de desempenho</td><td>Perda do cargo por desempenho insuficiente (art. 41 §1º III CF)</td></tr>
+  </table>
+
+  <h3>6.3 Princípios Implícitos (Reconhecidos pela Doutrina e STF)</h3>
+  <div class="g2">
+    <div class="card"><h4>Razoabilidade / Proporcionalidade</h4><p>Atos não excessivos; adequação, necessidade e proporcionalidade em sentido estrito.</p></div>
+    <div class="card"><h4>Continuidade do Serviço Público</h4><p>Serviços essenciais não podem ser interrompidos. Greve dos servidores é restrita.</p></div>
+    <div class="card"><h4>Autotutela</h4><p>Adm. pode anular (ilegalidade) ou revogar (mérito) seus próprios atos. Súmulas 346 e 473 do STF.</p></div>
+    <div class="card"><h4>Segurança Jurídica / Proteção à Confiança</h4><p>Estabilidade das relações jurídicas. Proibição de efeitos retroativos prejudiciais para atos de boa-fé.</p></div>
+    <div class="card"><h4>Supremacia do Interesse Público</h4><p>Interesse coletivo prevalece sobre o particular — fundamenta as prerrogativas da Adm.</p></div>
+    <div class="card"><h4>Motivação</h4><p>Adm. deve expor os fundamentos de fato e de direito de seus atos — decorre do contraditório e da ampla defesa.</p></div>
+  </div>
+
+  <h3>6.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">O princípio da autotutela, reconhecido pelas Súmulas 346 e 473 do STF, autoriza a Administração Pública a:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Anular atos ilegais e revogar atos inconvenientes apenas mediante autorização judicial.</li>
+      <li onclick="resp(this,'b','d')">b) Anular atos ilegais com efeitos ex nunc e revogar atos discricionários com efeitos ex tunc.</li>
+      <li onclick="resp(this,'c','d')">c) Revogar qualquer ato administrativo, inclusive os que geraram direitos adquiridos.</li>
+      <li onclick="resp(this,'d','d')">d) Anular seus atos ilegais (efeitos ex tunc) e revogar seus atos por razões de conveniência (efeitos ex nunc), independentemente de provocação judicial.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> Súmula 473 STF: "A Administração pode anular seus próprios atos, quando eivados de vícios que os tornem ilegais (ex tunc), porque deles não se originam direitos; ou revogá-los, por motivo de conveniência ou oportunidade (ex nunc), respeitados os direitos adquiridos."</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('5')">⬅ Anterior</button><button class="nbtn" onclick="irPara('7')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 7 -->
+<div class="section" id="sec-7">
+  <div class="sh sh-vd"><div class="num">Tema 07</div><h2>Responsabilidade Civil do Estado</h2><p>Evolução histórica, teorias e o regime do art. 37, §6º da CF/88.</p></div>
+  <h3>7.1 Evolução Histórica</h3>
+  <table>
+    <tr><th>Fase</th><th>Teoria</th><th>Fundamento</th></tr>
+    <tr><td>1ª</td><td><strong>Irresponsabilidade do Estado</strong></td><td>"The King can do no wrong" — Estado soberano não erra</td></tr>
+    <tr><td>2ª</td><td><strong>Responsabilidade com culpa civil</strong></td><td>Atos de gestão (responsável) × atos de império (irresponsável)</td></tr>
+    <tr><td>3ª</td><td><strong>Culpa administrativa (faute du service)</strong></td><td>Serviço não funcionou, funcionou mal ou atrasou</td></tr>
+    <tr><td>4ª</td><td><strong>Risco administrativo</strong></td><td>Responsabilidade objetiva — dano + nexo causal; admite excludentes</td></tr>
+    <tr><td>5ª</td><td><strong>Risco integral</strong></td><td>Responsabilidade objetiva sem excludentes (dano nuclear, terrorismo)</td></tr>
+  </table>
+
+  <h3>7.2 Regime Constitucional — Art. 37, §6º CF/88</h3>
+  <div class="artigo"><span class="an">Art. 37, §6º</span>As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos responderão pelos danos que seus agentes, nessa qualidade, causarem a terceiros, assegurado o direito de regresso contra o responsável nos casos de dolo ou culpa.</div>
+  <div class="g2">
+    <div class="card"><h4>Responsabilidade por ato COMISSIVO</h4><p><strong>Objetiva — Teoria do Risco Administrativo.</strong><br>Elementos: fato do agente + dano + nexo causal.<br>Dispensa prova de culpa ou dolo.</p></div>
+    <div class="card"><h4>Responsabilidade por OMISSÃO</h4><p><strong>Subjetiva — Teoria da Culpa Administrativa (majoritária/STJ).</strong><br>Ou objetiva pelo STF em casos de omissão específica.<br>Exige: omissão + dano + nexo + culpa do serviço.</p></div>
+  </div>
+
+  <h3>7.3 Excludentes e Atenuantes</h3>
+  <div class="card">
+    <h4>Excludentes (eliminam o nexo causal):</h4>
+    <ul>
+      <li><strong>Força maior:</strong> evento externo irresistível e imprevisível (raio, terremoto).</li>
+      <li><strong>Caso fortuito:</strong> evento interno, mas imprevisível e inevitável.</li>
+      <li><strong>Culpa exclusiva da vítima:</strong> o próprio dano foi provocado pela vítima.</li>
+      <li><strong>Culpa exclusiva de terceiro.</strong></li>
+    </ul>
+    <h4>Atenuantes (reduzem a indenização):</h4>
+    <ul><li><strong>Culpa concorrente da vítima:</strong> redução proporcional da indenização.</li></ul>
+  </div>
+
+  <h3>7.4 Direito de Regresso</h3>
+  <p>O Estado, após indenizar o particular, pode regressar contra o agente público causador do dano, desde que comprovado <strong>dolo ou culpa</strong> do agente (ação regressiva — imprescritível segundo parte da doutrina; STJ entende prescritível em 3 anos).</p>
+
+  <h3>7.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um motorista de ambulância do Estado, em serviço, avança um sinal vermelho e colide com um veículo particular. O Estado:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Só responde se ficar provada a culpa do servidor motorista.</li>
+      <li onclick="resp(this,'b','c')">b) Não responde, pois o acidente ocorreu em via pública, fora do controle do Estado.</li>
+      <li onclick="resp(this,'c','c')">c) Responde objetivamente pelo dano, independentemente de culpa, podendo regredir contra o agente se houver dolo ou culpa.</li>
+      <li onclick="resp(this,'d','c')">d) Responde solidariamente com o agente, e ambos devem ser acionados conjuntamente.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Trata-se de ato comissivo de agente público em serviço → responsabilidade objetiva (art. 37, §6º CF). A vítima não precisa provar culpa. O Estado paga e pode regredir contra o motorista se comprovado dolo ou culpa deste.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('6')">⬅ Anterior</button><button class="nbtn" onclick="irPara('8')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 8 -->
+<div class="section" id="sec-8">
+  <div class="sh sh-vd"><div class="num">Tema 08</div><h2>Serviços Públicos</h2><p>Conceito, princípios, formas de delegação e Lei 8.987/1995 e PPP (Lei 11.079/2004).</p></div>
+  <h3>8.1 Conceito e Princípios</h3>
+  <p>Toda atividade de oferecimento de utilidade ou comodidade material destinada à satisfação da coletividade em geral, mas fruível singularmente pelos administrados, que o Estado assume como pertinente a seus deveres e presta por si mesmo ou por quem lhe faça às vezes (Celso Antônio Bandeira de Mello).</p>
+  <div class="box-d"><strong>⭐ Princípios (FUCCAMOCOT):</strong> <strong>F</strong>undamentalidade · <strong>U</strong>niversalidade · <strong>C</strong>ontinuidade · <strong>C</strong>ortesia · <strong>A</strong>tualidade · <strong>M</strong>odicidade tarifária · <strong>O</strong>ficialidade · <strong>C</strong>ourtoisie · <strong>O</strong>brigatoriedade · <strong>T</strong>ransparência. Os mais cobrados: <strong>continuidade, modicidade, eficiência, generalidade (universalidade) e cortesia.</strong></div>
+
+  <h3>8.2 Formas de Delegação — Lei 8.987/1995</h3>
+  <table>
+    <tr><th>Forma</th><th>Instrumento</th><th>Remuneração</th><th>Risco</th></tr>
+    <tr><td><strong>Concessão</strong></td><td>Contrato (licitação — concorrência)</td><td>Tarifa paga pelo usuário</td><td>Concessionário</td></tr>
+    <tr><td><strong>Permissão</strong></td><td>Contrato de adesão (licitação)</td><td>Tarifa</td><td>Permissionário (precário)</td></tr>
+    <tr><td><strong>Autorização</strong></td><td>Ato unilateral (sem licitação)</td><td>Tarifa ou gratuito</td><td>Autorizatário</td></tr>
+  </table>
+  <div class="card">
+    <h4>Cláusulas exorbitantes na concessão:</h4>
+    <ul>
+      <li>Encampação (retomada por interesse público — indenização prévia).</li>
+      <li>Caducidade (rescisão por inadimplemento do concessionário — sem indenização prévia).</li>
+      <li>Intervenção (para assegurar a adequação do serviço).</li>
+      <li>Equilíbrio econômico-financeiro (revisão tarifária).</li>
+    </ul>
+  </div>
+
+  <h3>8.3 Parceria Público-Privada — Lei 11.079/2004</h3>
+  <div class="g2">
+    <div class="card"><h4>PPP Patrocinada</h4><p>Concessão comum + contraprestação do parceiro público ao privado (além da tarifa).</p></div>
+    <div class="card"><h4>PPP Administrativa</h4><p>Adm. é usuária direta ou indireta do serviço. Toda remuneração vem do Estado (sem tarifa do usuário).</p></div>
+  </div>
+  <div class="box-a"><strong>⚠ Limites das PPPs (Lei 11.079/04):</strong> Valor mínimo: R$ 10 milhões. Prazo: 5 a 35 anos. Sociedade de propósito específico (SPE) obrigatória. Garantias: fundo garantidor ou patrimônio especial. Vedada PPP cujo objeto seja único fornecimento de mão-de-obra ou execução de obra pública.</div>
+
+  <h3>8.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Sobre a concessão de serviços públicos, conforme a Lei 8.987/1995, é correto afirmar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) A encampação ocorre quando o concessionário descumpre as cláusulas contratuais, sem direito a indenização.</li>
+      <li onclick="resp(this,'b','c')">b) A permissão de serviço público é realizada sem necessidade de licitação, por ser ato precário.</li>
+      <li onclick="resp(this,'c','c')">c) A encampação é a retomada do serviço pelo poder concedente por razões de interesse público, mediante indenização prévia.</li>
+      <li onclick="resp(this,'d','c')">d) A caducidade gera direito imediato à indenização integral pelo poder concedente ao concessionário.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Encampação (art. 37, Lei 8.987/95) = retomada por interesse público supervenientemente justificado + indenização prévia ao concessionário. Caducidade = descumprimento contratual pelo concessionário → sem indenização prévia. Permissão = exige licitação (art. 40).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('7')">⬅ Anterior</button><button class="nbtn" onclick="irPara('9')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 9 -->
+<div class="section" id="sec-9">
+  <div class="sh sh-am"><div class="num">Tema 09</div><h2>Organização Administrativa</h2><p>Administração direta, indireta, entidades paraestatais e terceiro setor.</p></div>
+  <h3>9.1 Formas de Organização</h3>
+  <div class="g2">
+    <div class="card"><h4>Centralização × Descentralização</h4><p><strong>Centralização:</strong> a própria pessoa política executa o serviço (Adm. Direta).<br><strong>Descentralização:</strong> transfere a execução a outra pessoa jurídica (Adm. Indireta ou particulares). Pode ser: <em>por outorga</em> (transfere a titularidade) ou <em>por delegação</em> (transfere apenas a execução).</p></div>
+    <div class="card"><h4>Concentração × Desconcentração</h4><p><strong>Concentração:</strong> todas as atribuições num único órgão.<br><strong>Desconcentração:</strong> distribuição interna de atribuições dentro da <em>mesma</em> pessoa jurídica (criação de órgãos subordinados). Relação hierárquica.</p></div>
+  </div>
+
+  <h3>9.2 Administração Indireta — Entidades</h3>
+  <table>
+    <tr><th>Entidade</th><th>Natureza</th><th>Capital</th><th>Regime</th><th>Exemplos</th></tr>
+    <tr><td><strong>Autarquia</strong></td><td>Direito público</td><td>100% público</td><td>Estatutário</td><td>INSS, BACEN, ANATEL</td></tr>
+    <tr><td><strong>Fundação Pública de Dir. Público</strong></td><td>Direito público (espécie de autarquia)</td><td>100% público</td><td>Estatutário</td><td>IBGE, FUNASA</td></tr>
+    <tr><td><strong>Fundação Pública de Dir. Privado</strong></td><td>Direito privado</td><td>Público ou misto</td><td>CLT</td><td>Fundação Getúlio Vargas federal</td></tr>
+    <tr><td><strong>Empresa Pública</strong></td><td>Direito privado</td><td>100% público (qualquer forma societária)</td><td>CLT</td><td>Correios, CEF, EMBRAPA</td></tr>
+    <tr><td><strong>Sociedade de Economia Mista</strong></td><td>Direito privado</td><td>Público + privado; maioria votante pública; S/A</td><td>CLT</td><td>Petrobras, Banco do Brasil</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> Empresa pública pode ter qualquer forma societária; SEM é obrigatoriamente S/A. Ambas devem realizar licitação (Lei 13.303/16) e concurso público, mas o regime é CLT e não têm estabilidade do art. 41 CF.</div>
+
+  <h3>9.3 Terceiro Setor</h3>
+  <table>
+    <tr><th>Entidade</th><th>Qualificação</th><th>Instrumento</th><th>Base legal</th></tr>
+    <tr><td>Serviços Sociais Autônomos (Sistema S)</td><td>—</td><td>Lei autorizadora</td><td>Decreto-lei</td></tr>
+    <tr><td>Organizações Sociais (OS)</td><td>Qualificação pelo Executivo (discricionária)</td><td>Contrato de Gestão</td><td>Lei 9.637/98</td></tr>
+    <tr><td>OSCIP</td><td>Qualificação pelo Ministério da Justiça (vinculada)</td><td>Termo de Parceria</td><td>Lei 9.790/99</td></tr>
+    <tr><td>OSC (MROSC)</td><td>—</td><td>Termo de Colaboração / Fomento / Acc. Cooperação</td><td>Lei 13.019/2014</td></tr>
+  </table>
+
+  <h3>9.4 Contratos de Gestão</h3>
+  <p>Acordo firmado entre a Administração e Organizações Sociais ou entre órgãos da própria Adm. (ADM direta), estabelecendo metas e resultados a atingir em troca de maior autonomia gerencial e financeira.</p>
+
+  <h3>9.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A criação de um novo departamento dentro de um Ministério, com redistribuição interna de atribuições, caracteriza:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Descentralização por outorga, pois transfere a titularidade do serviço.</li>
+      <li onclick="resp(this,'b','b')">b) Desconcentração, pois distribui competências dentro da mesma pessoa jurídica, mantendo a hierarquia.</li>
+      <li onclick="resp(this,'c','b')">c) Descentralização por delegação, pois o serviço passa a ser executado por outro ente.</li>
+      <li onclick="resp(this,'d','b')">d) Concentração, pois agrupa atribuições dispersas num único órgão central.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Desconcentração = distribuição interna de atribuições dentro da mesma pessoa jurídica, com manutenção de vínculo hierárquico. Descentralização = transferência para pessoa jurídica distinta. Criar departamentos dentro do Ministério = desconcentração.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('8')">⬅ Anterior</button><button class="nbtn" onclick="irPara('10')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 10 -->
+<div class="section" id="sec-10">
+  <div class="sh sh-am"><div class="num">Tema 10</div><h2>Controle da Administração Pública</h2><p>Formas de controle interno, externo, judicial e pelos Tribunais de Contas.</p></div>
+  <h3>10.1 Classificações do Controle</h3>
+  <table>
+    <tr><th>Critério</th><th>Tipo</th><th>Descrição</th></tr>
+    <tr><td>Órgão</td><td>Interno / Externo</td><td>Exercido pelo próprio órgão ou por outro Poder/instituição</td></tr>
+    <tr><td>Momento</td><td>Prévio / Concomitante / Posterior</td><td>Antes, durante ou após o ato</td></tr>
+    <tr><td>Aspecto</td><td>Legalidade / Mérito</td><td>Judiciário = legalidade; Adm. = legalidade + mérito</td></tr>
+    <tr><td>Amplitude</td><td>Hierárquico / Finalístico (tutela)</td><td>Relação de subordinação / supervisão ministerial</td></tr>
+  </table>
+
+  <h3>10.2 Controle Judicial</h3>
+  <div class="card">
+    <ul>
+      <li>Controle de <strong>legalidade</strong> apenas — não analisa mérito administrativo.</li>
+      <li>Instrumentos: MS, Ação Popular, ACP, Habeas Corpus, Habeas Data, Mandado de Injunção.</li>
+      <li><strong>Teoria dos motivos determinantes:</strong> juiz pode verificar se o motivo declarado é real.</li>
+      <li>Controle de atos vinculados: amplo. Atos discricionários: controle dos limites (abuso, desvio, proporcionalidade).</li>
+    </ul>
+  </div>
+
+  <h3>10.3 Controle pelos Tribunais de Contas</h3>
+  <div class="card">
+    <ul>
+      <li>TCU (federal), TCEs (estaduais), TCMs (municipais — onde houver).</li>
+      <li>Controle <strong>externo</strong>, auxiliar do Congresso/Legislativo.</li>
+      <li>Competências do TCU (art. 71 CF): apreciar contas do PR, julgar contas dos administradores, fiscalizar atos, aplicar sanções, sustar atos irregulares.</li>
+      <li><strong>Natureza das decisões do TCU:</strong> administrativas (não fazem coisa julgada judicial). Exceção: julgamento de contas = definitivo no âmbito administrativo.</li>
+    </ul>
+    <div class="box-a"><strong>⚠ TCU não julga contas do Presidente da República</strong> — apenas <em>aprecia</em> e emite parecer. Quem julga é o Congresso Nacional (art. 49, IX, CF).</div>
+  </div>
+
+  <h3>10.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">O Tribunal de Contas da União (TCU), no exercício de suas competências constitucionais, pode:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Julgar as contas anuais do Presidente da República.</li>
+      <li onclick="resp(this,'b','c')">b) Anular contratos celebrados pela União com eficácia de coisa julgada judicial.</li>
+      <li onclick="resp(this,'c','c')">c) Aplicar sanções aos responsáveis por irregularidades, como multa e inabilitação para cargos em comissão.</li>
+      <li onclick="resp(this,'d','c')">d) Suspender liminarmente atos com eficácia imediata sobre terceiros independentemente de qualquer procedimento prévio.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 71, VIII, CF: O TCU pode aplicar sanções (multas, inabilitações). Erro A: o TCU apenas aprecia as contas do Presidente; quem julga é o CN (art. 49, IX). Erro B: as decisões do TCU têm natureza administrativa, não fazem coisa julgada judicial. Erro D: a sustação de atos exige procedimento prévio (art. 71, X, CF).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('9')">⬅ Anterior</button><button class="nbtn" onclick="irPara('11')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 11 -->
+<div class="section" id="sec-11">
+  <div class="sh sh-am"><div class="num">Tema 11</div><h2>Improbidade Administrativa</h2><p>Lei 8.429/1992 com as alterações da Lei 14.230/2021 — mudanças fundamentais no regime de improbidade.</p></div>
+  <h3>11.1 Principais Mudanças da Lei 14.230/2021</h3>
+  <div class="box-a"><strong>⚠ Mudanças cruciais pós-14.230/2021:</strong>
+    <ul style="margin-top:8px">
+      <li>Exige-se agora <strong>DOLO ESPECÍFICO</strong> do agente — culpa não é mais suficiente para nenhum ato.</li>
+      <li>Legitimidade exclusiva do <strong>Ministério Público</strong> para propor ação de improbidade (retirada da pessoa jurídica lesada).</li>
+      <li>Prescrição: <strong>8 anos</strong> do fato, salvo infrações continuadas.</li>
+      <li>Responsabilidade de pessoa jurídica foi excluída do âmbito da LIA.</li>
+      <li>Inversão do ônus da prova foi afastada.</li>
+    </ul>
+  </div>
+
+  <h3>11.2 Atos de Improbidade</h3>
+  <table>
+    <tr><th>Tipo</th><th>Art.</th><th>Sanções</th></tr>
+    <tr><td><strong>Enriquecimento ilícito</strong></td><td>Art. 9º</td><td>Perda dos bens + ressarcimento + perda da função + suspensão dos direitos políticos (14 a 17 anos) + multa (até 3x o valor)</td></tr>
+    <tr><td><strong>Lesão ao erário</strong></td><td>Art. 10</td><td>Perda dos bens + ressarcimento + perda da função + suspensão (5 a 8 anos) + multa (até 3x o valor)</td></tr>
+    <tr><td><strong>Concessão ou aplicação indevida de benef. tributário/financeiro</strong></td><td>Art. 10-A</td><td>Perda da função + suspensão (5 a 8 anos) + multa</td></tr>
+    <tr><td><strong>Violação aos princípios</strong></td><td>Art. 11</td><td>Perda da função + suspensão (3 a 5 anos) + multa (até 24x a remuneração)</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Prescritível × Imprescritível:</strong> Após EC 109/2021 e tese do STF: a pretensão de ressarcimento ao erário em ato doloso de improbidade é <strong>imprescritível</strong>. Para os atos culposos (hoje não cabíveis), prescreveria em 5 anos.</div>
+
+  <h3>11.3 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a Lei de Improbidade Administrativa após a Lei 14.230/2021, é correto afirmar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) A ação de improbidade pode ser proposta pelo Ministério Público ou pela pessoa jurídica lesada.</li>
+      <li onclick="resp(this,'b','b')">b) Somente atos praticados com dolo específico configuram improbidade administrativa, tendo o MP legitimidade exclusiva para a ação.</li>
+      <li onclick="resp(this,'c','b')">c) A culpa grave do agente público continua sendo suficiente para configurar ato de improbidade que cause lesão ao erário.</li>
+      <li onclick="resp(this,'d','b')">d) O prazo prescricional para a ação de improbidade é de 5 anos contados do fato.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> A Lei 14.230/2021 eliminou a modalidade culposa e exige dolo específico em todas as hipóteses. Também conferiu legitimidade exclusiva ao MP para propor a ação (retirou a legitimidade da PJ lesada). Prescrição: 8 anos.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('10')">⬅ Anterior</button><button class="nbtn" onclick="irPara('12')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 12 -->
+<div class="section" id="sec-12">
+  <div class="sh sh-am"><div class="num">Tema 12</div><h2>Lei Anticorrupção — Lei 12.846/2013</h2><p>Responsabilização objetiva civil e administrativa de pessoas jurídicas por atos contra a Administração Pública.</p></div>
+  <h3>12.1 Características Gerais</h3>
+  <div class="card">
+    <ul>
+      <li>Aplica-se a <strong>pessoas jurídicas</strong> (sociedades, associações, fundações) — não a pessoas físicas.</li>
+      <li>Responsabilidade <strong>objetiva</strong> no âmbito administrativo e civil — independe de culpa ou dolo.</li>
+      <li>Aplica-se aos atos praticados contra a Adm. Pública nacional e <strong>estrangeira</strong>.</li>
+      <li>Responsabilidade da PJ não exclui a responsabilidade individual dos dirigentes.</li>
+      <li>A fusão, incorporação, aquisição ou cisão não extingue a responsabilidade (limitada ao patrimônio transferido).</li>
+    </ul>
+  </div>
+
+  <h3>12.2 Atos Lesivos (Art. 5º)</h3>
+  <ul>
+    <li>Prometer, oferecer ou dar vantagem indevida a agente público.</li>
+    <li>Utilizar interposta pessoa para ocultar o verdadeiro beneficiário do ato.</li>
+    <li>Fraudar licitações ou contratos.</li>
+    <li>Dificultar atividade de investigação de órgãos de controle.</li>
+    <li>Financiar, custear, patrocinar atos lesivos.</li>
+  </ul>
+
+  <h3>12.3 Sanções</h3>
+  <div class="g2">
+    <div class="card"><h4>Administrativas (processo adm.)</h4><ul><li>Multa: 0,1% a 20% do faturamento bruto anual (nunca inferior ao valor da vantagem auferida).</li><li>Publicação extraordinária da decisão condenatória.</li></ul></div>
+    <div class="card"><h4>Judiciais (ação civil)</h4><ul><li>Perdimento dos bens e valores obtidos.</li><li>Suspensão ou interdição parcial das atividades.</li><li>Dissolução compulsória da PJ.</li><li>Proibição de receber incentivos, subsídios (1 a 5 anos).</li></ul></div>
+  </div>
+
+  <h3>12.4 Acordo de Leniência</h3>
+  <div class="card">
+    <p>A PJ pode celebrar acordo de leniência com a CGU (âmbito federal) para colaborar com investigações, reduzindo ou isentando sanções. Requisitos:</p>
+    <ul>
+      <li>Primeira a se manifestar; colaboração efetiva; cessação do envolvimento.</li>
+      <li>Benefícios: redução da multa até 2/3; isenção da publicação da decisão; isenção da proibição de receber incentivos.</li>
+      <li><strong>Não exime</strong> da reparação integral do dano nem da sanção penal.</li>
+    </ul>
+  </div>
+
+  <h3>12.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Sobre a responsabilização das pessoas jurídicas prevista na Lei 12.846/2013, é CORRETO afirmar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) A responsabilidade é subjetiva, exigindo comprovação de dolo ou culpa da pessoa jurídica.</li>
+      <li onclick="resp(this,'b','c')">b) A responsabilização da pessoa jurídica exclui a responsabilidade individual dos sócios e administradores.</li>
+      <li onclick="resp(this,'c','c')">c) A responsabilização é objetiva no âmbito administrativo e civil, independentemente de culpa ou dolo.</li>
+      <li onclick="resp(this,'d','c')">d) A dissolução compulsória da pessoa jurídica pode ser imposta na esfera administrativa, sem necessidade de ação judicial.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 2º, Lei 12.846/13: responsabilidade objetiva administrativa e civil. Erro A: independe de dolo/culpa. Erro B: a responsabilidade da PJ não exclui a individual dos dirigentes. Erro D: dissolução compulsória é sanção judicial (art. 19), não administrativa.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('11')">⬅ Anterior</button><button class="nbtn" onclick="irPara('13')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 13 -->
+<div class="section" id="sec-13">
+  <div class="sh sh-ro"><div class="num">Tema 13</div><h2>Licitações e Contratos — Lei 14.133/2021</h2><p>Nova Lei de Licitações — substituiu a Lei 8.666/93, Lei 10.520/02 e parte da Lei 12.462/11.</p></div>
+  <h3>13.1 Princípios (Art. 5º)</h3>
+  <div class="box-d"><strong>⭐ Princípios da Lei 14.133/21:</strong> Legalidade, impessoalidade, moralidade, publicidade, eficiência, interesse público, probidade, igualdade, planejamento, transparência, eficácia, segregação de funções, motivação, vinculação ao edital, julgamento objetivo, segurança jurídica, razoabilidade, competitividade, proporcionalidade, celeridade, economicidade e desenvolvimento nacional sustentável.</div>
+
+  <h3>13.2 Modalidades de Licitação</h3>
+  <table>
+    <tr><th>Modalidade</th><th>Critério de uso</th><th>Novidade</th></tr>
+    <tr><td><strong>Concorrência</strong></td><td>Contratos de alto valor (obras ≥ R$3,3M; outros ≥ R$1,43M)</td><td>Substituiu concorrência + tomada de preços da 8.666</td></tr>
+    <tr><td><strong>Pregão</strong></td><td>Bens e serviços comuns (qualquer valor)</td><td>Mantido; preferencialmente eletrônico</td></tr>
+    <tr><td><strong>Concurso</strong></td><td>Trabalho técnico, científico ou artístico</td><td>Mantido</td></tr>
+    <tr><td><strong>Leilão</strong></td><td>Alienação de bens ou concessões</td><td>Mantido</td></tr>
+    <tr><td><strong>Diálogo Competitivo</strong></td><td>Contratações inovadoras/complexas sem solução prévia</td><td><strong>Nova modalidade</strong> — sem similar na 8.666</td></tr>
+  </table>
+  <div class="box-a"><strong>⚠ Fim do Convite e da Tomada de Preços!</strong> A Lei 14.133/21 extinguiu essas duas modalidades. Contratos de médio valor são celebrados por Concorrência ou Pregão.</div>
+
+  <h3>13.3 Fases da Licitação</h3>
+  <ol class="steps">
+    <li><strong>Fase preparatória</strong> — estudo técnico preliminar, projeto básico/executivo, termo de referência, orçamento estimado, definição do agente de contratação.</li>
+    <li><strong>Fase de divulgação do edital</strong> — publicação no PNCP (Portal Nacional de Contratações Públicas).</li>
+    <li><strong>Apresentação de propostas e lances</strong>.</li>
+    <li><strong>Julgamento</strong> — critérios: menor preço, maior desconto, melhor técnica e preço, maior retorno econômico, maior lance.</li>
+    <li><strong>Habilitação</strong> — verificação dos documentos do vencedor.</li>
+    <li><strong>Recursal</strong> — prazo de 3 dias úteis.</li>
+    <li><strong>Homologação</strong> — autoridade superior valida o processo.</li>
+    <li><strong>Adjudicação</strong> — atribui o objeto ao vencedor.</li>
+  </ol>
+
+  <h3>13.4 Contratação Direta</h3>
+  <div class="g2">
+    <div class="card"><h4>Dispensa de Licitação</h4><p>Hipóteses taxativas: licitação dispensada (alienações em geral) e licitação dispensável (valores baixos: obras ≤ R$100k; outros ≤ R$50k; emergência 180 dias; etc.).</p></div>
+    <div class="card"><h4>Inexigibilidade</h4><p>Inviabilidade de competição: fornecedor exclusivo, serviço técnico especializado de natureza singular com profissional notório, artistas consagrados.</p></div>
+  </div>
+
+  <h3>13.5 Contratos Administrativos</h3>
+  <div class="card">
+    <h4>Cláusulas exorbitantes:</h4>
+    <ul>
+      <li>Modificação unilateral (até 25% para acréscimos/supressões; 50% para reforma de edifício).</li>
+      <li>Rescisão unilateral pela Adm.</li>
+      <li>Fiscalização da execução.</li>
+      <li>Aplicação de sanções.</li>
+      <li>Ocupação provisória de bens.</li>
+    </ul>
+    <h4>Sanções (art. 156):</h4>
+    <p>Advertência → Multa → Impedimento de licitar (até 3 anos) → Declaração de inidoneidade (3 a 6 anos).</p>
+  </div>
+
+  <h3>13.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A Lei 14.133/2021 introduziu, como novidade, a seguinte modalidade de licitação não existente na Lei 8.666/93:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Pregão eletrônico.</li>
+      <li onclick="resp(this,'b','d')">b) Concurso público de projetos.</li>
+      <li onclick="resp(this,'c','d')">c) Leilão de bens públicos.</li>
+      <li onclick="resp(this,'d','d')">d) Diálogo competitivo.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> O <strong>Diálogo Competitivo</strong> (art. 32) é a única modalidade nova criada pela Lei 14.133/21. Usada em contratações inovadoras onde a Adm. não tem solução técnica definida. As demais existiam nas leis anteriores.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('12')">⬅ Anterior</button><button class="nbtn" onclick="irPara('14')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 14 -->
+<div class="section" id="sec-14">
+  <div class="sh sh-ro"><div class="num">Tema 14</div><h2>Bens Públicos</h2><p>Regime jurídico, classificação, administração, aquisição, alienação e uso por terceiros.</p></div>
+  <h3>14.1 Conceito e Classificação — Art. 98 CC/02</h3>
+  <table>
+    <tr><th>Categoria</th><th>Descrição</th><th>Exemplos</th></tr>
+    <tr><td><strong>Bens de uso comum do povo</strong></td><td>Destinados ao uso de todos, sem distinção</td><td>Praças, ruas, rios, mares, estradas</td></tr>
+    <tr><td><strong>Bens de uso especial</strong></td><td>Utilizados pela Adm. na prestação de serviços</td><td>Repartições, hospitais, escolas públicas</td></tr>
+    <tr><td><strong>Bens dominicais (dominiais)</strong></td><td>Sem destinação pública específica; podem ser alienados</td><td>Terras devolutas, títulos da dívida pública</td></tr>
+  </table>
+
+  <h3>14.2 Características do Regime Jurídico</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Inalienabilidade:</strong> bens de uso comum e especial não podem ser alienados enquanto afetados. Bens dominicais = alienáveis.</li>
+      <li><strong>Impenhorabilidade:</strong> bens públicos não podem ser penhorados. Pagamento por precatório (art. 100 CF).</li>
+      <li><strong>Imprescritibilidade:</strong> não podem ser adquiridos por usucapião (art. 183, §3º e art. 191, parágrafo único, CF).</li>
+      <li><strong>Não oneração:</strong> não podem ser dados em garantia real (hipoteca, penhor).</li>
+    </ul>
+  </div>
+
+  <h3>14.3 Uso dos Bens Públicos por Terceiros</h3>
+  <table>
+    <tr><th>Forma</th><th>Instrumento</th><th>Interesse</th><th>Licitação</th></tr>
+    <tr><td><strong>Autorização de uso</strong></td><td>Ato unilateral</td><td>Predominantemente privado</td><td>Não (regra)</td></tr>
+    <tr><td><strong>Permissão de uso</strong></td><td>Ato unilateral (precário)</td><td>Público + privado</td><td>Sim (regra)</td></tr>
+    <tr><td><strong>Concessão de uso</strong></td><td>Contrato</td><td>Predominantemente público</td><td>Sim (obrigatória)</td></tr>
+    <tr><td><strong>Concessão de dir. real de uso</strong></td><td>Contrato / escritura</td><td>Urbanização, habitação</td><td>Sim</td></tr>
+    <tr><td><strong>Cessão de uso</strong></td><td>Ato adm. entre órgãos</td><td>Entidades públicas</td><td>Não</td></tr>
+  </table>
+
+  <h3>14.4 Afetação e Desafetação</h3>
+  <div class="g2">
+    <div class="card"><h4>Afetação</h4><p>Destinação do bem a uma finalidade pública específica. Pode ser expressa (lei/ato) ou tácita (utilização de fato).</p></div>
+    <div class="card"><h4>Desafetação</h4><p>Retirada da destinação pública. Bem passa a dominical e pode ser alienado. Deve ser feita por lei (regra) — não por simples ato administrativo.</p></div>
+  </div>
+
+  <h3>14.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um terreno público de uso especial (repartição pública desativada) que o Estado pretende vender a um particular deve, antes da alienação:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Ser apenas avaliado e leiloado, sem necessidade de alteração de sua classificação.</li>
+      <li onclick="resp(this,'b','c')">b) Ser concedido em uso ao particular interessado, sem necessidade de licitação.</li>
+      <li onclick="resp(this,'c','c')">c) Ser desafetado (passar à categoria de bem dominical) por lei, e a alienação exige licitação e autorização legislativa.</li>
+      <li onclick="resp(this,'d','c')">d) Ser declarado de utilidade pública para fins de desapropriação inversa.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Bens de uso especial são inalienáveis enquanto afetados. Para alienar, é preciso desafetá-los (transformar em dominicais), o que exige lei. Após a desafetação, a alienação de bem imóvel exige avaliação prévia e licitação (art. 17 da lei 8.666/93 / art. 76 Lei 14.133/21).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('13')">⬅ Anterior</button><button class="nbtn" onclick="irPara('15')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 15 -->
+<div class="section" id="sec-15">
+  <div class="sh sh-la"><div class="num">Tema 15</div><h2>Lei de Acesso à Informação — Lei 12.527/2011</h2><p>Regula o acesso a informações públicas previsto no art. 5º, XXXIII, art. 37, §3º, II e art. 216, §2º da CF/88.</p></div>
+  <h3>15.1 Abrangência</h3>
+  <div class="card">
+    <ul>
+      <li>Aplica-se a todos os órgãos dos <strong>três Poderes</strong> (federal, estadual, distrital e municipal), incluindo autarquias, fundações, EP, SEM e entidades privadas sem fins lucrativos que recebam recursos públicos (neste caso, apenas no que se refere à parcela pública).</li>
+      <li>Acesso é a <strong>regra</strong>; sigilo é a exceção.</li>
+    </ul>
+  </div>
+
+  <h3>15.2 Prazos Fundamentais</h3>
+  <table>
+    <tr><th>Situação</th><th>Prazo</th></tr>
+    <tr><td>Atendimento do pedido (regra)</td><td>20 dias</td></tr>
+    <tr><td>Prorrogação motivada</td><td>+ 10 dias (justificativa ao requerente)</td></tr>
+    <tr><td>Recurso à autoridade superior</td><td>10 dias</td></tr>
+    <tr><td>Decisão do recurso</td><td>5 dias</td></tr>
+    <tr><td>Informação ultrassecreta</td><td>Sigilo por até 25 anos (renovável uma vez)</td></tr>
+    <tr><td>Informação secreta</td><td>Sigilo por até 15 anos</td></tr>
+    <tr><td>Informação reservada</td><td>Sigilo por até 5 anos</td></tr>
+  </table>
+
+  <h3>15.3 Classificação das Informações Sigilosas</h3>
+  <div class="g3">
+    <div class="card"><h4>Ultrassecreta</h4><p>Competência: PR, VP, Ministros, Comandantes, Chefes de Missão. Prazo: até 25 anos (renov.).</p></div>
+    <div class="card"><h4>Secreta</h4><p>Autoridade de maior hierarquia de cada órgão. Prazo: até 15 anos.</p></div>
+    <div class="card"><h4>Reservada</h4><p>Servidores autorizados. Prazo: até 5 anos.</p></div>
+  </div>
+  <div class="box-d"><strong>⭐ Informações de acesso irrestrito:</strong> Dados pessoais, violações de direitos humanos, informações sobre licitações e contratos. Não podem ser classificadas como sigilosas.</div>
+
+  <h3>15.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a Lei 12.527/2011 (LAI), o prazo para que o órgão público responda ao pedido de acesso à informação é de:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) 15 dias, prorrogável por mais 15.</li>
+      <li onclick="resp(this,'b','b')">b) 20 dias, prorrogável por mais 10 dias, mediante justificativa.</li>
+      <li onclick="resp(this,'c','b')">c) 30 dias, improrrogável.</li>
+      <li onclick="resp(this,'d','b')">d) 10 dias, prorrogável por mais 10 dias.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 11, §1º e §2º, Lei 12.527/11: o prazo para resposta é de <strong>20 dias</strong>, podendo ser prorrogado por <strong>mais 10 dias</strong> mediante justificativa expressa, da qual será cientificado o requerente.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('14')">⬅ Anterior</button><button class="nbtn" onclick="irPara('16')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 16 -->
+<div class="section" id="sec-16">
+  <div class="sh sh-la"><div class="num">Tema 16</div><h2>LGPD — Lei Geral de Proteção de Dados (Lei 13.709/2018)</h2><p>Regula o tratamento de dados pessoais por pessoas naturais e jurídicas, públicas e privadas.</p></div>
+  <h3>16.1 Conceitos Fundamentais</h3>
+  <table>
+    <tr><th>Termo</th><th>Definição</th></tr>
+    <tr><td><strong>Dado pessoal</strong></td><td>Informação que identifica ou pode identificar uma pessoa natural</td></tr>
+    <tr><td><strong>Dado pessoal sensível</strong></td><td>Origem racial/étnica, convicção religiosa, saúde, dados genéticos/biométricos, vida sexual, filiação política/sindical</td></tr>
+    <tr><td><strong>Dado anonimizado</strong></td><td>Não pode identificar o titular; não é considerado dado pessoal</td></tr>
+    <tr><td><strong>Titular</strong></td><td>Pessoa natural a quem se referem os dados</td></tr>
+    <tr><td><strong>Controlador</strong></td><td>Decide sobre o tratamento dos dados</td></tr>
+    <tr><td><strong>Operador</strong></td><td>Realiza o tratamento em nome do controlador</td></tr>
+    <tr><td><strong>ANPD</strong></td><td>Autoridade Nacional de Proteção de Dados — órgão de controle</td></tr>
+  </table>
+
+  <h3>16.2 Bases Legais para Tratamento (Art. 7º)</h3>
+  <div class="card">
+    <p>O tratamento de dados pessoais só é lícito quando baseado em uma das seguintes hipóteses:</p>
+    <ul>
+      <li><strong>Consentimento</strong> do titular (livre, informado, inequívoco).</li>
+      <li>Cumprimento de <strong>obrigação legal ou regulatória</strong>.</li>
+      <li>Execução de <strong>políticas públicas</strong> (para a Adm. Pública).</li>
+      <li><strong>Estudos e pesquisas</strong> (anonimização sempre que possível).</li>
+      <li>Execução de <strong>contrato</strong> ou procedimentos preliminares.</li>
+      <li>Exercício regular de <strong>direitos em processos</strong>.</li>
+      <li>Proteção da <strong>vida ou incolumidade física</strong>.</li>
+      <li><strong>Tutela da saúde</strong> (exclusivamente para operadores da saúde).</li>
+      <li><strong>Interesse legítimo</strong> do controlador ou terceiros.</li>
+      <li><strong>Proteção do crédito.</strong></li>
+    </ul>
+  </div>
+
+  <h3>16.3 Direitos do Titular (Art. 18)</h3>
+  <div class="card">
+    <ul>
+      <li>Confirmação da existência de tratamento.</li>
+      <li>Acesso aos dados.</li>
+      <li>Correção de dados incompletos, inexatos ou desatualizados.</li>
+      <li>Anonimização, bloqueio ou eliminação de dados desnecessários.</li>
+      <li>Portabilidade dos dados.</li>
+      <li>Eliminação dos dados tratados com consentimento.</li>
+      <li>Informação sobre compartilhamento com terceiros.</li>
+      <li>Informação sobre possibilidade de não fornecer consentimento e consequências.</li>
+      <li>Revogação do consentimento.</li>
+      <li>Petição à ANPD.</li>
+    </ul>
+  </div>
+
+  <h3>16.4 Sanções (Art. 52)</h3>
+  <div class="card">
+    <ul>
+      <li>Advertência, com prazo para adoção de medidas corretivas.</li>
+      <li>Multa simples até 2% do faturamento anual (limite: R$ 50 milhões por infração).</li>
+      <li>Multa diária.</li>
+      <li>Publicização da infração.</li>
+      <li>Bloqueio/eliminação dos dados pessoais envolvidos.</li>
+      <li>Suspensão parcial do banco de dados (até 6 meses).</li>
+      <li>Proibição parcial ou total do exercício de atividades de tratamento.</li>
+    </ul>
+  </div>
+
+  <h3>16.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a LGPD (Lei 13.709/2018), são considerados dados pessoais sensíveis:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Nome completo, endereço residencial e número de CPF.</li>
+      <li onclick="resp(this,'b','b')">b) Dados sobre saúde, origem racial ou étnica, convicção religiosa e dados biométricos.</li>
+      <li onclick="resp(this,'c','b')">c) Dados profissionais, histórico de emprego e renda mensal declarada.</li>
+      <li onclick="resp(this,'d','b')">d) Dados de navegação na internet e cookies de sessão.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 5º, II, LGPD: dado pessoal sensível é aquele sobre origem racial ou étnica, convicção religiosa, opinião política, filiação sindical/religiosa/filosófica, saúde, vida sexual, dado genético ou biométrico. Esses dados têm tratamento mais restritivo que os dados pessoais comuns.</div>
+  </div>
+
+  <div class="box-ok" style="margin-top:28px"><strong>🎉 Parabéns!</strong> Você concluiu as 16 seções de Direito Administrativo para a banca FCC! Reforce as seções com maior incidência: Ato Administrativo, Licitações (Lei 14.133/21), Improbidade (Lei 14.230/21) e Responsabilidade Civil do Estado. Bons estudos!</div>
+  <div class="nb"><button class="nbtn" onclick="irPara('15')">⬅ Anterior</button><button class="nbtn" onclick="irPara('0')">📋 Índice</button></div>
+</div>
+
+</div><!-- end content -->
+<script>
+function iniciar(){document.getElementById('capa').style.display='none';document.getElementById('nav').style.display='flex';document.getElementById('content').style.display='block'}
+function voltarCapa(){document.getElementById('capa').style.display='flex';document.getElementById('nav').style.display='none';document.getElementById('content').style.display='none'}
+function irPara(n){const num=parseInt(n);document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const sec=document.getElementById('sec-'+num);if(sec){sec.classList.add('active');document.querySelector('#nav select').value=String(num);window.scrollTo({top:0,behavior:'smooth'})}}
+function resp(el,escolha,gabarito){const q=el.closest('.questao');if(q.querySelector('.gab.show'))return;q.querySelectorAll('.alt li').forEach(i=>{const m=i.getAttribute('onclick').match(/'([a-d])'/);if(m&&m[1]===gabarito)i.classList.add('correta');else if(i===el&&escolha!==gabarito)i.classList.add('errada')});q.querySelector('.gab').classList.add('show')}
+</script>
+</body>
+</html>

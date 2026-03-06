@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostila Interativa FCC: Realidade de Goiás</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Base Styling & Scrollbar */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #F8FAFC; color: #1E293B; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F1F5F9; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        /* Chart Container - MANDATORY STRICT STYLING */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        @media (max-width: 640px) {
+            .chart-container { height: 280px; }
+        }
+
+        /* Interactive Elements Custom CSS */
+        .timeline-item { cursor: pointer; transition: all 0.2s ease; border-left: 4px solid #E2E8F0; padding-left: 1rem; margin-bottom: 1rem; }
+        .timeline-item:hover, .timeline-item.active { border-left-color: #D97706; background-color: #FEF3C7; }
+        
+        .tab-btn { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
+        .tab-btn.active { border-bottom-color: #059669; color: #059669; font-weight: bold; }
+
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="antialiased h-screen flex flex-col overflow-hidden">
+
+    <!-- Chosen Palette: Cerrado Harmony (Neutral bg #F8FAFC, Accent Amber #D97706 for History/Economy, Accent Emerald #059669 for Geo/Nature, Text Slate #1E293B) -->
+    <!-- Application Structure Plan: The SPA uses a "Study Module Dashboard" layout. The extensive syllabus is divided into 4 logical pillars: History/Politics, Geography, Economy, and Society. A persistent top navigation allows users to switch contexts without losing their place. Within each module, specific interactive components (timelines for history, charts for data, clickable grids for regional aspects) are used to chunk information, preventing cognitive overload compared to a static text document. This non-linear approach allows candidates to focus on specific weak areas. -->
+    <!-- Visualization & Content Choices: 
+         1. Timeline (History): Goal: Organize chronological events. Method: HTML/CSS clickable list updating a text panel. Justification: Better than a wall of text for showing cause/effect over time.
+         2. Doughnut Chart (Geography): Goal: Inform about Biome dominance. Method: Chart.js. Justification: Quickly visualizes the massive proportion of the Cerrado biome.
+         3. Bar Chart (Economy): Goal: Compare economic shift. Method: Chart.js. Justification: Illustrates the historical transition from mining to agriculture to industry.
+         4. Line Chart (Society): Goal: Show change over time (Population). Method: Chart.js. Justification: Clearly shows the population spikes correlated with the construction of new capitals.
+         CONFIRMING: NO SVG used. NO Mermaid JS used. Interactive elements rely on DOM manipulation and Canvas. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white p-4 shadow-md z-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold">📚 Guia de Estudos FCC</h1>
+                <p class="text-sm text-slate-300">Realidade de Goiás</p>
+            </div>
+            <div class="text-xl">🇧🇷</div>
+        </div>
+    </header>
+
+    <!-- Main Application Area -->
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden bg-slate-50">
+        
+        <!-- Navigation (Sidebar on Desktop, Top Scroll on Mobile) -->
+        <nav class="md:w-64 bg-white border-r border-slate-200 overflow-x-auto md:overflow-y-auto flex-shrink-0">
+            <ul class="flex md:flex-col p-2 md:p-4 space-x-2 md:space-x-0 md:space-y-2">
+                <li>
+                    <button onclick="switchTab('historia')" id="btn-historia" class="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 focus:outline-none transition-colors whitespace-nowrap md:whitespace-normal font-medium tab-btn active">
+                        🏛️ História e Política
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('geografia')" id="btn-geografia" class="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 focus:outline-none transition-colors whitespace-nowrap md:whitespace-normal font-medium tab-btn">
+                        🗺️ Geografia Física
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('economia')" id="btn-economia" class="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 focus:outline-none transition-colors whitespace-nowrap md:whitespace-normal font-medium tab-btn">
+                        📈 Economia
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('sociedade')" id="btn-sociedade" class="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 focus:outline-none transition-colors whitespace-nowrap md:whitespace-normal font-medium tab-btn">
+                        👥 Sociedade e Cultura
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-8" id="main-content">
+
+            <!-- MODULE 1: HISTÓRIA E POLÍTICA -->
+            <section id="sec-historia" class="fade-in max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 border-b-2 border-amber-500 inline-block pb-1">História e Política</h2>
+                <p class="text-slate-600 mb-8 mt-2">Este módulo aborda a evolução política de Goiás, desde os primórdios da ocupação até a administração contemporânea. Explore a linha do tempo para entender como as oligarquias, a Revolução de 1930 e a construção de novas capitais moldaram o poder no estado.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Interactive Timeline -->
+                    <div class="col-span-1 bg-white p-4 rounded-xl shadow-sm border border-slate-100 h-[500px] overflow-y-auto">
+                        <h3 class="font-bold text-lg mb-4 text-amber-700">Linha do Tempo</h3>
+                        <div id="timeline-container">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Detail Panel -->
+                    <div class="col-span-1 md:col-span-2 bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                        <div id="timeline-detail" class="h-full">
+                            <h3 class="text-2xl font-bold text-slate-800 mb-4">Selecione um período</h3>
+                            <p class="text-slate-600">Clique em um evento na linha do tempo ao lado para ver os detalhes, conceitos-chave e implicações históricas exigidas em concursos.</p>
+                            <div class="mt-8 p-4 bg-amber-50 rounded-lg border border-amber-100 text-amber-800">
+                                💡 <strong>Dica FCC:</strong> A banca costuma cobrar a transição do eixo de poder da antiga Vila Boa (Cidade de Goiás) para Goiânia, relacionando isso com o fim do coronelismo e o movimento da Marcha para o Oeste.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MODULE 2: GEOGRAFIA -->
+            <section id="sec-geografia" class="hidden fade-in max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 border-b-2 border-emerald-600 inline-block pb-1">Aspectos Físicos (Geografia)</h2>
+                <p class="text-slate-600 mb-8 mt-2">Compreenda a base territorial de Goiás. O clima tropical, o relevo de planaltos e a hidrografia rica são fundamentais para entender a vocação agropecuária do estado. O bioma Cerrado é tema central.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Biome Chart -->
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-700 mb-4 text-center">Domínio Morfoclimático</h3>
+                        <div class="chart-container">
+                            <canvas id="biomeChart"></canvas>
+                        </div>
+                        <p class="text-sm text-center text-slate-500 mt-2">O Cerrado cobre a quase totalidade do território goiano, sendo considerado o "berço das águas" do Brasil.</p>
+                    </div>
+
+                    <!-- Geo Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 content-start">
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="text-3xl mb-2">☀️</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Clima</h4>
+                            <p class="text-sm text-slate-600">Tropical sazonal (ou semiúmido). Duas estações bem definidas: verão chuvoso (out-abr) e inverno seco (mai-set).</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="text-3xl mb-2">⛰️</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Relevo</h4>
+                            <p class="text-sm text-slate-600">Predomínio de Planaltos e Chapadas da Bacia do Paraná. Relevo tabular, favorável à mecanização agrícola.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition sm:col-span-2">
+                            <div class="text-3xl mb-2">💧</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Hidrografia</h4>
+                            <p class="text-sm text-slate-600">Goiás abriga nascentes de três importantes bacias hidrográficas brasileiras: <strong>Tocantins-Araguaia</strong> (a maior do estado), <strong>Paraná</strong> (Paranaíba) e <strong>São Francisco</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MODULE 3: ECONOMIA -->
+            <section id="sec-economia" class="hidden fade-in max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 border-b-2 border-blue-600 inline-block pb-1">Formação e Dinâmica Econômica</h2>
+                <p class="text-slate-600 mb-8 mt-2">Da mineração decadente à potência agroindustrial. Interaja com os dados abaixo para visualizar a transformação estrutural da economia goiana e o papel da infraestrutura nesse processo.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Economic Evolution Chart -->
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-700 mb-4 text-center">Evolução dos Ciclos Econômicos</h3>
+                        <div class="chart-container">
+                            <canvas id="econChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Infrastructure Info -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-600 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Infraestrutura e Integração</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-xl mr-3">🚂</span>
+                                <div>
+                                    <strong class="text-slate-700">Estrada de Ferro Goyaz (Início Séc. XX):</strong> Primeira tentativa de integração nacional, escoamento de gado e chegada de manufaturados.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-xl mr-3">🛣️</span>
+                                <div>
+                                    <strong class="text-slate-700">Rodovias (A partir de 1950):</strong> Com Brasília e a expansão agrícola (BR-153 / Belém-Brasília), tornaram-se o modal principal.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-xl mr-3">🏭</span>
+                                <div>
+                                    <strong class="text-slate-700">Industrialização Recente:</strong> Focada na agroindústria (alimentos), setor farmoquímico (DAIA em Anápolis) e mineração (níquel, cobre).
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Regional Inequality -->
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                    <h3 class="font-bold text-lg text-blue-800 mb-2">Desigualdades Regionais</h3>
+                    <p class="text-slate-700 text-sm">O desenvolvimento econômico é assimétrico. O Eixo <strong>Goiânia-Anápolis-Brasília</strong> e o <strong>Sudoeste Goiano</strong> (agronegócio) concentram riqueza e indústrias. Em contraste, o <strong>Norte</strong> e <strong>Nordeste Goiano (Vão do Paranã)</strong> historicamente apresentam menores índices de desenvolvimento social e econômico.</p>
+                </div>
+            </section>
+
+            <!-- MODULE 4: SOCIEDADE -->
+            <section id="sec-sociedade" class="hidden fade-in max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2 border-b-2 border-purple-600 inline-block pb-1">Sociedade e População</h2>
+                <p class="text-slate-600 mb-8 mt-2">A demografia de Goiás é marcada por fortes fluxos migratórios induzidos por políticas estatais e expansão da fronteira agrícola. Além disso, a formação cultural é um mosaico de povos nativos, africanos e migrantes de várias partes do país.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                     <!-- Population Chart -->
+                     <div>
+                        <h3 class="text-xl font-bold text-slate-700 mb-4 text-center">Crescimento Demográfico</h3>
+                        <div class="chart-container">
+                            <canvas id="popChart"></canvas>
+                        </div>
+                        <div class="mt-2 flex justify-center space-x-2">
+                             <span class="inline-block px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded font-bold">Aceleração com Goiânia (1930s)</span>
+                             <span class="inline-block px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded font-bold">Boom com Brasília (1960s)</span>
+                        </div>
+                    </div>
+
+                    <!-- Cultural/Social Grid -->
+                    <div class="grid grid-rows-3 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex items-center">
+                            <div class="text-3xl w-12 text-center mr-4">🏹</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Povos Indígenas</h4>
+                                <p class="text-xs text-slate-600">Dizimação histórica (bandeirantes). Grupos remanescentes importantes como os Karajá (Rio Araguaia) lutam por terras e cultura.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex items-center">
+                            <div class="text-3xl w-12 text-center mr-4">⛓️</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Escravidão e Cultura Negra</h4>
+                                <p class="text-xs text-slate-600">Forte presença no ciclo do ouro. Deixaram legado cultural marcante (Congadas, comunidades Quilombolas como os Kalunga no nordeste goiano).</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex items-center">
+                            <div class="text-3xl w-12 text-center mr-4">🚜</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Movimentos no Campo</h4>
+                                <p class="text-xs text-slate-600">A modernização da agricultura gerou concentração fundiária e êxodo rural, impulsionando conflitos agrários e movimentos como o MST e lutas de posseiros (ex: Trombas e Formoso).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // --- Data Definitions ---
+
+        // History Timeline Data
+        const historyData = [
+            { id: 1, title: "Séc. XVIII - Ciclo do Ouro", period: "1722 - 1800", description: "Início do povoamento branco europeu intenso pelas bandeiras paulistas (Bartolomeu Bueno da Silva). Economia baseada na extração de ouro de aluvião com uso massivo de mão de obra escravizada negra. Formação dos primeiros núcleos urbanos (Vila Boa - atual Cidade de Goiás, Meia Ponte - atual Pirenópolis). Rápido esgotamento das minas no final do século." },
+            { id: 2, title: "Séc. XIX - Isolamento e Pecuária", period: "1800 - 1889", description: "Com o fim do ouro, Goiás entra em estagnação e isolamento econômico. A pecuária extensiva torna-se a principal atividade de subsistência e comércio incipiente. Início da formação das grandes propriedades de terra (latifúndios) e fortalecimento do poder local dos fazendeiros (gênese do coronelismo)." },
+            { id: 3, title: "República Velha - Coronelismo", period: "1889 - 1930", description: "Domínio das oligarquias agrárias (famílias Caiado, Bulhões). A política é marcada pelo 'coronelismo', voto de cabresto e fraudes eleitorais. A capital permanece na Cidade de Goiás, simbolizando o poder agrário tradicional." },
+            { id: 4, title: "Revolução de 1930 e Goiânia", period: "1930 - 1940", description: "Ruptura política: Getúlio Vargas nomeia Pedro Ludovico Teixeira como interventor, quebrando o domínio da antiga oligarquia (Caiados). Para consolidar o novo poder e alinhar-se à 'Marcha para o Oeste', Ludovico constrói a nova capital, <strong>Goiânia (1933)</strong>, impulsionando a urbanização e modernização." },
+            { id: 5, title: "Construção de Brasília", period: "1956 - 1960", description: "A criação do Distrito Federal no Planalto Central (governo JK) revoluciona a realidade goiana. Gera um massivo fluxo migratório (candangos), exige a construção de extensa malha rodoviária federal e integra definitivamente o Centro-Oeste ao mercado nacional." },
+            { id: 6, title: "Milagre Econômico e Agronegócio", period: "1970 - Presente", description: "Forte investimento estatal em infraestrutura e pesquisa (EMBRAPA). Ocorre a modernização conservadora da agricultura: correção do solo do Cerrado, mecanização e avanço da soja. Goiás torna-se uma potência do agronegócio, impulsionando a recente agroindustrialização, mas gerando desigualdades regionais e impactos ambientais." }
+        ];
+
+        // --- State Management ---
+        let chartsInitialized = {
+            geografia: false,
+            economia: false,
+            sociedade: false
+        };
+        let chartInstances = {};
+
+        // --- Functions ---
+
+        // 1. Navigation Logic
+        function switchTab(tabId) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-slate-200');
+            });
+            document.getElementById(`btn-${tabId}`).classList.add('active', 'bg-slate-200');
+
+            // Update content sections
+            const sections = ['historia', 'geografia', 'economia', 'sociedade'];
+            sections.forEach(sec => {
+                document.getElementById(`sec-${sec}`).classList.add('hidden');
+            });
+            
+            const targetSection = document.getElementById(`sec-${tabId}`);
+            targetSection.classList.remove('hidden');
+
+            // Initialize charts if needed (delayed slightly to ensure container is rendered and has width)
+            setTimeout(() => {
+                if (tabId === 'geografia' && !chartsInitialized.geografia) initGeografiaCharts();
+                if (tabId === 'economia' && !chartsInitialized.economia) initEconomiaCharts();
+                if (tabId === 'sociedade' && !chartsInitialized.sociedade) initSociedadeCharts();
+            }, 50);
+        }
+
+        // 2. History Timeline Logic
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            container.innerHTML = '';
+            
+            historyData.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = `timeline-item ${index === 0 ? 'active' : ''}`;
+                el.innerHTML = `
+                    <div class="text-xs text-slate-500 font-bold">${item.period}</div>
+                    <div class="text-sm font-semibold text-slate-800">${item.title}</div>
+                `;
+                el.onclick = () => {
+                    // Update active state
+                    document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+                    el.classList.add('active');
+                    // Update detail panel
+                    updateTimelineDetail(item);
+                };
+                container.appendChild(el);
+            });
+            // Init with first item
+            updateTimelineDetail(historyData[0]);
+        }
+
+        function updateTimelineDetail(data) {
+            const detail = document.getElementById('timeline-detail');
+            // Simple animation trick
+            detail.style.opacity = 0;
+            setTimeout(() => {
+                detail.innerHTML = `
+                    <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold mb-3">${data.period}</span>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">${data.title}</h3>
+                    <p class="text-slate-700 leading-relaxed text-lg">${data.description}</p>
+                `;
+                detail.style.transition = 'opacity 0.3s ease';
+                detail.style.opacity = 1;
+            }, 100);
+        }
+
+        // 3. Chart Initializations (Chart.js)
+        
+        // Common options for responsiveness
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 12 } }
+            }
+        };
+
+        function initGeografiaCharts() {
+            const ctx = document.getElementById('biomeChart').getContext('2d');
+            chartInstances.biome = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Cerrado', 'Mata Atlântica'],
+                    datasets: [{
+                        data: [97, 3], // Approximate data for educational purposes
+                        backgroundColor: ['#059669', '#34D399'], // Emerald hues
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                    cutout: '60%',
+                    plugins: {
+                        ...commonChartOptions.plugins,
+                        tooltip: {
+                            callbacks: { label: function(context) { return context.label + ': ~' + context.raw + '%'; } }
+                        }
+                    }
+                }
+            });
+            chartsInitialized.geografia = true;
+        }
+
+        function initEconomiaCharts() {
+            const ctx = document.getElementById('econChart').getContext('2d');
+            // Illustrative data showing the relative dominance of sectors over time
+            chartInstances.econ = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Séc XVIII', 'Séc XIX', 'Anos 1980', 'Atualidade'],
+                    datasets: [
+                        { label: 'Extrativismo Mineral', data: [90, 5, 2, 5], backgroundColor: '#FCD34D', stack: 'Stack 0' },
+                        { label: 'Agropecuária', data: [5, 85, 60, 40], backgroundColor: '#10B981', stack: 'Stack 0' },
+                        { label: 'Indústria/Serviços', data: [5, 10, 38, 55], backgroundColor: '#3B82F6', stack: 'Stack 0' }
+                    ]
+                },
+                options: {
+                    ...commonChartOptions,
+                    scales: {
+                        x: { stacked: true },
+                        y: { stacked: true, beginAtZero: true, max: 100, ticks: { callback: function(value){ return value + '%' } } }
+                    },
+                    plugins: {
+                        ...commonChartOptions.plugins,
+                        title: { display: true, text: 'Importância Relativa dos Setores (%)' }
+                    }
+                }
+            });
+            chartsInitialized.economia = true;
+        }
+
+        function initSociedadeCharts() {
+            const ctx = document.getElementById('popChart').getContext('2d');
+            // Historical approximate population data in millions
+            chartInstances.pop = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1920', '1940', '1950', '1960', '1970', '1980', '2000', '2020'],
+                    datasets: [{
+                        label: 'População (Milhões)',
+                        data: [0.5, 0.8, 1.2, 1.9, 3.0, 3.8, 5.0, 7.2],
+                        borderColor: '#8B5CF6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#8B5CF6',
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+            chartsInitialized.sociedade = true;
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTimeline();
+            // Optional: Listen for window resize to tell charts to resize if layout shifts strangely
+            window.addEventListener('resize', () => {
+                for (let key in chartInstances) {
+                    if (chartInstances[key]) chartInstances[key].resize();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

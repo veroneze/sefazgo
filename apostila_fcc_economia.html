@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Estudos: Economia FCC</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Tailwind Config and CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        neutral: {
+                            50: '#f8fafc',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Import Inter font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+
+        /* REQUIRED CHART CONTAINER STYLING */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Custom Scrollbar for topic list */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        
+        /* Transition for list items */
+        .topic-item {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-neutral-50 text-neutral-800 antialiased min-h-screen flex flex-col">
+
+    <!-- REQUIRED PLACEHOLDERS -->
+    <!-- Chosen Palette: Warm Neutrals (Slate) with Brand Blue (#0284c7) accents. Background is Slate-50 for high contrast and readability. -->
+    <!-- Application Structure Plan: Dashboard/Interactive Syllabus structure. Designed to transform a linear list of topics into an explorable tool. A top navigation bar selects the macro-area (Micro, Tax, Macro). The main view splits into a vertical topic selector (sidebar) and a detailed content area. This allows users to drill down into specific syllabus points while keeping the overall structure visible. Interactive charts are integrated into the detail area to visually explain core economic concepts mentioned in the text, aiding comprehension of theoretical topics. -->
+    <!-- Visualization & Content Choices: 
+         - Report Info: Syllabus topics. 
+         - Goal: Explain core concepts visually since raw data isn't provided, but the topics require understanding of models.
+         - Viz Method: Line charts via Chart.js simulating economic models (Supply/Demand, Laffer, IS-LM).
+         - Interaction: Dynamic rendering based on selected topic, clickable buttons to shift curves (e.g., increase demand) to show 'Effects of shifts' (topic 7.1.4).
+         - Justification: Economics relies heavily on graphical models. Translating textual syllabus points into interactive models fulfills the 'interactive learning' requirement.
+         - Library: Chart.js (Canvas).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header -->
+    <header class="bg-brand-900 text-white shadow-md z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Apostila Interativa: Economia FCC</h1>
+            <p class="text-brand-100 mt-2 text-sm md:text-base max-w-3xl">Guia de estudos focado no edital. Explore os tópicos para visualizar conceitos-chave e resumos estruturados.</p>
+        </div>
+    </header>
+
+    <!-- Main Application Container -->
+    <main class="flex-grow flex flex-col md:flex-row max-w-7xl mx-auto w-full overflow-hidden">
+        
+        <!-- Sidebar Navigation (Modules) -->
+        <aside class="w-full md:w-64 bg-white border-r border-neutral-200 flex-shrink-0 shadow-[2px_0_5px_rgba(0,0,0,0.02)] z-0">
+            <div class="p-4 md:p-6">
+                <h2 class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-4">Módulos do Edital</h2>
+                <nav id="module-nav" class="space-y-2 flex flex-row md:flex-col overflow-x-auto md:overflow-visible pb-2 md:pb-0">
+                    <!-- Nav buttons injected via JS -->
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="flex-1 flex flex-col h-full md:h-[calc(100vh-116px)]">
+            
+            <!-- Module Introduction -->
+            <section class="bg-white border-b border-neutral-200 p-6 md:p-8 shrink-0">
+                <div class="flex items-center gap-3 mb-2">
+                    <span id="module-icon" class="text-2xl">📊</span>
+                    <h2 id="module-title" class="text-2xl font-bold text-neutral-900">Módulo</h2>
+                </div>
+                <p id="module-desc" class="text-neutral-600 max-w-4xl">Descrição da seção.</p>
+            </section>
+
+            <!-- Interactive Workspace -->
+            <section class="flex-1 flex flex-col lg:flex-row overflow-hidden bg-neutral-50 p-4 md:p-6 gap-6">
+                
+                <!-- Topic List (Left Column) -->
+                <div class="w-full lg:w-1/3 bg-white rounded-xl shadow-sm border border-neutral-200 flex flex-col h-[40vh] lg:h-full">
+                    <div class="p-4 border-b border-neutral-100 bg-neutral-50 rounded-t-xl">
+                        <h3 class="font-semibold text-neutral-800">Tópicos Exigidos</h3>
+                    </div>
+                    <ul id="topic-list" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                        <!-- List items injected via JS -->
+                    </ul>
+                </div>
+
+                <!-- Topic Details & Visualization (Right Column) -->
+                <div class="w-full lg:w-2/3 bg-white rounded-xl shadow-sm border border-neutral-200 flex flex-col h-auto lg:h-full overflow-y-auto custom-scrollbar">
+                    <div class="p-6 lg:p-8 flex-1 flex flex-col">
+                        <span id="detail-number" class="text-sm font-bold text-brand-600 mb-1">Tópico</span>
+                        <h3 id="detail-title" class="text-xl font-bold text-neutral-900 mb-4 pb-4 border-b border-neutral-100">Título do Tópico</h3>
+                        
+                        <div id="detail-content" class="text-neutral-700 space-y-4 mb-8 leading-relaxed">
+                            <!-- Content injected via JS -->
+                        </div>
+
+                        <!-- Dynamic Visualization Area -->
+                        <div id="viz-area" class="mt-auto hidden flex flex-col items-center border-t border-neutral-100 pt-6">
+                            <div class="w-full flex justify-between items-end mb-4 px-2">
+                                <div>
+                                    <h4 id="viz-title" class="font-bold text-neutral-800">Modelo Analítico</h4>
+                                    <p id="viz-desc" class="text-sm text-neutral-500">Representação gráfica do conceito.</p>
+                                </div>
+                                <div id="viz-controls" class="space-x-2">
+                                    <!-- Controls injected via JS -->
+                                </div>
+                            </div>
+                            <!-- REQUIRED CHART CONTAINER -->
+                            <div class="chart-container">
+                                <canvas id="mainChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Data and Logic -->
+    <script>
+        // --- 1. Data Source (Structured from the prompt's report) ---
+        const syllabusData = {
+            micro: {
+                id: 'micro',
+                icon: '📈',
+                title: '7.1 Microeconomia',
+                desc: 'Nesta seção, exploramos o comportamento de agentes individuais (consumidores e firmas) e como suas decisões interagem nos mercados. O foco principal é a formação de preços, alocação de recursos escassos e as diferentes estruturas de mercado.',
+                topics: [
+                    {
+                        num: "1", title: "Conceitos fundamentais de economia",
+                        content: `<p>A economia estuda a alocação de recursos <strong>escassos</strong> para satisfazer necessidades humanas ilimitadas. O conceito central é a <strong>escassez</strong>.</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Custo de Oportunidade:</strong> O valor da melhor alternativa sacrificada ao se fazer uma escolha.</li>
+                                    <li><strong>Fronteira de Possibilidades de Produção (FPP):</strong> Demonstra as quantidades máximas de produção que podem ser obtidas por uma economia.</li>
+                                  </ul>`,
+                        hasViz: false
+                    },
+                    {
+                        num: "2 & 3", title: "Equilíbrio de Mercado e Fatores de Oferta/Procura",
+                        content: `<p>O mercado encontra seu equilíbrio no ponto onde a quantidade demandada pelos consumidores iguala a quantidade ofertada pelas firmas.</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Procura (Demanda):</strong> Afetada por Renda, Preço de bens substitutos/complementares, Gostos e Expectativas. Curva negativamente inclinada.</li>
+                                    <li><strong>Oferta:</strong> Afetada por Custo de insumos, Tecnologia, Clima e Número de vendedores. Curva positivamente inclinada.</li>
+                                  </ul>`,
+                        hasViz: true, vizType: 'supplyDemand',
+                        vizTitle: "Equilíbrio: Oferta e Demanda",
+                        vizDesc: "Interação básica de mercado."
+                    },
+                    {
+                        num: "4", title: "Efeitos de deslocamentos das curvas",
+                        content: `<p>Mudanças nos fatores (exceto o próprio preço do bem) causam <strong>deslocamentos</strong> das curvas, gerando um novo ponto de equilíbrio (novo preço e quantidade).</p>
+                                  <div class="bg-brand-50 p-4 rounded-md mt-4 border border-brand-100 text-sm">
+                                    <strong>Nota de Estudo:</strong> Compreender para onde a curva vai (direita=aumento, esquerda=diminuição) e qual o impacto no preço (P) e quantidade (Q) de equilíbrio é vital para a FCC. Use os botões abaixo para simular no gráfico.
+                                  </div>`,
+                        hasViz: true, vizType: 'supplyDemandShift',
+                        vizTitle: "Simulador de Deslocamentos",
+                        vizDesc: "Observe como choques exógenos alteram P* e Q*."
+                    },
+                    {
+                        num: "5", title: "Elasticidades: preço da procura e oferta",
+                        content: `<p>Mede a sensibilidade da quantidade demandada ou ofertada a variações no preço.</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Elástica (>1):</strong> Quantidade reage muito à mudança de preço (ex: bens supérfluos).</li>
+                                    <li><strong>Inelástica (<1):</strong> Quantidade reage pouco (ex: remédios, sal).</li>
+                                    <li><strong>Unitária (=1):</strong> Variação proporcional.</li>
+                                  </ul>`,
+                        hasViz: false
+                    },
+                    {
+                        num: "6", title: "Equilíbrio da firma nas estruturas de mercado",
+                        content: `<p>Como as empresas maximizam lucros (Receita Marginal = Custo Marginal) em diferentes ambientes:</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Concorrência Perfeita:</strong> Muitos vendedores, produto homogêneo. Firma é tomadora de preços (P = Cmg). Lucro econômico zero no longo prazo.</li>
+                                    <li><strong>Monopólio:</strong> Único vendedor, barreiras à entrada. Preço > Custo Marginal. Causa peso morto.</li>
+                                    <li><strong>Oligopólio:</strong> Poucos vendedores, interdependência estratégica.</li>
+                                    <li><strong>Concorrência Monopolística:</strong> Muitos vendedores, produtos diferenciados.</li>
+                                  </ul>`,
+                        hasViz: false
+                    }
+                ]
+            },
+            tax: {
+                id: 'tax',
+                icon: '⚖️',
+                title: '7.2 Economia da Tributação',
+                desc: 'Analisa como o Estado arrecada recursos, os diferentes tipos de tributos e, principalmente, os impactos da tributação na eficiência econômica (distorções nos preços) e na equidade (distribuição de renda).',
+                topics: [
+                    {
+                        num: "1 & 2", title: "Formas e Classificação da Tributação",
+                        content: `<p>A tributação é necessária para financiar bens públicos e corrigir falhas de mercado.</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Impostos:</strong> Não vinculados a atuação estatal específica. Podem ser <em>Ad Valorem</em> (% sobre o valor, ex: ICMS) ou <em>Específicos</em> (valor fixo por unidade, ex: CIDE-Combustíveis).</li>
+                                    <li><strong>Taxas:</strong> Vinculadas a serviço público específico ou poder de polícia.</li>
+                                  </ul>`,
+                        hasViz: false
+                    },
+                    {
+                        num: "3 & 4", title: "Eficiência, Peso Morto e Elasticidades",
+                        content: `<p>A maioria dos impostos altera os preços relativos, mudando o comportamento dos agentes e gerando ineficiência (não-Pareto ótimo).</p>
+                                  <p class="mt-2"><strong>Peso Morto (Excesso de Gravame):</strong> É a perda de bem-estar social (excedente do consumidor + produtor) que excede a receita arrecadada pelo governo.</p>
+                                  <div class="bg-amber-50 p-4 rounded-md mt-4 border border-amber-200 text-sm">
+                                    <strong>Regra de Ouro FCC:</strong> O tamanho do peso morto depende das elasticidades. Quanto <strong>mais elásticas</strong> forem a oferta e a demanda, <strong>maior</strong> será o peso morto criado pelo imposto (maior a fuga do mercado).
+                                  </div>`,
+                        hasViz: false
+                    },
+                    {
+                        num: "5", title: "Tributação Ótima e Curva de Laffer",
+                        content: `<p>Como tributar minimizando distorções (Regra de Ramsey: tributar mais bens de demanda inelástica).</p>
+                                  <p class="mt-2"><strong>Curva de Laffer:</strong> Ilustra a relação teórica entre alíquotas de imposto e receita tributária. Mostra que a partir de certo ponto (alíquota proibitiva), aumentar o imposto reduz a arrecadação devido ao desestímulo à produção e evasão fiscal.</p>`,
+                        hasViz: true, vizType: 'laffer',
+                        vizTitle: "A Curva de Laffer",
+                        vizDesc: "Relação entre Alíquota e Arrecadação."
+                    },
+                    {
+                        num: "6 & 7", title: "Equidade, Princípios e Incidência",
+                        content: `<p>Existe um <em>trade-off</em> clássico: políticas muito equitativas podem gerar ineficiências, e vice-versa.</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Princípio do Benefício:</strong> Paga quem usa (ex: pedágio).</li>
+                                    <li><strong>Capacidade Contributiva:</strong> Paga quem tem mais renda/riqueza.</li>
+                                    <li><strong>Incidência Econômica:</strong> Quem recolhe o imposto (incidência legal) nem sempre é quem arca com o custo (incidência econômica). O ônus recai mais sobre o lado <strong>mais inelástico</strong> do mercado (que não consegue "fugir").</li>
+                                  </ul>`,
+                        hasViz: false
+                    }
+                ]
+            },
+            macro: {
+                id: 'macro',
+                icon: '🌍',
+                title: '7.3 Macroeconomia',
+                desc: 'Estuda os grandes agregados econômicos: produto nacional, nível de preços (inflação), emprego, taxa de juros e relações com o setor externo. Foca na visão global da economia.',
+                topics: [
+                    {
+                        num: "1 & 2", title: "Contabilidade Nacional e Renda Nacional",
+                        content: `<p>Mede o desempenho geral da economia. A identidade macroeconômica básica para uma economia aberta com governo é:</p>
+                                  <div class="text-center my-4 font-mono bg-neutral-100 p-2 rounded">Y = C + I + G + (X - M)</div>
+                                  <p class="text-sm text-neutral-600">Onde: Y (Produto/Renda), C (Consumo), I (Investimento), G (Gastos do Governo), X (Exportações), M (Importações).</p>`,
+                        hasViz: false
+                    },
+                    {
+                        num: "3 & 4", title: "Modelo IS-LM (Políticas Fiscal e Monetária)",
+                        content: `<p>Modelo de determinação da renda a curto prazo assumindo preços fixos.</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Curva IS (Investment-Saving):</strong> Equilíbrio no mercado de bens. Negativamente inclinada (juros menores aumentam investimento e renda). Afetada pela <em>Política Fiscal</em> (G, Tributos).</li>
+                                    <li><strong>Curva LM (Liquidity-Money):</strong> Equilíbrio no mercado monetário. Positivamente inclinada. Afetada pela <em>Política Monetária</em> (Oferta de Moeda).</li>
+                                  </ul>`,
+                        hasViz: true, vizType: 'islm',
+                        vizTitle: "Modelo IS-LM",
+                        vizDesc: "Equilíbrio simultâneo dos mercados de bens e moeda."
+                    },
+                    {
+                        num: "5 & 6", title: "PIB, Inflação e Mensuração",
+                        content: `<p>Distinção crucial:</p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>PIB Nominal:</strong> Medido a preços correntes (do ano em questão).</li>
+                                    <li><strong>PIB Real:</strong> Medido a preços constantes (de um ano-base). Isola o efeito da inflação, mostrando o crescimento real da produção.</li>
+                                    <li><strong>Deflator do PIB:</strong> Razão entre PIB Nominal e Real. É um índice de inflação.</li>
+                                  </ul>`,
+                        hasViz: false
+                    },
+                    {
+                        num: "8, 10 & 11", title: "Setor Externo e Atuação do Estado",
+                        content: `<p><strong>Balanço de Pagamentos (BP):</strong> Registro contábil de todas as transações de um país com o resto do mundo (Transações Correntes + Conta Capital e Financeira).</p>
+                                  <p class="mt-2"><strong>Políticas Macroeconômicas:</strong></p>
+                                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><strong>Fiscal:</strong> Controle de gastos e impostos.</li>
+                                    <li><strong>Monetária:</strong> Controle de emissão de moeda e taxa de juros básica (Selic).</li>
+                                    <li><strong>Cambial:</strong> Gestão da taxa de câmbio (fixa, flutuante).</li>
+                                  </ul>`,
+                        hasViz: false
+                    }
+                ]
+            }
+        };
+
+        // --- 2. State Management ---
+        let currentModuleId = 'micro';
+        let currentTopicIndex = 0;
+        let chartInstance = null;
+
+        // --- 3. DOM Elements ---
+        const navContainer = document.getElementById('module-nav');
+        const moduleIcon = document.getElementById('module-icon');
+        const moduleTitle = document.getElementById('module-title');
+        const moduleDesc = document.getElementById('module-desc');
+        const topicListContainer = document.getElementById('topic-list');
+        const detailNumber = document.getElementById('detail-number');
+        const detailTitle = document.getElementById('detail-title');
+        const detailContent = document.getElementById('detail-content');
+        
+        const vizArea = document.getElementById('viz-area');
+        const vizTitle = document.getElementById('viz-title');
+        const vizDesc = document.getElementById('viz-desc');
+        const vizControls = document.getElementById('viz-controls');
+        const canvasElement = document.getElementById('mainChart');
+
+        // --- 4. Initialization ---
+        function initApp() {
+            renderNavigation();
+            selectModule(currentModuleId);
+        }
+
+        // --- 5. Render Logic ---
+        function renderNavigation() {
+            navContainer.innerHTML = '';
+            Object.keys(syllabusData).forEach(key => {
+                const mod = syllabusData[key];
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors md:mr-0 mr-2 flex-shrink-0 flex items-center gap-2 ${key === currentModuleId ? 'bg-brand-50 text-brand-600 border border-brand-200' : 'text-neutral-600 hover:bg-neutral-100'}`;
+                btn.innerHTML = `<span>${mod.icon}</span> <span class="whitespace-nowrap md:whitespace-normal">${mod.title.split(' ')[1]}</span>`;
+                btn.onclick = () => selectModule(key);
+                navContainer.appendChild(btn);
+            });
+        }
+
+        function selectModule(moduleId) {
+            currentModuleId = moduleId;
+            currentTopicIndex = 0;
+            renderNavigation(); // Update active state
+
+            const mod = syllabusData[moduleId];
+            moduleIcon.textContent = mod.icon;
+            moduleTitle.textContent = mod.title;
+            moduleDesc.textContent = mod.desc;
+
+            renderTopicList(mod.topics);
+            selectTopic(0); // Auto select first
+        }
+
+        function renderTopicList(topics) {
+            topicListContainer.innerHTML = '';
+            topics.forEach((topic, index) => {
+                const li = document.createElement('li');
+                li.className = `topic-item p-3 rounded-md cursor-pointer border-l-4 ${index === currentTopicIndex ? 'bg-white shadow-sm border-brand-500' : 'border-transparent hover:bg-neutral-100 text-neutral-600'}`;
+                li.innerHTML = `
+                    <div class="text-xs text-neutral-400 font-bold mb-1">Item ${topic.num}</div>
+                    <div class="text-sm font-medium leading-snug">${topic.title}</div>
+                `;
+                li.onclick = () => selectTopic(index);
+                topicListContainer.appendChild(li);
+            });
+        }
+
+        function selectTopic(index) {
+            currentTopicIndex = index;
+            const mod = syllabusData[currentModuleId];
+            const topic = mod.topics[index];
+
+            // Update UI selection
+            Array.from(topicListContainer.children).forEach((el, i) => {
+                if (i === index) {
+                    el.className = 'topic-item p-3 rounded-md cursor-pointer border-l-4 bg-white shadow-sm border-brand-500 text-neutral-900';
+                } else {
+                    el.className = 'topic-item p-3 rounded-md cursor-pointer border-l-4 border-transparent hover:bg-neutral-100 text-neutral-600';
+                }
+            });
+
+            // Update Content
+            detailNumber.textContent = `Tópico ${topic.num}`;
+            detailTitle.textContent = topic.title;
+            detailContent.innerHTML = topic.content;
+
+            // Handle Visualization
+            if (topic.hasViz) {
+                vizArea.classList.remove('hidden');
+                vizTitle.textContent = topic.vizTitle;
+                vizDesc.textContent = topic.vizDesc;
+                renderChart(topic.vizType);
+            } else {
+                vizArea.classList.add('hidden');
+                destroyChart();
+            }
+        }
+
+        // --- 6. Charting Logic (Chart.js) ---
+        function destroyChart() {
+            if (chartInstance) {
+                chartInstance.destroy();
+                chartInstance = null;
+            }
+            vizControls.innerHTML = ''; // Clear controls
+        }
+
+        function getCommonOptions(xTitle, yTitle) {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 500 },
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8 } },
+                    tooltip: { enabled: true }
+                },
+                scales: {
+                    x: {
+                        type: 'linear', position: 'bottom',
+                        title: { display: true, text: xTitle, font: {weight: 'bold'} },
+                        grid: { display: false },
+                        ticks: { display: false } // Hide numbers for theoretical models
+                    },
+                    y: {
+                        title: { display: true, text: yTitle, font: {weight: 'bold'} },
+                        grid: { borderDash: [5, 5] },
+                        ticks: { display: false }
+                    }
+                }
+            };
+        }
+
+        function renderChart(type) {
+            destroyChart();
+            const ctx = canvasElement.getContext('2d');
+
+            if (type === 'supplyDemand' || type === 'supplyDemandShift') {
+                // Base data
+                const demand = [{x: 10, y: 90}, {x: 90, y: 10}];
+                const supply = [{x: 10, y: 10}, {x: 90, y: 90}];
+                
+                const data = {
+                    datasets: [
+                        { label: 'Demanda (D)', data: demand, borderColor: '#0ea5e9', backgroundColor: '#0ea5e9', borderWidth: 3, pointRadius: 0, tension: 0 },
+                        { label: 'Oferta (O)', data: supply, borderColor: '#f97316', backgroundColor: '#f97316', borderWidth: 3, pointRadius: 0, tension: 0 }
+                    ]
+                };
+
+                const options = getCommonOptions('Quantidade (Q)', 'Preço (P)');
+                
+                // Add Intersection Point via custom plugin conceptually (simplified by plotting a point)
+                data.datasets.push({
+                    label: 'Equilíbrio (E*)', data: [{x: 50, y: 50}],
+                    backgroundColor: '#0f172a', pointRadius: 6, pointHoverRadius: 8, type: 'scatter', showLine: false
+                });
+
+                chartInstance = new Chart(ctx, { type: 'line', data: data, options: options });
+
+                if (type === 'supplyDemandShift') {
+                    // Add Interaction buttons
+                    vizControls.innerHTML = `
+                        <button id="btn-shift-d" class="px-3 py-1 bg-brand-100 text-brand-700 rounded text-xs font-semibold hover:bg-brand-200 transition">+ Demanda</button>
+                        <button id="btn-shift-s" class="px-3 py-1 bg-orange-100 text-orange-700 rounded text-xs font-semibold hover:bg-orange-200 transition">+ Oferta</button>
+                        <button id="btn-reset" class="px-3 py-1 bg-neutral-200 text-neutral-700 rounded text-xs font-semibold hover:bg-neutral-300 transition">Reset</button>
+                    `;
+                    
+                    document.getElementById('btn-shift-d').onclick = () => {
+                        chartInstance.data.datasets[0].data = [{x: 30, y: 110}, {x: 110, y: 30}]; // Shift D Right
+                        chartInstance.data.datasets[2].data = [{x: 60, y: 60}]; // New Eq
+                        chartInstance.data.datasets[0].label = "Demanda (D')";
+                        chartInstance.update();
+                    };
+                    document.getElementById('btn-shift-s').onclick = () => {
+                        chartInstance.data.datasets[1].data = [{x: 30, y: -10}, {x: 110, y: 70}]; // Shift S Right (downwards in P)
+                        // Calculate new intersection roughly for visual sake based on shift
+                        chartInstance.data.datasets[2].data = [{x: 60, y: 40}]; // New Eq
+                        chartInstance.data.datasets[1].label = "Oferta (O')";
+                        chartInstance.update();
+                    };
+                    document.getElementById('btn-reset').onclick = () => renderChart('supplyDemandShift');
+                }
+            } 
+            else if (type === 'laffer') {
+                // Generate parabola data
+                const lafferData = [];
+                for(let x=0; x<=100; x+=5) {
+                    // Simple parabola y = -a(x-h)^2 + k. Vertex at (50, 100)
+                    let y = -0.04 * Math.pow((x - 50), 2) + 100;
+                    lafferData.push({x: x, y: y});
+                }
+
+                const options = getCommonOptions('Alíquota de Imposto (%)', 'Arrecadação Tributária ($)');
+                options.scales.x.ticks.display = true; // Show percentages here
+                options.scales.x.min = 0; options.scales.x.max = 100;
+                
+                // Add an annotation line for 'T max'
+                options.plugins.annotation = {
+                    annotations: {
+                        line1: { type: 'line', xMin: 50, xMax: 50, borderColor: 'rgba(0,0,0,0.3)', borderDash: [4, 4], label: {display: true, content: 'Alíquota Ótima', position: 'end'} }
+                    }
+                };
+
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            label: 'Curva de Laffer', data: lafferData,
+                            borderColor: '#16a34a', backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                            borderWidth: 3, pointRadius: 0, tension: 0.4, fill: true
+                        }]
+                    },
+                    options: options
+                });
+            }
+            else if (type === 'islm') {
+                const isData = [{x: 10, y: 90}, {x: 90, y: 10}]; // IS slopes down
+                const lmData = [{x: 10, y: 30}, {x: 90, y: 70}]; // LM slopes up
+                
+                const data = {
+                    datasets: [
+                        { label: 'Curva IS', data: isData, borderColor: '#8b5cf6', borderWidth: 3, pointRadius: 0, tension: 0 },
+                        { label: 'Curva LM', data: lmData, borderColor: '#eab308', borderWidth: 3, pointRadius: 0, tension: 0 },
+                        { label: 'Equilíbrio', data: [{x: 50, y: 50}], backgroundColor: '#0f172a', pointRadius: 6, type: 'scatter' }
+                    ]
+                };
+                
+                const options = getCommonOptions('Produto / Renda (Y)', 'Taxa de Juros (r)');
+
+                chartInstance = new Chart(ctx, { type: 'line', data: data, options: options });
+
+                 vizControls.innerHTML = `
+                        <button id="btn-pol-fisc" class="px-3 py-1 bg-purple-100 text-purple-700 rounded text-xs font-semibold hover:bg-purple-200 transition">Pol. Fiscal Expansiva</button>
+                        <button id="btn-pol-mon" class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold hover:bg-yellow-200 transition">Pol. Monetária Expansiva</button>
+                        <button id="btn-reset-macro" class="px-3 py-1 bg-neutral-200 text-neutral-700 rounded text-xs font-semibold hover:bg-neutral-300 transition">Reset</button>
+                    `;
+                    
+                    document.getElementById('btn-pol-fisc').onclick = () => {
+                        chartInstance.data.datasets[0].data = [{x: 30, y: 110}, {x: 110, y: 30}]; // IS right
+                        chartInstance.data.datasets[2].data = [{x: 63, y: 57}]; // New Eq (higher Y, higher r)
+                        chartInstance.update();
+                    };
+                    document.getElementById('btn-pol-mon').onclick = () => {
+                        chartInstance.data.datasets[1].data = [{x: 10, y: 10}, {x: 90, y: 50}]; // LM down/right
+                        chartInstance.data.datasets[2].data = [{x: 63, y: 37}]; // New Eq (higher Y, lower r)
+                        chartInstance.update();
+                    };
+                    document.getElementById('btn-reset-macro').onclick = () => renderChart('islm');
+            }
+        }
+
+        // Start the app
+        document.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>

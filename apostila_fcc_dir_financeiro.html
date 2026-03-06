@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apostila FCC – Direito Financeiro</title>
+<style>
+:root{--az:#1a3a5c;--azm:#2563a8;--azc:#dbeafe;--vd:#15803d;--vdc:#dcfce7;--vm:#b91c1c;--vmc:#fee2e2;--am:#b45309;--amc:#fef3c7;--es:#065f46;--esc:#d1fae5;--cz:#f1f5f9;--tx:#1e293b;--bd:#cbd5e1;--ro:#7c3aed;--roc:#ede9fe;--la:#0e7490;--lac:#cffafe;--in:#1d4ed8;--inc:#eff6ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f8fafc;color:var(--tx)}
+#capa{background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 60%,#065f46 100%);color:#fff;text-align:center;padding:60px 20px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#capa .badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 20px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+#capa h1{font-size:2.6rem;font-weight:800;line-height:1.2;margin-bottom:10px}
+#capa h2{font-size:1.1rem;font-weight:400;opacity:.85;margin-bottom:36px}
+#capa .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:700px}
+#capa .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:5px 12px;font-size:.75rem}
+#capa .btn-s{margin-top:44px;background:#fff;color:#0f172a;padding:13px 38px;border-radius:50px;border:none;font-size:1rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+#capa .btn-s:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.4)}
+#nav{background:var(--az);color:#fff;padding:10px 16px;display:none;align-items:center;gap:12px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
+#nav .nt{font-weight:700;font-size:.85rem;white-space:nowrap}
+#nav select{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 10px;font-size:.82rem;cursor:pointer;flex:1;min-width:220px}
+#nav select option{background:var(--az)}
+#nav .bc{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:5px 12px;font-size:.78rem;cursor:pointer;white-space:nowrap}
+#content{display:none;max-width:940px;margin:0 auto;padding:28px 18px 70px}
+.section{display:none}.section.active{display:block}
+.sh{border-radius:12px;padding:26px 30px;margin-bottom:26px;color:#fff}
+.sh .num{font-size:.78rem;opacity:.7;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.sh h2{font-size:1.65rem;font-weight:800}
+.sh p{margin-top:7px;opacity:.85;font-size:.92rem}
+.sh-az{background:linear-gradient(135deg,#0f172a,#1d4ed8)}
+.sh-vd{background:linear-gradient(135deg,#065f46,#15803d)}
+.sh-am{background:linear-gradient(135deg,#78350f,#b45309)}
+.sh-la{background:linear-gradient(135deg,#164e63,#0e7490)}
+h3{color:var(--az);font-size:1.05rem;margin:24px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--azc)}
+h4{color:var(--azm);font-size:.93rem;margin:13px 0 7px;font-weight:700}
+p{line-height:1.75;margin-bottom:9px;font-size:.93rem}
+ul,ol{padding-left:20px;margin-bottom:11px}
+li{line-height:1.75;font-size:.93rem;margin-bottom:4px}
+.card{background:#fff;border-radius:10px;padding:18px 22px;border:1px solid var(--bd);margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.box-d{background:var(--amc);border-left:4px solid var(--am);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-d strong{color:var(--am)}
+.box-a{background:var(--vmc);border-left:4px solid var(--vm);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-a strong{color:var(--vm)}
+.box-i{background:var(--azc);border-left:4px solid var(--azm);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-i strong{color:var(--azm)}
+.box-ok{background:var(--vdc);border-left:4px solid var(--vd);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-ok strong{color:var(--vd)}
+.box-la{background:var(--lac);border-left:4px solid var(--la);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-la strong{color:var(--la)}
+.box-in{background:var(--inc);border-left:4px solid var(--in);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-in strong{color:var(--in)}
+.ex{background:var(--cz);border-radius:8px;padding:13px 16px;margin:9px 0;font-size:.9rem;border:1px solid var(--bd)}
+.artigo{background:#fff;border:2px solid var(--azc);border-radius:8px;padding:13px 18px;margin:10px 0;font-size:.9rem;line-height:1.7}
+.artigo .an{font-weight:800;color:var(--azm);font-size:.82rem;display:block;margin-bottom:3px}
+.formula{background:#1e293b;color:#e2e8f0;border-radius:10px;padding:14px 20px;margin:12px 0;font-family:'Courier New',monospace;font-size:.9rem;text-align:center}
+.formula .hl{color:#fbbf24;font-weight:700}
+table{width:100%;border-collapse:collapse;margin:11px 0 14px;font-size:.88rem}
+th{background:var(--az);color:#fff;padding:9px 13px;text-align:left}
+td{padding:8px 13px;border-bottom:1px solid var(--bd);vertical-align:top}
+tr:nth-child(even) td{background:var(--cz)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:13px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;margin:13px 0}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.questao{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:18px 22px;margin:13px 0}
+.questao .en{font-weight:600;margin-bottom:11px;line-height:1.6;font-size:.93rem}
+.questao .alt{list-style:none;padding:0}
+.questao .alt li{padding:7px 11px;border-radius:6px;margin:5px 0;cursor:pointer;border:1.5px solid var(--bd);transition:all .15s;font-size:.9rem}
+.questao .alt li:hover{border-color:var(--azm);background:var(--azc)}
+.questao .alt li.correta{background:var(--vdc);border-color:var(--vd)}
+.questao .alt li.errada{background:var(--vmc);border-color:var(--vm)}
+.questao .gab{display:none;margin-top:11px;padding:11px;background:var(--cz);border-radius:8px;font-size:.87rem;line-height:1.65}
+.questao .gab.show{display:block}
+.nb{display:flex;gap:11px;margin-top:38px;justify-content:space-between}
+.nbtn{background:var(--az);color:#fff;border:none;border-radius:8px;padding:11px 22px;cursor:pointer;font-size:.88rem;font-weight:600;transition:background .2s}
+.nbtn:hover{background:var(--azm)}
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:11px;margin:18px 0}
+.ii{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:15px;cursor:pointer;transition:all .2s;text-align:center}
+.ii:hover{border-color:var(--azm);background:var(--azc);transform:translateY(-2px)}
+.ii .n{font-size:1.2rem;font-weight:800;color:var(--az)}
+.ii .nm{font-size:.77rem;color:#64748b;margin-top:3px;line-height:1.3}
+.steps{counter-reset:st;list-style:none;padding-left:0}
+.steps li{counter-increment:st;padding:9px 12px 9px 42px;position:relative;margin-bottom:7px;background:var(--cz);border-radius:8px;border:1px solid var(--bd);font-size:.9rem;line-height:1.6}
+.steps li::before{content:counter(st);position:absolute;left:11px;top:50%;transform:translateY(-50%);background:var(--az);color:#fff;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;line-height:21px;text-align:center}
+.timeline{border-left:3px solid var(--azm);padding-left:20px;margin:14px 0}
+.timeline-item{position:relative;margin-bottom:16px}
+.timeline-item::before{content:'';position:absolute;left:-25px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--azm);border:2px solid #fff;box-shadow:0 0 0 2px var(--azm)}
+.timeline-item h4{margin:0 0 4px;color:var(--az)}
+.timeline-item p{margin:0;font-size:.88rem;color:#475569}
+.badge-lei{display:inline-block;background:var(--azc);color:var(--az);border-radius:4px;padding:1px 8px;font-size:.73rem;font-weight:700;margin-right:4px}
+.badge-art{display:inline-block;background:var(--amc);color:var(--am);border-radius:4px;padding:1px 8px;font-size:.73rem;font-weight:700;margin-right:4px}
+.badge-lrf{display:inline-block;background:var(--vdc);color:var(--vd);border-radius:4px;padding:1px 8px;font-size:.73rem;font-weight:700;margin-right:4px}
+.ciclo{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 0}
+.ciclo-item{background:var(--az);color:#fff;border-radius:8px;padding:8px 14px;font-size:.82rem;font-weight:600;text-align:center;min-width:90px}
+.ciclo-arrow{color:var(--azm);font-size:1.2rem;font-weight:900}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div id="capa">
+  <div class="badge">Banca FCC</div>
+  <h1>Direito Financeiro</h1>
+  <h2>Apostila Completa · PPA · LDO · LOA · LRF · Lei 4.320/1964</h2>
+  <div class="pills">
+    <span class="pill">Orçamento CF/88</span><span class="pill">PPA · LDO · LOA</span>
+    <span class="pill">Créditos Adicionais</span><span class="pill">Emendas Parlamentares</span>
+    <span class="pill">LRF – LC 101/2000</span><span class="pill">Receita Pública</span>
+    <span class="pill">Despesa Pública</span><span class="pill">Dívida e Endividamento</span>
+    <span class="pill">Gestão Patrimonial</span><span class="pill">Lei 4.320/1964</span>
+  </div>
+  <button class="btn-s" onclick="iniciar()">💰 Começar a Estudar</button>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <span class="nt">💰 FCC – Dir. Financeiro</span>
+  <select onchange="irPara(this.value)">
+    <option value="0">📋 Índice Geral</option>
+    <optgroup label="1. Orçamento na CF/88">
+      <option value="1">1.1 PPA – Plano Plurianual</option>
+      <option value="2">1.2 LDO – Lei de Diretrizes Orçamentárias</option>
+      <option value="3">1.3 LOA – Lei Orçamentária Anual</option>
+      <option value="4">1.4 Créditos Adicionais</option>
+      <option value="5">1.5 Emendas Parlamentares</option>
+    </optgroup>
+    <optgroup label="2. LC 101/2000 – LRF">
+      <option value="6">2.1 Planejamento</option>
+      <option value="7">2.2 Receita Pública</option>
+      <option value="8">2.3 Despesa Pública</option>
+      <option value="9">2.4 Transferências Voluntárias</option>
+      <option value="10">2.5 Setor Privado e Dívida</option>
+      <option value="11">2.6 Gestão Patrimonial</option>
+    </optgroup>
+    <option value="12">3. Lei 4.320/1964</option>
+  </select>
+  <button class="bc" onclick="voltarCapa()">⬅ Capa</button>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<!-- ÍNDICE -->
+<div class="section active" id="sec-0">
+  <div class="sh sh-az"><div class="num">Apostila FCC</div><h2>📋 Índice Geral – Direito Financeiro</h2><p>13 seções cobrindo todo o edital: Orçamento na CF/88, LRF (LC 101/2000) e Lei 4.320/1964.</p></div>
+  <h3>1. Orçamento na Constituição Federal de 1988</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('1')"><div class="n">1.1</div><div class="nm">PPA – Plano Plurianual</div></div>
+    <div class="ii" onclick="irPara('2')"><div class="n">1.2</div><div class="nm">LDO – Lei de Diretrizes Orçamentárias</div></div>
+    <div class="ii" onclick="irPara('3')"><div class="n">1.3</div><div class="nm">LOA – Lei Orçamentária Anual</div></div>
+    <div class="ii" onclick="irPara('4')"><div class="n">1.4</div><div class="nm">Créditos Adicionais</div></div>
+    <div class="ii" onclick="irPara('5')"><div class="n">1.5</div><div class="nm">Emendas Parlamentares</div></div>
+  </div>
+  <h3>2. Lei de Responsabilidade Fiscal – LC 101/2000</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('6')"><div class="n">2.1</div><div class="nm">Planejamento (Cap. II)</div></div>
+    <div class="ii" onclick="irPara('7')"><div class="n">2.2</div><div class="nm">Receita Pública (Cap. III)</div></div>
+    <div class="ii" onclick="irPara('8')"><div class="n">2.3</div><div class="nm">Despesa Pública (Cap. IV)</div></div>
+    <div class="ii" onclick="irPara('9')"><div class="n">2.4–5</div><div class="nm">Transferências e Setor Privado</div></div>
+    <div class="ii" onclick="irPara('10')"><div class="n">2.6–7</div><div class="nm">Dívida e Endividamento</div></div>
+    <div class="ii" onclick="irPara('11')"><div class="n">2.8</div><div class="nm">Gestão Patrimonial</div></div>
+  </div>
+  <h3>3. Lei 4.320/1964</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('12')"><div class="n">3</div><div class="nm">Lei 4.320/1964 – Normas Gerais de Dir. Financeiro</div></div>
+  </div>
+</div>
+
+<!-- SEC 1 – PPA -->
+<div class="section" id="sec-1">
+  <div class="sh sh-az"><div class="num">Orçamento CF/88 · 1.1</div><h2>PPA – Plano Plurianual</h2><p>Instrumento de planejamento de médio prazo que orienta a ação governamental por 4 anos.</p></div>
+
+  <h3>1.1 Base Legal e Conceito</h3>
+  <div class="artigo"><span class="an">Art. 165, §1º – CF/88</span>A lei que instituir o plano plurianual estabelecerá, de forma regionalizada, as <strong>diretrizes, objetivos e metas</strong> da administração pública federal para as despesas de capital e outras dela decorrentes e para as relativas aos programas de duração continuada.</div>
+  <div class="card">
+    <h4>Vigência do PPA:</h4>
+    <ul>
+      <li>Abrange <strong>4 anos</strong>: do 2º ano do mandato presidencial ao 1º ano do mandato subsequente.</li>
+      <li>Encaminhado ao CN até <strong>31 de agosto</strong> do 1º ano do mandato, devolvido até <strong>22 de dezembro</strong>.</li>
+      <li>Criado para garantir continuidade das políticas públicas além de um mandato.</li>
+    </ul>
+  </div>
+
+  <h3>1.2 Estrutura e Conteúdo</h3>
+  <div class="g2">
+    <div class="card"><h4>Macroobjetivos</h4><p>Grandes diretrizes de governo que norteiam todos os programas. Ex.: crescimento econômico, redução da pobreza, modernização do Estado.</p></div>
+    <div class="card"><h4>Programas</h4><p>Unidade básica do PPA — conjunto de ações articuladas para alcançar um objetivo. Cada programa tem: objetivo, indicadores, metas, valor global, órgão responsável.</p></div>
+  </div>
+  <div class="g3">
+    <div class="card"><h4>Programas Temáticos</h4><p>Voltados à entrega de bens e serviços à sociedade. Relacionados às políticas públicas setoriais.</p></div>
+    <div class="card"><h4>Programas de Gestão</h4><p>Relativos a atividades típicas de suporte, gestão e manutenção do Estado.</p></div>
+    <div class="card"><h4>Operações Especiais</h4><p>Despesas que não contribuem para produtos/serviços — serviço da dívida, aposentadorias, transferências constitucionais.</p></div>
+  </div>
+
+  <h3>1.3 Relação com LDO e LOA</h3>
+  <div class="ciclo">
+    <div class="ciclo-item">PPA<br><small>4 anos</small></div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">LDO<br><small>1 ano</small></div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">LOA<br><small>1 ano</small></div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">Execução<br><small>Empenho→Liquidação→Pagamento</small></div>
+  </div>
+  <div class="box-a"><strong>⚠ Vedação constitucional – Art. 167, §1º CF:</strong> Nenhum investimento cuja execução ultrapasse um exercício financeiro poderá ser iniciado sem prévia inclusão no PPA ou sem lei que autorize a inclusão.</div>
+
+  <h3>1.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme o art. 165, §1º da CF/88, o Plano Plurianual estabelece, de forma regionalizada, as diretrizes, objetivos e metas para despesas de capital e programas de duração continuada. Sobre o PPA, é CORRETO afirmar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) O PPA deve ser encaminhado ao Congresso Nacional até 15 de setembro do primeiro ano do mandato presidencial.</li>
+      <li onclick="resp(this,'b','d')">b) O PPA vigora por 3 anos, correspondendo integralmente ao mandato presidencial.</li>
+      <li onclick="resp(this,'c','d')">c) O PPA só abrange despesas de capital, não contemplando despesas correntes.</li>
+      <li onclick="resp(this,'d','d')">d) Nenhum investimento de execução plurianual pode ser iniciado sem prévia inclusão no PPA ou lei autorizativa.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> Art. 167, §1º, CF. O PPA vigora por 4 anos (do 2º ao 5º ano do mandato). É encaminhado até 31 de agosto. Abrange despesas de capital e as correntes decorrentes dessas ou de programas de duração continuada.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('0')">⬅ Índice</button><button class="nbtn" onclick="irPara('2')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 2 – LDO -->
+<div class="section" id="sec-2">
+  <div class="sh sh-az"><div class="num">Orçamento CF/88 · 1.2</div><h2>LDO – Lei de Diretrizes Orçamentárias</h2><p>Elo de ligação entre o PPA e a LOA — orienta a elaboração do orçamento anual.</p></div>
+
+  <h3>2.1 Base Legal e Objetivos</h3>
+  <div class="artigo"><span class="an">Art. 165, §2º – CF/88</span>A lei de diretrizes orçamentárias compreenderá as metas e prioridades da administração pública federal, incluindo as despesas de capital para o exercício financeiro subsequente, orientará a elaboração da lei orçamentária anual, disporá sobre as alterações na legislação tributária e estabelecerá a política de aplicação das agências financeiras oficiais de fomento.</div>
+  <div class="card">
+    <h4>Prazos:</h4>
+    <ul>
+      <li>Encaminhada ao CN até <strong>15 de abril</strong> de cada ano.</li>
+      <li>Devolvida até <strong>30 de junho</strong> (prazo constitucional).</li>
+      <li>Se não aprovada, o CN não entra em recesso (art. 57, §2º CF).</li>
+    </ul>
+  </div>
+
+  <h3>2.2 Conteúdo da LDO (CF/88 + LRF)</h3>
+  <div class="g2">
+    <div class="card">
+      <h4>Conteúdo constitucional (art. 165, §2º):</h4>
+      <ul>
+        <li>Metas e prioridades da Adm. para o exercício seguinte.</li>
+        <li>Despesas de capital para o próximo exercício.</li>
+        <li>Orientação para elaboração da LOA.</li>
+        <li>Alterações na legislação tributária.</li>
+        <li>Política das agências de fomento.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Conteúdo adicional (LRF, art. 4º):</h4>
+      <ul>
+        <li>Equilíbrio entre receitas e despesas.</li>
+        <li>Critérios para limitação de empenho.</li>
+        <li>Normas para controle de custos e avaliação de resultados.</li>
+        <li>Demais condições e exigências para transferências de recursos a entidades.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>2.3 Anexo de Metas Fiscais (LRF, art. 4º, §1º)</h3>
+  <div class="card">
+    <p>Acompanha a LDO e estabelece:</p>
+    <ul>
+      <li>Metas anuais de <strong>receitas, despesas, resultado primário e nominal e dívida pública</strong> para os 3 exercícios seguintes.</li>
+      <li>Avaliação do cumprimento das metas do ano anterior.</li>
+      <li>Evolução do patrimônio líquido dos últimos 3 exercícios.</li>
+      <li>Avaliação financeira e atuarial do regime previdenciário.</li>
+    </ul>
+  </div>
+
+  <h3>2.4 Anexo de Riscos Fiscais (LRF, art. 4º, §3º)</h3>
+  <div class="card">
+    <p>Avalia passivos contingentes e outros riscos capazes de afetar as contas públicas, informando as providências a serem tomadas:</p>
+    <ul>
+      <li><strong>Riscos orçamentários:</strong> frustração de arrecadação, aumento não previsto de despesas obrigatórias.</li>
+      <li><strong>Riscos da dívida:</strong> variação de taxas de juros, câmbio, refinanciamento.</li>
+    </ul>
+  </div>
+
+  <h3>2.5 Limitação de Empenho (Contingenciamento)</h3>
+  <div class="artigo"><span class="an">Art. 9º – LRF</span>Se verificado, ao final de um bimestre, que a realização da receita poderá não comportar o cumprimento das metas de resultado primário ou nominal, os Poderes e o MP promoverão, por ato próprio e nos montantes necessários, nos trinta dias subsequentes, limitação de empenho e movimentação financeira.</div>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> A limitação de empenho (contingenciamento) protege as <strong>metas fiscais</strong>. Despesas obrigatórias de caráter continuado <strong>não podem ser contingenciadas</strong>. Cada Poder contingencia autonomamente (independência dos Poderes).</div>
+
+  <h3>2.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">O Anexo de Riscos Fiscais, integrante da Lei de Diretrizes Orçamentárias, nos termos da Lei de Responsabilidade Fiscal, avalia:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) As metas de resultado primário e nominal para os três exercícios seguintes.</li>
+      <li onclick="resp(this,'b','b')">b) Os passivos contingentes e outros riscos capazes de afetar as contas públicas, com as providências a adotar.</li>
+      <li onclick="resp(this,'c','b')">c) A política de aplicação das agências financeiras oficiais de fomento.</li>
+      <li onclick="resp(this,'d','b')">d) As diretrizes para limitação de empenho no exercício financeiro seguinte.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 4º, §3º, LRF: o Anexo de Riscos Fiscais avalia passivos contingentes e riscos capazes de afetar as contas. O Anexo de Metas Fiscais (§1º) contém as metas de receita, despesa, resultado primário/nominal e dívida.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('1')">⬅ Anterior</button><button class="nbtn" onclick="irPara('3')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 3 – LOA -->
+<div class="section" id="sec-3">
+  <div class="sh sh-az"><div class="num">Orçamento CF/88 · 1.3</div><h2>LOA – Lei Orçamentária Anual</h2><p>O orçamento propriamente dito — autoriza a arrecadação e o gasto público para o exercício financeiro.</p></div>
+
+  <h3>3.1 Base Legal e Natureza Jurídica</h3>
+  <div class="artigo"><span class="an">Art. 165, §5º – CF/88</span>A lei orçamentária anual compreenderá: I – o orçamento fiscal; II – o orçamento de investimento das empresas; III – o orçamento da seguridade social.</div>
+  <div class="g3">
+    <div class="card"><h4>Orçamento Fiscal</h4><p>Receitas e despesas dos Poderes da União, fundos, órgãos e entidades da Adm. direta e indireta, exceto as abaixo.</p></div>
+    <div class="card"><h4>Orçamento de Investimento</h4><p>Empresas estatais em que a União detém maioria do capital social com direito a voto.</p></div>
+    <div class="card"><h4>Orçamento da Seguridade Social</h4><p>Saúde, previdência e assistência social — todas as entidades e órgãos vinculados à seguridade.</p></div>
+  </div>
+
+  <h3>3.2 Prazos da LOA</h3>
+  <table>
+    <tr><th>Evento</th><th>Prazo</th></tr>
+    <tr><td>Encaminhamento ao CN</td><td>Até <strong>31 de agosto</strong> de cada ano</td></tr>
+    <tr><td>Devolução aprovada</td><td>Até <strong>22 de dezembro</strong></td></tr>
+    <tr><td>Exercício financeiro</td><td>Coincide com o <strong>ano civil</strong> (1º jan. a 31 dez.)</td></tr>
+  </table>
+
+  <h3>3.3 Princípios Orçamentários</h3>
+  <table>
+    <tr><th>Princípio</th><th>Conteúdo</th></tr>
+    <tr><td><strong>Unidade</strong></td><td>Um único orçamento por ente; a CF adota o orçamento consolidado (LOA única com 3 peças)</td></tr>
+    <tr><td><strong>Universalidade</strong></td><td>Todas as receitas e despesas devem constar do orçamento (art. 2º Lei 4.320/64)</td></tr>
+    <tr><td><strong>Anualidade</strong></td><td>Vigência de um ano; coincide com o exercício financeiro</td></tr>
+    <tr><td><strong>Exclusividade</strong></td><td>A LOA não pode conter matéria estranha à previsão de receita e fixação de despesa (art. 165, §8º CF)</td></tr>
+    <tr><td><strong>Não afetação</strong></td><td>Vedada a vinculação de receitas de impostos a órgãos, fundos ou despesas (art. 167, IV CF) — com exceções</td></tr>
+    <tr><td><strong>Equilíbrio</strong></td><td>Receitas previstas = despesas autorizadas (meta da LRF)</td></tr>
+    <tr><td><strong>Especificação (discriminação)</strong></td><td>Vedadas dotações globais para despesas não especificadas</td></tr>
+    <tr><td><strong>Publicidade</strong></td><td>Transparência — portais de transparência, relatórios periódicos</td></tr>
+  </table>
+
+  <h3>3.4 Natureza Autorizativa da LOA</h3>
+  <div class="box-d"><strong>⭐ FCC cobra muito:</strong> A LOA tem natureza <em>autorizativa</em> para despesas discricionárias, não impositiva — o Executivo não é obrigado a realizar todos os gastos previstos (pode contingenciar). <strong>Exceção:</strong> emendas parlamentares individuais e de bancada são de execução obrigatória (impositivas) — EC 86/2015 e EC 100/2019.</div>
+
+  <h3>3.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a CF/88, a Lei Orçamentária Anual NÃO poderá conter:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Previsão de receitas da seguridade social.</li>
+      <li onclick="resp(this,'b','c')">b) Fixação de despesas dos Poderes da União.</li>
+      <li onclick="resp(this,'c','c')">c) Dispositivos estranhos à previsão de receita e fixação de despesa, ressalvadas as autorizações para abertura de créditos suplementares e operações de crédito.</li>
+      <li onclick="resp(this,'d','c')">d) Orçamento de investimento das empresas estatais federais.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 165, §8º, CF/88 — princípio da exclusividade: a LOA não conterá dispositivo estranho à previsão de receita e à fixação da despesa, ressalvada a autorização para abertura de créditos suplementares e contratação de operações de crédito, ainda que por ARO.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('2')">⬅ Anterior</button><button class="nbtn" onclick="irPara('4')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 4 – CRÉDITOS ADICIONAIS -->
+<div class="section" id="sec-4">
+  <div class="sh sh-az"><div class="num">Orçamento CF/88 · 1.4</div><h2>Créditos Adicionais</h2><p>Autorizações de despesa não computadas ou insuficientemente dotadas na LOA.</p></div>
+
+  <h3>4.1 Conceito e Tipos — Art. 40 da Lei 4.320/64</h3>
+  <table>
+    <tr><th>Tipo</th><th>Finalidade</th><th>Vigência</th><th>Autorização</th></tr>
+    <tr><td><strong>Suplementares</strong></td><td>Reforço de dotação orçamentária existente e insuficiente</td><td>Até 31/12 do exercício</td><td>LOA pode autorizar previamente (limitado a %)</td></tr>
+    <tr><td><strong>Especiais</strong></td><td>Despesas sem dotação específica na LOA</td><td>Até 31/12 (salvo se abertos nos últimos 4 meses)</td><td>Exige lei específica</td></tr>
+    <tr><td><strong>Extraordinários</strong></td><td>Despesas urgentes e imprevisíveis (calamidade, guerra, comoção)</td><td>Podem ser reabertos no exercício seguinte</td><td>MP (federal) ou decreto (estados/municípios)</td></tr>
+  </table>
+
+  <h3>4.2 Fontes de Recursos para Créditos Adicionais</h3>
+  <div class="artigo"><span class="an">Art. 43 – Lei 4.320/64</span>A abertura dos créditos suplementares e especiais depende da existência de recursos disponíveis para ocorrer a despesa. Constituem recursos: I – superávit financeiro apurado em balanço patrimonial do exercício anterior; II – os provenientes de excesso de arrecadação; III – os resultantes de anulação parcial ou total de dotações; IV – o produto de operações de crédito autorizadas em lei.</div>
+
+  <h3>4.3 Reabertura de Créditos Adicionais</h3>
+  <div class="g2">
+    <div class="card"><h4>Créditos Extraordinários</h4><p>Podem ser reabertos no exercício seguinte, limitados ao saldo do exercício anterior.</p></div>
+    <div class="card"><h4>Créditos Especiais</h4><p>Podem ser reabertos <em>somente</em> se abertos nos <strong>últimos 4 meses</strong> do exercício, limitados ao saldo.</p></div>
+  </div>
+  <div class="box-a"><strong>⚠ Créditos Suplementares</strong> nunca podem ser reabertos no exercício seguinte. Extinguem-se em 31/12.</div>
+
+  <h3>4.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Os créditos adicionais abertos nos últimos quatro meses do exercício que não tenham sido totalmente utilizados poderão ser reabertos no exercício seguinte. Esse dispositivo aplica-se SOMENTE a:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Créditos suplementares e extraordinários.</li>
+      <li onclick="resp(this,'b','c')">b) Créditos suplementares e especiais.</li>
+      <li onclick="resp(this,'c','c')">c) Créditos especiais e extraordinários.</li>
+      <li onclick="resp(this,'d','c')">d) Todos os créditos adicionais, sem distinção.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 167, §2º, CF: créditos <strong>especiais e extraordinários</strong> abertos nos últimos 4 meses do exercício podem ser reabertos no seguinte, limitados ao saldo. Créditos suplementares nunca se reabrem — extinguem-se em 31/12.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('3')">⬅ Anterior</button><button class="nbtn" onclick="irPara('5')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 5 – EMENDAS PARLAMENTARES -->
+<div class="section" id="sec-5">
+  <div class="sh sh-az"><div class="num">Orçamento CF/88 · 1.5</div><h2>Emendas Parlamentares ao Orçamento</h2><p>Mecanismo de participação do Legislativo na alocação das despesas públicas.</p></div>
+
+  <h3>5.1 Tipos de Emendas</h3>
+  <table>
+    <tr><th>Tipo</th><th>Autores</th><th>Execução</th><th>Limite</th></tr>
+    <tr><td><strong>Individuais</strong></td><td>Cada parlamentar</td><td>Impositiva (obrigatória)</td><td>1,2% da RCL, sendo metade destinada à saúde</td></tr>
+    <tr><td><strong>De bancada estadual</strong></td><td>Bancada de cada Estado/DF</td><td>Impositiva</td><td>1% da RCL federal</td></tr>
+    <tr><td><strong>De comissão</strong></td><td>Comissões do CN</td><td>Autorizativa</td><td>Regimento interno do CN</td></tr>
+    <tr><td><strong>De relator</strong></td><td>Relator geral da LOA</td><td>Regulamentada por resolução</td><td>Polêmicas — foram objeto de ADI no STF</td></tr>
+  </table>
+
+  <h3>5.2 Emendas Individuais Impositivas (EC 86/2015 e EC 100/2019)</h3>
+  <div class="card">
+    <ul>
+      <li>A execução das emendas individuais é <strong>obrigatória</strong> até o limite de 1,2% da Receita Corrente Líquida do exercício anterior.</li>
+      <li>Metade do percentual (<strong>0,6% da RCL</strong>) deve ser destinada à saúde.</li>
+      <li>A execução pode ser impedida em caso de <strong>impedimento de ordem técnica</strong>, comunicado ao parlamentar no prazo de 120 dias.</li>
+      <li>Cancelamento e remanejamento mediante anuência do autor.</li>
+    </ul>
+  </div>
+
+  <h3>5.3 Vedações às Emendas — Art. 166, §3º CF</h3>
+  <div class="box-a"><strong>⚠ As emendas NÃO podem:</strong>
+    <ul style="margin-top:8px">
+      <li>Ser incompatíveis com o PPA e a LDO.</li>
+      <li>Indicar recursos sem fonte correspondente ou com anulação de despesas obrigatórias ou vinculadas.</li>
+      <li>Ser relacionadas à compensação de tributos ou contribuições de competência da União.</li>
+    </ul>
+  </div>
+
+  <h3>5.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Sobre as emendas parlamentares individuais ao orçamento, conforme a CF/88 após a EC 86/2015, é CORRETO afirmar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) A execução das emendas individuais é facultativa, a critério exclusivo do Poder Executivo.</li>
+      <li onclick="resp(this,'b','c')">b) O total das emendas individuais não pode ultrapassar 2% da Receita Corrente Líquida do exercício anterior.</li>
+      <li onclick="resp(this,'c','c')">c) A execução das emendas individuais é obrigatória, limitada a 1,2% da RCL, sendo metade destinada a ações de saúde.</li>
+      <li onclick="resp(this,'d','c')">d) As emendas de bancada estadual também são impositivas e limitadas a 1,2% da RCL.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> EC 86/2015 e EC 100/2019: emendas individuais = execução impositiva, limitadas a 1,2% da RCL, com 50% destinados à saúde. Emendas de bancada têm limite próprio (1% da RCL federal). Execução pode ser bloqueada por impedimento técnico comunicado em 120 dias.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('4')">⬅ Anterior</button><button class="nbtn" onclick="irPara('6')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 6 – LRF PLANEJAMENTO -->
+<div class="section" id="sec-6">
+  <div class="sh sh-vd"><div class="num">LRF · Cap. II</div><h2>LRF – Planejamento</h2><p>LC 101/2000 — normas de finanças públicas voltadas à responsabilidade na gestão fiscal.</p></div>
+
+  <h3>6.1 Objetivos e Âmbito da LRF</h3>
+  <div class="artigo"><span class="an">Art. 1º – LC 101/2000</span>Esta Lei Complementar estabelece normas de finanças públicas voltadas para a responsabilidade na gestão fiscal, com amparo no Capítulo II do Título VI da Constituição, e compreende a União, os Estados, o Distrito Federal e os Municípios.</div>
+  <div class="box-la"><strong>ℹ Responsabilidade fiscal:</strong> ação planejada e transparente em que se previnem riscos e corrigem desvios capazes de afetar o equilíbrio das contas públicas, mediante o cumprimento de metas de resultados entre receitas e despesas.</div>
+
+  <h3>6.2 Instrumentos de Planejamento (LRF, art. 4º a 10)</h3>
+  <div class="card">
+    <h4>LDO na LRF — Art. 4º:</h4>
+    <ul>
+      <li>Equilíbrio entre receitas e despesas.</li>
+      <li>Critérios e forma de limitação de empenho (contingenciamento).</li>
+      <li>Normas relativas ao controle de custos e à avaliação dos resultados dos programas.</li>
+      <li>Demais condições e exigências para transferências de recursos a entidades públicas e privadas.</li>
+    </ul>
+    <h4>Anexo de Metas Fiscais (art. 4º, §1º): estabelece metas anuais para:</h4>
+    <p>Receitas · Despesas · Resultado nominal · Resultado primário · Montante da dívida pública — para os 3 exercícios seguintes.</p>
+  </div>
+
+  <h3>6.3 Resultado Primário × Resultado Nominal</h3>
+  <div class="g2">
+    <div class="card">
+      <h4>Resultado Primário</h4>
+      <div class="formula">RP = Receitas Totais − Despesas Totais<br><span class="hl">(excluindo juros da dívida)</span></div>
+      <p>Indica se o governo gera recursos suficientes para cobrir suas despesas <em>exceto os juros</em>. Mede o esforço fiscal corrente.</p>
+    </div>
+    <div class="card">
+      <h4>Resultado Nominal</h4>
+      <div class="formula">RN = Receitas Totais − Despesas Totais<br><span class="hl">(incluindo juros da dívida)</span></div>
+      <p>Indica a variação total da dívida pública no período. Resultado negativo = déficit nominal = aumento da dívida.</p>
+    </div>
+  </div>
+
+  <h3>6.4 Relatórios Obrigatórios da LRF</h3>
+  <table>
+    <tr><th>Relatório</th><th>Periodicidade</th><th>Elaborado por</th><th>Publicação</th></tr>
+    <tr><td><strong>RREO</strong> – Resumo Exec. Orçamentário</td><td>Bimestral</td><td>Poder Executivo</td><td>30 dias após encerramento</td></tr>
+    <tr><td><strong>RGF</strong> – Gestão Fiscal</td><td>Quadrimestral</td><td>Cada Poder e MP</td><td>30 dias (municípios c/ pop &lt; 50k = semestral)</td></tr>
+  </table>
+
+  <h3>6.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">O Relatório de Gestão Fiscal, previsto na Lei de Responsabilidade Fiscal, deve ser emitido com periodicidade:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Bimestral, pelo Poder Executivo.</li>
+      <li onclick="resp(this,'b','b')">b) Quadrimestral, por cada Poder e pelo Ministério Público.</li>
+      <li onclick="resp(this,'c','b')">c) Semestral, apenas pelo Poder Executivo.</li>
+      <li onclick="resp(this,'d','b')">d) Anual, consolidado pelo Tribunal de Contas.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 54 da LRF: o RGF é emitido ao final de cada quadrimestre por cada Poder e pelo MP. Municípios com população inferior a 50 mil habitantes podem optar pela publicação semestral. O RREO (bimestral) é elaborado pelo Poder Executivo.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('5')">⬅ Anterior</button><button class="nbtn" onclick="irPara('7')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 7 – RECEITA PÚBLICA -->
+<div class="section" id="sec-7">
+  <div class="sh sh-vd"><div class="num">LRF · Cap. III</div><h2>Receita Pública</h2><p>Classificação, estágios e normas da LRF para previsão e arrecadação.</p></div>
+
+  <h3>7.1 Conceito e Classificação</h3>
+  <div class="g2">
+    <div class="card"><h4>Receitas Correntes</h4><p>Não alteram o patrimônio líquido de forma imediata. Ex.: tributos, contribuições, serviços, transferências correntes, patrimoniais.</p></div>
+    <div class="card"><h4>Receitas de Capital</h4><p>Alteram o patrimônio (aumentam o endividamento ou reduzem ativos). Ex.: operações de crédito, alienação de bens, amortização de empréstimos recebidos, transferências de capital.</p></div>
+  </div>
+
+  <h3>7.2 Estágios da Receita (Lei 4.320/64)</h3>
+  <div class="ciclo">
+    <div class="ciclo-item">Previsão</div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">Lançamento</div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">Arrecadação</div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">Recolhimento</div>
+  </div>
+  <div class="card">
+    <ul>
+      <li><strong>Previsão:</strong> consta da LOA — estimativa das receitas.</li>
+      <li><strong>Lançamento:</strong> ato pelo qual se verifica a ocorrência do fato gerador, determina a matéria tributável, calcula o tributo, identifica o sujeito passivo.</li>
+      <li><strong>Arrecadação:</strong> entrega dos valores pelo contribuinte ao agente arrecadador (banco).</li>
+      <li><strong>Recolhimento:</strong> transferência dos valores arrecadados ao Tesouro Nacional (caixa único).</li>
+    </ul>
+  </div>
+
+  <h3>7.3 Receita Corrente Líquida (RCL) — Art. 2º, IV, LRF</h3>
+  <div class="card">
+    <p>Somatório das receitas tributárias, de contribuições, patrimoniais, industriais, agropecuárias, de serviços, transferências correntes e outras receitas correntes, <strong>deduzidas</strong>:</p>
+    <ul>
+      <li>Transferências constitucionais (FPE, FPM, etc.).</li>
+      <li>Contribuições para o RGPS (previdência social dos servidores).</li>
+      <li>Receitas de compensações financeiras entre os regimes previdenciários.</li>
+    </ul>
+    <div class="box-d"><strong>⭐ RCL é apurada somando os últimos 12 meses anteriores ao mês de referência.</strong> É o principal parâmetro para limites de gasto com pessoal, endividamento e investimento.</div>
+  </div>
+
+  <h3>7.4 Normas da LRF para Receita (Arts. 11–14)</h3>
+  <div class="card">
+    <ul>
+      <li>Constituem requisitos essenciais da responsabilidade fiscal a <strong>instituição, previsão e efetiva arrecadação</strong> de todos os tributos de competência do ente (art. 11).</li>
+      <li>Renúncia de receita (art. 14): isenção, anistia, remissão, subsídio, crédito presumido — exige estimativa de impacto e compensação por aumento de receita ou corte de despesas.</li>
+    </ul>
+  </div>
+
+  <h3>7.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a Lei de Responsabilidade Fiscal (LC 101/2000), a concessão de benefício tributário que implique renúncia de receita:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Independe de qualquer estimativa de impacto, desde que aprovada pelo Poder Legislativo.</li>
+      <li onclick="resp(this,'b','c')">b) É vedada em qualquer hipótese durante vigência da LRF.</li>
+      <li onclick="resp(this,'c','c')">c) Deve ser acompanhada de estimativa do impacto orçamentário-financeiro e de medida compensatória por aumento de receita ou corte de despesas.</li>
+      <li onclick="resp(this,'d','c')">d) É permitida somente quando o resultado primário for superavitário no exercício anterior.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 14, LRF: a renúncia de receita (isenção, anistia, subsídio, crédito presumido, remissão etc.) exige: estimativa do impacto orçamentário-financeiro e demonstração de que a renúncia foi considerada nas metas fiscais da LDO OU medida compensatória por aumento de outra receita ou corte de despesas.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('6')">⬅ Anterior</button><button class="nbtn" onclick="irPara('8')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 8 – DESPESA PÚBLICA -->
+<div class="section" id="sec-8">
+  <div class="sh sh-vd"><div class="num">LRF · Cap. IV</div><h2>Despesa Pública</h2><p>Classificação, estágios, despesas obrigatórias, com pessoal e de custeio — núcleo central da LRF.</p></div>
+
+  <h3>8.1 Estágios da Despesa (Lei 4.320/64)</h3>
+  <div class="ciclo">
+    <div class="ciclo-item">Fixação<br>(LOA)</div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">Empenho</div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">Liquidação</div>
+    <div class="ciclo-arrow">→</div>
+    <div class="ciclo-item">Pagamento</div>
+  </div>
+  <div class="card">
+    <ul>
+      <li><strong>Empenho:</strong> ato que cria para o Estado a obrigação de pagamento pendente de implementação de condição. Nota de empenho — reserva da dotação. Tipos: ordinário, global e estimativo.</li>
+      <li><strong>Liquidação:</strong> verificação do direito adquirido pelo credor — entrega do bem/serviço confirmada.</li>
+      <li><strong>Pagamento:</strong> despacho autorizatório pela autoridade; emissão de ordem bancária.</li>
+    </ul>
+  </div>
+
+  <h3>8.2 Classificação das Despesas</h3>
+  <div class="g2">
+    <div class="card"><h4>Quanto à natureza</h4><ul><li><strong>Correntes:</strong> pessoal, juros, custeio (manutenção). Não ampliam o patrimônio.</li><li><strong>De capital:</strong> investimentos, inversões financeiras, amortização da dívida. Ampliam ou reduzem o patrimônio.</li></ul></div>
+    <div class="card"><h4>Quanto à obrigatoriedade (LRF)</h4><ul><li><strong>Obrigatórias de caráter continuado:</strong> criadas por lei, realizadas por mais de 2 anos. Exigem estimativa de impacto e fonte de custeio (arts. 16 e 17 LRF).</li><li><strong>Discricionárias:</strong> sujeitas a contingenciamento.</li></ul></div>
+  </div>
+
+  <h3>8.3 Despesas com Pessoal — Arts. 18 a 23 da LRF</h3>
+  <table>
+    <tr><th>Ente</th><th>Limite Global</th><th>Executivo</th><th>Legislativo</th><th>Judiciário/MP</th></tr>
+    <tr><td><strong>União</strong></td><td>50% da RCL</td><td>37,9%</td><td>2,5%</td><td>6% + 2% MP + 0,6% TCU + 3% AGU</td></tr>
+    <tr><td><strong>Estados/DF</strong></td><td>60% da RCL</td><td>49%</td><td>3%</td><td>6% Jud. + 2% MP</td></tr>
+    <tr><td><strong>Municípios</strong></td><td>60% da RCL</td><td>54%</td><td>6%</td><td>—</td></tr>
+  </table>
+  <div class="box-a"><strong>⚠ Limites de alerta e prudência:</strong> <strong>Alerta:</strong> 90% do limite (notificação pelo TC). <strong>Prudencial:</strong> 95% do limite — vedadas novas admissões, horas extras, concessão de vantagens. Se atingir 100%: medidas do art. 23 (redução em 1/3 no quadrimestre seguinte; e em 2/3 no segundo quadrimestre).</div>
+
+  <h3>8.4 Geração de Despesa — Arts. 15 a 17 da LRF</h3>
+  <div class="card">
+    <ul>
+      <li>Toda criação, expansão ou aperfeiçoamento de ação governamental que acarrete aumento de despesa deve ser acompanhado de estimativa de impacto orçamentário-financeiro (art. 16).</li>
+      <li>Despesa obrigatória de caráter continuado: exige, adicionalmente, demonstração da origem dos recursos para custeio (art. 17).</li>
+      <li>É nulo o ato que não atender os requisitos dos arts. 15 e 16 (art. 15).</li>
+    </ul>
+  </div>
+
+  <h3>8.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a LRF, quando os limites de despesa com pessoal atingirem 95% do permitido (limite prudencial), é vedado ao ente:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Apenas conceder reajustes salariais.</li>
+      <li onclick="resp(this,'b','d')">b) Pagar a folha de pessoal ativo e encargos.</li>
+      <li onclick="resp(this,'c','d')">c) Realizar transferências voluntárias a outros entes.</li>
+      <li onclick="resp(this,'d','d')">d) Conceder vantagens, criar cargos ou empregos, contratar hora extra e admitir pessoal.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> Art. 22, parágrafo único, LRF: atingido o limite prudencial (95% do limite de pessoal), são vedadas: concessão de vantagem, aumento ou reajuste de remuneração; criação de cargo, emprego ou função; alteração de estrutura de carreira; provimento de cargo; contratação de hora extra (salvo convocação extraordinária do CN/ALPB etc.); contratação de hora extra.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('7')">⬅ Anterior</button><button class="nbtn" onclick="irPara('9')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 9 – TRANSFERÊNCIAS E SETOR PRIVADO -->
+<div class="section" id="sec-9">
+  <div class="sh sh-vd"><div class="num">LRF · Caps. V e VI</div><h2>Transferências Voluntárias e Setor Privado</h2><p>Condições para repasses intergovernamentais e destinação de recursos ao setor privado.</p></div>
+
+  <h3>9.1 Transferências Voluntárias — Art. 25 da LRF</h3>
+  <div class="artigo"><span class="an">Art. 25 – LRF</span>Para efeito desta Lei Complementar, entende-se por transferência voluntária a entrega de recursos correntes ou de capital a outro ente da Federação, a título de cooperação, auxílio ou assistência financeira, que não decorra de determinação constitucional, legal ou os destinados ao Sistema Único de Saúde.</div>
+  <div class="card">
+    <h4>Exigências para o ente recebedor (art. 25, §1º):</h4>
+    <ul>
+      <li>Estar em dia com os tributos, empréstimos e financiamentos devidos ao ente transferidor.</li>
+      <li>Cumprir os limites constitucionais de aplicação em educação e saúde.</li>
+      <li>Observar os limites das dívidas consolidada e mobiliária, operações de crédito e concessão de garantias.</li>
+      <li>Ter previsão orçamentária de contrapartida.</li>
+    </ul>
+    <div class="box-a"><strong>⚠ Vedação (art. 25, §3º):</strong> São vedadas as transferências voluntárias para o pagamento de despesas com pessoal ativo, inativo e pensionistas dos Estados, DF e Municípios.</div>
+  </div>
+
+  <h3>9.2 Destinação ao Setor Privado — Art. 26 da LRF</h3>
+  <div class="card">
+    <ul>
+      <li>A concessão de crédito por instituição financeira controlada pelo ente deve ser autorizada em lei e compatível com a LDO.</li>
+      <li>Vedados os benefícios financeiros ou fiscais concedidos a empresas para licitações de projetos ou iniciativas privadas, salvo previsão legal.</li>
+      <li>Subsídios e benefícios para o setor privado devem constar do orçamento e observar o art. 14 (renúncia de receita).</li>
+    </ul>
+  </div>
+
+  <h3>9.3 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme o art. 25 da LRF, é considerada transferência voluntária:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) A entrega de recursos do FPM aos Municípios, por determinação constitucional.</li>
+      <li onclick="resp(this,'b','c')">b) Os repasses ao SUS previstos constitucionalmente.</li>
+      <li onclick="resp(this,'c','c')">c) A entrega de recursos correntes ou de capital a outro ente da Federação, a título de cooperação, que não decorra de determinação constitucional ou legal.</li>
+      <li onclick="resp(this,'d','c')">d) As transferências fundo a fundo de recursos da saúde, por previsão da LC 141/2012.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 25, LRF: transferência voluntária é a entrega por cooperação/auxílio/assistência, sem determinação constitucional ou legal e excluídos os recursos do SUS. FPM, repasses SUS e transferências legais obrigatórias <em>não</em> são voluntárias.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('8')">⬅ Anterior</button><button class="nbtn" onclick="irPara('10')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 10 – DÍVIDA -->
+<div class="section" id="sec-10">
+  <div class="sh sh-am"><div class="num">LRF · Cap. VII</div><h2>Dívida e Endividamento</h2><p>Conceitos, limites e vedações para o controle do endividamento público.</p></div>
+
+  <h3>10.1 Conceitos Fundamentais</h3>
+  <table>
+    <tr><th>Conceito</th><th>Definição (LRF, art. 29)</th></tr>
+    <tr><td><strong>Dívida Pública Consolidada ou Fundada</strong></td><td>Montante total das obrigações financeiras assumidas pelo ente, decorrentes de leis, contratos, convênios ou tratados, com prazo superior a 12 meses</td></tr>
+    <tr><td><strong>Dívida Pública Mobiliária</strong></td><td>Representada por títulos emitidos pela União, inclusive os do BACEN para fins de política monetária</td></tr>
+    <tr><td><strong>Operação de Crédito</strong></td><td>Compromisso financeiro assumido em razão de mútuo, abertura de crédito, emissão e aceite de título, aquisição financiada de bens, recebimento antecipado de valores provenientes de venda</td></tr>
+    <tr><td><strong>ARO</strong></td><td>Operação de Crédito por Antecipação de Receita Orçamentária — para cobertura de déficit de caixa</td></tr>
+    <tr><td><strong>Concessão de Garantia</strong></td><td>Compromisso de adimplência de obrigação financeira ou contratual assumida por ente da Federação ou entidade a ele vinculada</td></tr>
+  </table>
+
+  <h3>10.2 Limites de Endividamento (Resolução do Senado)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Dívida Consolidada Líquida:</strong> fixada pelo Senado Federal para cada ente. Limites atuais: União (sem limite fixado ainda pelo SF); Estados = 2x a RCL; Municípios = 1,2x a RCL.</li>
+      <li>Se ultrapassado o limite: vedação de novas operações de crédito + prazo para retorno.</li>
+    </ul>
+  </div>
+
+  <h3>10.3 Operações de Crédito — Vedações</h3>
+  <div class="box-a"><strong>⚠ Vedações da LRF (arts. 35 e 36):</strong>
+    <ul style="margin-top:8px">
+      <li>Operação de crédito entre entes da Federação — vedada, salvo refinanciamento de dívidas ou ARO.</li>
+      <li>Captação de recursos à margem do orçamento (vedada).</li>
+      <li>Emissão de títulos pela dívida pública sem autorização do Senado ou da LOA.</li>
+      <li>BACEN não pode conceder crédito ao Tesouro Nacional, exceto compra de títulos para refinanciamento.</li>
+    </ul>
+  </div>
+
+  <h3>10.4 ARO — Antecipação de Receita Orçamentária</h3>
+  <div class="card">
+    <ul>
+      <li>Prazo: deve ser liquidada até o <strong>10 de dezembro</strong> de cada exercício.</li>
+      <li>Não pode ser realizada no <strong>último ano de mandato</strong> do Chefe do Executivo.</li>
+      <li>Instituição financeira estatal não pode conceder ARO ao ente que a controla.</li>
+      <li>Vedado contrair nova ARO enquanto houver outra em aberto.</li>
+    </ul>
+  </div>
+
+  <h3>10.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A Operação de Crédito por Antecipação de Receita Orçamentária (ARO), conforme a LRF, deve ser:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Liquidada até 31 de dezembro do exercício e pode ser contratada no último ano de mandato.</li>
+      <li onclick="resp(this,'b','b')">b) Liquidada até 10 de dezembro do exercício e é vedada no último ano de mandato do Chefe do Executivo.</li>
+      <li onclick="resp(this,'c','b')">c) Liquidada até 30 de novembro e pode ser renovada enquanto o exercício financeiro estiver em curso.</li>
+      <li onclick="resp(this,'d','b')">d) Contratada somente com instituições financeiras privadas, sendo vedada com bancos públicos.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 38, LRF: a ARO deve ser liquidada no mesmo exercício, impreterivelmente até o dia 10 de dezembro. É vedada no último ano de mandato do Chefe do Executivo (art. 38, IV, "b"). Banco público estatal também não pode conceder ARO ao ente controlador.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('9')">⬅ Anterior</button><button class="nbtn" onclick="irPara('11')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 11 – GESTÃO PATRIMONIAL -->
+<div class="section" id="sec-11">
+  <div class="sh sh-am"><div class="num">LRF · Cap. VIII</div><h2>Gestão Patrimonial</h2><p>Uso e alienação de bens públicos — regras para preservação do patrimônio e precaução fiscal.</p></div>
+
+  <h3>11.1 Disponibilidades de Caixa — Art. 43</h3>
+  <div class="card">
+    <ul>
+      <li>As disponibilidades de caixa dos entes devem ser depositadas em <strong>conta única</strong> ou em instituições financeiras oficiais, ressalvados os casos previstos em lei.</li>
+      <li>Disponibilidades do <strong>regime previdenciário</strong> dos servidores ficam depositadas em conta separada das demais disponibilidades.</li>
+      <li>Os recursos do regime previdenciário somente serão utilizados para o pagamento de benefícios previdenciários (vedada a destinação para outros fins).</li>
+    </ul>
+  </div>
+
+  <h3>11.2 Preservação do Patrimônio Público — Art. 44 e 45</h3>
+  <div class="card">
+    <h4>Art. 44 — Vedações:</h4>
+    <ul>
+      <li>Aplicar receita de capital derivada de alienação de bens em despesas correntes, salvo autorização em LDO (exceto para programa de apoio à inclusão e promoção social — EC 42/2003 e art. 44 parágrafo único).</li>
+    </ul>
+    <h4>Art. 45 — Projetos em andamento:</h4>
+    <ul>
+      <li>Vedado iniciar projeto cujo custo total seja superior ao custo médio por unidade de produto sem prévia inclusão no PPA e previsão na LDO.</li>
+    </ul>
+  </div>
+
+  <h3>11.3 Empresas Estatais Dependentes</h3>
+  <div class="box-la"><strong>ℹ Empresa estatal dependente:</strong> controlada pelo ente que recebe do Tesouro recursos financeiros para custeio em geral, exceto pessoal, ou capital, excluídas participações societárias (art. 2º, III, LRF). Sujeitas às mesmas normas de despesa com pessoal e demais limites da LRF.</div>
+
+  <h3>11.4 Transparência e Controle</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Instrumentos de transparência (art. 48):</strong> PPA, LDO e LOA + respectivos anexos, prestações de contas e pareceres prévios, RREO e RGF, versões simplificadas para acesso popular.</li>
+      <li><strong>Portais de transparência:</strong> divulgação em tempo real na internet (Lei de Acesso à Informação é complementar).</li>
+      <li><strong>Conselho de Gestão Fiscal (art. 67):</strong> acompanhamento e avaliação das políticas e operações de gestão fiscal.</li>
+    </ul>
+  </div>
+
+  <h3>11.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Nos termos do art. 44 da LRF, é vedado ao ente da Federação:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Contrair operações de crédito para financiar despesas de capital.</li>
+      <li onclick="resp(this,'b','b')">b) Aplicar a receita de capital derivada de alienação de bens e direitos em despesas correntes, salvo autorização prevista na LDO.</li>
+      <li onclick="resp(this,'c','b')">c) Depositar as disponibilidades de caixa do regime previdenciário na mesma conta das demais disponibilidades.</li>
+      <li onclick="resp(this,'d','b')">d) Realizar transferências voluntárias recebidas em despesas de capital.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 44, LRF: é vedada a aplicação de receita de capital derivada de alienação de bens em despesas correntes, ressalvada a autorização na LDO para programas de apoio à inclusão social. As demais assertivas não correspondem a vedações do art. 44.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('10')">⬅ Anterior</button><button class="nbtn" onclick="irPara('12')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 12 – LEI 4.320 -->
+<div class="section" id="sec-12">
+  <div class="sh sh-la"><div class="num">Tema 3</div><h2>Lei nº 4.320/1964</h2><p>Estatuto das normas gerais de direito financeiro — receita, despesa, balanços e controle.</p></div>
+
+  <h3>12.1 Objeto e Âmbito</h3>
+  <div class="artigo"><span class="an">Art. 1º – Lei 4.320/64</span>Esta lei estatui normas gerais de Direito Financeiro para elaboração e controle dos orçamentos e balanços da União, dos Estados, dos Municípios e do Distrito Federal.</div>
+  <div class="box-in"><strong>ℹ Recepção pela CF/88:</strong> A Lei 4.320/64 foi recepcionada com status de <strong>lei complementar</strong> (art. 165, §9º, CF), regulando normas gerais de direito financeiro até a edição de LC específica.</div>
+
+  <h3>12.2 Princípios Orçamentários na Lei 4.320/64</h3>
+  <table>
+    <tr><th>Princípio</th><th>Artigo</th><th>Conteúdo</th></tr>
+    <tr><td><strong>Unidade</strong></td><td>Art. 2º</td><td>A LOA de cada ente será una</td></tr>
+    <tr><td><strong>Universalidade</strong></td><td>Art. 2º</td><td>Contém todas as receitas e despesas (regra do orçamento bruto — art. 6º: vedada dedução)</td></tr>
+    <tr><td><strong>Anualidade</strong></td><td>Art. 2º</td><td>Prazo de vigência de 1 ano (exercício = ano civil)</td></tr>
+    <tr><td><strong>Orçamento bruto</strong></td><td>Art. 6º</td><td>Receitas e despesas devem constar pelo valor total, sem deduções</td></tr>
+    <tr><td><strong>Especificação</strong></td><td>Art. 5º</td><td>Vedadas dotações globais para fins não determinados</td></tr>
+    <tr><td><strong>Publicidade</strong></td><td>Art. 22</td><td>Divulgação dos atos orçamentários</td></tr>
+  </table>
+
+  <h3>12.3 Receita — Classificação (Arts. 9º e 11)</h3>
+  <div class="g2">
+    <div class="card"><h4>Receitas Correntes</h4><ul><li>Tributárias (impostos, taxas, contribuições de melhoria)</li><li>De contribuições</li><li>Patrimoniais</li><li>Agropecuárias</li><li>Industriais</li><li>De serviços</li><li>Transferências correntes</li><li>Outras receitas correntes</li></ul></div>
+    <div class="card"><h4>Receitas de Capital</h4><ul><li>Operações de crédito</li><li>Alienação de bens</li><li>Amortização de empréstimos</li><li>Transferências de capital</li><li>Outras receitas de capital</li></ul></div>
+  </div>
+
+  <h3>12.4 Despesa — Classificação (Arts. 12 e 13)</h3>
+  <table>
+    <tr><th>Categoria econômica</th><th>Espécies</th><th>Modalidades</th></tr>
+    <tr><td><strong>Despesas Correntes</strong></td><td>Custeio, Transferências Correntes</td><td>Pessoal, material de consumo, serviços, juros, etc.</td></tr>
+    <tr><td><strong>Despesas de Capital</strong></td><td>Investimentos, Inversões Financeiras, Transferências de Capital, Amortização da Dívida</td><td>Obras, equipamentos, constituição de fundos, aquisição de participações, etc.</td></tr>
+  </table>
+
+  <h3>12.5 Balanços Públicos (Arts. 99 a 106)</h3>
+  <div class="g2">
+    <div class="card"><h4>Balanço Orçamentário</h4><p>Demonstra as receitas e despesas previstas × realizadas. Evidencia o resultado orçamentário (déficit ou superávit orçamentário).</p></div>
+    <div class="card"><h4>Balanço Financeiro</h4><p>Demonstra as receitas e despesas financeiras (entradas e saídas de caixa). Evidencia o resultado financeiro (saldo de caixa).</p></div>
+    <div class="card"><h4>Balanço Patrimonial</h4><p>Ativo, passivo e patrimônio líquido do ente. Evidencia a situação patrimonial (superávit ou déficit patrimonial).</p></div>
+    <div class="card"><h4>Demonstração das Variações Patrimoniais (DVP)</h4><p>Evidencia as alterações ocorridas no patrimônio líquido — inclui receitas e despesas orçamentárias e extraorçamentárias.</p></div>
+  </div>
+
+  <h3>12.6 Restos a Pagar (Arts. 36 e 37)</h3>
+  <div class="card">
+    <ul>
+      <li>São as despesas empenhadas, mas não pagas até 31/12 do exercício.</li>
+      <li><strong>Processados:</strong> empenhados + liquidados, mas não pagos.</li>
+      <li><strong>Não processados:</strong> empenhados, mas ainda não liquidados.</li>
+      <li>Podem ser cancelados após 2 anos ou ao final do exercício seguinte ao de emissão.</li>
+    </ul>
+  </div>
+
+  <h3>12.7 Suprimentos de Fundos — Art. 68</h3>
+  <p>Regime de adiantamento — entrega de numerário a servidor para despesas que não possam subordinar-se ao processo normal de aplicação (urgência, sigilo ou peculiaridade da despesa). O servidor deve prestar contas.</p>
+
+  <h3>12.8 Controle Interno e Externo</h3>
+  <div class="g2">
+    <div class="card"><h4>Controle Interno (arts. 75–80)</h4><p>Exercido pela própria Adm. Abrange: legalidade dos atos, guarda do patrimônio, regularidade dos gastos, verificação da execução dos programas.</p></div>
+    <div class="card"><h4>Controle Externo (arts. 71–73)</h4><p>Exercido pelo Poder Legislativo com auxílio dos Tribunais de Contas. Julgamento das contas, fiscalização financeira e patrimonial.</p></div>
+  </div>
+
+  <h3>12.9 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a Lei 4.320/1964, os "restos a pagar" correspondem a:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Despesas fixadas na LOA que não foram empenhadas até 31 de dezembro.</li>
+      <li onclick="resp(this,'b','c')">b) Despesas liquidadas e pagas no exercício subsequente ao do empenho.</li>
+      <li onclick="resp(this,'c','c')">c) Despesas empenhadas, mas não pagas até 31 de dezembro, distinguindo-se em processados (liquidados) e não processados (não liquidados).</li>
+      <li onclick="resp(this,'d','c')">d) Créditos adicionais suplementares abertos e não utilizados até o final do exercício.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Arts. 36 e 37 da Lei 4.320/64: restos a pagar = despesas empenhadas não pagas até 31/12. Processados = empenhados + liquidados (direito adquirido pelo credor confirmado). Não processados = empenhados, mas não liquidados ainda (pendente de verificação da entrega).</div>
+  </div>
+
+  <div class="box-ok" style="margin-top:30px"><strong>🎉 Parabéns!</strong> Você concluiu as 13 seções de Direito Financeiro para a banca FCC. Os temas mais cobrados são: limitação de empenho, despesas com pessoal (LRF), créditos adicionais, estágios da receita/despesa e os balanços da Lei 4.320/64. Revise os artigos literais da LRF e da CF/88. Bons estudos!</div>
+  <div class="nb"><button class="nbtn" onclick="irPara('11')">⬅ Anterior</button><button class="nbtn" onclick="irPara('0')">📋 Índice</button></div>
+</div>
+
+</div><!-- end content -->
+<script>
+function iniciar(){document.getElementById('capa').style.display='none';document.getElementById('nav').style.display='flex';document.getElementById('content').style.display='block'}
+function voltarCapa(){document.getElementById('capa').style.display='flex';document.getElementById('nav').style.display='none';document.getElementById('content').style.display='none'}
+function irPara(n){const num=parseInt(n);document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const sec=document.getElementById('sec-'+num);if(sec){sec.classList.add('active');document.querySelector('#nav select').value=String(num);window.scrollTo({top:0,behavior:'smooth'})}}
+function resp(el,escolha,gabarito){const q=el.closest('.questao');if(q.querySelector('.gab.show'))return;q.querySelectorAll('.alt li').forEach(i=>{const m=i.getAttribute('onclick').match(/'([a-d])'/);if(m&&m[1]===gabarito)i.classList.add('correta');else if(i===el&&escolha!==gabarito)i.classList.add('errada')});q.querySelector('.gab').classList.add('show')}
+</script>
+</body>
+</html>

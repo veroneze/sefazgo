@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apostila FCC – Direito Constitucional</title>
+<style>
+:root{--azul:#1a3a5c;--azul-m:#2563a8;--azul-c:#dbeafe;--verde:#15803d;--verde-c:#dcfce7;--verm:#b91c1c;--verm-c:#fee2e2;--amar:#b45309;--amar-c:#fef3c7;--esm:#065f46;--esm-c:#d1fae5;--cinza:#f1f5f9;--texto:#1e293b;--borda:#cbd5e1;--ouro:#92400e;--ouro-c:#fde68a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f8fafc;color:var(--texto)}
+#capa{background:linear-gradient(135deg,#1a3a5c 0%,#065f46 100%);color:#fff;text-align:center;padding:60px 20px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#capa .badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 20px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+#capa h1{font-size:2.6rem;font-weight:800;line-height:1.2;margin-bottom:10px}
+#capa h2{font-size:1.1rem;font-weight:400;opacity:.85;margin-bottom:36px}
+#capa .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:680px}
+#capa .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:5px 12px;font-size:.75rem}
+#capa .btn-s{margin-top:44px;background:#fff;color:#1a3a5c;padding:13px 38px;border-radius:50px;border:none;font-size:1rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+#capa .btn-s:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+#nav{background:var(--azul);color:#fff;padding:10px 16px;display:none;align-items:center;gap:12px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
+#nav .nt{font-weight:700;font-size:.85rem;white-space:nowrap}
+#nav select{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 10px;font-size:.82rem;cursor:pointer;flex:1;min-width:200px}
+#nav select option{background:var(--azul)}
+#nav .bc{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:5px 12px;font-size:.78rem;cursor:pointer;white-space:nowrap}
+#content{display:none;max-width:940px;margin:0 auto;padding:28px 18px 70px}
+.section{display:none}.section.active{display:block}
+.sh{border-radius:12px;padding:26px 30px;margin-bottom:26px;color:#fff}
+.sh .num{font-size:.78rem;opacity:.7;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.sh h2{font-size:1.7rem;font-weight:800}
+.sh p{margin-top:7px;opacity:.85;font-size:.92rem}
+.sh-azul{background:linear-gradient(135deg,#1a3a5c,#2563a8)}
+.sh-verde{background:linear-gradient(135deg,#065f46,#15803d)}
+.sh-ouro{background:linear-gradient(135deg,#78350f,#b45309)}
+h3{color:var(--azul);font-size:1.05rem;margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--azul-c)}
+h4{color:var(--azul-m);font-size:.93rem;margin:14px 0 7px;font-weight:700}
+p{line-height:1.75;margin-bottom:9px;font-size:.93rem}
+ul,ol{padding-left:20px;margin-bottom:11px}
+li{line-height:1.75;font-size:.93rem;margin-bottom:4px}
+.card{background:#fff;border-radius:10px;padding:18px 22px;border:1px solid var(--borda);margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.box-d{background:var(--amar-c);border-left:4px solid var(--amar);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-d strong{color:var(--amar)}
+.box-a{background:var(--verm-c);border-left:4px solid var(--verm);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-a strong{color:var(--verm)}
+.box-i{background:var(--azul-c);border-left:4px solid var(--azul-m);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-i strong{color:var(--azul-m)}
+.box-ok{background:var(--verde-c);border-left:4px solid var(--verde);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-ok strong{color:var(--verde)}
+.box-ouro{background:var(--ouro-c);border-left:4px solid var(--ouro);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-ouro strong{color:var(--ouro)}
+.box-esm{background:var(--esm-c);border-left:4px solid var(--esm);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-esm strong{color:var(--esm)}
+.ex{background:var(--cinza);border-radius:8px;padding:13px 16px;margin:9px 0;font-size:.9rem;border:1px solid var(--borda)}
+.cf{background:#1e293b;color:#e2e8f0;border-radius:10px;padding:14px 18px;margin:12px 0;font-family:'Courier New',monospace;font-size:.88rem;text-align:center}
+.cf .hl{color:#fbbf24;font-weight:700}
+.certo{color:var(--verde);font-weight:700}.errado{color:var(--verm);font-weight:700}
+table{width:100%;border-collapse:collapse;margin:11px 0 14px;font-size:.88rem}
+th{background:var(--azul);color:#fff;padding:9px 13px;text-align:left}
+td{padding:8px 13px;border-bottom:1px solid var(--borda);vertical-align:top}
+tr:nth-child(even) td{background:var(--cinza)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:13px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;margin:13px 0}
+@media(max-width:650px){.grid2,.grid3{grid-template-columns:1fr}}
+.questao{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:18px 22px;margin:13px 0}
+.questao .en{font-weight:600;margin-bottom:11px;line-height:1.6;font-size:.93rem}
+.questao .alt{list-style:none;padding:0}
+.questao .alt li{padding:7px 11px;border-radius:6px;margin:5px 0;cursor:pointer;border:1.5px solid var(--borda);transition:all .15s;font-size:.9rem}
+.questao .alt li:hover{border-color:var(--azul-m);background:var(--azul-c)}
+.questao .alt li.correta{background:var(--verde-c);border-color:var(--verde)}
+.questao .alt li.errada{background:var(--verm-c);border-color:var(--verm)}
+.questao .gab{display:none;margin-top:11px;padding:11px;background:var(--cinza);border-radius:8px;font-size:.87rem;line-height:1.65}
+.questao .gab.show{display:block}
+.nb{display:flex;gap:11px;margin-top:38px;justify-content:space-between}
+.nbtn{background:var(--azul);color:#fff;border:none;border-radius:8px;padding:11px 22px;cursor:pointer;font-size:.88rem;font-weight:600;transition:background .2s}
+.nbtn:hover{background:var(--azul-m)}
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:11px;margin:18px 0}
+.ii{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:15px;cursor:pointer;transition:all .2s;text-align:center}
+.ii:hover{border-color:var(--azul-m);background:var(--azul-c);transform:translateY(-2px)}
+.ii .n{font-size:1.25rem;font-weight:800;color:var(--azul)}
+.ii .nm{font-size:.78rem;color:#64748b;margin-top:3px;line-height:1.3}
+.artigo{background:#fff;border:2px solid var(--azul-c);border-radius:8px;padding:14px 18px;margin:10px 0;font-size:.9rem;line-height:1.7}
+.artigo .art-num{font-weight:800;color:var(--azul-m);font-size:.82rem;display:block;margin-bottom:3px}
+.steps{counter-reset:st;list-style:none;padding-left:0}
+.steps li{counter-increment:st;padding:9px 12px 9px 42px;position:relative;margin-bottom:7px;background:var(--cinza);border-radius:8px;border:1px solid var(--borda);font-size:.9rem;line-height:1.6}
+.steps li::before{content:counter(st);position:absolute;left:11px;top:50%;transform:translateY(-50%);background:var(--azul);color:#fff;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;line-height:21px;text-align:center}
+.tag-lei{display:inline-block;background:var(--azul-c);color:var(--azul);border-radius:4px;padding:1px 7px;font-size:.75rem;font-weight:700;margin-right:3px}
+.tag-cf{display:inline-block;background:var(--ouro-c);color:var(--ouro);border-radius:4px;padding:1px 7px;font-size:.75rem;font-weight:700;margin-right:3px}
+.tag-go{display:inline-block;background:var(--esm-c);color:var(--esm);border-radius:4px;padding:1px 7px;font-size:.75px;font-weight:700;margin-right:3px}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div id="capa">
+  <div class="badge">Banca FCC</div>
+  <h1>Direito Constitucional</h1>
+  <h2>Apostila Completa para Concursos Públicos · CF/88 + CE-GO</h2>
+  <div class="pills">
+    <span class="pill">CF/1988</span><span class="pill">Normas Constitucionais</span>
+    <span class="pill">Direitos Fundamentais</span><span class="pill">Organização do Estado</span>
+    <span class="pill">Administração Pública</span><span class="pill">Poder Executivo</span>
+    <span class="pill">Poder Legislativo</span><span class="pill">Poder Judiciário</span>
+    <span class="pill">Controle de Constitucionalidade</span><span class="pill">Ordem Econômica</span>
+    <span class="pill">Constituição de Goiás</span>
+  </div>
+  <button class="btn-s" onclick="iniciar()">⚖️ Começar a Estudar</button>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <span class="nt">⚖️ FCC – Dir. Const.</span>
+  <select onchange="irPara(this.value)">
+    <option value="0">📋 Índice Geral</option>
+    <option value="1">1. CF/1988 – Visão Geral</option>
+    <option value="2">2. Aplicabilidade das Normas</option>
+    <option value="3">3. Direitos e Garantias Fundamentais</option>
+    <option value="4">4. Organização Político-Administrativa</option>
+    <option value="5">5. Administração Pública</option>
+    <option value="6">6. Poder Executivo</option>
+    <option value="7">7. Poder Legislativo</option>
+    <option value="8">8. Poder Judiciário e Funções Essenciais</option>
+    <option value="9">9. Controle de Constitucionalidade</option>
+    <option value="10">10. Ordem Econômica e Financeira</option>
+    <option value="11">11. Constituição do Estado de Goiás</option>
+  </select>
+  <button class="bc" onclick="voltarCapa()">⬅ Capa</button>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<!-- ÍNDICE -->
+<div class="section active" id="sec-0">
+  <div class="sh sh-azul"><div class="num">Apostila FCC</div><h2>📋 Índice Geral</h2><p>11 seções cobrindo todo o edital de Direito Constitucional da FCC, incluindo a CE-GO.</p></div>
+  <div class="ig">
+    <div class="ii" onclick="irPara('1')"><div class="n">01</div><div class="nm">CF/1988 – Visão Geral e Princípios</div></div>
+    <div class="ii" onclick="irPara('2')"><div class="n">02</div><div class="nm">Aplicabilidade das Normas Constitucionais</div></div>
+    <div class="ii" onclick="irPara('3')"><div class="n">03</div><div class="nm">Direitos e Garantias Fundamentais</div></div>
+    <div class="ii" onclick="irPara('4')"><div class="n">04</div><div class="nm">Organização Político-Administrativa</div></div>
+    <div class="ii" onclick="irPara('5')"><div class="n">05</div><div class="nm">Administração Pública e Servidores</div></div>
+    <div class="ii" onclick="irPara('6')"><div class="n">06</div><div class="nm">Poder Executivo</div></div>
+    <div class="ii" onclick="irPara('7')"><div class="n">07</div><div class="nm">Poder Legislativo e Processo Legislativo</div></div>
+    <div class="ii" onclick="irPara('8')"><div class="n">08</div><div class="nm">Poder Judiciário e Funções Essenciais</div></div>
+    <div class="ii" onclick="irPara('9')"><div class="n">09</div><div class="nm">Controle de Constitucionalidade</div></div>
+    <div class="ii" onclick="irPara('10')"><div class="n">10</div><div class="nm">Ordem Econômica e Financeira</div></div>
+    <div class="ii" onclick="irPara('11')"><div class="n">11</div><div class="nm">Constituição do Estado de Goiás</div></div>
+  </div>
+</div>
+
+<!-- SEC 1 -->
+<div class="section" id="sec-1">
+  <div class="sh sh-azul"><div class="num">Tema 01</div><h2>CF/1988 – Visão Geral e Princípios</h2><p>A Constituição Cidadã: fundamentos, objetivos, princípios e estrutura normativa.</p></div>
+
+  <h3>1.1 Contexto Histórico e Características</h3>
+  <div class="grid2">
+    <div class="card"><h4>Denominação</h4><p>"Constituição Cidadã" (Ulysses Guimarães). Promulgada em <strong>5 de outubro de 1988</strong>. É a 7ª Constituição brasileira.</p></div>
+    <div class="card"><h4>Classificação</h4><ul><li><strong>Escrita</strong> e <strong>codificada</strong></li><li><strong>Rígida</strong> (processo especial de modificação)</li><li><strong>Promulgada</strong> (democrática)</li><li><strong>Analítica/Prolixa</strong> (extensa)</li><li><strong>Normativa</strong> (efetivamente aplicada)</li></ul></div>
+  </div>
+
+  <h3>1.2 Fundamentos da República — Art. 1º</h3>
+  <div class="box-ouro"><strong>🏛 Mnemônico SOLIDU:</strong> <strong>SO</strong>berania · <strong>C</strong>idadania → <strong>SCDVP</strong>: Soberania, Cidadania, Dignidade da pessoa humana, Valores sociais do trabalho e da livre iniciativa, Pluralismo político.</div>
+  <div class="artigo"><span class="art-num">Art. 1º — Parágrafo único</span>Todo o poder emana do povo, que o exerce por meio de representantes eleitos ou diretamente, nos termos desta Constituição. (<strong>Democracia semidireta</strong>)</div>
+
+  <h3>1.3 Objetivos Fundamentais — Art. 3º</h3>
+  <div class="card">
+    <ul>
+      <li>Construir uma sociedade <strong>livre, justa e solidária</strong>.</li>
+      <li>Garantir o <strong>desenvolvimento nacional</strong>.</li>
+      <li><strong>Erradicar a pobreza</strong> e a marginalização e reduzir as desigualdades sociais e regionais.</li>
+      <li>Promover o <strong>bem de todos</strong>, sem preconceitos de origem, raça, sexo, cor, idade.</li>
+    </ul>
+  </div>
+
+  <h3>1.4 Princípios das Relações Internacionais — Art. 4º</h3>
+  <p>Independência nacional, prevalência dos direitos humanos, autodeterminação dos povos, não-intervenção, igualdade entre os Estados, defesa da paz, solução pacífica dos conflitos, repúdio ao terrorismo e ao racismo, cooperação entre os povos, concessão de asilo político. <strong>Objetivo: integração da América Latina.</strong></p>
+
+  <h3>1.5 Poder Constituinte</h3>
+  <table>
+    <tr><th>Tipo</th><th>Características</th><th>Limites</th></tr>
+    <tr><td><strong>Originário</strong></td><td>Cria a Constituição; inicial, ilimitado, incondicionado</td><td>Nenhum jurídico formal</td></tr>
+    <tr><td><strong>Derivado Reformador</strong></td><td>Emendas Constitucionais — art. 60 CF</td><td>Formais, circunstanciais e materiais (cláusulas pétreas)</td></tr>
+    <tr><td><strong>Derivado Decorrente</strong></td><td>Estados elaboram suas Constituições</td><td>Princípios sensíveis e estabelecidos da CF</td></tr>
+    <tr><td><strong>Difuso</strong></td><td>Mutação constitucional — interpretação evolutiva</td><td>Não viola o texto expresso</td></tr>
+  </table>
+
+  <h3>1.6 Cláusulas Pétreas — Art. 60, §4º</h3>
+  <div class="box-a"><strong>⚠ VEDADO abolir:</strong> I – Forma federativa de Estado; II – Voto direto, secreto, universal e periódico; III – Separação dos Poderes; IV – Direitos e garantias individuais.</div>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> Cláusulas pétreas não impedem a <em>modificação</em>, apenas a <em>abolição</em>. É possível ampliar direitos fundamentais por EC, mas não suprimi-los.</div>
+
+  <h3>1.7 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">São fundamentos da República Federativa do Brasil, nos termos do art. 1º da CF/88:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Soberania, livre iniciativa, democracia, segurança e pluralismo político.</li>
+      <li onclick="resp(this,'b','b')">b) Soberania, cidadania, dignidade da pessoa humana, valores sociais do trabalho e da livre iniciativa e pluralismo político.</li>
+      <li onclick="resp(this,'c','b')">c) Cidadania, igualdade, moralidade, desenvolvimento nacional e dignidade humana.</li>
+      <li onclick="resp(this,'d','b')">d) Livre iniciativa, cidadania, soberania, impessoalidade e pluralismo político.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 1º, I a V, CF/88: Soberania, Cidadania, Dignidade da pessoa humana, Valores sociais do trabalho e da livre iniciativa, Pluralismo político. Os demais itens misturam princípios da administração pública ou objetivos (art. 3º).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('0')">⬅ Índice</button><button class="nbtn" onclick="irPara('2')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 2 -->
+<div class="section" id="sec-2">
+  <div class="sh sh-azul"><div class="num">Tema 02</div><h2>Aplicabilidade das Normas Constitucionais</h2><p>Classificação de José Afonso da Silva — adotada pela FCC como referência central.</p></div>
+
+  <h3>2.1 Normas de Eficácia Plena</h3>
+  <div class="card">
+    <ul>
+      <li>Produzem <strong>todos os efeitos</strong> desde a promulgação da CF.</li>
+      <li><strong>Autoaplicáveis</strong> — não dependem de lei regulamentadora.</li>
+      <li>Aplicabilidade <strong>direta, imediata e integral</strong>.</li>
+    </ul>
+    <div class="ex"><strong>Exemplos:</strong> Art. 2º (separação dos poderes), art. 5º, I (igualdade homem/mulher), art. 230, §2º (gratuidade transporte urbano para maiores de 65 anos).</div>
+  </div>
+
+  <h3>2.2 Normas de Eficácia Contida (Redutível ou Restringível)</h3>
+  <div class="card">
+    <ul>
+      <li>Também <strong>autoaplicáveis</strong> desde a promulgação, mas podem ter seus efeitos <strong>restringidos</strong> por lei.</li>
+      <li>Aplicabilidade <strong>direta, imediata, mas não integral</strong>.</li>
+      <li>Enquanto não houver restrição legislativa, produzem efeitos plenos.</li>
+    </ul>
+    <div class="ex"><strong>Exemplos:</strong> Art. 5º, XIII (liberdade de exercício de trabalho, "atendidas as qualificações que a lei estabelecer"), art. 5º, VIII (escusa de consciência).</div>
+  </div>
+
+  <h3>2.3 Normas de Eficácia Limitada</h3>
+  <div class="card">
+    <ul>
+      <li>Dependem de regulamentação legislativa para produzir <strong>plenos efeitos</strong>.</li>
+      <li>Aplicabilidade <strong>indireta, mediata e reduzida</strong>.</li>
+      <li>Produzem efeito <em>mínimo</em>: revogam normas anteriores incompatíveis e vinculam o legislador.</li>
+    </ul>
+    <div class="grid2" style="margin-top:10px">
+      <div class="card" style="margin:0"><h4>Institutivas</h4><p>Criam órgãos ou instituições. Ex.: art. 33 (territórios), art. 88 (criação de ministérios).</p></div>
+      <div class="card" style="margin:0"><h4>Programáticas</h4><p>Estabelecem programa de ação estatal. Ex.: art. 196 (saúde), art. 205 (educação), art. 215 (cultura).</p></div>
+    </div>
+  </div>
+
+  <h3>2.4 Quadro Comparativo</h3>
+  <table>
+    <tr><th>Tipo</th><th>Aplicabilidade</th><th>Lei regulamentadora</th><th>Efeito mínimo</th></tr>
+    <tr><td><strong>Plena</strong></td><td>Direta, imediata, integral</td><td>Não precisa</td><td>Máximo</td></tr>
+    <tr><td><strong>Contida</strong></td><td>Direta, imediata, não integral</td><td>Pode restringir</td><td>Pleno até restrição</td></tr>
+    <tr><td><strong>Limitada</strong></td><td>Indireta, mediata, reduzida</td><td>Necessária para plena eficácia</td><td>Revoga normas incompatíveis</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> A banca costuma cobrar a diferença entre <em>contida</em> e <em>limitada</em>. A contida é plena enquanto não restringida. A limitada depende de lei para ter eficácia plena.</div>
+
+  <h3>2.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A norma constitucional que dispõe "É livre o exercício de qualquer trabalho, ofício ou profissão, atendidas as qualificações profissionais que a lei estabelecer" (art. 5º, XIII) é classificada como de eficácia:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Plena, pois está no rol do art. 5º.</li>
+      <li onclick="resp(this,'b','b')">b) Contida, pois pode ser restringida por lei ordinária.</li>
+      <li onclick="resp(this,'c','b')">c) Limitada programática, pois depende de lei para ter qualquer efeito.</li>
+      <li onclick="resp(this,'d','b')">d) Limitada institutiva, pois cria órgão regulador das profissões.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> O inciso XIII do art. 5º é norma de eficácia contida: tem aplicabilidade direta e imediata (a liberdade existe), mas a lei pode estabelecer qualificações que a restrinjam (ex.: regulamentação da advocacia, medicina).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('1')">⬅ Anterior</button><button class="nbtn" onclick="irPara('3')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 3 -->
+<div class="section" id="sec-3">
+  <div class="sh sh-azul"><div class="num">Tema 03</div><h2>Direitos e Garantias Fundamentais</h2><p>Art. 5º a 17 da CF/88 — o tema mais cobrado em provas da FCC de Direito Constitucional.</p></div>
+
+  <h3>3.1 Características dos Direitos Fundamentais</h3>
+  <div class="grid2">
+    <div class="card"><h4>Características gerais</h4><ul><li><strong>Universalidade</strong> — para todos</li><li><strong>Historicidade</strong> — evoluem no tempo</li><li><strong>Inalienabilidade</strong> — não se transferem</li><li><strong>Imprescritibilidade</strong> — não prescrevem</li><li><strong>Irrenunciabilidade</strong></li><li><strong>Relatividade</strong> — não são absolutos</li></ul></div>
+    <div class="card"><h4>Gerações/Dimensões</h4><ul><li><strong>1ª</strong>: Civis e políticos (liberdades negativas)</li><li><strong>2ª</strong>: Sociais, econômicos e culturais</li><li><strong>3ª</strong>: Solidariedade/fraternidade (meio ambiente, paz)</li><li><strong>4ª</strong>: Democracia direta, pluralismo (Bonavides)</li></ul></div>
+  </div>
+
+  <h3>3.2 Direitos Individuais e Coletivos — Art. 5º (destaques)</h3>
+  <div class="card">
+    <h4>Remédios Constitucionais (Garantias)</h4>
+    <table>
+      <tr><th>Remédio</th><th>Finalidade</th><th>Prazo/Obs.</th></tr>
+      <tr><td><strong>Habeas Corpus</strong></td><td>Liberdade de locomoção ameaçada ou violada</td><td>Gratuito, sem advogado</td></tr>
+      <tr><td><strong>Mandado de Segurança</strong></td><td>Direito líquido e certo, ato de autoridade pública</td><td>120 dias do ato</td></tr>
+      <tr><td><strong>MS Coletivo</strong></td><td>Idem, impetrado por partido/sindicato/associação</td><td>Substituição processual</td></tr>
+      <tr><td><strong>Habeas Data</strong></td><td>Acesso/retificação de dados pessoais em entidades públicas</td><td>Gratuito</td></tr>
+      <tr><td><strong>Mandado de Injunção</strong></td><td>Inércia normativa que inviabiliza direito constitucional</td><td>Efeitos: inter partes ou erga omnes</td></tr>
+      <tr><td><strong>Ação Popular</strong></td><td>Anular ato lesivo ao patrimônio público, moralidade, etc.</td><td>Cidadão; gratuita salvo má-fé</td></tr>
+    </table>
+  </div>
+
+  <h3>3.3 Direitos Sociais — Art. 6º a 11</h3>
+  <div class="artigo"><span class="art-num">Art. 6º</span>São direitos sociais a educação, a saúde, a alimentação, o trabalho, a moradia, o transporte, o lazer, a segurança, a previdência social, a proteção à maternidade e à infância, a assistência aos desamparados.</div>
+  <div class="box-d"><strong>⭐ Mnemônico art. 6º:</strong> <strong>E-SA-TRA-MO-TRA-LA-SE-PRE-PRO-A</strong> → Educação, SAúde, TRAbalho, MOradia, TRAnsporte, LAzer, SEgurança, PREvidência, PROteção à maternidade, Assistência.</div>
+
+  <h3>3.4 Direitos de Nacionalidade — Arts. 12 e 13</h3>
+  <div class="grid2">
+    <div class="card"><h4>Brasileiro Nato</h4><ul><li>Nascido no Brasil (jus soli), salvo a serviço estrangeiro.</li><li>Filho de brasileiro(a) a serviço do Brasil no exterior (jus sanguinis funcional).</li><li>Filho de pai ou mãe brasileira, registrado ou que venha residir e opte ao atingir a maioridade.</li></ul></div>
+    <div class="card"><h4>Brasileiro Naturalizado</h4><ul><li>Estrangeiro: 15 anos ininterruptos + idoneidade.</li><li>Originário de países de língua portuguesa: 1 ano ininterrupto + idoneidade.</li><li>Estrangeiro com filho brasileiro ou casado com brasileiro: 1 ano ininterrupto.</li></ul></div>
+  </div>
+  <div class="box-a"><strong>⚠ Cargos privativos de brasileiros natos:</strong> Presidente e Vice-Presidente da República, Presidente da Câmara, Presidente do Senado, Min. do STF, carreira diplomática, oficial das Forças Armadas, Ministro da Defesa.</div>
+
+  <h3>3.5 Direitos Políticos — Arts. 14 a 16</h3>
+  <div class="card">
+    <h4>Condições de elegibilidade (art. 14, §3º):</h4>
+    <p>Nacionalidade brasileira, pleno exercício dos direitos políticos, alistamento eleitoral, domicílio eleitoral na circunscrição, filiação partidária, idade mínima (35/30/21/18 anos conforme o cargo).</p>
+    <h4>Inelegibilidades absolutas:</h4>
+    <p>Inalistáveis (estrangeiros e conscritos) e analfabetos.</p>
+  </div>
+
+  <h3>3.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Assinale a alternativa correta sobre os remédios constitucionais previstos no art. 5º da CF/88:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) O habeas data destina-se a proteger a liberdade de locomoção contra ameaça ou coação ilegal.</li>
+      <li onclick="resp(this,'b','c')">b) A ação popular pode ser proposta por qualquer pessoa, inclusive estrangeiros residentes.</li>
+      <li onclick="resp(this,'c','c')">c) O mandado de injunção é cabível quando a falta de norma regulamentadora torne inviável o exercício de direito constitucional.</li>
+      <li onclick="resp(this,'d','c')">d) O mandado de segurança pode ser impetrado a qualquer tempo, sem prazo decadencial.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> O MI (art. 5º, LXXI) visa suprir omissão normativa. Erro A: habeas data = dados pessoais (habeas corpus = locomoção). Erro B: ação popular = cidadão (eleitor). Erro D: MS tem prazo decadencial de 120 dias.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('2')">⬅ Anterior</button><button class="nbtn" onclick="irPara('4')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 4 -->
+<div class="section" id="sec-4">
+  <div class="sh sh-azul"><div class="num">Tema 04</div><h2>Organização Político-Administrativa</h2><p>Arts. 18 a 43 da CF/88 — Federalismo brasileiro, entes federativos e suas competências.</p></div>
+
+  <h3>4.1 Estado Federal Brasileiro</h3>
+  <div class="artigo"><span class="art-num">Art. 18</span>A organização político-administrativa da República Federativa do Brasil compreende a União, os Estados, o Distrito Federal e os Municípios, todos autônomos nos termos desta Constituição.</div>
+  <div class="card">
+    <h4>Características do federalismo brasileiro:</h4>
+    <ul>
+      <li><strong>Tríplice</strong>: União + Estados + Municípios (incomum no direito comparado).</li>
+      <li><strong>Indissolúvel</strong>: vedado o direito de secessão.</li>
+      <li>Organização <strong>descentralizada</strong>, mas com predominância da União.</li>
+      <li>Incorporação, subdivisão ou desmembramento de Estados: aprovação da população e do Congresso Nacional (lei complementar).</li>
+    </ul>
+  </div>
+
+  <h3>4.2 Competências — Distribuição</h3>
+  <table>
+    <tr><th>Tipo</th><th>Titulares</th><th>Artigo CF</th><th>Exemplos</th></tr>
+    <tr><td><strong>Exclusiva</strong></td><td>União</td><td>Art. 21</td><td>Emitir moeda, declarar guerra, manter Forças Armadas</td></tr>
+    <tr><td><strong>Privativa</strong></td><td>União (delegável)</td><td>Art. 22</td><td>Legislar sobre direito civil, penal, trabalhista, processual</td></tr>
+    <tr><td><strong>Comum/Concorrente</strong></td><td>U + E + DF + M</td><td>Art. 23</td><td>Saúde, educação, proteção ao meio ambiente, patrimônio</td></tr>
+    <tr><td><strong>Concorrente Legislativa</strong></td><td>U + E + DF</td><td>Art. 24</td><td>Tributário, financeiro, penitenciário, urbanístico</td></tr>
+    <tr><td><strong>Reservada/Remanescente</strong></td><td>Estados</td><td>Art. 25, §1º</td><td>Tudo que não for vedado ou atribuído à União/Municípios</td></tr>
+    <tr><td><strong>Peculiar</strong></td><td>Municípios</td><td>Art. 30</td><td>Assuntos de interesse local, transporte coletivo, ordenamento urbano</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Art. 24 — Competência Concorrente:</strong> União estabelece normas gerais; Estados suplementam. Se a União não legislar, os Estados têm competência plena. Sobrevindo lei federal, a estadual fica suspensa no que for contrária.</div>
+
+  <h3>4.3 Vedações Constitucionais — Art. 19</h3>
+  <div class="card">
+    <p>É vedado à União, aos Estados, ao DF e aos Municípios:</p>
+    <ul>
+      <li>Estabelecer cultos religiosos ou igrejas, subvencioná-los, embaraçar seu funcionamento ou manter relações de dependência com eles — <strong>Estado laico</strong>.</li>
+      <li>Recusar fé aos documentos públicos.</li>
+      <li>Criar distinções entre brasileiros ou preferências entre si.</li>
+    </ul>
+  </div>
+
+  <h3>4.4 Distrito Federal e Municípios</h3>
+  <div class="grid2">
+    <div class="card"><h4>Distrito Federal — Art. 32</h4><ul><li>Acumula competências estaduais E municipais.</li><li>Não pode ser dividido em Municípios.</li><li>Lei Orgânica aprovada pela CLDF (2/3).</li><li>Tributos estaduais E municipais.</li></ul></div>
+    <div class="card"><h4>Municípios — Art. 29</h4><ul><li>Regem-se por Lei Orgânica própria.</li><li>Eleições: 1º turno se candidato ≥ 50% dos votos válidos (cidades ≥ 200 mil eleitores: 2 turnos).</li><li>Câmara Municipal: vereadores (mín. 9, máx. 55).</li></ul></div>
+  </div>
+
+  <h3>4.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Compete privativamente à União legislar sobre, EXCETO:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Direito civil, comercial, penal e processual.</li>
+      <li onclick="resp(this,'b','d')">b) Desapropriação.</li>
+      <li onclick="resp(this,'c','d')">c) Trânsito e transporte.</li>
+      <li onclick="resp(this,'d','d')">d) Procedimentos em matéria processual (competência concorrente com os Estados).</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> "Procedimentos em matéria processual" é competência concorrente (art. 24, XI). Direito processual (normas gerais) é privativo da União (art. 22, I), mas procedimentos são concorrentes. A FCC cobra essa distinção com frequência.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('3')">⬅ Anterior</button><button class="nbtn" onclick="irPara('5')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 5 -->
+<div class="section" id="sec-5">
+  <div class="sh sh-azul"><div class="num">Tema 05</div><h2>Administração Pública e Servidores</h2><p>Arts. 37 a 41 da CF/88 — princípios, vedações, concurso público, estabilidade e remuneração.</p></div>
+
+  <h3>5.1 Princípios — Art. 37, caput</h3>
+  <div class="box-ouro"><strong>🏛 LIMPE:</strong> <strong>L</strong>egalidade · <strong>I</strong>mpessoalidade · <strong>M</strong>oralidade · <strong>P</strong>ublicidade · <strong>E</strong>ficiência (EC 19/1998).</div>
+  <div class="grid2">
+    <div class="card"><h4>Legalidade</h4><p>O agente público só pode fazer o que a lei <strong>autoriza</strong>. Diferente do particular, que pode fazer tudo que a lei não proíbe.</p></div>
+    <div class="card"><h4>Impessoalidade</h4><p>Atos praticados em nome do órgão, não do agente. Veda promoção pessoal com uso de publicidade oficial.</p></div>
+    <div class="card"><h4>Moralidade</h4><p>Conduta honesta, ética. Viola a moralidade o nepotismo — Súmula Vinculante 13 do STF.</p></div>
+    <div class="card"><h4>Publicidade</h4><p>Transparência dos atos. Exceções: segurança nacional e intimidade (habeas data e sigilo fiscal).</p></div>
+  </div>
+
+  <h3>5.2 Regras Gerais — Art. 37</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Concurso público</strong> obrigatório para cargo/emprego efetivo (II) — exceto cargos em comissão (livre nomeação/exoneração).</li>
+      <li>Prazo de validade: até <strong>2 anos</strong>, prorrogável uma vez por igual período (III).</li>
+      <li><strong>Acumulação</strong> permitida: 2 cargos de professor; professor + técnico/científico; 2 cargos ou empregos privativos de profissionais de saúde com profissões regulamentadas — desde que haja compatibilidade de horários (XVI).</li>
+      <li><strong>Teto remuneratório:</strong> subsídio dos Ministros do STF (XI).</li>
+      <li>Atos de improbidade administrativa: suspensão de direitos políticos, perda da função, indisponibilidade de bens, ressarcimento (§4º).</li>
+    </ul>
+  </div>
+
+  <h3>5.3 Servidores Públicos — Arts. 39 a 41</h3>
+  <table>
+    <tr><th>Instituto</th><th>Regra</th></tr>
+    <tr><td><strong>Estabilidade</strong></td><td>3 anos de efetivo exercício + aprovação em avaliação especial de desempenho</td></tr>
+    <tr><td><strong>Perda do cargo</strong></td><td>Sentença judicial transitada em julgado; PAD; avaliação periódica de desempenho (insuficiência); excesso de despesa com pessoal (LRF)</td></tr>
+    <tr><td><strong>Subsídio</strong></td><td>Parcela única — vedadas vantagens, adicionais, abonos (em regra)</td></tr>
+    <tr><td><strong>Vencimento</strong></td><td>Retribuição do cargo + vantagens pessoais</td></tr>
+    <tr><td><strong>Aposentadoria voluntária</strong></td><td>EC 103/2019: 65/60 anos (homem/mulher) + 25 anos serviço + 10 anos carreira + 5 no cargo</td></tr>
+  </table>
+
+  <h3>5.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme o art. 37 da CF/88, assinale a afirmativa CORRETA sobre a acumulação de cargos públicos:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) É sempre vedada a acumulação de cargos, empregos e funções públicas.</li>
+      <li onclick="resp(this,'b','c')">b) É permitida a acumulação de três cargos de professor, desde que haja compatibilidade de horários.</li>
+      <li onclick="resp(this,'c','c')">c) É permitida a acumulação de dois cargos ou empregos privativos de profissionais de saúde com profissões regulamentadas, havendo compatibilidade de horários.</li>
+      <li onclick="resp(this,'d','c')">d) É permitida a acumulação de cargo de médico com cargo em comissão, independentemente de compatibilidade de horários.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 37, XVI, "c": profissionais de saúde com profissões regulamentadas podem acumular 2 cargos/empregos com compatibilidade de horários. Só dois cargos. Cargo em comissão não se acumula livremente com cargo efetivo além do permitido.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('4')">⬅ Anterior</button><button class="nbtn" onclick="irPara('6')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 6 -->
+<div class="section" id="sec-6">
+  <div class="sh sh-verde"><div class="num">Tema 06</div><h2>Poder Executivo</h2><p>Arts. 76 a 91 da CF/88 — Presidente da República, atribuições, responsabilidade e órgãos.</p></div>
+
+  <h3>6.1 Estrutura</h3>
+  <div class="card">
+    <ul>
+      <li>O Poder Executivo é exercido pelo <strong>Presidente da República</strong>, auxiliado pelos Ministros de Estado.</li>
+      <li>Mandato: <strong>4 anos</strong>, com possibilidade de uma reeleição (art. 82).</li>
+      <li>Eleição: majoritária, em <strong>2 turnos</strong>. Eleito Presidente, o Vice com mais votos assume. Chapa (Presidente + Vice).</li>
+      <li>Requisitos: ser brasileiro nato, pleno exercício dos direitos políticos, idade mínima de <strong>35 anos</strong>, alistamento eleitoral, filiação partidária e domicílio eleitoral no Brasil.</li>
+    </ul>
+  </div>
+
+  <h3>6.2 Atribuições do Presidente — Art. 84</h3>
+  <div class="grid2">
+    <div class="card"><h4>Atribuições privativas (indelegáveis)</h4><ul><li>Nomear e exonerar Ministros (I)</li><li>Celebrar tratados internacionais (VIII)</li><li>Decretar estado de defesa e sítio (IX)</li><li>Nomear membros do STF e tribunais superiores (XIV)</li><li>Convocar e presidir o Conselho da República (XIX)</li></ul></div>
+    <div class="card"><h4>Atribuições delegáveis aos Ministros, PGR e AGU</h4><ul><li>Dispor sobre organização da administração federal (VI)</li><li>Prover cargos federais (XXV)</li><li>Editar decretos e regulamentos (IV)</li></ul></div>
+  </div>
+
+  <h3>6.3 Crimes de Responsabilidade e Impeachment</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Crimes comuns:</strong> STF julga, mediante autorização da Câmara (2/3 — 342 deputados).</li>
+      <li><strong>Crimes de responsabilidade:</strong> Senado julga, precedido de autorização da Câmara (2/3). Pena: perda do cargo + inabilitação por 8 anos.</li>
+      <li>Durante o mandato, o Presidente <strong>não pode ser responsabilizado</strong> por atos estranhos ao exercício da função (imunidade relativa).</li>
+      <li>Nas infrações penais comuns, o Presidente não estará sujeito a <strong>prisão</strong> enquanto não sobrevier sentença condenatória (§3º, art. 86).</li>
+    </ul>
+  </div>
+
+  <h3>6.4 Medidas Provisórias — Art. 62</h3>
+  <div class="card">
+    <ul>
+      <li>Em caso de <strong>relevância e urgência</strong>, o Presidente pode editar MPs com força de lei.</li>
+      <li>Prazo: <strong>60 dias</strong>, prorrogável uma vez por igual período (120 dias total).</li>
+      <li>Tranca a pauta do Legislativo após 45 dias de vigência.</li>
+    </ul>
+    <div class="box-a"><strong>⚠ Vedações às MPs:</strong> Matéria relativa a: nacionalidade, cidadania, direitos políticos, partidos, direito eleitoral; direito penal e processual penal; organização do Poder Judiciário e MP; planos plurianuais; detenção/sequestro de bens; EC já regulada; regulamentação de artigo cuja EC mencionou lei complementar.</div>
+  </div>
+
+  <h3>6.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Sobre as medidas provisórias, conforme o art. 62 da CF/88, é CORRETO afirmar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Podem tratar de matéria penal em qualquer hipótese, desde que haja urgência.</li>
+      <li onclick="resp(this,'b','d')">b) Têm validade inicial de 90 dias, prorrogável por mais 90.</li>
+      <li onclick="resp(this,'c','d')">c) Podem ser reeditadas na mesma sessão legislativa em que tenham sido rejeitadas.</li>
+      <li onclick="resp(this,'d','d')">d) Perdem eficácia se não forem convertidas em lei no prazo de 120 dias, devendo o Congresso regular as relações jurídicas surgidas nesse período.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> As MPs valem 60 dias, prorrogáveis por mais 60 (120 dias total). Se não convertidas em lei, perdem eficácia, e o CN deve editar decreto legislativo para regular os efeitos. É vedada reedição na mesma sessão legislativa após rejeição.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('5')">⬅ Anterior</button><button class="nbtn" onclick="irPara('7')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 7 -->
+<div class="section" id="sec-7">
+  <div class="sh sh-verde"><div class="num">Tema 07</div><h2>Poder Legislativo e Processo Legislativo</h2><p>Arts. 44 a 75 da CF/88 — estrutura, atribuições, espécies normativas e fiscalização.</p></div>
+
+  <h3>7.1 Estrutura — Congresso Nacional Bicameral</h3>
+  <div class="grid2">
+    <div class="card"><h4>Câmara dos Deputados</h4><ul><li>Representação do <strong>povo</strong>.</li><li>513 deputados federais.</li><li>Mandato: <strong>4 anos</strong>.</li><li>Mín. 8, máx. 70 por Estado/DF.</li><li>Eleição: proporcional.</li></ul></div>
+    <div class="card"><h4>Senado Federal</h4><ul><li>Representação dos <strong>Estados</strong> e do DF.</li><li>81 senadores (3 por Estado/DF).</li><li>Mandato: <strong>8 anos</strong> (renovação alternada de 1/3 e 2/3 de 4 em 4 anos).</li><li>Eleição: majoritária simples.</li></ul></div>
+  </div>
+
+  <h3>7.2 Espécies Normativas — Art. 59</h3>
+  <div class="cf">EC · <span class="hl">LC · LO · LDel · MP · LFC · Resolução · Decreto Legislativo</span></div>
+  <table>
+    <tr><th>Espécie</th><th>Quórum/Procedimento</th><th>Matéria</th></tr>
+    <tr><td><strong>EC</strong></td><td>3/5 em 2 turnos, em cada Casa</td><td>Reforma constitucional</td></tr>
+    <tr><td><strong>Lei Complementar</strong></td><td>Maioria absoluta (½+1 dos membros)</td><td>Matérias expressamente reservadas pela CF</td></tr>
+    <tr><td><strong>Lei Ordinária</strong></td><td>Maioria simples (dos presentes)</td><td>Matérias não reservadas à LC</td></tr>
+    <tr><td><strong>Lei Delegada</strong></td><td>Delegação pelo CN; elaborada pelo PR</td><td>Vedadas: atos de LC, CN privativas, EC</td></tr>
+    <tr><td><strong>Medida Provisória</strong></td><td>PR; 60+60 dias; CN converte em lei</td><td>Relevância e urgência (vedações no §1º)</td></tr>
+  </table>
+
+  <h3>7.3 Fases do Processo Legislativo Ordinário</h3>
+  <ol class="steps">
+    <li><strong>Iniciativa</strong> — quem apresenta o projeto (legitimados: art. 61).</li>
+    <li><strong>Discussão e votação</strong> nas comissões e plenário de ambas as Casas.</li>
+    <li><strong>Sanção ou veto</strong> pelo Presidente da República (15 dias úteis — sanção tácita se silente; veto em 15 dias úteis).</li>
+    <li><strong>Apreciação do veto</strong> pelo CN (maioria absoluta em sessão conjunta; prazo: 30 dias).</li>
+    <li><strong>Promulgação e publicação</strong> (PR ou, se omisso, Presidente do Senado/Vice).</li>
+  </ol>
+  <div class="box-d"><strong>⭐ Iniciativa privativa do Presidente (art. 61, §1º):</strong> Criação de cargos, funções, empregos públicos na Administração direta; militares; organização da PGR; criação, estruturação e atribuições de ministérios.</div>
+
+  <h3>7.4 Comissões Parlamentares de Inquérito — Art. 58, §3º</h3>
+  <div class="card">
+    <ul>
+      <li>Criadas mediante requerimento de <strong>1/3</strong> dos membros da Casa.</li>
+      <li>Fato determinado + prazo certo.</li>
+      <li><strong>Poderes de investigação</strong> equiparados aos da autoridade judicial.</li>
+      <li><strong>Não podem:</strong> decretar prisão (salvo flagrante), interceptar comunicações, busca e apreensão domiciliar, decretar indisponibilidade de bens.</li>
+      <li>Conclusões encaminhadas ao MP para adotar as medidas cabíveis.</li>
+    </ul>
+  </div>
+
+  <h3>7.5 Fiscalização Contábil e Financeira — Art. 70 a 75</h3>
+  <p>Exercida pelo <strong>Congresso Nacional</strong>, com auxílio do <strong>Tribunal de Contas da União (TCU)</strong>. Abrange <strong>fiscalização contábil, financeira, orçamentária, operacional e patrimonial</strong>.</p>
+
+  <h3>7.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Sobre as Comissões Parlamentares de Inquérito (CPIs), conforme o art. 58, §3º da CF/88, é INCORRETO afirmar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Devem ter objeto determinado e prazo certo de duração.</li>
+      <li onclick="resp(this,'b','d')">b) São criadas mediante requerimento de um terço dos membros da Casa.</li>
+      <li onclick="resp(this,'c','d')">c) Têm poderes de investigação próprios das autoridades judiciais.</li>
+      <li onclick="resp(this,'d','d')">d) Podem decretar a prisão preventiva de investigados, desde que por votação da maioria absoluta de seus membros.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> CPIs não podem decretar prisão preventiva — essa medida é reservada ao Poder Judiciário (STF: HC 71.039). A CPI só pode prender em flagrante delito, como qualquer cidadão. Todas as demais alternativas estão corretas.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('6')">⬅ Anterior</button><button class="nbtn" onclick="irPara('8')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 8 -->
+<div class="section" id="sec-8">
+  <div class="sh sh-verde"><div class="num">Tema 08</div><h2>Poder Judiciário e Funções Essenciais à Justiça</h2><p>Arts. 92 a 135 da CF/88 — estrutura judicial, garantias, MP e advocacia pública.</p></div>
+
+  <h3>8.1 Estrutura do Poder Judiciário</h3>
+  <table>
+    <tr><th>Órgão</th><th>Competência principal</th><th>Composição</th></tr>
+    <tr><td><strong>STF</strong></td><td>Guarda da Constituição; controle de constitucionalidade</td><td>11 Ministros (natos brasileiros, 35-65 anos, notório saber jurídico)</td></tr>
+    <tr><td><strong>CNJ</strong></td><td>Controle administrativo e disciplinar do Judiciário</td><td>15 membros (EC 45/2004)</td></tr>
+    <tr><td><strong>STJ</strong></td><td>Uniformização da interpretação da lei federal; recurso especial</td><td>Mín. 33 Ministros</td></tr>
+    <tr><td><strong>TST</strong></td><td>Uniformização do direito do trabalho</td><td>27 Ministros</td></tr>
+    <tr><td><strong>TSE / TREs</strong></td><td>Justiça eleitoral</td><td>7 Ministros no TSE</td></tr>
+    <tr><td><strong>STM</strong></td><td>Justiça militar da União</td><td>15 Ministros</td></tr>
+    <tr><td><strong>TRFs / JF</strong></td><td>Causas envolvendo a União e entidades federais</td><td>5 TRFs</td></tr>
+  </table>
+
+  <h3>8.2 Garantias da Magistratura — Art. 95</h3>
+  <div class="grid3">
+    <div class="card"><h4>Vitaliciedade</h4><p>Após 2 anos de exercício. Perda do cargo só por sentença judicial transitada em julgado.</p></div>
+    <div class="card"><h4>Inamovibilidade</h4><p>Não pode ser removido de ofício, salvo por interesse público (votação 2/3 do Tribunal ou CNJ).</p></div>
+    <div class="card"><h4>Irredutibilidade de subsídio</h4><p>Nominal. Não protege contra tributos gerais e IRPF.</p></div>
+  </div>
+  <div class="box-a"><strong>⚠ Vedações aos juízes (art. 95, parágrafo único):</strong> Exercer outro cargo/função exceto magistério; receber custas/participação em processo; dedicar-se à atividade político-partidária; receber auxílio ou contribuição de pessoas jurídicas públicas ou privadas, ressalvadas as exceções legais.</div>
+
+  <h3>8.3 Ministério Público — Arts. 127 a 130-A</h3>
+  <div class="card">
+    <h4>Função essencial</h4>
+    <p>Instituição permanente, essencial à função jurisdicional do Estado, incumbindo-lhe a <strong>defesa da ordem jurídica, do regime democrático e dos interesses sociais e individuais indisponíveis</strong>.</p>
+    <h4>Princípios: unidade, indivisibilidade e independência funcional.</h4>
+    <h4>Funções (art. 129):</h4>
+    <ul>
+      <li>Ação penal pública privativa (I).</li>
+      <li>Ação civil pública para proteção do patrimônio público, meio ambiente e outros interesses (III).</li>
+      <li>Controle externo da atividade policial (VII).</li>
+    </ul>
+    <h4>Vedações aos membros do MP:</h4>
+    <p>Receber honorários, percentagens ou custas; exercer advocacia; participar de sociedade comercial; exercer função pública, salvo magistério; atividade político-partidária; receber auxílio de entidades públicas/privadas (exceto nos casos previstos).</p>
+  </div>
+
+  <h3>8.4 Advocacia Pública — Arts. 131 e 132</h3>
+  <div class="grid2">
+    <div class="card"><h4>AGU — Art. 131</h4><p>Defende judicialmente e extrajudicialmente a <strong>União</strong>. Presta consultoria e assessoramento jurídico do Poder Executivo federal.</p></div>
+    <div class="card"><h4>PGE — Art. 132</h4><p>Procuradores dos Estados e DF — representação judicial e extrajudicial dos <strong>Estados</strong> e DF, exclusivamente.</p></div>
+  </div>
+
+  <h3>8.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a CF/88, é garantia da magistratura que impede a remoção compulsória do juiz de seu cargo, salvo por motivo de interesse público, mediante decisão do tribunal ou CNJ com votação de:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Maioria simples dos membros.</li>
+      <li onclick="resp(this,'b','c')">b) Maioria absoluta dos membros.</li>
+      <li onclick="resp(this,'c','c')">c) Dois terços dos membros do tribunal ou do CNJ.</li>
+      <li onclick="resp(this,'d','c')">d) Unanimidade dos membros presentes.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 95, II, CF/88: a inamovibilidade pode ser excepcionada por interesse público, mediante decisão por voto da <strong>maioria absoluta do respectivo tribunal ou do CNJ</strong>. Atenção: o art. 95 diz "maioria absoluta", não "dois terços" — questão que exige leitura atenta do texto constitucional.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('7')">⬅ Anterior</button><button class="nbtn" onclick="irPara('9')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 9 -->
+<div class="section" id="sec-9">
+  <div class="sh sh-azul"><div class="num">Tema 09</div><h2>Controle de Constitucionalidade</h2><p>Sistema judicial de controle mais cobrado na FCC — ADI, ADC, ADPF, ADO e seus efeitos.</p></div>
+
+  <h3>9.1 Conceito e Sistemas</h3>
+  <div class="grid2">
+    <div class="card"><h4>Controle Difuso</h4><ul><li>Qualquer juiz ou tribunal pode declarar a inconstitucionalidade.</li><li>Incidental (prejudicial ao caso concreto).</li><li>Efeitos <strong>inter partes</strong> e <strong>ex tunc</strong> (regra).</li><li>Cláusula de reserva de plenário (art. 97 — maioria absoluta do tribunal).</li></ul></div>
+    <div class="card"><h4>Controle Concentrado</h4><ul><li>Competência exclusiva do <strong>STF</strong> (âmbito federal).</li><li>Ação direta; objeto principal.</li><li>Efeitos <strong>erga omnes</strong> e <strong>ex tunc</strong> (regra).</li><li>Legitimados: art. 103 da CF (rol taxativo).</li></ul></div>
+  </div>
+
+  <h3>9.2 Ações do Controle Concentrado</h3>
+  <table>
+    <tr><th>Ação</th><th>Objeto</th><th>Finalidade</th></tr>
+    <tr><td><strong>ADI</strong></td><td>Lei/ato normativo federal ou estadual</td><td>Declarar inconstitucionalidade</td></tr>
+    <tr><td><strong>ADC</strong></td><td>Lei/ato normativo federal</td><td>Declarar constitucionalidade</td></tr>
+    <tr><td><strong>ADO</strong></td><td>Omissão inconstitucional</td><td>Ciência ao Poder omisso; fixar prazo ao órgão administrativo (30 dias)</td></tr>
+    <tr><td><strong>ADPF</strong></td><td>Ato do Poder Público que viole preceito fundamental</td><td>Subsidiariedade; alcança leis municipais e pré-constitucionais</td></tr>
+  </table>
+
+  <h3>9.3 Legitimados — Art. 103</h3>
+  <div class="card">
+    <div class="grid2" style="margin:0">
+      <div><h4>Legitimados universais (sem pertinência temática)</h4><ul><li>Presidente da República</li><li>Mesa da Câmara / Mesa do Senado</li><li>PGR</li><li>Conselho Federal da OAB</li><li>Partido político com representação no CN</li></ul></div>
+      <div><h4>Legitimados especiais (exigem pertinência temática)</h4><ul><li>Governador de Estado / DF</li><li>Mesa de Assembleia Legislativa / CLDF</li><li>Confederação sindical ou entidade de classe de âmbito nacional</li></ul></div>
+    </div>
+  </div>
+
+  <h3>9.4 Efeitos das Decisões</h3>
+  <table>
+    <tr><th>Efeito</th><th>Descrição</th></tr>
+    <tr><td><strong>Erga omnes</strong></td><td>Vincula todos (controle concentrado e difuso com resolução do Senado — art. 52, X)</td></tr>
+    <tr><td><strong>Ex tunc</strong></td><td>Retroativo — regra (lei inconstitucional = nula desde a origem)</td></tr>
+    <tr><td><strong>Ex nunc</strong></td><td>A partir da decisão — modulação de efeitos (art. 27, Lei 9.868/99)</td></tr>
+    <tr><td><strong>Pro futuro</strong></td><td>A partir de data futura fixada pelo STF — modulação excepcional</td></tr>
+    <tr><td><strong>Vinculante</strong></td><td>Órgãos do Judiciário e Adm. Pública direta e indireta, federal, estadual e municipal</td></tr>
+  </table>
+
+  <h3>9.5 Súmula Vinculante — Art. 103-A</h3>
+  <div class="card">
+    <ul>
+      <li>Aprovada por <strong>2/3</strong> dos membros do STF (8 Ministros).</li>
+      <li>Após <strong>reiteradas decisões</strong> sobre matéria constitucional.</li>
+      <li>Efeito: vincula órgãos do Judiciário e Administração Pública.</li>
+      <li>Pode ser <strong>cancelada ou revisada</strong> pelos legitimados do art. 103 ou pelo próprio STF.</li>
+    </ul>
+  </div>
+
+  <h3>9.6 Reclamação Constitucional</h3>
+  <p>Ação constitucional destinada a <strong>preservar a competência</strong> do STF e garantir a <strong>autoridade de suas decisões</strong>. Julgada pelo próprio STF. Cabível também quando há desrespeito a súmula vinculante.</p>
+
+  <h3>9.7 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Assinale a alternativa CORRETA sobre a Arguição de Descumprimento de Preceito Fundamental (ADPF):</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Pode ser ajuizada por qualquer cidadão que se sentir prejudicado por ato do Poder Público.</li>
+      <li onclick="resp(this,'b','c')">b) Não pode ter como objeto leis municipais ou atos pré-constitucionais.</li>
+      <li onclick="resp(this,'c','c')">c) É subsidiária: só é cabível quando não houver outro meio eficaz de sanar a lesividade ao preceito fundamental.</li>
+      <li onclick="resp(this,'d','c')">d) Seus efeitos são sempre inter partes, não vinculando os demais tribunais.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> A ADPF tem caráter subsidiário (art. 4º, §1º, Lei 9.882/99). Erro A: legitimados são os mesmos do art. 103. Erro B: a ADPF alcança leis municipais e atos pré-constitucionais (grande diferencial em relação à ADI). Erro D: a ADPF tem efeitos erga omnes e vinculante.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('8')">⬅ Anterior</button><button class="nbtn" onclick="irPara('10')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 10 -->
+<div class="section" id="sec-10">
+  <div class="sh sh-verde"><div class="num">Tema 10</div><h2>Ordem Econômica e Financeira</h2><p>Arts. 170 a 192 da CF/88 — princípios, papel do Estado na economia e sistema financeiro.</p></div>
+
+  <h3>10.1 Princípios da Ordem Econômica — Art. 170</h3>
+  <div class="artigo"><span class="art-num">Art. 170 — Fundamentos:</span>Valorização do trabalho humano e livre iniciativa, assegurada a todos a existência digna, conforme os ditames da justiça social.</div>
+  <div class="card">
+    <h4>Princípios (art. 170, I a IX):</h4>
+    <p>Soberania nacional · Propriedade privada · Função social da propriedade · Livre concorrência · Defesa do consumidor · Defesa do meio ambiente · Redução das desigualdades regionais e sociais · Busca do pleno emprego · Tratamento favorecido às EPPs.</p>
+  </div>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> O parágrafo único do art. 170 garante a <strong>liberdade de exercício de atividade econômica</strong>, independentemente de autorização estatal, salvo nos casos previstos em lei.</div>
+
+  <h3>10.2 Atuação do Estado na Economia</h3>
+  <div class="grid2">
+    <div class="card"><h4>Exploração direta (art. 173)</h4><p>A União só explora diretamente atividade econômica quando necessário aos <strong>imperativos da segurança nacional</strong> ou a <strong>relevante interesse coletivo</strong> (lei autorizadora).</p></div>
+    <div class="card"><h4>Monopólios da União (art. 177)</h4><p>Pesquisa e lavra de petróleo/gás natural, refino, importação/exportação de derivados de petróleo, transporte marítimo do petróleo bruto, mineração nuclear e geração de energia nuclear.</p></div>
+  </div>
+
+  <h3>10.3 Política Urbana — Arts. 182 e 183</h3>
+  <div class="card">
+    <ul>
+      <li>Plano diretor obrigatório para cidades com mais de <strong>20.000 habitantes</strong>.</li>
+      <li>Usucapião urbano: área urbana de até <strong>250 m²</strong>, 5 anos ininterruptos, sem oposição, para moradia — desde que não seja proprietário de outro imóvel (art. 183).</li>
+    </ul>
+  </div>
+
+  <h3>10.4 Política Agrícola e Reforma Agrária — Arts. 184 a 191</h3>
+  <div class="card">
+    <ul>
+      <li>Desapropriação por interesse social: para fins de reforma agrária — <strong>imóvel que não cumpre função social</strong>.</li>
+      <li>Pequena propriedade rural, trabalhada pela família: <strong>impenhorável</strong> e não sujeita à desapropriação para fins de reforma agrária (art. 185, I).</li>
+      <li>Usucapião rural (art. 191): área de terra em zona rural, até <strong>50 ha</strong>, 5 anos ininterruptos, sem oposição — tornada produtiva pelo trabalho próprio ou da família.</li>
+    </ul>
+  </div>
+
+  <h3>10.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Nos termos do art. 183 da CF/88, aquele que possuir área urbana de até 250 m² por cinco anos ininterruptos, sem oposição, utilizando-a para moradia, adquirirá o domínio. Essa modalidade de aquisição:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Pode ser reconhecida mais de uma vez em favor do mesmo possuidor.</li>
+      <li onclick="resp(this,'b','c')">b) Não exige que o possuidor não seja proprietário de outro imóvel urbano ou rural.</li>
+      <li onclick="resp(this,'c','c')">c) Não ocorrerá se o possuidor já for proprietário de outro imóvel urbano ou rural, e não pode ser reconhecida mais de uma vez.</li>
+      <li onclick="resp(this,'d','c')">d) Exige que a área seja destinada exclusivamente a uso residencial do possuidor, vedado qualquer uso misto.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 183, §§2º e 3º da CF/88: o título será conferido ao homem ou à mulher, ou a ambos, independentemente do estado civil, mas não será reconhecido ao mesmo possuidor mais de uma vez; e o possuidor não pode ser proprietário de outro imóvel urbano ou rural.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('9')">⬅ Anterior</button><button class="nbtn" onclick="irPara('11')">Próximo ➡</button></div>
+</div>
+
+<!-- SEC 11 -->
+<div class="section" id="sec-11">
+  <div class="sh sh-ouro"><div class="num">Tema 11</div><h2>Constituição do Estado de Goiás</h2><p>CE-GO de 1989 — Organização dos Poderes e Ordem Econômica e Social do Estado de Goiás.</p></div>
+
+  <h3>11.1 Bases e Princípios da CE-GO</h3>
+  <div class="card">
+    <ul>
+      <li>Promulgada em <strong>5 de outubro de 1989</strong>, observados os princípios da CF/88.</li>
+      <li>O Estado de Goiás <strong>não pode</strong> contrariar normas da Constituição Federal — princípio da simetria/subordinação.</li>
+      <li>O poder constituinte decorrente do Estado está sujeito aos <strong>princípios sensíveis, extensíveis e estabelecidos</strong> da CF/88.</li>
+    </ul>
+  </div>
+
+  <h3>11.2 Poder Legislativo — Assembleia Legislativa (ALEGO)</h3>
+  <div class="card">
+    <h4>Composição:</h4>
+    <ul>
+      <li><strong>41 Deputados Estaduais</strong> — eleitos para mandatos de 4 anos.</li>
+      <li>Remuneração: <strong>75%</strong> do subsídio dos Deputados Federais.</li>
+      <li>Mesa Diretora: eleita para mandato de 2 anos, vedada recondução para o mesmo cargo na eleição imediatamente subsequente.</li>
+    </ul>
+    <h4>Competências privativas da ALEGO:</h4>
+    <ul>
+      <li>Aprovar o Orçamento do Estado e o plano plurianual.</li>
+      <li>Autorizar o Governador a declarar estado de calamidade pública.</li>
+      <li>Aprovar convênios celebrados pelo Governo com a União, outros Estados e Municípios.</li>
+      <li>Processo e julgamento do Governador e Vice-Governador nos crimes de responsabilidade.</li>
+    </ul>
+  </div>
+
+  <h3>11.3 Poder Executivo Estadual</h3>
+  <div class="card">
+    <h4>Governador e Vice-Governador:</h4>
+    <ul>
+      <li>Eleitos pelo voto direto e secreto, em <strong>dois turnos</strong> se necessário, para mandato de <strong>4 anos</strong>.</li>
+      <li>Reeleição: uma única vez para o período subsequente (simetria com o Presidente da República).</li>
+      <li>Posse: em sessão da ALEGO, em 1º de janeiro do ano seguinte à eleição.</li>
+      <li>Substituição: Governador → Vice-Governador. Ambos impedidos: Presidente da ALEGO → 1º Secretário → 2º Secretário.</li>
+    </ul>
+    <h4>Competências privativas do Governador (simetria com art. 84 CF):</h4>
+    <p>Nomear e exonerar secretários; iniciar processo legislativo; sancionar, promulgar e publicar leis; vetar projetos de lei; exercer a chefia da segurança pública; celebrar convênios com a União.</p>
+  </div>
+
+  <h3>11.4 Poder Judiciário Estadual</h3>
+  <div class="card">
+    <h4>Tribunal de Justiça do Estado de Goiás (TJGO):</h4>
+    <ul>
+      <li>Órgão de cúpula da Justiça estadual em Goiás.</li>
+      <li>Competência originária: julgar o Governador (nos crimes comuns), Secretários de Estado, Deputados Estaduais (nos crimes comuns e de responsabilidade perante o próprio tribunal, conforme o caso), membros do MP estadual e da Defensoria Pública.</li>
+    </ul>
+    <h4>Controle de Constitucionalidade Estadual:</h4>
+    <p>O TJGO exerce o controle concentrado de constitucionalidade estadual, com as ações <strong>ADI estadual</strong> e <strong>ADPF estadual</strong>, tendo como parâmetro a <strong>Constituição Estadual</strong>.</p>
+  </div>
+
+  <h3>11.5 Ordem Econômica e Social na CE-GO</h3>
+  <div class="card">
+    <h4>Política de Desenvolvimento:</h4>
+    <ul>
+      <li>O Estado atuará como agente normativo e regulador da atividade econômica, exercendo as funções de <strong>fiscalização, incentivo e planejamento</strong> (simetria com art. 174 CF/88).</li>
+      <li>Proteção ao <strong>agronegócio e à agricultura familiar</strong>, dado o perfil econômico de Goiás.</li>
+      <li>Incentivos fiscais e financeiros para atrair investimentos e gerar empregos, respeitados os limites da Lei de Responsabilidade Fiscal.</li>
+      <li>Preservação do meio ambiente, dos recursos hídricos e do Cerrado goiano.</li>
+    </ul>
+    <h4>Patrimônio Histórico e Cultural:</h4>
+    <p>O Estado assegura proteção ao patrimônio histórico e cultural, incluindo Goiás Velho (Cidade de Goiás), Pirenópolis e sítios arqueológicos do território goiano.</p>
+  </div>
+
+  <h3>11.6 Quadro Comparativo: CF/88 × CE-GO (Princípio da Simetria)</h3>
+  <table>
+    <tr><th>Instituto</th><th>CF/88 (Modelo)</th><th>CE-GO (Simetria)</th></tr>
+    <tr><td>Casa Legislativa</td><td>Câmara dos Deputados (513)</td><td>ALEGO (41 Deputados)</td></tr>
+    <tr><td>Mandato legislativo</td><td>4 anos</td><td>4 anos</td></tr>
+    <tr><td>Subsídio deputados estaduais</td><td>100% (base)</td><td>75% do subsídio federal</td></tr>
+    <tr><td>Chefia Executivo</td><td>Presidente da República</td><td>Governador do Estado</td></tr>
+    <tr><td>Mandato executivo</td><td>4 anos, 1 reeleição</td><td>4 anos, 1 reeleição</td></tr>
+    <tr><td>Controle concentrado</td><td>STF (parâmetro: CF)</td><td>TJGO (parâmetro: CE-GO)</td></tr>
+    <tr><td>Controle externo</td><td>TCU</td><td>TCE-GO</td></tr>
+  </table>
+
+  <h3>11.7 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Com base na Constituição do Estado de Goiás e no princípio da simetria com a CF/88, assinale a alternativa CORRETA:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Os Deputados Estaduais goianos recebem subsídio equivalente a 100% do subsídio dos Deputados Federais.</li>
+      <li onclick="resp(this,'b','c')">b) O Governador de Goiás pode exercer mandato por até três períodos consecutivos.</li>
+      <li onclick="resp(this,'c','c')">c) O controle concentrado de constitucionalidade estadual em Goiás tem como parâmetro a Constituição Estadual, sendo o TJGO o órgão competente.</li>
+      <li onclick="resp(this,'d','c')">d) A Assembleia Legislativa de Goiás é composta por 51 deputados estaduais.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> O TJGO exerce o controle concentrado estadual tendo como parâmetro a CE-GO. Erro A: subsídio dos deputados estaduais = 75% do federal (art. 27, §2º, CF). Erro B: mandato de 4 anos com uma reeleição (simetria com o art. 82 CF). Erro D: a ALEGO tem 41 deputados estaduais.</div>
+  </div>
+
+  <div class="box-ok" style="margin-top:28px"><strong>🎉 Parabéns!</strong> Você concluiu as 11 seções de Direito Constitucional para a banca FCC. Revise os artigos da CF/88 citados, pratique com questões anteriores e dedique atenção especial ao controle de constitucionalidade e aos direitos fundamentais — os temas mais cobrados. Bons estudos!</div>
+  <div class="nb"><button class="nbtn" onclick="irPara('10')">⬅ Anterior</button><button class="nbtn" onclick="irPara('0')">📋 Índice</button></div>
+</div>
+
+</div><!-- end content -->
+<script>
+function iniciar(){document.getElementById('capa').style.display='none';document.getElementById('nav').style.display='flex';document.getElementById('content').style.display='block'}
+function voltarCapa(){document.getElementById('capa').style.display='flex';document.getElementById('nav').style.display='none';document.getElementById('content').style.display='none'}
+function irPara(n){const num=parseInt(n);document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const sec=document.getElementById('sec-'+num);if(sec){sec.classList.add('active');document.querySelector('#nav select').value=String(num);window.scrollTo({top:0,behavior:'smooth'})}}
+function resp(el,escolha,gabarito){const q=el.closest('.questao');if(q.querySelector('.gab.show'))return;q.querySelectorAll('.alt li').forEach(i=>{const m=i.getAttribute('onclick').match(/'([a-d])'/);if(m&&m[1]===gabarito)i.classList.add('correta');else if(i===el&&escolha!==gabarito)i.classList.add('errada')});q.querySelector('.gab').classList.add('show')}
+</script>
+</body>
+</html>

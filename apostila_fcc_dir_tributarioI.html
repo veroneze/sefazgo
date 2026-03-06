@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostila Interativa: Direito Tributário I (FCC)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chosen Palette: Classic Calm Academic (Slate Gray, Soft Blue, Clean White) -->
+    <!-- Application Structure Plan: A dashboard-style SPA tailored for studying. 
+         The linear syllabus is broken into 5 logical modules: 
+         1. Visão Geral (Dashboard with data viz), 
+         2. Alicerce Constitucional (Principles/Limitations), 
+         3. Mapa de Competências (Who taxes what), 
+         4. Mecânica do CTN (The lifecycle of tax credit), 
+         5. Legislação & Jurisprudência. 
+         This non-linear structure allows students to jump directly to weak areas. Accordions and tabs prevent cognitive overload, hiding details until requested. Visualizations break down complex distributions. -->
+    <!-- Visualization & Content Choices: 
+         - Goal: Show distribution of tax species -> Viz: Doughnut Chart (Chart.js) -> Interaction: Hover for details -> Justifies: Quick visual grasp of which entity holds the most tax types. NO SVG.
+         - Goal: Explain Tax Credit Lifecycle -> Viz: Interactive HTML/CSS Process Flow -> Interaction: Click steps to read definitions -> Justifies: Better than a static chart for showing a chronological process. NO SVG.
+         - Goal: Memorize Tax Competence -> Viz: Interactive Cards -> Interaction: Click to flip/expand -> Justifies: Active recall learning method. NO SVG. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #334155; /* Slate 700 */
+        }
+
+        /* Essential Chart Container Styles */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+
+        /* Custom Scrollbar for inner content */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Transitions */
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; }
+        
+        .section-content { display: none; animation: slideUp 0.4s ease-out; }
+        .section-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Process Flow Nodes */
+        .process-node {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .process-node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-color: #3b82f6;
+        }
+        .process-node.active-node {
+            background-color: #eff6ff;
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900 bg-opacity-50 z-20 hidden md:hidden" onclick="toggleMobileMenu()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="w-64 bg-white border-r border-slate-200 flex flex-col fixed md:relative z-30 h-full transition-transform transform -translate-x-full md:translate-x-0">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Tributário I</h1>
+                <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">Foco Banca FCC</p>
+            </div>
+            <button class="md:hidden text-slate-500 text-2xl focus:outline-none" onclick="toggleMobileMenu()">&#10005;</button>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li>
+                    <button onclick="switchSection('s-visao')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-blue-600 bg-blue-50 border-r-4 border-blue-600 transition-colors" data-target="s-visao">
+                        &#128202; Visão Geral & Espécies
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchSection('s-cf')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-cf">
+                        &#128214; Constituição Federal
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchSection('s-competencia')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-competencia">
+                        &#127963; Competências (União, EE, MM)
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchSection('s-ctn')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-ctn">
+                        &#9881; Código Tributário Nacional
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchSection('s-legis')" class="nav-btn w-full text-left px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-r-4 border-transparent" data-target="s-legis">
+                        &#128220; Leis Complementares & STF
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="p-4 border-t border-slate-200">
+            <div class="bg-slate-100 rounded p-3 text-xs text-slate-500 text-center">
+                Material de Revisão Interativo
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50 relative">
+        
+        <!-- Mobile Header -->
+        <header class="md:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between sticky top-0 z-10">
+            <span class="font-bold text-slate-800">Direito Tributário I</span>
+            <button onclick="toggleMobileMenu()" class="text-slate-600 text-2xl focus:outline-none">&#9776;</button>
+        </header>
+
+        <!-- Content Area -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 lg:px-12">
+            
+            <!-- SECTION: Visão Geral -->
+            <section id="s-visao" class="section-content active max-w-5xl mx-auto">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Visão Geral e Espécies Tributárias</h2>
+                    <p class="text-slate-600">Este módulo introduz os conceitos fundamentais do Sistema Tributário Nacional. Entender a teoria das espécies tributárias é o passo número um para compreender como o Estado financia suas atividades.</p>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Text Content -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4 border-b pb-2">&#128269; O que é Tributo? (Art. 3º, CTN)</h3>
+                        <p class="text-sm text-slate-600 mb-4 bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+                            Tributo é toda prestação pecuniária compulsória, em moeda ou cujo valor nela se possa exprimir, que não constitua sanção de ato ilícito, instituída em lei e cobrada mediante atividade administrativa plenamente vinculada.
+                        </p>
+                        
+                        <h4 class="font-medium text-slate-800 mb-2 mt-4">A Teoria Pentapartida (STF)</h4>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li class="flex items-start"><span class="text-blue-500 mr-2">&#9632;</span> <strong>Impostos:</strong> Não vinculados a atuação estatal (ex: IR, IPVA).</li>
+                            <li class="flex items-start"><span class="text-teal-500 mr-2">&#9632;</span> <strong>Taxas:</strong> Vinculados a serviço público específico/divisível ou poder de polícia.</li>
+                            <li class="flex items-start"><span class="text-purple-500 mr-2">&#9632;</span> <strong>Contribuição de Melhoria:</strong> Decorrente de valorização imobiliária por obra pública.</li>
+                            <li class="flex items-start"><span class="text-orange-500 mr-2">&#9632;</span> <strong>Empréstimos Compulsórios:</strong> Despesas extraordinárias (guerra/calamidade) ou investimento urgente (só a União institui).</li>
+                            <li class="flex items-start"><span class="text-red-500 mr-2">&#9632;</span> <strong>Contribuições Especiais:</strong> Sociais, CIDE, interesse de categorias (só a União, regra geral).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2 text-center">Distribuição Qualitativa das Espécies</h3>
+                        <p class="text-xs text-slate-500 text-center mb-4">Representação teórica da complexidade normativa por espécie.</p>
+                        <div class="chart-container">
+                            <canvas id="especiesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: Constituição Federal -->
+            <section id="s-cf" class="section-content max-w-5xl mx-auto">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Limitações Constitucionais</h2>
+                    <p class="text-slate-600">A Constituição Federal não cria tributos, ela outorga <strong>competência</strong> para que os entes o façam, ao mesmo tempo em que impõe limites estritos para proteger o cidadão. Explore os princípios e imunidades abaixo.</p>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Princípios -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                            <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-sm mr-2">&#9878;</span> Princípios Tributários
+                        </h3>
+                        <div class="space-y-3">
+                            <!-- Accordion Item -->
+                            <div class="border rounded-lg overflow-hidden">
+                                <button class="w-full text-left px-4 py-3 bg-slate-50 hover:bg-slate-100 font-medium text-sm flex justify-between items-center" onclick="toggleAccordion('acc-legalidade')">
+                                    Legalidade
+                                    <span class="text-slate-400">&#9662;</span>
+                                </button>
+                                <div id="acc-legalidade" class="hidden px-4 py-3 text-sm text-slate-600 border-t bg-white">
+                                    Exige lei para instituir ou majorar tributo. <em>Exceções (podem ter alíquota alterada por Decreto):</em> II, IE, IPI, IOF, CIDE-Combustíveis, ICMS-Monofásico.
+                                </div>
+                            </div>
+                            <div class="border rounded-lg overflow-hidden">
+                                <button class="w-full text-left px-4 py-3 bg-slate-50 hover:bg-slate-100 font-medium text-sm flex justify-between items-center" onclick="toggleAccordion('acc-anterioridade')">
+                                    Anterioridade (Anual e Nonagesimal)
+                                    <span class="text-slate-400">&#9662;</span>
+                                </button>
+                                <div id="acc-anterioridade" class="hidden px-4 py-3 text-sm text-slate-600 border-t bg-white">
+                                    Tributo não pode ser cobrado no mesmo ano (Anual) nem antes de 90 dias (Nonagesimal) da lei que o criou/aumentou. <em>Fique atento às diversas exceções da FCC para cada uma!</em>
+                                </div>
+                            </div>
+                            <div class="border rounded-lg overflow-hidden">
+                                <button class="w-full text-left px-4 py-3 bg-slate-50 hover:bg-slate-100 font-medium text-sm flex justify-between items-center" onclick="toggleAccordion('acc-irretro')">
+                                    Irretroatividade
+                                    <span class="text-slate-400">&#9662;</span>
+                                </button>
+                                <div id="acc-irretro" class="hidden px-4 py-3 text-sm text-slate-600 border-t bg-white">
+                                    A lei tributária não se aplica a fatos geradores ocorridos antes do seu início de vigência.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imunidades -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                            <span class="bg-teal-100 text-teal-600 px-2 py-1 rounded text-sm mr-2">&#128683;</span> Imunidades (Art. 150, VI)
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">Incompetência constitucional para tributar. Aplica-se <strong>apenas a impostos</strong>.</p>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="p-3 border border-slate-200 rounded hover:border-teal-400 hover:bg-teal-50 cursor-pointer transition-colors" title="Patrimônio, renda ou serviços uns dos outros.">
+                                <div class="font-bold text-slate-700 text-sm">Recíproca</div>
+                                <div class="text-xs text-slate-500 mt-1">União, Est, DF, Mun.</div>
+                            </div>
+                            <div class="p-3 border border-slate-200 rounded hover:border-teal-400 hover:bg-teal-50 cursor-pointer transition-colors">
+                                <div class="font-bold text-slate-700 text-sm">Templos</div>
+                                <div class="text-xs text-slate-500 mt-1">Qualquer culto.</div>
+                            </div>
+                            <div class="p-3 border border-slate-200 rounded hover:border-teal-400 hover:bg-teal-50 cursor-pointer transition-colors">
+                                <div class="font-bold text-slate-700 text-sm">Partidos e Sindicatos</div>
+                                <div class="text-xs text-slate-500 mt-1">E instituições de educação/assistência social.</div>
+                            </div>
+                            <div class="p-3 border border-slate-200 rounded hover:border-teal-400 hover:bg-teal-50 cursor-pointer transition-colors">
+                                <div class="font-bold text-slate-700 text-sm">Cultural</div>
+                                <div class="text-xs text-slate-500 mt-1">Livros, jornais, periódicos e papel destinado.</div>
+                            </div>
+                            <div class="p-3 border border-slate-200 rounded hover:border-teal-400 hover:bg-teal-50 cursor-pointer transition-colors col-span-2">
+                                <div class="font-bold text-slate-700 text-sm">Musical</div>
+                                <div class="text-xs text-slate-500 mt-1">Fonogramas e videofonogramas musicais brasileiros.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: Competências -->
+            <section id="s-competencia" class="section-content max-w-5xl mx-auto">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Competência Tributária: Impostos</h2>
+                    <p class="text-slate-600">A divisão do poder de cobrar impostos é rígida no Brasil. Clique nas abas abaixo para visualizar os impostos de cada ente federativo.</p>
+                </header>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <!-- Tab Headers -->
+                    <div class="flex border-b border-slate-200 bg-slate-50">
+                        <button class="flex-1 py-4 text-center font-semibold text-blue-700 border-b-2 border-blue-600 bg-white" id="btn-tab-uniao" onclick="openCompTab('uniao')">União (Federais)</button>
+                        <button class="flex-1 py-4 text-center font-medium text-slate-500 hover:text-slate-700 transition" id="btn-tab-estado" onclick="openCompTab('estado')">Estados & DF</button>
+                        <button class="flex-1 py-4 text-center font-medium text-slate-500 hover:text-slate-700 transition" id="btn-tab-municipio" onclick="openCompTab('municipio')">Municípios</button>
+                    </div>
+
+                    <!-- Tab Contents -->
+                    <div class="p-6">
+                        <!-- União -->
+                        <div id="tab-uniao" class="comp-tab active">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-blue-50 p-4 rounded border border-blue-100"><span class="font-bold text-blue-800 text-lg block">II</span><span class="text-xs text-slate-600">Importação</span></div>
+                                <div class="bg-blue-50 p-4 rounded border border-blue-100"><span class="font-bold text-blue-800 text-lg block">IE</span><span class="text-xs text-slate-600">Exportação</span></div>
+                                <div class="bg-blue-50 p-4 rounded border border-blue-100"><span class="font-bold text-blue-800 text-lg block">IR</span><span class="text-xs text-slate-600">Renda</span></div>
+                                <div class="bg-blue-50 p-4 rounded border border-blue-100"><span class="font-bold text-blue-800 text-lg block">IPI</span><span class="text-xs text-slate-600">Prod. Industrializados</span></div>
+                                <div class="bg-blue-50 p-4 rounded border border-blue-100"><span class="font-bold text-blue-800 text-lg block">IOF</span><span class="text-xs text-slate-600">Op. Financeiras</span></div>
+                                <div class="bg-blue-50 p-4 rounded border border-blue-100"><span class="font-bold text-blue-800 text-lg block">ITR</span><span class="text-xs text-slate-600">Território Rural</span></div>
+                                <div class="bg-blue-50 p-4 rounded border border-blue-100"><span class="font-bold text-blue-800 text-lg block">IGF</span><span class="text-xs text-slate-600">Grandes Fortunas (Não instituído)</span></div>
+                                <div class="bg-slate-100 p-4 rounded border border-dashed border-slate-300 flex items-center justify-center text-center">
+                                    <span class="text-xs text-slate-500">União também possui competência residual e extraordinária.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estado -->
+                        <div id="tab-estado" class="comp-tab hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="border border-slate-200 rounded p-5 hover:shadow-md transition">
+                                    <h4 class="font-bold text-teal-700 text-xl mb-2">ICMS</h4>
+                                    <p class="text-sm text-slate-600">Circulação de Mercadorias e Serviços (Transporte interestadual/intermunicipal e Comunicação).</p>
+                                    <span class="inline-block mt-3 text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Maior arrecadação</span>
+                                </div>
+                                <div class="border border-slate-200 rounded p-5 hover:shadow-md transition">
+                                    <h4 class="font-bold text-teal-700 text-xl mb-2">IPVA</h4>
+                                    <p class="text-sm text-slate-600">Propriedade de Veículos Automotores.</p>
+                                    <span class="inline-block mt-3 text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">50% p/ Município</span>
+                                </div>
+                                <div class="border border-slate-200 rounded p-5 hover:shadow-md transition">
+                                    <h4 class="font-bold text-teal-700 text-xl mb-2">ITCMD</h4>
+                                    <p class="text-sm text-slate-600">Transmissão Causa Mortis e Doação (Bens e Direitos).</p>
+                                    <span class="inline-block mt-3 text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Imposto sobre Herança</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Município -->
+                        <div id="tab-municipio" class="comp-tab hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="border border-slate-200 rounded p-5 hover:shadow-md transition">
+                                    <h4 class="font-bold text-orange-600 text-xl mb-2">IPTU</h4>
+                                    <p class="text-sm text-slate-600">Propriedade Predial e Territorial Urbana.</p>
+                                    <span class="inline-block mt-3 text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded border border-orange-200">Pode ser progressivo</span>
+                                </div>
+                                <div class="border border-slate-200 rounded p-5 hover:shadow-md transition">
+                                    <h4 class="font-bold text-orange-600 text-xl mb-2">ISS (ou ISSQN)</h4>
+                                    <p class="text-sm text-slate-600">Serviços de Qualquer Natureza (exceto os do ICMS).</p>
+                                    <span class="inline-block mt-3 text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200">LC 116/03</span>
+                                </div>
+                                <div class="border border-slate-200 rounded p-5 hover:shadow-md transition">
+                                    <h4 class="font-bold text-orange-600 text-xl mb-2">ITBI</h4>
+                                    <p class="text-sm text-slate-600">Transmissão Inter Vivos de Bens Imóveis (Onerosa).</p>
+                                    <span class="inline-block mt-3 text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200">Exceção: Doação (vai p/ ITCMD)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: CTN -->
+            <section id="s-ctn" class="section-content max-w-5xl mx-auto">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Dinâmica do CTN</h2>
+                    <p class="text-slate-600">O Código Tributário Nacional estabelece as regras gerais. Entenda a linha do tempo da obrigação tributária e o que acontece com o crédito (Suspensão, Extinção, Exclusão).</p>
+                </header>
+
+                <!-- Interactive Timeline -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                    <h3 class="text-lg font-bold text-slate-800 mb-6 text-center">Linha do Tempo da Relação Tributária</h3>
+                    
+                    <div class="flex flex-col md:flex-row items-center justify-between relative space-y-4 md:space-y-0">
+                        <!-- Connecting Line (Desktop) -->
+                        <div class="hidden md:block absolute top-1/2 left-10 right-10 h-1 bg-slate-200 -z-0 transform -translate-y-1/2"></div>
+                        
+                        <div class="process-node bg-white border-2 border-slate-300 w-full md:w-1/4 rounded-lg p-3 text-center z-10" onclick="showProcessDetail('hipotese')">
+                            <div class="text-xs text-slate-400 font-bold uppercase mb-1">Passo 1</div>
+                            <div class="font-bold text-slate-700">Hipótese de Incidência</div>
+                        </div>
+                        
+                        <div class="hidden md:block text-slate-300 z-10">&#10132;</div>
+                        
+                        <div class="process-node bg-white border-2 border-slate-300 w-full md:w-1/4 rounded-lg p-3 text-center z-10" onclick="showProcessDetail('fato')">
+                            <div class="text-xs text-slate-400 font-bold uppercase mb-1">Passo 2</div>
+                            <div class="font-bold text-blue-600">Fato Gerador</div>
+                        </div>
+
+                        <div class="hidden md:block text-slate-300 z-10">&#10132;</div>
+
+                        <div class="process-node bg-white border-2 border-slate-300 w-full md:w-1/4 rounded-lg p-3 text-center z-10" onclick="showProcessDetail('obrigacao')">
+                            <div class="text-xs text-slate-400 font-bold uppercase mb-1">Passo 3</div>
+                            <div class="font-bold text-slate-700">Obrigação Tributária</div>
+                        </div>
+
+                        <div class="hidden md:block text-slate-300 z-10">&#10132;</div>
+
+                        <div class="process-node bg-white border-2 border-slate-300 w-full md:w-1/4 rounded-lg p-3 text-center z-10" onclick="showProcessDetail('lancamento')">
+                            <div class="text-xs text-slate-400 font-bold uppercase mb-1">Passo 4</div>
+                            <div class="font-bold text-teal-600">Lançamento</div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Detail Box -->
+                    <div id="process-detail-box" class="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-600 hidden">
+                        <!-- Content injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Modificadores do Crédito -->
+                <h3 class="text-xl font-bold text-slate-800 mb-4 mt-10">Modificadores do Crédito Tributário</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Suspensão -->
+                    <div class="bg-yellow-50 rounded-xl border border-yellow-200 overflow-hidden">
+                        <div class="bg-yellow-100 px-4 py-3 border-b border-yellow-200 font-bold text-yellow-800 flex justify-between">
+                            Suspensão (Art. 151)
+                            <span class="text-yellow-600" title="Mneumônico: MODECOPA">&#128161;</span>
+                        </div>
+                        <ul class="p-4 text-sm text-slate-700 space-y-2">
+                            <li><strong class="text-yellow-700">MO</strong>ratória</li>
+                            <li><strong class="text-yellow-700">DE</strong>pósito do montante integral</li>
+                            <li><strong class="text-yellow-700">CO</strong>ncessão de liminar em MS</li>
+                            <li><strong class="text-yellow-700">CO</strong>ncessão de liminar outras ações</li>
+                            <li>Reclamações e recursos no processo admin.</li>
+                            <li><strong class="text-yellow-700">PA</strong>rcelamento</li>
+                        </ul>
+                    </div>
+
+                    <!-- Extinção -->
+                    <div class="bg-red-50 rounded-xl border border-red-200 overflow-hidden">
+                        <div class="bg-red-100 px-4 py-3 border-b border-red-200 font-bold text-red-800">
+                            Extinção (Art. 156)
+                        </div>
+                        <ul class="p-4 text-sm text-slate-700 space-y-2">
+                            <li>Pagamento</li>
+                            <li>Compensação</li>
+                            <li>Transação</li>
+                            <li>Remissão</li>
+                            <li>Prescrição e decadência</li>
+                            <li>Conversão de depósito em renda</li>
+                            <li>Decisão administrativa/judicial irreformável</li>
+                        </ul>
+                    </div>
+
+                    <!-- Exclusão -->
+                    <div class="bg-green-50 rounded-xl border border-green-200 overflow-hidden">
+                        <div class="bg-green-100 px-4 py-3 border-b border-green-200 font-bold text-green-800">
+                            Exclusão (Art. 175)
+                        </div>
+                        <div class="p-4 text-sm text-slate-700 space-y-4">
+                            <div>
+                                <strong class="block text-green-700 mb-1">Isenção</strong>
+                                Dispensa legal do pagamento do tributo. Fato gerador ocorre, mas lei dispensa cobrança.
+                            </div>
+                            <div class="border-t border-green-200 pt-3">
+                                <strong class="block text-green-700 mb-1">Anistia</strong>
+                                Perdão da infração (multa) cometida ANTES da vigência da lei que a concede. Não se aplica a crimes.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION: Legislação & Jurisprudência -->
+            <section id="s-legis" class="section-content max-w-5xl mx-auto">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Leis Complementares & Súmulas</h2>
+                    <p class="text-slate-600">A prova da FCC exige conhecimento literal de certas leis e o entendimento pacificado pelo STF em matéria tributária.</p>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- LCs -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">&#128218; Leis Complementares Chave</h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded hover:bg-white transition cursor-help" title="Exige convênios no CONFAZ para concessão de isenções/incentivos de ICMS (guerra fiscal).">
+                                <strong class="text-blue-600">LC nº 24/1975:</strong> Convênios ICMS
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded hover:bg-white transition cursor-help" title="Regras gerais do ICMS. Define não incidência sobre exportações, base de cálculo, etc.">
+                                <strong class="text-blue-600">LC nº 87/1996:</strong> Lei Kandir (ICMS)
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded hover:bg-white transition cursor-help" title="Regulamenta a quebra de sigilo bancário pelo fisco sem necessidade de ordem judicial prévia (Tema STF).">
+                                <strong class="text-blue-600">LC nº 105/2001:</strong> Sigilo Financeiro
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded hover:bg-white transition cursor-help" title="Traz a lista anexa de serviços sujeitos ao ISS e regras sobre o local do recolhimento (Art. 3º).">
+                                <strong class="text-blue-600">LC nº 116/2003:</strong> Regras do ISS
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded hover:bg-white transition cursor-help" title="Tratamento diferenciado para ME e EPP. Unifica arrecadação.">
+                                <strong class="text-blue-600">LC nº 123/2006:</strong> Simples Nacional
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded hover:bg-white transition cursor-help" title="Tributação única (monofásica) sobre combustíveis, alterando dinâmica do ICMS.">
+                                <strong class="text-blue-600">LC nº 192/2022:</strong> ICMS Combustíveis
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Súmulas Vinculantes -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">&#9878;&#65039; Jurisprudência: Súmulas Vinculantes</h3>
+                        <p class="text-sm text-slate-600 mb-4">A FCC cobra muito a aplicação prática. Algumas SVs essenciais:</p>
+                        
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-blue-500 pl-3">
+                                <span class="font-bold text-slate-800 text-sm">SV 19:</span>
+                                <p class="text-xs text-slate-600 mt-1">A taxa cobrada exclusivamente em razão dos serviços públicos de coleta, remoção e tratamento ou destinação de lixo ou resíduos provenientes de imóveis, não viola o artigo 145, II, da CF.</p>
+                            </div>
+                            <div class="border-l-4 border-teal-500 pl-3">
+                                <span class="font-bold text-slate-800 text-sm">SV 21:</span>
+                                <p class="text-xs text-slate-600 mt-1">É inconstitucional a exigência de depósito ou arrolamento prévios de dinheiro ou bens para admissibilidade de recurso administrativo.</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-3">
+                                <span class="font-bold text-slate-800 text-sm">SV 31:</span>
+                                <p class="text-xs text-slate-600 mt-1">É inconstitucional a incidência do ISS sobre operações de locação de bens móveis.</p>
+                            </div>
+                            <div class="border-l-4 border-orange-500 pl-3">
+                                <span class="font-bold text-slate-800 text-sm">SV 50:</span>
+                                <p class="text-xs text-slate-600 mt-1">Norma legal que altera o prazo de recolhimento de obrigação tributária não se sujeita ao princípio da anterioridade.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // --- Navigation Logic ---
+        function switchSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show target section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update sidebar buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-600');
+                btn.classList.add('text-slate-600', 'border-transparent');
+                
+                if (btn.getAttribute('data-target') === sectionId) {
+                    btn.classList.remove('text-slate-600', 'border-transparent');
+                    btn.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-600');
+                }
+            });
+
+            // Close mobile menu if open
+            if(window.innerWidth < 768) {
+                toggleMobileMenu();
+            }
+        }
+
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // --- Accordion Logic (CF Section) ---
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const button = content.previousElementSibling;
+            const icon = button.querySelector('span');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerHTML = '&#9652;'; // up arrow
+                button.classList.add('bg-slate-100');
+            } else {
+                content.classList.add('hidden');
+                icon.innerHTML = '&#9662;'; // down arrow
+                button.classList.remove('bg-slate-100');
+            }
+        }
+
+        // --- Tabs Logic (Competência Section) ---
+        function openCompTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.comp-tab').forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('active');
+            });
+            
+            // Reset all buttons
+            document.querySelectorAll('[id^="btn-tab-"]').forEach(btn => {
+                btn.className = 'flex-1 py-4 text-center font-medium text-slate-500 hover:text-slate-700 transition bg-slate-50 border-b border-slate-200';
+            });
+            
+            // Show selected tab
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.classList.remove('hidden');
+            activeTab.classList.add('active');
+            
+            // Style active button
+            const activeBtn = document.getElementById(`btn-tab-${tabName}`);
+            activeBtn.className = 'flex-1 py-4 text-center font-semibold text-blue-700 border-b-2 border-blue-600 bg-white';
+        }
+
+        // --- Process Flow Logic (CTN Section) ---
+        const processDetails = {
+            hipotese: "<strong>Hipótese de Incidência:</strong> É a descrição genérica e abstrata de um fato prevista na lei. (Ex: 'Auferir renda'). Ainda não há cobrança, é apenas a previsão legal.",
+            fato: "<strong>Fato Gerador:</strong> É a materialização da Hipótese de Incidência no mundo real. Quando o contribuinte realiza a ação descrita na lei (Ex: 'João ganhou salário'), nasce a obrigação.",
+            obrigacao: "<strong>Obrigação Tributária:</strong> É o vínculo jurídico transitório que une o Estado (credor) ao Contribuinte (devedor). Divide-se em Principal (pagar o tributo/multa) e Acessória (fazer/não fazer algo, ex: declarar IR).",
+            lancamento: "<strong>Lançamento:</strong> Procedimento administrativo vinculado que verifica a ocorrência do fato gerador, determina a matéria tributável, calcula o montante, identifica o sujeito e propõe penalidade. <em>O Lançamento CONSTITUI o Crédito Tributário.</em>"
+        };
+
+        function showProcessDetail(step) {
+            const box = document.getElementById('process-detail-box');
+            
+            // Update Nodes style
+            document.querySelectorAll('.process-node').forEach(node => {
+                node.classList.remove('active-node');
+            });
+            event.currentTarget.classList.add('active-node');
+
+            // Update content and show
+            box.innerHTML = processDetails[step];
+            box.classList.remove('hidden');
+        }
+
+        // --- Chart.js Initialization (Visão Geral) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('especiesChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Impostos', 'Taxas', 'Contribuições Especiais', 'Contribuição de Melhoria', 'Empréstimos Compulsórios'],
+                    datasets: [{
+                        data: [45, 25, 20, 5, 5], // Fictional weight for visual representation of importance/volume
+                        backgroundColor: [
+                            '#3b82f6', // blue-500 (Impostos)
+                            '#14b8a6', // teal-500 (Taxas)
+                            '#ef4444', // red-500 (Contrib. Especiais)
+                            '#a855f7', // purple-500 (Melhoria)
+                            '#f97316'  // orange-500 (Empréstimos)
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 11
+                                },
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { family: "'Inter', sans-serif" },
+                            bodyFont: { family: "'Inter', sans-serif" },
+                            callbacks: {
+                                label: function(context) {
+                                    // Custom tooltip to explain the chart purpose, not actual data
+                                    const notes = [
+                                        "Maior volume normativo e arrecadatório.",
+                                        "Alta litigância sobre base de cálculo.",
+                                        "Maior número de espécies (sociais, CIDE).",
+                                        "Rara aplicação prática.",
+                                        "Uso excepcional (guerra/calamidade)."
+                                    ];
+                                    return ` ${context.label}: ${notes[context.dataIndex]}`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

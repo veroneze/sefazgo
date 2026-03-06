@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostila Interativa: Contabilidade Geral - FCC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 700px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 300px; 
+            max-height: 400px; 
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        @media (min-width: 768px) { 
+            .chart-container { height: 380px; } 
+        }
+
+        .nav-link.active {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            border-right: 4px solid #1d4ed8;
+            font-weight: 600;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 150px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .flip-card-front {
+            background-color: white;
+            color: #1e293b;
+            border-top: 4px solid #3b82f6;
+        }
+        .flip-card-back {
+            background-color: #3b82f6;
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 0.875rem;
+        }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="antialiased flex flex-col md:flex-row min-h-screen">
+
+    <!-- Chosen Palette: Slate and Blue tones for a professional, academic feel. -->
+
+    <!-- Application Structure Plan: The SPA uses a sidebar navigation model, ideal for study guides, allowing users to track progress and jump between topics. The content area is divided into logical, thematic sections corresponding to the syllabus. Interactive elements like flip cards (for principles), dynamic charts (for the accounting equation and depreciation), and tabbed interfaces (for inventory methods) are used to break up text and encourage active recall and visual understanding, moving away from a static PDF experience. -->
+
+    <!-- Visualization & Content Choices: 
+         - Principles: Goal: Memorization/Recall -> Viz: Flip Cards -> Interaction: Click to reveal -> Justification: Active recall is a proven study technique for definitions. Library: CSS/HTML.
+         - Accounting Equation: Goal: Understand relationship -> Viz: Stacked Bar Chart -> Interaction: Buttons to simulate transactions -> Justification: Visually demonstrates how A=P+PL stays in balance dynamically. Library: Chart.js.
+         - Depreciation: Goal: Understand calculation over time -> Viz: Line Chart -> Interaction: Input fields for cost/life/residual -> Justification: Allows students to test different scenarios and see the linear decay. Library: Chart.js.
+         - Inventory (PEPS/UEPS): Goal: Compare methods -> Viz: Tabbed text interface -> Interaction: Click tabs -> Justification: Keeps layout clean while allowing quick comparison of distinct concepts. Library: HTML/JS.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="w-full md:w-64 bg-white border-r border-slate-200 md:fixed md:h-screen overflow-y-auto flex-shrink-0 z-10 shadow-md md:shadow-none">
+        <div class="p-6">
+            <h1 class="text-xl font-bold text-slate-800 tracking-tight leading-tight">
+                <span class="text-blue-600">FCC</span> Foco Exame
+            </h1>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">Contabilidade Geral</p>
+        </div>
+        <ul class="flex md:flex-col overflow-x-auto md:overflow-x-visible pb-2 md:pb-0" id="nav-menu">
+            <li><a href="#introducao" class="nav-link active block px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 whitespace-nowrap md:whitespace-normal">1. Introdução & Conceitos</a></li>
+            <li><a href="#principios" class="nav-link block px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 whitespace-nowrap md:whitespace-normal">2. Princípios Contábeis</a></li>
+            <li><a href="#patrimonio" class="nav-link block px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 whitespace-nowrap md:whitespace-normal">3. Itens Patrimoniais</a></li>
+            <li><a href="#operacoes" class="nav-link block px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 whitespace-nowrap md:whitespace-normal">4. Operações Específicas</a></li>
+            <li><a href="#demonstracoes" class="nav-link block px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 whitespace-nowrap md:whitespace-normal">5. Demonstrações Contábeis</a></li>
+        </ul>
+    </nav>
+
+    <main class="flex-1 md:ml-64 p-6 md:p-10 lg:p-16 max-w-5xl mx-auto w-full">
+        
+        <header class="mb-12 border-b border-slate-200 pb-8">
+            <div class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-semibold tracking-wide mb-4">MÓDULO INTERATIVO</div>
+            <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Apostila de Contabilidade Geral</h2>
+            <p class="text-lg text-slate-600">Material focado na banca Fundação Carlos Chagas (FCC). Explore os conceitos, simule cálculos e domine a teoria através desta interface interativa.</p>
+        </header>
+
+        <section id="introducao" class="mb-20 scroll-mt-20">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                <span class="text-blue-500 mr-2">&#128218;</span> 1. Conceitos Fundamentais
+            </h3>
+            <p class="text-slate-600 mb-6">Esta seção estabelece a base da contabilidade. É crucial entender o que a contabilidade estuda e para quem ela gera informações. A FCC costuma cobrar o entendimento exato destes termos.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <h4 class="text-sm uppercase tracking-wider text-slate-500 font-bold mb-2">Objeto</h4>
+                    <p class="text-xl font-semibold text-slate-800 mb-2">O Patrimônio</p>
+                    <p class="text-slate-600 text-sm">Conjunto de bens, direitos e obrigações vinculados a uma entidade (pessoa física ou jurídica).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <h4 class="text-sm uppercase tracking-wider text-slate-500 font-bold mb-2">Objetivo</h4>
+                    <p class="text-xl font-semibold text-slate-800 mb-2">Controle e Informação</p>
+                    <p class="text-slate-600 text-sm">Fornecer informações econômicas e financeiras aos usuários para a tomada de decisões.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 md:col-span-2">
+                    <h4 class="text-sm uppercase tracking-wider text-slate-500 font-bold mb-4">Usuários da Informação</h4>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1 bg-slate-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <strong class="block text-slate-800 mb-1">Internos</strong>
+                            <span class="text-sm text-slate-600">Gestores, diretores, conselho de administração. Necessitam de dados detalhados para planejamento e controle.</span>
+                        </div>
+                        <div class="flex-1 bg-slate-50 p-4 rounded-lg border-l-4 border-emerald-500">
+                            <strong class="block text-slate-800 mb-1">Externos</strong>
+                            <span class="text-sm text-slate-600">Investidores, bancos, governo (fisco), fornecedores. Baseiam-se nas demonstrações financeiras publicadas.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="principios" class="mb-20 scroll-mt-20">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                <span class="text-blue-500 mr-2">&#10024;</span> 2. Princípios Contábeis
+            </h3>
+            <p class="text-slate-600 mb-6">Embora a Resolução CFC nº 750/93 tenha sido revogada, a essência dos princípios permanece nas Normas Brasileiras de Contabilidade (Estrutura Conceitual). Clique nos cartões para testar sua memória.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><h4 class="font-bold text-lg">Entidade</h4></div>
+                        <div class="flip-card-back"><p>O patrimônio da empresa não se confunde com o de seus sócios.</p></div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><h4 class="font-bold text-lg">Continuidade</h4></div>
+                        <div class="flip-card-back"><p>Pressupõe que a entidade continuará em operação no futuro previsível.</p></div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><h4 class="font-bold text-lg">Oportunidade</h4></div>
+                        <div class="flip-card-back"><p>A informação deve ser íntegra e tempestiva (no momento certo) para ser útil.</p></div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><h4 class="font-bold text-lg">Competência</h4></div>
+                        <div class="flip-card-back"><p>Receitas e despesas são reconhecidas quando ocorrem, independentemente de recebimento ou pagamento.</p></div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><h4 class="font-bold text-lg">Prudência</h4></div>
+                        <div class="flip-card-back"><p>Sempre que houver alternativas, adota-se o menor valor para o Ativo e o maior para o Passivo.</p></div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front"><h4 class="font-bold text-lg">Registro Original</h4></div>
+                        <div class="flip-card-back"><p>Os itens são registrados pelo valor original da transação, expresso em moeda nacional.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="patrimonio" class="mb-20 scroll-mt-20">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                <span class="text-blue-500 mr-2">&#127974;</span> 3. Itens Patrimoniais e a Equação
+            </h3>
+            <p class="text-slate-600 mb-6">O Balanço Patrimonial repousa sobre a Equação Fundamental da Contabilidade. Interaja com os botões abaixo para ver como diferentes eventos afetam o equilíbrio patrimonial.</p>
+            
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-6">
+                <div class="flex flex-wrap justify-center gap-2 mb-6" id="equation-controls">
+                    <button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-sm font-medium transition" onclick="updateEquation('compra-prazo')">Compra Estoque a Prazo (+A, +P)</button>
+                    <button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-sm font-medium transition" onclick="updateEquation('lucro')">Venda com Lucro (+A, +PL)</button>
+                    <button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-sm font-medium transition" onclick="updateEquation('pagamento')">Pagamento de Dívida (-A, -P)</button>
+                    <button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-sm font-medium transition" onclick="updateEquation('reset')">Reiniciar</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="equationChart"></canvas>
+                </div>
+                <p id="equation-msg" class="text-center mt-4 text-sm font-medium text-slate-600">Estado Inicial: A empresa possui R$1000 em bens, deve R$400 a terceiros, restando R$600 de capital próprio.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h4 class="font-bold text-blue-600 mb-2 border-b pb-2">Ativo (Bens e Direitos)</h4>
+                    <p class="text-sm text-slate-600">Recurso controlado pela entidade como resultado de eventos passados e do qual se espera que fluam benefícios econômicos futuros.</p>
+                    <ul class="text-sm text-slate-600 mt-2 list-disc pl-5">
+                        <li>Caixa e Equivalentes</li>
+                        <li>Contas a Receber (Clientes)</li>
+                        <li>Estoques</li>
+                        <li>Imobilizado</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-red-500 mb-2 border-b pb-2">Passivo (Obrigações)</h4>
+                    <p class="text-sm text-slate-600">Obrigação presente da entidade, derivada de eventos passados, cuja liquidação se espera que resulte na saída de recursos.</p>
+                    <ul class="text-sm text-slate-600 mt-2 list-disc pl-5">
+                        <li>Fornecedores</li>
+                        <li>Salários a Pagar</li>
+                        <li>Empréstimos e Financiamentos</li>
+                        <li>Tributos a Recolher</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-emerald-600 mb-2 border-b pb-2">Patrimônio Líquido</h4>
+                    <p class="text-sm text-slate-600">O interesse residual nos ativos da entidade depois de deduzidos todos os seus passivos. (Ativo - Passivo Exigível).</p>
+                    <ul class="text-sm text-slate-600 mt-2 list-disc pl-5">
+                        <li>Capital Social</li>
+                        <li>Reservas de Lucros</li>
+                        <li>Ajustes de Avaliação Patrimonial</li>
+                        <li>(Prejuízos Acumulados)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="operacoes" class="mb-20 scroll-mt-20">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                <span class="text-blue-500 mr-2">&#128296;</span> 4. Operações Específicas
+            </h3>
+            
+            <div class="space-y-8">
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <h4 class="text-lg font-bold text-slate-800 mb-4">4.1 Avaliação de Estoques</h4>
+                    <p class="text-sm text-slate-600 mb-4">A legislação tributária brasileira permite basicamente PEPS e Média Ponderada Móvel. O UEPS é proibido para fins fiscais, mas pode aparecer em teoria.</p>
+                    
+                    <div class="flex border-b border-slate-200 mb-4">
+                        <button class="py-2 px-4 text-sm font-medium text-blue-600 border-b-2 border-blue-600 tab-btn" onclick="showTab('peps')">PEPS (FIFO)</button>
+                        <button class="py-2 px-4 text-sm font-medium text-slate-500 hover:text-slate-700 tab-btn" onclick="showTab('ueps')">UEPS (LIFO)</button>
+                        <button class="py-2 px-4 text-sm font-medium text-slate-500 hover:text-slate-700 tab-btn" onclick="showTab('media')">Média Ponderada</button>
+                    </div>
+                    
+                    <div id="tab-peps" class="tab-content text-sm text-slate-700">
+                        <strong>Primeiro a Entrar, Primeiro a Sair.</strong> O custo da mercadoria vendida (CMV) é calculado com base nos lotes mais antigos. O estoque final fica valorizado pelos preços mais recentes. Em época de inflação, gera maior Lucro (pois o CMV é menor).
+                    </div>
+                    <div id="tab-ueps" class="tab-content text-sm text-slate-700 hidden">
+                        <strong>Último a Entrar, Primeiro a Sair.</strong> O CMV é calculado pelos custos mais recentes. O estoque final fica valorizado pelos custos mais antigos. Em época de inflação, gera menor Lucro. Proibido pelo Fisco no Brasil.
+                    </div>
+                    <div id="tab-media" class="tab-content text-sm text-slate-700 hidden">
+                        <strong>Média Ponderada Móvel.</strong> A cada nova aquisição, calcula-se um novo custo médio unitário (Custo Total / Quantidade Total). O CMV e o Estoque Final utilizam este valor médio. É o método mais aceito e utilizado.
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <h4 class="text-lg font-bold text-slate-800 mb-4">4.2 Ativo Imobilizado e Depreciação</h4>
+                    <p class="text-sm text-slate-600 mb-4">Depreciação é a alocação sistemática do valor depreciável de um ativo ao longo da sua vida útil. Simule a depreciação linear (cotas constantes).</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Custo de Aquisição (R$)</label>
+                            <input type="number" id="dep-custo" value="50000" class="w-full border-slate-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Valor Residual (R$)</label>
+                            <input type="number" id="dep-residual" value="5000" class="w-full border-slate-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Vida Útil (Anos)</label>
+                            <input type="number" id="dep-anos" value="5" class="w-full border-slate-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="calculateDepreciation()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition">Calcular</button>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="depreciationChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-xs text-slate-500 bg-slate-50 p-3 rounded">
+                        <strong>Fórmula Linear:</strong> Quota Anual = (Custo de Aquisição - Valor Residual) / Vida Útil. <br>
+                        <em>Nota: Terrenos, via de regra, não sofrem depreciação. Ativos intangíveis sofrem amortização, e recursos naturais, exaustão.</em>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-orange-400">
+                        <h4 class="font-bold text-slate-800 mb-2">4.3 Redução ao Valor Recuperável (Impairment)</h4>
+                        <p class="text-sm text-slate-600 mb-2">Aplica-se ao Imobilizado e Intangível. O ativo não pode estar registrado por um valor superior àquele passível de ser recuperado por uso ou venda.</p>
+                        <p class="text-sm bg-orange-50 text-orange-800 p-2 rounded">
+                            Valor Recuperável = Maior valor entre: <br>
+                            1. Valor Justo líquido de despesas de venda<br>
+                            2. Valor em Uso (fluxo de caixa futuro)
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-purple-400">
+                        <h4 class="font-bold text-slate-800 mb-2">4.4 Provisões e Passivos Contingentes</h4>
+                        <p class="text-sm text-slate-600 mb-2"><strong>Provisão:</strong> Passivo de prazo ou valor incerto. É reconhecida se: obrigação presente, provável saída de recursos, e estimativa confiável.</p>
+                        <p class="text-sm bg-purple-50 text-purple-800 p-2 rounded">
+                            <strong>Probabilidade:</strong><br>
+                            - Provável: Contabiliza (Provisão)<br>
+                            - Possível: Apenas Divulga em Notas Explicativas<br>
+                            - Remota: Nada faz.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="demonstracoes" class="mb-20 scroll-mt-20">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                <span class="text-blue-500 mr-2">&#128203;</span> 5. Demonstrações Contábeis
+            </h3>
+            <p class="text-slate-600 mb-6">As demonstrações refletem a posição financeira e o desempenho da entidade. Entenda a estrutura básica exigida pela Lei 6.404/76 (alterada pela 11.638/07).</p>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 text-white p-3 text-center font-bold tracking-widest uppercase text-sm">
+                    Balanço Patrimonial (Estático)
+                </div>
+                <div class="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                    <div class="flex-1 p-6 bg-blue-50/30">
+                        <h4 class="font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-3">ATIVO (Destinação)</h4>
+                        
+                        <div class="mb-4">
+                            <strong class="text-sm text-slate-800">Circulante</strong>
+                            <p class="text-xs text-slate-500 mb-1">Realizável no exercício seguinte.</p>
+                            <ul class="text-sm text-slate-600 pl-4 border-l-2 border-blue-300 space-y-1">
+                                <li>Caixa e Equivalentes</li>
+                                <li>Clientes</li>
+                                <li>Estoques</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <strong class="text-sm text-slate-800">Não Circulante</strong>
+                            <ul class="text-sm text-slate-600 pl-4 border-l-2 border-blue-300 space-y-1 mt-1">
+                                <li>Realizável a Longo Prazo</li>
+                                <li>Investimentos (Ex: coligadas)</li>
+                                <li>Imobilizado (Bens corpóreos)</li>
+                                <li>Intangível (Marcas, patentes)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 p-6 bg-red-50/30">
+                        <h4 class="font-bold text-red-800 border-b-2 border-red-200 pb-2 mb-3">PASSIVO E PL (Origem)</h4>
+                        
+                        <div class="mb-4">
+                            <strong class="text-sm text-slate-800">Passivo Circulante</strong>
+                            <p class="text-xs text-slate-500 mb-1">Exigível no exercício seguinte.</p>
+                            <ul class="text-sm text-slate-600 pl-4 border-l-2 border-red-300 space-y-1">
+                                <li>Fornecedores</li>
+                                <li>Obrigações Trabalhistas</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <strong class="text-sm text-slate-800">Passivo Não Circulante</strong>
+                            <ul class="text-sm text-slate-600 pl-4 border-l-2 border-red-300 space-y-1 mt-1">
+                                <li>Financiamentos a longo prazo</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <strong class="text-sm text-emerald-700">Patrimônio Líquido</strong>
+                            <ul class="text-sm text-slate-600 pl-4 border-l-2 border-emerald-300 space-y-1 mt-1">
+                                <li>Capital Social</li>
+                                <li>Reservas (Capital, Lucros)</li>
+                                <li>Ações em Tesouraria (-)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-indigo-800 text-white p-3 text-center font-bold tracking-widest uppercase text-sm">
+                    Demonstração do Resultado do Exercício (DRE) - Dinâmico
+                </div>
+                <div class="p-6">
+                    <p class="text-sm text-slate-600 mb-4">Apresenta o fluxo de receitas e despesas (regime de competência) para apurar o lucro ou prejuízo do período, que será transferido para o PL no Balanço.</p>
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200 font-mono text-sm space-y-2">
+                        <div class="flex justify-between font-bold text-indigo-700"><span>Receita Bruta de Vendas</span></div>
+                        <div class="flex justify-between text-red-600 pl-4"><span>(-) Deduções (Devoluções, Abatimentos, Impostos s/ vendas)</span></div>
+                        <div class="flex justify-between font-bold border-t border-slate-300 pt-1"><span>= Receita Líquida</span></div>
+                        <div class="flex justify-between text-red-600 pl-4"><span>(-) Custo das Mercadorias Vendidas (CMV)</span></div>
+                        <div class="flex justify-between font-bold border-t border-slate-300 pt-1"><span>= Lucro Bruto</span></div>
+                        <div class="flex justify-between text-red-600 pl-4"><span>(-) Despesas Operacionais (Vendas, Administrativas)</span></div>
+                        <div class="flex justify-between text-green-600 pl-4"><span>(+) Outras Receitas Operacionais</span></div>
+                        <div class="flex justify-between font-bold border-t border-slate-300 pt-1"><span>= Resultado Antes IR/CSLL</span></div>
+                        <div class="flex justify-between text-red-600 pl-4"><span>(-) Provisão IR e CSLL</span></div>
+                        <div class="flex justify-between font-bold text-lg border-t-2 border-slate-800 pt-2 text-emerald-600"><span>= Lucro (ou Prejuízo) Líquido do Exercício</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        
+        <footer class="text-center text-sm text-slate-400 mt-20 pt-8 border-t border-slate-200">
+            Criado para fins de estudo - Foco Banca FCC.
+        </footer>
+    </main>
+
+    <script>
+        // Interactivity Logic
+
+        // 1. Navigation Highlighting on Scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'border-blue-600', 'bg-blue-50');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 2. Tab Logic for Inventory
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                el.classList.add('text-slate-500');
+            });
+            
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const activeBtn = event.currentTarget;
+            activeBtn.classList.remove('text-slate-500');
+            activeBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+        }
+
+        // 3. Accounting Equation Chart (Chart.js)
+        const eqCanvas = document.getElementById('equationChart');
+        let eqChart;
+        
+        let state = { ativo: 1000, passivo: 400, pl: 600 };
+
+        function initEquationChart() {
+            const ctx = eqCanvas.getContext('2d');
+            eqChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Balanço Patrimonial'],
+                    datasets: [
+                        {
+                            label: 'Ativo',
+                            data: [state.ativo],
+                            backgroundColor: '#3b82f6',
+                            stack: 'Stack 0',
+                            barPercentage: 0.5
+                        },
+                        {
+                            label: 'Passivo',
+                            data: [state.passivo],
+                            backgroundColor: '#ef4444',
+                            stack: 'Stack 1',
+                            barPercentage: 0.5
+                        },
+                        {
+                            label: 'Patrimônio Líquido',
+                            data: [state.pl],
+                            backgroundColor: '#10b981',
+                            stack: 'Stack 1',
+                            barPercentage: 0.5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 2000,
+                            title: { display: true, text: 'Valor (R$)' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': R$ ' + context.parsed.y;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateEquation(action) {
+            const msgEl = document.getElementById('equation-msg');
+            switch(action) {
+                case 'compra-prazo':
+                    state.ativo += 200;
+                    state.passivo += 200;
+                    msgEl.innerText = "Compra a prazo: Entra estoque (+Ativo), cria-se dívida com fornecedor (+Passivo). Total aumenta.";
+                    break;
+                case 'lucro':
+                    state.ativo += 150;
+                    state.pl += 150;
+                    msgEl.innerText = "Venda com Lucro: Entra dinheiro/direito (+Ativo), aumenta a riqueza dos sócios (+PL).";
+                    break;
+                case 'pagamento':
+                    if(state.ativo >= 100 && state.passivo >= 100) {
+                        state.ativo -= 100;
+                        state.passivo -= 100;
+                        msgEl.innerText = "Pagamento: Sai dinheiro do caixa (-Ativo), reduz a dívida (-Passivo). Total diminui.";
+                    } else {
+                        msgEl.innerText = "Saldo insuficiente para simular pagamento.";
+                    }
+                    break;
+                case 'reset':
+                    state = { ativo: 1000, passivo: 400, pl: 600 };
+                    msgEl.innerText = "Estado Inicial: A empresa possui R$1000 em bens, deve R$400 a terceiros, restando R$600 de capital próprio.";
+                    break;
+            }
+            
+            eqChart.data.datasets[0].data = [state.ativo];
+            eqChart.data.datasets[1].data = [state.passivo];
+            eqChart.data.datasets[2].data = [state.pl];
+            
+            // Adjust max Y scale dynamically if needed
+            const maxVal = Math.max(state.ativo, state.passivo + state.pl);
+            eqChart.options.scales.y.max = maxVal < 2000 ? 2000 : maxVal + 500;
+            
+            eqChart.update();
+        }
+
+        // 4. Depreciation Chart (Chart.js)
+        let depChart;
+        
+        function calculateDepreciation() {
+            const custo = parseFloat(document.getElementById('dep-custo').value);
+            const residual = parseFloat(document.getElementById('dep-residual').value);
+            const anos = parseInt(document.getElementById('dep-anos').value);
+
+            if (isNaN(custo) || isNaN(residual) || isNaN(anos) || anos <= 0) {
+                alert("Por favor, insira valores válidos.");
+                return;
+            }
+
+            const valorDepreciavel = custo - residual;
+            const quotaAnual = valorDepreciavel / anos;
+
+            let labels = ['Ano 0 (Compra)'];
+            let dataValorContabil = [custo];
+            let dataDepAcumulada = [0];
+
+            let valorAtual = custo;
+            let depAcumulada = 0;
+
+            for (let i = 1; i <= anos; i++) {
+                labels.push('Ano ' + i);
+                valorAtual -= quotaAnual;
+                depAcumulada += quotaAnual;
+                dataValorContabil.push(valorAtual);
+                dataDepAcumulada.push(depAcumulada);
+            }
+
+            updateDepChart(labels, dataValorContabil, dataDepAcumulada, custo);
+        }
+
+        function updateDepChart(labels, dataVC, dataDA, maxCusto) {
+            const ctx = document.getElementById('depreciationChart').getContext('2d');
+            
+            if (depChart) {
+                depChart.destroy();
+            }
+
+            depChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Valor Contábil Líquido',
+                            data: dataVC,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Depreciação Acumulada',
+                            data: dataDA,
+                            borderColor: '#ef4444',
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            max: maxCusto * 1.1,
+                            title: { display: true, text: 'Valor (R$)' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize Charts on Load
+        window.onload = function() {
+            initEquationChart();
+            calculateDepreciation();
+        };
+
+    </script>
+</body>
+</html>

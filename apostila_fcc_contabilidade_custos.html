@@ -1,0 +1,544 @@
+Aqui está o código HTML completo para a sua apostila. Você pode salvar este código como um arquivo `.html` (por exemplo, `apostila_fcc.html`) e abri-lo em qualquer navegador.
+
+O design foi feito para ser limpo, responsivo e fácil de imprimir.
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostila FCC - Contabilidade Avançada e de Custos</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --code-bg: #f4f4f4;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-top: 25px;
+        }
+
+        h4 {
+            color: #555;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .header-info {
+            background-color: #eef2f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .box-alert {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .box-tip {
+            background-color: #d1ecf1;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .box-warning {
+            background-color: #f8d7da;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        ul {
+            list-style-type: square;
+        }
+
+        .formula {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px dashed var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        @media print {
+            body { background-color: #fff; }
+            .container { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
+            h2 { break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>12. CONTABILIDADE AVANÇADA E DE CUSTOS</h1>
+        <div class="header-info">
+            <p>Banca: Fundação Carlos Chagas (FCC) | Foco: Concursos de Nível Superior</p>
+            <p>Base Normativa: CPC/IFRS, Lei 6.404/76 e NBC TG</p>
+        </div>
+    </header>
+
+    <section>
+        <h2>12.1 CONTABILIDADE AVANÇADA</h2>
+
+        <h3>Políticas Contábeis, Mudança de Estimativa e Retificação de Erro</h3>
+        <h4>Conceito</h4>
+        <p>Princípios, bases, convenções, regras e práticas específicas adotadas na elaboração das demonstrações contábeis.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Situação</th>
+                    <th>Tratamento Contábil</th>
+                    <th>Efeito nas Demonstrações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Mudança de Política Contábil</strong></td>
+                    <td>Aplicação <strong>retrospectiva</strong></td>
+                    <td>Ajusta saldos iniciais do PL e exercícios comparativos</td>
+                </tr>
+                <tr>
+                    <td><strong>Mudança de Estimativa</strong></td>
+                    <td>Aplicação <strong>prospectiva</strong></td>
+                    <td>Reconhecida no resultado do período atual e futuro</td>
+                </tr>
+                <tr>
+                    <td><strong>Retificação de Erro</strong></td>
+                    <td>Aplicação <strong>retrospectiva</strong></td>
+                    <td>Reapresentação das demonstrações como se o erro nunca tivesse ocorrido</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="box-tip">
+            <strong>Exemplos FCC:</strong>
+            <ul>
+                <li>Mudança de política: alteração no método de avaliação de estoques (PEPS → Custo Médio)</li>
+                <li>Mudança de estimativa: revisão da vida útil de um ativo imobilizado</li>
+                <li>Erro: omissão de depreciação em exercício anterior</li>
+            </ul>
+        </div>
+
+        <div class="box-warning">
+            <strong>Atenção FCC:</strong> Mudanças de política contábil só são permitidas se exigidas por pronunciamento técnico ou se resultarem em informação mais confiável e relevante.
+        </div>
+
+        <hr>
+
+        <h3>Mensuração a Valor Justo (CPC 46)</h3>
+        <p><strong>Conceito:</strong> Preço que seria recebido pela venda de um ativo ou pago pela transferência de um passivo em transação não forçada entre participantes do mercado na data de mensuração.</p>
+        
+        <h4>Hierarquia do Valor Justo</h4>
+        <pre>
+Nível 1 → Preços cotados em mercados ativos (mais confiável)
+Nível 2 → Dados observáveis direta ou indiretamente
+Nível 3 → Dados não observáveis (estimativas da entidade)
+        </pre>
+
+        <div class="formula">
+            Ganho/Perda = Valor Justo na Data - Valor Contábil Anterior
+        </div>
+
+        <hr>
+
+        <h3>Ajuste a Valor Presente - AVP (CPC 12)</h3>
+        <p><strong>Objetivo:</strong> Adequar os ativos e passivos ao seu valor econômico real, considerando o efeito do tempo sobre o valor do dinheiro.</p>
+        <p><strong>Quando Aplicar:</strong> Operações de longo prazo ou curto prazo com efeito relevante.</p>
+
+        <div class="formula">
+            VP = VF ÷ (1 + i)ⁿ
+        </div>
+        <p>Onde: VP = Valor Presente | VF = Valor Futuro | i = taxa de desconto | n = período</p>
+
+        <div class="box-tip">
+            <strong>Dica FCC:</strong> O AVP é contrapartida de receita/despesa financeira e deve ser apropriado pelo método dos juros efetivos.
+        </div>
+
+        <hr>
+
+        <h3>Instrumentos Financeiros (CPC 38, 39 e 40)</h3>
+        <h4>Classificação (IFRS 9)</h4>
+        <ol>
+            <li><strong>Mensurados ao Custo Amortizado:</strong> Carteira mantida para receber fluxos contratuais (SPPI test).</li>
+            <li><strong>Mensurados ao Valor Justo por Outros Resultados Abrangentes (VJ-ORA):</strong> Carteira mista: receber fluxos + vender.</li>
+            <li><strong>Mensurados ao Valor Justo por Resultado (VJ-Resultado):</strong> Demais casos (inclui negociação).</li>
+        </ol>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Instrumento</th>
+                    <th>Avaliação Inicial</th>
+                    <th>Avaliação Subsequente</th>
+                    <th>Variação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Valores a Receber</td>
+                    <td>Valor justo + custos transação</td>
+                    <td>Custo amortizado</td>
+                    <td>Juros efetivos no resultado</td>
+                </tr>
+                <tr>
+                    <td>Aplicações Financeiras</td>
+                    <td>Valor justo</td>
+                    <td>Conforme classificação</td>
+                    <td>Resultado ou ORA</td>
+                </tr>
+                <tr>
+                    <td>Empréstimos/Debêntures</td>
+                    <td>Valor justo - custos transação</td>
+                    <td>Custo amortizado</td>
+                    <td>Juros efetivos no resultado</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h3>Propriedade para Investimento (CPC 28)</h3>
+        <p><strong>Conceito:</strong> Imóvel mantido para auferir aluguéis e/ou valorização, e não para uso administrativo ou venda no curso normal dos negócios.</p>
+        <ul>
+            <li><strong>Modelo do Custo:</strong> Custo histórico - depreciação - impairment. Valor justo divulgado em notas.</li>
+            <li><strong>Modelo do Valor Justo:</strong> Reavaliação a cada período. Variação reconhecida no RESULTADO.</li>
+        </ul>
+
+        <hr>
+
+        <h3>Arrendamento Mercantil - Leasing (CPC 06 R2)</h3>
+        <h4>Para o Arrendatário (modelo único)</h4>
+        <ol>
+            <li>Reconhecer ATIVO DE DIREITO DE USO e PASSIVO DE ARRENDAMENTO.</li>
+            <li>Valor inicial = VP das prestações + pagamentos iniciais.</li>
+            <li>Depreciar o ativo de direito de uso.</li>
+            <li>Passivo: juros (despesa financeira) + amortização.</li>
+        </ol>
+
+        <hr>
+
+        <h3>Participações Societárias (CPC 18)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Definição</th>
+                    <th>Poder</th>
+                    <th>Método</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Controlada</td>
+                    <td>Poder de dirigir políticas + benefícios</td>
+                    <td>Controle (>50% ou direito)</td>
+                    <td>Integralização + MEP</td>
+                </tr>
+                <tr>
+                    <td>Coligada</td>
+                    <td>Influência significativa sem controle</td>
+                    <td>Influência (20-50% ou direito)</td>
+                    <td>Equivalência Patrimonial</td>
+                </tr>
+                <tr>
+                    <td>Investimento</td>
+                    <td>Sem influência significativa</td>
+                    <td>Apenas financeiro</td>
+                    <td>Custo ou Valor Justo</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Método da Equivalência Patrimonial (MEP)</h4>
+        <div class="formula">
+            Valor do Investimento = Custo de Aquisição ± % do Lucro/Prejuízo - Dividendos Recebidos ± Ajustes de VJ - Lucros Não Realizados
+        </div>
+        <p><strong>Lucros Não Realizados:</strong> Transações entre investidora e investida. O lucro só é realizado quando o bem é vendido a terceiros.</p>
+        <p><strong>Recebimento de Dividendos:</strong> Reduz o valor do investimento (D - Banco / C - Investimento). Não é receita!</p>
+
+        <hr>
+
+        <h3>Reorganização e Reestruturação (CPC 15 e Lei 6.404/76)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Operação</th>
+                    <th>Definição</th>
+                    <th>Efeito Societário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Incorporação</td>
+                    <td>Uma empresa absorve outra(s)</td>
+                    <td>Incorporada é extinta; incorporadora subsiste</td>
+                </tr>
+                <tr>
+                    <td>Fusão</td>
+                    <td>Duas+ empresas formam nova sociedade</td>
+                    <td>Todas as originais são extintas</td>
+                </tr>
+                <tr>
+                    <td>Cisão</td>
+                    <td>Empresa transfere parcelas do patrimônio</td>
+                    <td>Pode ou não ser extinta; novas sociedades surgem</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Goodwill e Deságio</h4>
+        <div class="formula">
+            GOODWILL (Ágio) = Valor Pago - Valor Justo do PL Adquirido (Ajustado)
+        </div>
+        <ul>
+            <li><strong>Goodwill:</strong> Não amortiza; teste de impairment anual.</li>
+            <li><strong>Deságio:</strong> Reconhecido imediatamente no resultado (ganho).</li>
+        </ul>
+
+        <hr>
+
+        <h3>Subvenção e Assistência Governamentais (CPC 07)</h3>
+        <ul>
+            <li><strong>Subvenção de Investimento:</strong> para aquisição de ativos não circulantes. (Conta de PL ou Redução do Ativo).</li>
+            <li><strong>Subvenção de Custeio:</strong> para despesas operacionais. (Receita operacional).</li>
+        </ul>
+
+        <hr>
+
+        <h3>Demonstrações Contábeis</h3>
+        <h4>DFC (CPC 03)</h4>
+        <ul>
+            <li><strong>Atividades Operacionais:</strong> Recebimentos de clientes, pagamentos a fornecedores.</li>
+            <li><strong>Atividades de Investimento:</strong> Compra/venda de imobilizado, aplicações.</li>
+            <li><strong>Atividades de Financiamento:</strong> Integralização de capital, empréstimos.</li>
+        </ul>
+
+        <h4>DVA (CPC 09)</h4>
+        <p>Demonstra a riqueza criada e sua distribuição entre pessoal, governo, financiadores e sócios.</p>
+
+    </section>
+
+    <section>
+        <h2>12.2 CONTABILIDADE DE CUSTOS</h2>
+
+        <h3>Conceitos Gerais</h3>
+        <ul>
+            <li><strong>Custo:</strong> Gasto com bem/serviço utilizado na produção.</li>
+            <li><strong>Despesa:</strong> Gasto para obtenção de receita, não ligado à produção.</li>
+            <li><strong>Investimento:</strong> Gasto ativado em função de vida útil.</li>
+            <li><strong>Perda:</strong> Gasto não intencional.</li>
+        </ul>
+
+        <hr>
+
+        <h3>Classificação e Apropriação</h3>
+        <ul>
+            <li><strong>Custos Diretos:</strong> MPD, MOD.</li>
+            <li><strong>Custos Indiretos (CIF):</strong> Rateados (aluguel, energia).</li>
+            <li><strong>Custos Fixos:</strong> Constantes dentro da capacidade.</li>
+            <li><strong>Custos Variáveis:</strong> Variam com o volume.</li>
+        </ul>
+
+        <h4>Departamentalização</h4>
+        <p>Divisão em centros de custos (Produtivos e Auxiliares). Métodos de rateio dos auxiliares: Direto, Escalonado ou Recíproco.</p>
+
+        <hr>
+
+        <h3>Apuração da Produção</h3>
+        <div class="formula">
+            CPA = EI + CP - EF (Custo da Produção Acabada)
+        </div>
+        <div class="formula">
+            CMV = EIPA + CPA - EFPA (Custo dos Produtos Vendidos)
+        </div>
+        <p><strong>Equivalentes de Produção:</strong> Transforma unidades em elaboração em unidades acabadas baseadas no grau de completude.</p>
+
+        <hr>
+
+        <h3>Tipos de Custeio</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Custeio por Absorção</th>
+                    <th>Custeio Variável</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Base Normativa</td>
+                    <td>Obrigatório fiscal/contábil</td>
+                    <td>Gerencial</td>
+                </tr>
+                <tr>
+                    <td>Custos Fixos Industriais</td>
+                    <td>Incluídos no custo do produto</td>
+                    <td>Despesa do período</td>
+                </tr>
+                <tr>
+                    <td>Resultado (Produção > Venda)</td>
+                    <td>Maior (estoque "absorve" custos)</td>
+                    <td>Menor</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h3>Custo Padrão e Variações</h3>
+        <p>Custo predeterminado com base técnica.</p>
+        <h4>Fórmulas de Variação</h4>
+        <ul>
+            <li><strong>Materiais:</strong> Variação de Preço e Variação de Quantidade.</li>
+            <li><strong>Mão de Obra:</strong> Variação de Taxa e Variação de Eficiência.</li>
+            <li><strong>CIF:</strong> Variação de Gasto, Eficiência e Volume.</li>
+        </ul>
+
+        <hr>
+
+        <h3>Margem de Contribuição e Ponto de Equilíbrio</h3>
+        <div class="formula">
+            MC Unitária = Preço de Venda - Custos/Despesas Variáveis Unitários
+        </div>
+        <div class="formula">
+            PE (Quantidade) = Custos Fixos ÷ MC Unitária
+        </div>
+        <div class="formula">
+            GAO (Grau de Alavancagem Operacional) = MC Total ÷ Lucro Operacional
+        </div>
+        <div class="formula">
+            Margem de Segurança = Vendas Atuais - Vendas no PE
+        </div>
+
+    </section>
+
+    <section>
+        <h2>🎯 Dicas Finais para Prova FCC</h2>
+        <div class="box-alert">
+            <strong>Padrões de Questões FCC:</strong>
+            <ul>
+                <li>Cobrança literal de dispositivos normativos (CPC, Lei 6.404).</li>
+                <li>Casos práticos com cálculos diretos (fórmulas decoradas).</li>
+                <li>Atenção para palavras como "Exceto", "Correto apenas", "Não constitui".</li>
+            </ul>
+        </div>
+        
+        <div class="box-tip">
+            <strong>Tópicos Mais Cobrados:</strong>
+            <ol>
+                <li>Equivalência Patrimonial e lucros não realizados.</li>
+                <li>Classificação de instrumentos financeiros (CPC 38/40).</li>
+                <li>Tratamento de subvenções governamentais.</li>
+                <li>DFC: classificação de fluxos e método indireto.</li>
+                <li>Custeio por absorção vs. variável (impacto no resultado).</li>
+                <li>Análise de variações do custo padrão.</li>
+                <li>Ponto de equilíbrio e margem de segurança.</li>
+            </ol>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 50px; color: #777; font-size: 0.8em;">
+        <p>Material de estudo gerado para concursos FCC.</p>
+    </footer>
+</div>
+
+</body>
+</html>
+```

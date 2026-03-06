@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apostila FCC – Legislação Tributária Estadual de Goiás</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --paper: #ffffff;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --primary: #0f766e;
+      --primary-2: #115e59;
+      --accent: #d97706;
+      --line: #dbe4ee;
+      --soft: #eef6f5;
+      --warn: #fff7ed;
+      --danger: #fef2f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.6 "Inter", "Segoe UI", Arial, sans-serif;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 18px 40px rgba(15, 118, 110, 0.18);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    .hero p { margin: 8px 0; }
+    .paper {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+      margin-bottom: 20px;
+    }
+    h2, h3, h4 { line-height: 1.25; }
+    h2 {
+      margin-top: 0;
+      color: var(--primary-2);
+      font-size: 1.6rem;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 10px;
+    }
+    h3 {
+      color: var(--primary);
+      margin-top: 28px;
+      font-size: 1.2rem;
+    }
+    h4 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: #0b4f4a;
+    }
+    p, li { color: var(--ink); }
+    .muted { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+    .soft { background: var(--soft); }
+    .warn { background: var(--warn); }
+    .danger { background: var(--danger); }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.25);
+      margin-bottom: 12px;
+    }
+    ul { padding-left: 20px; }
+    .toc a {
+      text-decoration: none;
+      color: var(--primary-2);
+      font-weight: 600;
+    }
+    .toc li { margin: 6px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 0.96rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f0f7f6; }
+    .checklist li { list-style: "☐ "; padding-left: 6px; }
+    .flash li { list-style: "💡 "; padding-left: 6px; }
+    .fcc li { list-style: "⚠️ "; padding-left: 6px; }
+    .footer {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .93em;
+    }
+    @media print {
+      body { background: white; }
+      .wrap { max-width: 100%; padding: 0; }
+      .hero, .paper { box-shadow: none; }
+      a { color: black; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="badge">Apostila em HTML</div>
+      <h1>Legislação Tributária Estadual de Goiás – FCC</h1>
+      <p><strong>Foco:</strong> estudo por edital, revisão rápida e memorização dos pontos que costumam render cobrança objetiva e literal.</p>
+      <p><strong>Escopo:</strong> item 15 do edital, com organização por norma e por tema.</p>
+      <p><strong>Uso recomendado:</strong> 1ª leitura panorâmica → leitura seca da norma → revisão por quadros e checklists → treino de literalidade.</p>
+    </section>
+
+    <section class="paper toc">
+      <h2>Sumário</h2>
+      <ol>
+        <li><a href="#como-estudar">Como estudar este bloco na FCC</a></li>
+        <li><a href="#mapa">Mapa do conteúdo</a></li>
+        <li><a href="#cte">Lei nº 11.651/1991 – CTE/GO</a></li>
+        <li><a href="#rcte">Decreto nº 4.852/1997 – RCTE e anexos do edital</a></li>
+        <li><a href="#pat">Lei nº 16.469/2009 – Processo administrativo tributário</a></li>
+        <li><a href="#documentos">NF-e, NFC-e e MDF-e</a></li>
+        <li><a href="#desenvolvimento">ProGoiás, FUNDEINFRA, FOMENTAR e PRODUZIR</a></li>
+        <li><a href="#autorregularizacao">Autorregularização e direitos do contribuinte</a></li>
+        <li><a href="#revisao">Quadros de revisão final</a></li>
+        <li><a href="#fontes">Fontes oficiais</a></li>
+      </ol>
+    </section>
+
+    <section class="paper" id="como-estudar">
+      <h2>1. Como estudar este bloco na FCC</h2>
+      <div class="grid">
+        <div class="card soft">
+          <h4>O padrão da banca</h4>
+          <ul>
+            <li>Cobra muita <strong>literalidade</strong> de lei e decreto.</li>
+            <li>Gosta de misturar <strong>conceito + exceção + condição</strong>.</li>
+            <li>Explora <strong>competência, sujeito passivo, fatos geradores, documentos fiscais, benefícios e vedações</strong>.</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <h4>Estratégia certa</h4>
+          <ul>
+            <li>Não estude só por resumo.</li>
+            <li>Leia a estrutura de cada norma antes do detalhe.</li>
+            <li>Decore os <strong>blocos documentais</strong>: obrigação, lançamento, crédito, infração, processo, benefícios e obrigações acessórias.</li>
+          </ul>
+        </div>
+        <div class="card danger">
+          <h4>Erros comuns</h4>
+          <ul>
+            <li>Confundir <strong>benefício fiscal</strong> com <strong>regime especial</strong>.</li>
+            <li>Ignorar anexos do RCTE.</li>
+            <li>Estudar NF-e/NFC-e/MDF-e só por prática e não pela redação normativa.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="paper" id="mapa">
+      <h2>2. Mapa do conteúdo</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Bloco</th>
+            <th>O que a FCC tende a explorar</th>
+            <th>Prioridade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CTE/GO</td>
+            <td>Tributos estaduais, obrigação tributária, crédito, penalidades, decadência/prescrição, regras gerais do PAT</td>
+            <td>Altíssima</td>
+          </tr>
+          <tr>
+            <td>RCTE + Anexos</td>
+            <td>Substituição tributária, benefícios fiscais, obrigações específicas, DIFAL, deveres informacionais</td>
+            <td>Altíssima</td>
+          </tr>
+          <tr>
+            <td>PAT/CAT</td>
+            <td>Órgãos julgadores, impugnação, recursos, competência, estrutura do contencioso</td>
+            <td>Alta</td>
+          </tr>
+          <tr>
+            <td>NF-e / NFC-e / MDF-e</td>
+            <td>Conceito, autorização de uso, contingência, eventos, cancelamento, DANFE/DANFC-e</td>
+            <td>Alta</td>
+          </tr>
+          <tr>
+            <td>Programas de incentivo</td>
+            <td>Objetivos, condições, fruição, contrapartidas, diferença entre programas</td>
+            <td>Média/Alta</td>
+          </tr>
+          <tr>
+            <td>Direitos do contribuinte / autorregularização</td>
+            <td>Garantias, deveres, cooperação, saneamento espontâneo de irregularidades</td>
+            <td>Média</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="paper" id="cte">
+      <h2>3. Lei nº 11.651/1991 – Código Tributário do Estado de Goiás (CTE)</h2>
+      <p>Este é o eixo central do conteúdo. A leitura deve ser feita com atenção à estrutura do código e às regras gerais que depois reaparecem detalhadas no RCTE.</p>
+
+      <h3>3.1. O que dominar</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Tributos estaduais</h4>
+          <ul>
+            <li>ICMS</li>
+            <li>IPVA</li>
+            <li>ITCD</li>
+            <li>Taxas estaduais</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Núcleo dogmático</h4>
+          <ul>
+            <li>Fato gerador</li>
+            <li>Sujeito ativo e passivo</li>
+            <li>Obrigação principal e acessória</li>
+            <li>Lançamento e crédito tributário</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Parte sancionatória</h4>
+          <ul>
+            <li>Infrações</li>
+            <li>Multas</li>
+            <li>Responsabilidade</li>
+            <li>Regras gerais do contencioso</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>3.2. Pontos quentes de cobrança</h3>
+      <ul class="fcc">
+        <li>Diferença entre hipótese de incidência, fato gerador, base de cálculo e alíquota.</li>
+        <li>Momento do fato gerador no ICMS e distinção entre circulação jurídica e mera movimentação física.</li>
+        <li>Responsabilidade tributária e responsabilidade por infração.</li>
+        <li>Constituição do crédito tributário, revisão, extinção, exclusão e suspensão.</li>
+        <li>Decadência e prescrição em chave comparativa.</li>
+      </ul>
+
+      <h3>3.3. Como revisar o CTE</h3>
+      <ul class="checklist">
+        <li>Sei listar os tributos estaduais disciplinados no código.</li>
+        <li>Sei diferenciar obrigação principal de acessória.</li>
+        <li>Sei apontar o que é lançamento e o que é crédito tributário.</li>
+        <li>Sei localizar os dispositivos sobre processo administrativo tributário no próprio código.</li>
+        <li>Sei onde o CTE conversa com o RCTE e com leis especiais.</li>
+      </ul>
+
+      <h3>3.4. Macetes úteis</h3>
+      <ul class="flash">
+        <li><strong>CTE</strong> = regra geral estadual.</li>
+        <li><strong>RCTE</strong> = detalhamento operacional do código.</li>
+        <li><strong>Lei especial</strong> = processo, direitos do contribuinte, incentivos e programas específicos.</li>
+      </ul>
+    </section>
+
+    <section class="paper" id="rcte">
+      <h2>4. Decreto nº 4.852/1997 – RCTE e anexos cobrados no edital</h2>
+      <p>O edital recorta partes específicas do decreto. Estude exatamente os anexos e capítulos indicados, porque a banca tende a cobrar a disciplina operacional do ICMS.</p>
+
+      <h3>4.1. Livro I, Título V, Capítulo IV-A e Livro III, Título II</h3>
+      <div class="card soft">
+        <p><strong>Foco de leitura:</strong> regras operacionais do ICMS e deveres instrumentais vinculados à apuração, fiscalização e cumprimento formal.</p>
+        <p><strong>O que memorizar:</strong> conceitos normativos, eventos fiscais, procedimentos e consequências do descumprimento.</p>
+      </div>
+
+      <h3>4.2. Anexo VIII – Substituição tributária do ICMS</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Ponto</th>
+            <th>O que entender</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sujeitos da ST</td>
+            <td>Quem é contribuinte substituto, substituído e responsável pelo recolhimento.</td>
+          </tr>
+          <tr>
+            <td>Base de cálculo</td>
+            <td>Preço praticado, preço sugerido, pauta, MVA e ajustes cabíveis.</td>
+          </tr>
+          <tr>
+            <td>Momento do recolhimento</td>
+            <td>Quando o imposto é exigido e por qual operação futura se antecipa.</td>
+          </tr>
+          <tr>
+            <td>Restituição/complementação</td>
+            <td>Hipóteses em que a base real diverge da presumida.</td>
+          </tr>
+          <tr>
+            <td>Escrituração</td>
+            <td>Reflexos documentais e forma de destaque/registro.</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="fcc">
+        <li>A FCC gosta de cobrar a lógica da ST: <strong>antecipação do ICMS devido por operação subsequente</strong>.</li>
+        <li>Fique atento às hipóteses em que não há retenção, há devolução ou há necessidade de ajuste.</li>
+      </ul>
+
+      <h3>4.3. Anexo IX – Benefícios fiscais</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Capítulo I</h4>
+          <p>Estrutura dos benefícios, condicionantes, alcance, limitações e efeitos na apropriação de crédito.</p>
+        </div>
+        <div class="card">
+          <h4>Capítulo V</h4>
+          <p>Benefícios específicos que normalmente exigem leitura literal: hipóteses, requisitos, prazo e manutenção ou estorno de crédito.</p>
+        </div>
+      </div>
+      <ul class="fcc">
+        <li>Benefício fiscal nunca deve ser estudado só pelo nome: decore <strong>beneficiário + operação + condição + efeito no crédito</strong>.</li>
+        <li>A banca adora trocar <strong>isenção</strong>, <strong>redução de base</strong> e <strong>crédito outorgado</strong>.</li>
+      </ul>
+
+      <h3>4.4. Anexo XII – Obrigações específicas</h3>
+      <p>Leia os capítulos indicados como um bloco de deveres acessórios do contribuinte. O ponto aqui não é só “o que fazer”, mas <strong>quem deve fazer, em que prazo, por qual meio e com qual consequência</strong>.</p>
+      <ul>
+        <li>Capítulos I e II: obrigações de natureza cadastral e documental.</li>
+        <li>Capítulo V: deveres específicos ligados à escrituração/informação.</li>
+        <li>Capítulos VII, VIII, X e XI: controles, registros e comunicações obrigatórias.</li>
+        <li>Capítulos XIII, XV, XVI e XVII: situações especiais cobradas por literalidade.</li>
+      </ul>
+
+      <h3>4.5. Anexo XV – Operações destinadas a consumidor final não contribuinte localizado em Goiás</h3>
+      <div class="card warn">
+        <p><strong>Palavra-chave:</strong> DIFAL.</p>
+        <p>Domine a lógica da repartição do imposto nas operações interestaduais destinadas a consumidor final não contribuinte, com foco em responsabilidade, recolhimento, documento fiscal e eventual partilha/regras acessórias.</p>
+      </div>
+
+      <h3>4.6. Anexo XVIII – Informações por instituições financeiras e intermediadores</h3>
+      <p>Aqui o centro é o dever de informar para fins de administração tributária. A cobrança tende a girar em torno de:</p>
+      <ul>
+        <li>quem está obrigado a prestar as informações;</li>
+        <li>qual o conteúdo informacional exigido;</li>
+        <li>forma, periodicidade e hipóteses de dispensa;</li>
+        <li>relação entre dever instrumental e atividade de fiscalização.</li>
+      </ul>
+
+      <h3>4.7. Anexo XX – ICMS DIFAL-SN (exceto apêndices)</h3>
+      <p>Estude esse anexo em paralelo com o tema <strong>optante do Simples Nacional</strong>. A banca pode misturar regime favorecido com deveres de recolhimento em operações interestaduais.</p>
+      <ul class="fcc">
+        <li>Quem recolhe.</li>
+        <li>Quando recolhe.</li>
+        <li>Como o anexo adapta a disciplina do DIFAL ao Simples.</li>
+      </ul>
+
+      <h3>4.8. Checklist do RCTE</h3>
+      <ul class="checklist">
+        <li>Sei distinguir ST, benefício fiscal, obrigação acessória e DIFAL.</li>
+        <li>Sei em qual anexo do RCTE está cada um desses temas.</li>
+        <li>Sei ler dispositivo de benefício fiscal identificando condição e contrapartida.</li>
+        <li>Sei localizar regras de informação prestada por terceiros ao Fisco.</li>
+      </ul>
+    </section>
+
+    <section class="paper" id="pat">
+      <h2>5. Lei nº 16.469/2009 – Processo administrativo tributário e órgãos de julgamento</h2>
+      <p>Este bloco conversa diretamente com o CTE. A leitura deve ser feita pensando em <strong>estrutura do contencioso</strong> + <strong>sequência procedimental</strong>.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Parte orgânica</h4>
+          <ul>
+            <li>Conselho Administrativo Tributário (CAT)</li>
+            <li>Órgãos colegiados e singulares</li>
+            <li>Competência de julgamento</li>
+            <li>Atuação dos representantes fazendários</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Parte processual</h4>
+          <ul>
+            <li>Constituição do litígio</li>
+            <li>Impugnação</li>
+            <li>Instrução</li>
+            <li>Julgamento e recursos</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Parte decisória</h4>
+          <ul>
+            <li>Efeitos da decisão</li>
+            <li>Nulidades</li>
+            <li>Preclusão</li>
+            <li>Definitividade administrativa</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Pontos que a FCC pode transformar em pegadinha</h3>
+      <ul class="fcc">
+        <li>Diferença entre competência do julgador singular, da câmara e do conselho pleno.</li>
+        <li>Cabimento, prazo e efeito de cada recurso.</li>
+        <li>Quem pode praticar cada ato no processo.</li>
+        <li>Hipóteses de nulidade versus irregularidade sanável.</li>
+      </ul>
+
+      <h3>Resumo mental do PAT</h3>
+      <p><code>Autuação → ciência → impugnação/defesa → instrução → julgamento → recurso → decisão final</code></p>
+    </section>
+
+    <section class="paper" id="documentos">
+      <h2>6. Documentos fiscais eletrônicos: NF-e, NFC-e e MDF-e</h2>
+      <p>Esse bloco costuma render questão objetiva muito limpa. O segredo é dominar o vocabulário do ajuste SINIEF e as etapas do documento eletrônico.</p>
+
+      <h3>6.1. Ajuste SINIEF nº 07/05 – NF-e e DANFE</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Cláusulas do edital</th>
+            <th>Foco de revisão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>I, II, II-A, III</td>
+            <td>Conceito, validade jurídica, requisitos básicos, autorização de uso</td>
+          </tr>
+          <tr>
+            <td>VI, VII, IX</td>
+            <td>Emissão, contingência, consulta e disponibilização</td>
+          </tr>
+          <tr>
+            <td>XI, XII, XIII-A</td>
+            <td>Cancelamento, inutilização, guarda, eventos e controles</td>
+          </tr>
+          <tr>
+            <td>XIV-A, XV-A</td>
+            <td>DANFE e deveres acessórios correlatos</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>6.2. Ajuste SINIEF nº 19/16 – NFC-e modelo 65 e DANFC-e</h3>
+      <ul>
+        <li>Conceito e campo de utilização da NFC-e.</li>
+        <li>Diferença funcional entre NFC-e e NF-e.</li>
+        <li>Emissão, autorização, contingência e representação auxiliar.</li>
+        <li>Regras de consulta, guarda e disponibilização ao consumidor/Fisco.</li>
+      </ul>
+
+      <h3>6.3. Ajuste SINIEF nº 21/10 – MDF-e</h3>
+      <ul>
+        <li>Finalidade do MDF-e na vinculação e consolidação documental do transporte.</li>
+        <li>Quem está obrigado à emissão.</li>
+        <li>Encerramento, eventos e hipóteses operacionais específicas.</li>
+        <li>Integração com NF-e/CT-e no fluxo logístico-fiscal.</li>
+      </ul>
+
+      <h3>Questões clássicas da FCC</h3>
+      <ul class="fcc">
+        <li>Troca o documento principal pelo documento auxiliar.</li>
+        <li>Confunde autorização de uso com mera transmissão.</li>
+        <li>Explora contingência, cancelamento e inutilização como se fossem sinônimos.</li>
+        <li>Testa quem está obrigado a emitir MDF-e em situações práticas.</li>
+      </ul>
+    </section>
+
+    <section class="paper" id="desenvolvimento">
+      <h2>7. Programas de desenvolvimento e incentivos</h2>
+
+      <h3>7.1. Lei nº 20.787/2020 – ProGoiás</h3>
+      <p>Estude o programa sob quatro perguntas:</p>
+      <ul>
+        <li>qual é o <strong>objetivo</strong> do programa;</li>
+        <li>quem pode ser <strong>beneficiário</strong>;</li>
+        <li>qual é o <strong>incentivo/tratamento</strong> concedido;</li>
+        <li>quais são as <strong>condições, vedações e contrapartidas</strong>.</li>
+      </ul>
+
+      <h3>7.2. Lei nº 21.670/2022, art. 5º, e Decreto nº 10.187/2022 – FUNDEINFRA e Programa de Parcerias Institucionais</h3>
+      <div class="card warn">
+        <p>Faça leitura combinada da lei com o decreto regulamentador. A prova pode cobrar a <strong>finalidade do fundo</strong>, as <strong>fontes/condições de ingresso</strong>, a <strong>natureza da contribuição/contrapartida</strong> e o desenho do programa de parcerias.</p>
+      </div>
+
+      <h3>7.3. Lei nº 9.489/1984 – FOMENTAR</h3>
+      <p>Programa clássico de incentivo à industrialização. Na revisão, destaque:</p>
+      <ul>
+        <li>objetivos econômicos do programa;</li>
+        <li>forma de apoio/incentivo;</li>
+        <li>critérios de enquadramento e fruição;</li>
+        <li>relação histórica com políticas posteriores.</li>
+      </ul>
+
+      <h3>7.4. Lei nº 11.180/1990 – Modificações no FOMENTAR</h3>
+      <p>Leia como norma de ajuste do regime anterior. A cobrança tende a ser comparativa: “o que mudou” e “qual tratamento foi alterado”.</p>
+
+      <h3>7.5. Lei nº 13.591/2000 – PRODUZIR e FUNPRODUZIR</h3>
+      <ul>
+        <li>objetivo do programa;</li>
+        <li>estrutura do incentivo;</li>
+        <li>beneficiários e condições;</li>
+        <li>papel do FUNPRODUZIR;</li>
+        <li>diferença entre PRODUZIR e programas posteriores, como o ProGoiás.</li>
+      </ul>
+
+      <h3>Quadro comparativo rápido</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Programa</th>
+            <th>Ideia central</th>
+            <th>Como revisar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FOMENTAR</td>
+            <td>Fomento à industrialização</td>
+            <td>Origem, finalidade, mecanismo de estímulo</td>
+          </tr>
+          <tr>
+            <td>PRODUZIR</td>
+            <td>Desenvolvimento industrial + fundo próprio</td>
+            <td>Benefício, enquadramento, fundo e contrapartidas</td>
+          </tr>
+          <tr>
+            <td>ProGoiás</td>
+            <td>Programa mais recente de desenvolvimento regional</td>
+            <td>Beneficiários, modalidade de incentivo, regras atuais</td>
+          </tr>
+          <tr>
+            <td>FUNDEINFRA</td>
+            <td>Infraestrutura e parcerias institucionais</td>
+            <td>Finalidade, disciplina legal e decreto regulamentador</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="paper" id="autorregularizacao">
+      <h2>8. Autorregularização e direitos do contribuinte</h2>
+
+      <h3>8.1. Instrução Normativa nº 199/2022-SRE – Autorregularização em malhas fiscais</h3>
+      <p>Estude a IN como instrumento de conformidade. O centro da cobrança é a possibilidade de o contribuinte corrigir irregularidades apontadas pelo Fisco em malhas fiscais, dentro de procedimento e prazo próprios.</p>
+      <ul>
+        <li>conceito de autorregularização;</li>
+        <li>como o contribuinte é cientificado;</li>
+        <li>prazo e forma de saneamento;</li>
+        <li>efeitos do atendimento ou do não atendimento.</li>
+      </ul>
+
+      <h3>8.2. Lei Complementar Estadual nº 104/2013 – Código de Direitos, Garantias e Obrigações do Contribuinte</h3>
+      <div class="grid">
+        <div class="card soft">
+          <h4>Direitos</h4>
+          <ul>
+            <li>tratamento respeitoso e transparente;</li>
+            <li>acesso à informação;</li>
+            <li>segurança jurídica;</li>
+            <li>orientação e previsibilidade.</li>
+          </ul>
+        </div>
+        <div class="card soft">
+          <h4>Garantias</h4>
+          <ul>
+            <li>devido processo;</li>
+            <li>ampla defesa;</li>
+            <li>contraditório;</li>
+            <li>motivação dos atos.</li>
+          </ul>
+        </div>
+        <div class="card soft">
+          <h4>Obrigações</h4>
+          <ul>
+            <li>boa-fé;</li>
+            <li>cooperação;</li>
+            <li>prestação de informações verdadeiras;</li>
+            <li>cumprimento dos deveres instrumentais.</li>
+          </ul>
+        </div>
+      </div>
+      <p>A FCC pode usar essa lei para construir questão principiológica com linguagem quase “administrativista”, mas aplicada ao ambiente tributário.</p>
+    </section>
+
+    <section class="paper" id="revisao">
+      <h2>9. Revisão final</h2>
+
+      <h3>9.1. O que tem que estar na cabeça na véspera</h3>
+      <ul class="checklist">
+        <li>CTE: estrutura geral, obrigação, crédito, infração e regras gerais de processo.</li>
+        <li>Lei 16.469/2009: órgãos julgadores, rito, recursos e nulidades.</li>
+        <li>RCTE Anexo VIII: substituição tributária.</li>
+        <li>RCTE Anexo IX: benefícios fiscais e seus condicionamentos.</li>
+        <li>RCTE Anexo XII: obrigações específicas.</li>
+        <li>RCTE Anexos XV, XVIII e XX: DIFAL, deveres informacionais e DIFAL-SN.</li>
+        <li>Ajustes SINIEF: NF-e, NFC-e e MDF-e.</li>
+        <li>ProGoiás, FUNDEINFRA, FOMENTAR, PRODUZIR.</li>
+        <li>Autorregularização e direitos do contribuinte.</li>
+      </ul>
+
+      <h3>9.2. Perguntas de autoavaliação</h3>
+      <ol>
+        <li>Consigo explicar a diferença entre obrigação principal e acessória sem consultar material?</li>
+        <li>Consigo resumir o fluxo do processo administrativo tributário em 30 segundos?</li>
+        <li>Se aparecer uma questão sobre ST, eu sei identificar sujeito, base e operação futura?</li>
+        <li>Se a questão falar em benefício fiscal, eu penso automaticamente em condição, prazo e efeito no crédito?</li>
+        <li>Se a questão citar NF-e, NFC-e ou MDF-e, eu sei qual documento é principal, qual é auxiliar e qual evento/processo se aplica?</li>
+      </ol>
+
+      <h3>9.3. Roteiro de 5 dias</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Dia</th>
+            <th>Bloco</th>
+            <th>Tarefa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>CTE</td>
+            <td>Leitura seca + marcação de conceitos gerais</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Lei 16.469/2009 + LC 104/2013 + IN 199/2022</td>
+            <td>Fluxo do processo e direitos do contribuinte</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>RCTE</td>
+            <td>Anexos VIII, IX, XII</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>RCTE + SINIEF</td>
+            <td>Anexos XV, XVIII, XX + NF-e/NFC-e/MDF-e</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Programas</td>
+            <td>ProGoiás, FUNDEINFRA, FOMENTAR e PRODUZIR + revisão final</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="paper" id="fontes">
+      <h2>10. Fontes oficiais para leitura da lei seca</h2>
+      <ul>
+        <li>Portal de Legislação da Secretaria da Economia de Goiás.</li>
+        <li>Portal da Casa Civil / Gabinete Civil do Estado de Goiás para leis estaduais consolidadas.</li>
+        <li>Portal do CONFAZ para os Ajustes SINIEF nº 07/05, nº 19/16 e nº 21/10.</li>
+        <li>Edital do concurso para conferência do recorte exato dos dispositivos.</li>
+      </ul>
+      <p class="footer">Observação importante: como a legislação tributária sofre alterações frequentes, esta apostila foi estruturada para estudo por edital e revisão estratégica. A leitura final deve ser feita sempre na redação oficial consolidada da norma.</p>
+    </section>
+  </div>
+</body>
+</html>

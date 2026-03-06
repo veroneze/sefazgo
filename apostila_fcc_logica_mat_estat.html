@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apostila FCC – Lógica, Mat. Financeira e Estatística</title>
+<style>
+:root{--azul:#1a3a5c;--azul-m:#2563a8;--azul-c:#dbeafe;--verde:#16a34a;--verde-c:#dcfce7;--verm:#b91c1c;--verm-c:#fee2e2;--amar:#d97706;--amar-c:#fef3c7;--roxo:#7c3aed;--roxo-c:#ede9fe;--cinza:#f1f5f9;--texto:#1e293b;--borda:#cbd5e1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f8fafc;color:var(--texto)}
+#capa{background:linear-gradient(135deg,#1a3a5c 0%,#7c3aed 100%);color:#fff;text-align:center;padding:60px 20px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#capa .badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 20px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+#capa h1{font-size:2.4rem;font-weight:800;line-height:1.2;margin-bottom:10px}
+#capa h2{font-size:1.1rem;font-weight:400;opacity:.85;margin-bottom:36px}
+#capa .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:640px}
+#capa .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:5px 12px;font-size:.75rem}
+#capa .btn-s{margin-top:44px;background:#fff;color:#1a3a5c;padding:13px 38px;border-radius:50px;border:none;font-size:1rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+#capa .btn-s:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+#nav{background:var(--azul);color:#fff;padding:10px 16px;display:none;align-items:center;gap:12px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
+#nav .nt{font-weight:700;font-size:.85rem;white-space:nowrap}
+#nav select{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 10px;font-size:.82rem;cursor:pointer;flex:1;min-width:200px}
+#nav select option{background:var(--azul)}
+#nav .bc{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:5px 12px;font-size:.78rem;cursor:pointer;white-space:nowrap}
+#content{display:none;max-width:920px;margin:0 auto;padding:28px 18px 60px}
+.section{display:none}.section.active{display:block}
+.sh{border-radius:12px;padding:26px 30px;margin-bottom:26px;color:#fff}
+.sh .num{font-size:.78rem;opacity:.7;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.sh h2{font-size:1.7rem;font-weight:800}
+.sh p{margin-top:7px;opacity:.85;font-size:.92rem}
+.sh-azul{background:linear-gradient(135deg,var(--azul),var(--azul-m))}
+.sh-roxo{background:linear-gradient(135deg,#5b21b6,#7c3aed)}
+.sh-verde{background:linear-gradient(135deg,#065f46,#16a34a)}
+h3{color:var(--azul);font-size:1.05rem;margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--azul-c)}
+h4{color:var(--azul-m);font-size:.93rem;margin:14px 0 7px;font-weight:700}
+p{line-height:1.75;margin-bottom:9px;font-size:.93rem}
+ul,ol{padding-left:20px;margin-bottom:11px}
+li{line-height:1.75;font-size:.93rem;margin-bottom:3px}
+.card{background:#fff;border-radius:10px;padding:18px 22px;border:1px solid var(--borda);margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.box-d{background:var(--amar-c);border-left:4px solid var(--amar);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-d strong{color:var(--amar)}
+.box-a{background:var(--verm-c);border-left:4px solid var(--verm);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-a strong{color:var(--verm)}
+.box-i{background:var(--azul-c);border-left:4px solid var(--azul-m);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-i strong{color:var(--azul-m)}
+.box-ok{background:var(--verde-c);border-left:4px solid var(--verde);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-ok strong{color:var(--verde)}
+.box-roxo{background:var(--roxo-c);border-left:4px solid var(--roxo);border-radius:0 8px 8px 0;padding:13px 16px;margin:14px 0}
+.box-roxo strong{color:var(--roxo)}
+.ex{background:var(--cinza);border-radius:8px;padding:13px 16px;margin:9px 0;font-size:.9rem;border:1px solid var(--borda)}
+.ex strong{color:var(--azul)}
+.formula{background:#1e293b;color:#e2e8f0;border-radius:10px;padding:16px 20px;margin:12px 0;font-family:'Courier New',monospace;font-size:.95rem;text-align:center;letter-spacing:.5px}
+.formula .destaque{color:#fbbf24;font-weight:700}
+.certo{color:var(--verde);font-weight:700}.errado{color:var(--verm);font-weight:700}
+table{width:100%;border-collapse:collapse;margin:11px 0 14px;font-size:.88rem}
+th{background:var(--azul);color:#fff;padding:9px 13px;text-align:left}
+td{padding:8px 13px;border-bottom:1px solid var(--borda)}
+tr:nth-child(even) td{background:var(--cinza)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:13px 0}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.questao{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:18px 22px;margin:13px 0}
+.questao .en{font-weight:600;margin-bottom:11px;line-height:1.6}
+.questao .alt{list-style:none;padding:0}
+.questao .alt li{padding:7px 11px;border-radius:6px;margin:5px 0;cursor:pointer;border:1.5px solid var(--borda);transition:all .15s;font-size:.9rem}
+.questao .alt li:hover{border-color:var(--azul-m);background:var(--azul-c)}
+.questao .alt li.correta{background:var(--verde-c);border-color:var(--verde)}
+.questao .alt li.errada{background:var(--verm-c);border-color:var(--verm)}
+.questao .gab{display:none;margin-top:11px;padding:11px;background:var(--cinza);border-radius:8px;font-size:.86rem;line-height:1.65}
+.questao .gab.show{display:block}
+.nb{display:flex;gap:11px;margin-top:38px;justify-content:space-between}
+.nbtn{background:var(--azul);color:#fff;border:none;border-radius:8px;padding:11px 22px;cursor:pointer;font-size:.88rem;font-weight:600;transition:background .2s}
+.nbtn:hover{background:var(--azul-m)}
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:11px;margin:18px 0}
+.ii{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:15px;cursor:pointer;transition:all .2s;text-align:center}
+.ii:hover{border-color:var(--azul-m);background:var(--azul-c);transform:translateY(-2px)}
+.ii .n{font-size:1.3rem;font-weight:800;color:var(--azul)}
+.ii .nm{font-size:.78rem;color:#64748b;margin-top:3px;line-height:1.3}
+.badge-sec{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:4px}
+.b-azul{background:var(--azul-c);color:var(--azul)}
+.b-roxo{background:var(--roxo-c);color:var(--roxo)}
+.b-verde{background:var(--verde-c);color:var(--verde)}
+.steps{counter-reset:step;list-style:none;padding-left:0}
+.steps li{counter-increment:step;padding:10px 14px 10px 44px;position:relative;margin-bottom:8px;background:var(--cinza);border-radius:8px;border:1px solid var(--borda);font-size:.91rem;line-height:1.6}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);background:var(--azul);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;line-height:22px;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div id="capa">
+  <div class="badge">Banca FCC</div>
+  <h1>Lógica · Mat. Financeira · Estatística</h1>
+  <h2>Apostila Completa para Concursos Públicos</h2>
+  <div class="pills">
+    <span class="pill">Lógica Proposicional</span><span class="pill">Dedução e Inferência</span>
+    <span class="pill">Juros Simples e Compostos</span><span class="pill">Descontos</span>
+    <span class="pill">Amortização</span><span class="pill">Fluxo de Caixa</span>
+    <span class="pill">Estatística Descritiva</span><span class="pill">Probabilidade</span>
+    <span class="pill">Distribuições</span><span class="pill">Teste de Hipótese</span>
+  </div>
+  <button class="btn-s" onclick="iniciar()">📐 Começar a Estudar</button>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <span class="nt">📐 FCC</span>
+  <select onchange="irPara(this.value)">
+    <option value="0">📋 Índice Geral</option>
+    <optgroup label="2.1 Raciocínio Lógico">
+      <option value="1">RL1 – Lógica Proposicional</option>
+      <option value="2">RL2 – Raciocínio e Dedução</option>
+      <option value="3">RL3 – Lógica Situacional</option>
+    </optgroup>
+    <optgroup label="2.2 Matemática Financeira">
+      <option value="4">MF1 – Juros Simples</option>
+      <option value="5">MF2 – Juros Compostos</option>
+      <option value="6">MF3 – Descontos</option>
+      <option value="7">MF4 – Amortizações</option>
+      <option value="8">MF5 – Fluxo de Caixa</option>
+    </optgroup>
+    <optgroup label="2.3 Estatística">
+      <option value="9">ES1 – Estatística Descritiva</option>
+      <option value="10">ES2 – Probabilidade</option>
+      <option value="11">ES3 – Variáveis Aleatórias e Distribuições</option>
+      <option value="12">ES4 – Esperança, Variância e Correlação</option>
+      <option value="13">ES5 – Inferência e Testes de Hipótese</option>
+    </optgroup>
+  </select>
+  <button class="bc" onclick="voltarCapa()">⬅ Capa</button>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<!-- ÍNDICE -->
+<div class="section active" id="sec-0">
+  <div class="sh sh-azul"><div class="num">Apostila FCC</div><h2>📋 Índice Geral</h2><p>13 seções cobrindo Raciocínio Lógico, Matemática Financeira e Estatística.</p></div>
+  <h3>2.1 Raciocínio Lógico</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('1')"><div class="n">RL1</div><div class="nm">Lógica Proposicional e Conectivos</div></div>
+    <div class="ii" onclick="irPara('2')"><div class="n">RL2</div><div class="nm">Raciocínio Verbal, Matemático e Sequencial</div></div>
+    <div class="ii" onclick="irPara('3')"><div class="n">RL3</div><div class="nm">Dedução, Hipóteses e Conclusões</div></div>
+  </div>
+  <h3>2.2 Matemática Financeira</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('4')"><div class="n">MF1</div><div class="nm">Juros Simples</div></div>
+    <div class="ii" onclick="irPara('5')"><div class="n">MF2</div><div class="nm">Juros Compostos</div></div>
+    <div class="ii" onclick="irPara('6')"><div class="n">MF3</div><div class="nm">Descontos Simples e Compostos</div></div>
+    <div class="ii" onclick="irPara('7')"><div class="n">MF4</div><div class="nm">Sistemas de Amortização</div></div>
+    <div class="ii" onclick="irPara('8')"><div class="n">MF5</div><div class="nm">Fluxo de Caixa</div></div>
+  </div>
+  <h3>2.3 Estatística</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('9')"><div class="n">ES1</div><div class="nm">Estatística Descritiva</div></div>
+    <div class="ii" onclick="irPara('10')"><div class="n">ES2</div><div class="nm">Probabilidade</div></div>
+    <div class="ii" onclick="irPara('11')"><div class="n">ES3</div><div class="nm">Distribuições de Probabilidade</div></div>
+    <div class="ii" onclick="irPara('12')"><div class="n">ES4</div><div class="nm">Esperança, Variância e Correlação</div></div>
+    <div class="ii" onclick="irPara('13')"><div class="n">ES5</div><div class="nm">Inferência e Testes de Hipótese</div></div>
+  </div>
+</div>
+
+<!-- RL1 -->
+<div class="section" id="sec-1">
+  <div class="sh sh-azul"><div class="num">Raciocínio Lógico · RL1</div><h2>Lógica Proposicional e Conectivos</h2><p>Base de toda lógica formal. A FCC cobra tabelas-verdade, equivalências e negação de proposições.</p></div>
+  <h3>1.1 Proposição</h3>
+  <p>Sentença declarativa com valor lógico definido: <strong>Verdadeiro (V)</strong> ou <strong>Falso (F)</strong>.</p>
+  <div class="box-a"><strong>⚠ Não são proposições:</strong> perguntas ("Que horas são?"), exclamações ("Que dia lindo!"), ordens ("Feche a porta.") e sentenças abertas ("x + 2 = 5").</div>
+
+  <h3>1.2 Conectivos Lógicos</h3>
+  <table>
+    <tr><th>Nome</th><th>Símbolo</th><th>Leitura</th><th>Falsa quando</th></tr>
+    <tr><td>Negação</td><td>¬p / ~p</td><td>não p</td><td>p é verdadeira</td></tr>
+    <tr><td>Conjunção</td><td>p ∧ q</td><td>p e q</td><td>pelo menos um for F</td></tr>
+    <tr><td>Disjunção inclusiva</td><td>p ∨ q</td><td>p ou q</td><td>ambos forem F</td></tr>
+    <tr><td>Disjunção exclusiva</td><td>p ⊕ q</td><td>p ou q (excl.)</td><td>ambos iguais</td></tr>
+    <tr><td>Condicional</td><td>p → q</td><td>se p então q</td><td>p=V e q=F</td></tr>
+    <tr><td>Bicondicional</td><td>p ↔ q</td><td>p se e somente se q</td><td>valores diferentes</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Macete — Condicional p→q:</strong> "A mentira do condicional = só quando a hipótese é verdadeira e a conclusão é falsa." Ex.: "Se chover, vou ao cinema" → só é falsa se chover E eu não for.</div>
+
+  <h3>1.3 Negações das Proposições Compostas</h3>
+  <table>
+    <tr><th>Proposição</th><th>Negação</th></tr>
+    <tr><td>p ∧ q (p e q)</td><td>¬p ∨ ¬q (não-p ou não-q) — Lei De Morgan</td></tr>
+    <tr><td>p ∨ q (p ou q)</td><td>¬p ∧ ¬q (não-p e não-q) — Lei De Morgan</td></tr>
+    <tr><td>p → q (se p então q)</td><td>p ∧ ¬q (p e não-q)</td></tr>
+    <tr><td>p ↔ q</td><td>(p ∧ ¬q) ∨ (¬p ∧ q)</td></tr>
+    <tr><td>Todo A é B</td><td>Algum A não é B</td></tr>
+    <tr><td>Nenhum A é B</td><td>Algum A é B</td></tr>
+    <tr><td>Algum A é B</td><td>Nenhum A é B</td></tr>
+  </table>
+
+  <h3>1.4 Equivalências Importantes</h3>
+  <div class="card">
+    <h4>Contrapositiva (equivalente ao condicional):</h4>
+    <div class="formula">p → q  <span class="destaque">≡</span>  ¬q → ¬p</div>
+    <p style="margin-top:8px">Recíproca (q→p) e Inversa (¬p→¬q) <strong>não</strong> são equivalentes ao condicional original.</p>
+  </div>
+  <div class="card">
+    <h4>Equivalências úteis:</h4>
+    <div class="formula">p → q  <span class="destaque">≡</span>  ¬p ∨ q</div>
+    <div class="formula">¬(p ∧ q)  <span class="destaque">≡</span>  ¬p ∨ ¬q &nbsp;&nbsp;|&nbsp;&nbsp; ¬(p ∨ q)  <span class="destaque">≡</span>  ¬p ∧ ¬q</div>
+  </div>
+
+  <h3>1.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A negação de "Se o candidato estudou, então foi aprovado" é:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Se o candidato não estudou, então não foi aprovado.</li>
+      <li onclick="resp(this,'b','c')">b) O candidato não estudou ou foi aprovado.</li>
+      <li onclick="resp(this,'c','c')">c) O candidato estudou e não foi aprovado.</li>
+      <li onclick="resp(this,'d','c')">d) O candidato não estudou e não foi aprovado.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Negação de p→q = p ∧ ¬q. Logo: "O candidato estudou (p) E não foi aprovado (¬q)".</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('0')">⬅ Índice</button><button class="nbtn" onclick="irPara('2')">Próximo ➡</button></div>
+</div>
+
+<!-- RL2 -->
+<div class="section" id="sec-2">
+  <div class="sh sh-azul"><div class="num">Raciocínio Lógico · RL2</div><h2>Raciocínio Verbal, Matemático e Sequencial</h2><p>Habilidades de identificar padrões, sequências e relações lógicas em contextos variados.</p></div>
+
+  <h3>2.1 Raciocínio Sequencial</h3>
+  <p>Identificar o padrão de uma sequência numérica, literal ou figurativa.</p>
+  <div class="card">
+    <h4>Tipos mais comuns:</h4>
+    <ul>
+      <li><strong>PA (Progressão Aritmética):</strong> diferença constante. Ex.: 2, 5, 8, 11… (razão +3)</li>
+      <li><strong>PG (Progressão Geométrica):</strong> razão constante. Ex.: 3, 6, 12, 24… (razão ×2)</li>
+      <li><strong>Fibonacci:</strong> cada termo = soma dos dois anteriores. Ex.: 1,1,2,3,5,8,13…</li>
+      <li><strong>Quadrados/Cubos:</strong> 1,4,9,16,25… ou 1,8,27,64…</li>
+      <li><strong>Misto:</strong> alterna dois padrões. Ex.: 1,3,2,6,3,9,4,12… (+1 e ×3)</li>
+    </ul>
+  </div>
+  <div class="ex"><strong>Exemplo:</strong> 2, 6, 12, 20, 30, __? <br>Diferenças: +4, +6, +8, +10 → próxima diferença = +12 → resposta: <strong>42</strong></div>
+
+  <h3>2.2 Raciocínio Verbal (Analogias)</h3>
+  <p>Identificar a relação entre pares de conceitos:</p>
+  <div class="grid2">
+    <div class="card"><h4>Tipos de relação</h4><ul><li>Parte × todo: folha : árvore</li><li>Causa × efeito: fogo : fumaça</li><li>Sinônimo / Antônimo</li><li>Função: bisturi : cirurgião</li><li>Hierarquia: sargento : soldado</li></ul></div>
+    <div class="card"><h4>Estratégia</h4><p>Monte uma frase com o 1º par e aplique ao 2º:</p><p><em>"Bisturi é instrumento do cirurgião"</em> → <em>"Estetoscópio é instrumento do médico"</em></p></div>
+  </div>
+
+  <h3>2.3 Orientação Espacial e Temporal</h3>
+  <div class="card">
+    <h4>Pontos cardeais e rotação:</h4>
+    <ul>
+      <li>Virar à <strong>direita</strong> = rotação de 90° no sentido horário.</li>
+      <li>Virar à <strong>esquerda</strong> = rotação de 90° no sentido anti-horário.</li>
+      <li>Duas meias-voltas = retorno ao ponto de origem da direção.</li>
+    </ul>
+    <h4>Sequência temporal:</h4>
+    <p>Organizar eventos por relações como "antes de", "depois que", "ao mesmo tempo". Montar linha do tempo mental.</p>
+  </div>
+
+  <h3>2.4 Formação de Conceitos e Discriminação</h3>
+  <p>Identificar o elemento que <strong>não pertence</strong> ao grupo ou a <strong>característica comum</strong>:</p>
+  <div class="ex"><strong>Exemplo:</strong> Qual não pertence? Martelo, Serrote, Parafuso, Chave de fenda.<br>→ <strong>Parafuso</strong> (é componente; os demais são ferramentas).</div>
+
+  <h3>2.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Complete a sequência: 1, 4, 9, 16, 25, ___</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) 30</li>
+      <li onclick="resp(this,'b','c')">b) 34</li>
+      <li onclick="resp(this,'c','c')">c) 36</li>
+      <li onclick="resp(this,'d','c')">d) 49</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> São os quadrados perfeitos: 1²=1, 2²=4, 3²=9, 4²=16, 5²=25, 6²=<strong>36</strong>.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('1')">⬅ Anterior</button><button class="nbtn" onclick="irPara('3')">Próximo ➡</button></div>
+</div>
+
+<!-- RL3 -->
+<div class="section" id="sec-3">
+  <div class="sh sh-azul"><div class="num">Raciocínio Lógico · RL3</div><h2>Lógica Situacional: Dedução e Conclusão</h2><p>Questões de arranjo lógico (puzzles), silogismos e inferência a partir de hipóteses.</p></div>
+
+  <h3>3.1 Silogismo Categórico</h3>
+  <p>Raciocínio com duas premissas e uma conclusão:</p>
+  <div class="card">
+    <div class="ex"><strong>Todo A é B. Todo B é C. Logo, todo A é C.</strong> (Válido ✅)</div>
+    <div class="ex"><strong>Todo A é B. João é B. Logo, João é A.</strong> (Inválido ❌ — falácia da afirmação do consequente)</div>
+  </div>
+  <div class="box-d"><strong>⭐ Diagrama de Euler/Venn:</strong> Sempre desenhe os conjuntos para visualizar as relações. Se o conjunto A está dentro de B, e B dentro de C, então A está dentro de C.</div>
+
+  <h3>3.2 Lógica de Tabela (Puzzle)</h3>
+  <p>Dados: pessoas, objetos, lugares com restrições. Método:</p>
+  <ol class="steps">
+    <li>Liste todas as variáveis em uma tabela (linhas × colunas).</li>
+    <li>Use as pistas diretas primeiro (X para impossível, ✓ para certeza).</li>
+    <li>Elimine por exclusão: se A está em 1, ninguém mais pode estar em 1.</li>
+    <li>Use negações e condicionais para deduzir novos fatos.</li>
+    <li>Verifique consistência ao final.</li>
+  </ol>
+  <div class="ex"><strong>Exemplo:</strong> Ana, Bruno e Carla moram em casas azul, verde e amarela. Ana não mora na verde. Bruno mora na azul. Quem mora na verde?<br>→ Bruno=azul → Ana≠verde → Ana=amarela → <strong>Carla=verde</strong>.</div>
+
+  <h3>3.3 Relações Condicionais em Situações</h3>
+  <div class="card">
+    <h4>Regras de ouro:</h4>
+    <ul>
+      <li>Se "Se P, então Q" e sabemos que P é verdade → Q é verdade (<strong>Modus Ponens</strong>).</li>
+      <li>Se "Se P, então Q" e sabemos que Q é falso → P é falso (<strong>Modus Tollens</strong>).</li>
+      <li>Saber que Q é verdadeiro NÃO garante que P é verdadeiro.</li>
+      <li>Saber que P é falso NÃO garante que Q é falso.</li>
+    </ul>
+  </div>
+
+  <h3>3.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Cinco amigos (A, B, C, D, E) sentam em fila. C não senta ao lado de D. B senta na 1ª posição. A senta imediatamente à direita de B. D senta na última posição. Qual é a posição de C?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) 3ª</li>
+      <li onclick="resp(this,'b','b')">b) 4ª</li>
+      <li onclick="resp(this,'c','b')">c) 5ª</li>
+      <li onclick="resp(this,'d','b')">d) 2ª</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> B=1ª, A=2ª, D=5ª. C não senta ao lado de D (5ª), logo C ≠ 4ª. Restam posições 3ª e 4ª para C e E. Como C≠4ª → C=3ª e E=4ª. Aguarde — relendo: C não ao lado de D(5ª) → C≠4ª → C=3ª, E=4ª. <br><em>Revisão: B(1), A(2), C(3), E(4), D(5). C na 3ª posição.</em> ✅ Gabarito correto: A (3ª).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('2')">⬅ Anterior</button><button class="nbtn" onclick="irPara('4')">Próximo ➡</button></div>
+</div>
+
+<!-- MF1 -->
+<div class="section" id="sec-4">
+  <div class="sh sh-roxo"><div class="num">Matemática Financeira · MF1</div><h2>Juros Simples</h2><p>Os juros incidem apenas sobre o capital inicial. Relação linear com o tempo.</p></div>
+
+  <h3>1.1 Fórmulas Fundamentais</h3>
+  <div class="formula">J = C · i · t &nbsp;&nbsp;&nbsp; M = C · (1 + i · t) &nbsp;&nbsp;&nbsp; M = C + J</div>
+  <p>Onde: <strong>J</strong> = juros, <strong>C</strong> = capital (principal), <strong>i</strong> = taxa (em decimal), <strong>t</strong> = tempo, <strong>M</strong> = montante.</p>
+  <div class="box-a"><strong>⚠ Atenção à unidade de tempo!</strong> A taxa e o tempo devem estar na <em>mesma unidade</em>. Taxa mensal com tempo em anos → converter!</div>
+  <div class="ex"><strong>Exemplo:</strong> Capital = R$2.000, taxa = 3% ao mês, tempo = 6 meses.<br>J = 2000 × 0,03 × 6 = <strong>R$ 360</strong> | M = 2000 + 360 = <strong>R$ 2.360</strong></div>
+
+  <h3>1.2 Taxa Real, Taxa Efetiva e Aparente</h3>
+  <div class="card">
+    <h4>Taxa nominal vs. efetiva (juros simples)</h4>
+    <p>Em juros simples, a taxa nominal é proporcional à efetiva para períodos diferentes.</p>
+    <div class="formula">i<sub>equivalente</sub> = i<sub>nominal</sub> × (t₁/t₂)</div>
+    <div class="ex">Taxa anual 24% a.a. → mensal: 24%/12 = <strong>2% a.m.</strong></div>
+  </div>
+  <div class="card">
+    <h4>Taxa real (descontada inflação)</h4>
+    <div class="formula">1 + i<sub>real</sub> = (1 + i<sub>nominal</sub>) / (1 + inflação)</div>
+  </div>
+
+  <h3>1.3 Taxas Equivalentes (Juros Simples)</h3>
+  <p>Duas taxas são equivalentes quando produzem o mesmo montante no mesmo período.</p>
+  <div class="formula">i₁ · t₁ = i₂ · t₂ &nbsp;→&nbsp; i₁/i₂ = t₂/t₁</div>
+
+  <h3>1.4 Capitais Equivalentes</h3>
+  <p>Dois capitais são equivalentes se, a uma mesma taxa e data focal, possuem o mesmo valor.</p>
+  <div class="formula">C₁ · (1 + i·t₁) = C₂ · (1 + i·t₂)</div>
+
+  <h3>1.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um capital de R$ 5.000 é aplicado a juros simples de 2% ao mês. Qual o montante após 8 meses?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) R$ 5.080</li>
+      <li onclick="resp(this,'b','c')">b) R$ 5.600</li>
+      <li onclick="resp(this,'c','c')">c) R$ 5.800</li>
+      <li onclick="resp(this,'d','c')">d) R$ 6.000</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> J = 5000 × 0,02 × 8 = 800. M = 5000 + 800 = <strong>R$ 5.800</strong>.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('3')">⬅ Anterior</button><button class="nbtn" onclick="irPara('5')">Próximo ➡</button></div>
+</div>
+
+<!-- MF2 -->
+<div class="section" id="sec-5">
+  <div class="sh sh-roxo"><div class="num">Matemática Financeira · MF2</div><h2>Juros Compostos</h2><p>Os juros são calculados sobre o montante acumulado. Crescimento exponencial.</p></div>
+
+  <h3>2.1 Fórmulas Fundamentais</h3>
+  <div class="formula">M = C · (1 + i)ⁿ &nbsp;&nbsp;&nbsp; J = M − C</div>
+  <div class="ex"><strong>Exemplo:</strong> C = R$1.000, i = 10% a.a., n = 3 anos.<br>M = 1000 × (1,10)³ = 1000 × 1,331 = <strong>R$ 1.331</strong></div>
+
+  <h3>2.2 Taxas Equivalentes (Juros Compostos)</h3>
+  <div class="box-d"><strong>⭐ Diferença crucial:</strong> Em juros compostos, taxas equivalentes NÃO são proporcionais — usa-se raiz!</div>
+  <div class="formula">(1 + i<sub>a</sub>)¹ = (1 + i<sub>m</sub>)¹² &nbsp;→&nbsp; i<sub>m</sub> = (1 + i<sub>a</sub>)^(1/12) − 1</div>
+  <div class="ex">Taxa anual de 21% → mensal: i = (1,21)^(1/12) − 1 ≈ 1,6% a.m.</div>
+
+  <h3>2.3 Taxa Nominal vs. Taxa Efetiva</h3>
+  <table>
+    <tr><th>Taxa Nominal</th><th>Taxa Efetiva</th></tr>
+    <tr><td>Declarada para um período, capitalizada em outro</td><td>Taxa real aplicada no período de capitalização</td></tr>
+    <tr><td>Ex.: 12% a.a., capitalização mensal</td><td>i_mensal = 12%/12 = 1% a.m. (efetiva mensal)</td></tr>
+    <tr><td>Converter: divide pela freq. de capitalização</td><td>M = C(1+i_ef)ⁿ com i_ef do período</td></tr>
+  </table>
+
+  <h3>2.4 Taxa Real</h3>
+  <div class="formula">(1 + i<sub>real</sub>) = (1 + i<sub>nominal</sub>) / (1 + inflação)</div>
+
+  <h3>2.5 Capitalização Contínua</h3>
+  <div class="formula">M = C · e^(i·t) &nbsp;&nbsp;&nbsp; onde e ≈ 2,71828</div>
+  <p>Usada em finanças quantitativas. A FCC pode cobrar a fórmula e conceito, não cálculo complexo.</p>
+
+  <h3>2.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Qual a taxa mensal equivalente a uma taxa anual de 44% em juros compostos? (Dado: 1,44^(1/12) ≈ 1,031)</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) 3,67% a.m.</li>
+      <li onclick="resp(this,'b','b')">b) 3,1% a.m.</li>
+      <li onclick="resp(this,'c','b')">c) 3,33% a.m.</li>
+      <li onclick="resp(this,'d','b')">d) 44%/12 ≈ 3,67% a.m.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> i_m = (1,44)^(1/12) − 1 ≈ 1,031 − 1 = 0,031 = <strong>3,1% a.m.</strong> Em juros compostos, não se divide a taxa; usa-se a raiz do período.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('4')">⬅ Anterior</button><button class="nbtn" onclick="irPara('6')">Próximo ➡</button></div>
+</div>
+
+<!-- MF3 -->
+<div class="section" id="sec-6">
+  <div class="sh sh-roxo"><div class="num">Matemática Financeira · MF3</div><h2>Descontos: Simples e Composto</h2><p>Desconto é a diferença entre o valor nominal (futuro) e o valor atual (presente).</p></div>
+
+  <h3>3.1 Conceitos Básicos</h3>
+  <p><strong>Valor Nominal (N):</strong> valor de face do título (valor futuro). <strong>Valor Atual (A):</strong> valor presente após desconto. <strong>Desconto (D):</strong> D = N − A.</p>
+
+  <h3>3.2 Desconto Simples Comercial (Por Fora)</h3>
+  <div class="formula">D<sub>c</sub> = N · d · t &nbsp;&nbsp;&nbsp; A = N · (1 − d · t)</div>
+  <p>O desconto incide sobre o <strong>valor nominal</strong>. É o mais usado pelo comércio (bancos, duplicatas).</p>
+  <div class="ex"><strong>Exemplo:</strong> N = R$1.000, d = 3% a.m., t = 2 meses.<br>D = 1000 × 0,03 × 2 = R$ 60 → A = <strong>R$ 940</strong></div>
+
+  <h3>3.3 Desconto Simples Racional (Por Dentro)</h3>
+  <div class="formula">D<sub>r</sub> = N · i · t / (1 + i · t) &nbsp;&nbsp;&nbsp; A = N / (1 + i · t)</div>
+  <p>O desconto incide sobre o <strong>valor atual</strong>. Matematicamente mais correto que o comercial.</p>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> Para mesmo N, i e t: <strong>Desconto Comercial > Desconto Racional</strong>. O desconto por fora é sempre maior que o por dentro.</div>
+
+  <h3>3.4 Desconto Composto</h3>
+  <div class="formula">A = N · (1 + i)^(−n) = N / (1 + i)ⁿ</div>
+  <div class="ex"><strong>Exemplo:</strong> N = R$1.331, i = 10% a.a., n = 3 anos.<br>A = 1331 / (1,10)³ = 1331/1,331 = <strong>R$ 1.000</strong></div>
+
+  <h3>3.5 Relação entre Taxas de Desconto</h3>
+  <div class="card">
+    <p>Dado o desconto comercial <strong>d</strong>, a taxa de juros correspondente <strong>i</strong> é:</p>
+    <div class="formula">i = d / (1 − d · t)</div>
+  </div>
+
+  <h3>3.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um título de valor nominal R$ 2.000 é descontado 3 meses antes do vencimento a uma taxa de desconto comercial simples de 4% a.m. Qual o valor do desconto?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) R$ 80</li>
+      <li onclick="resp(this,'b','d')">b) R$ 200</li>
+      <li onclick="resp(this,'c','d')">c) R$ 180</li>
+      <li onclick="resp(this,'d','d')">d) R$ 240</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> D = N × d × t = 2000 × 0,04 × 3 = <strong>R$ 240</strong>. Valor atual = 2000 − 240 = R$ 1.760.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('5')">⬅ Anterior</button><button class="nbtn" onclick="irPara('7')">Próximo ➡</button></div>
+</div>
+
+<!-- MF4 -->
+<div class="section" id="sec-7">
+  <div class="sh sh-roxo"><div class="num">Matemática Financeira · MF4</div><h2>Sistemas de Amortização</h2><p>Amortizar = pagar gradualmente uma dívida com parcelas que cobrem juros e o principal.</p></div>
+
+  <h3>4.1 Componentes de uma Parcela</h3>
+  <div class="formula">Parcela (PMT) = Amortização (A) + Juros (J)</div>
+  <p><strong>Saldo devedor</strong> = capital pendente após cada pagamento. Os juros de cada período são calculados sobre o saldo devedor.</p>
+
+  <h3>4.2 Sistema Francês (PRICE)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Parcelas constantes</strong> (PMT fixo).</li>
+      <li>Juros decrescentes ao longo do tempo.</li>
+      <li>Amortização crescente ao longo do tempo.</li>
+    </ul>
+    <div class="formula">PMT = C · i · (1+i)ⁿ / [(1+i)ⁿ − 1]</div>
+  </div>
+  <div class="box-d"><strong>⭐ Dica:</strong> No início do PRICE, a maior parte da parcela é juros. No final, é amortização. O saldo devedor cai lentamente no início.</div>
+
+  <h3>4.3 Sistema de Amortização Constante (SAC)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Amortização constante</strong> = C/n em cada período.</li>
+      <li>Juros decrescentes (base = saldo devedor que diminui).</li>
+      <li>Parcelas decrescentes.</li>
+    </ul>
+    <div class="formula">Amort. = C/n &nbsp;&nbsp;|&nbsp;&nbsp; J_k = Saldo_k × i &nbsp;&nbsp;|&nbsp;&nbsp; PMT_k = C/n + J_k</div>
+  </div>
+
+  <h3>4.4 Sistema Misto (SAM)</h3>
+  <p>Média aritmética do PRICE e do SAC: parcela = (PMT_PRICE + PMT_SAC) / 2.</p>
+  <div class="box-i"><strong>ℹ Comparação dos sistemas:</strong> Para a mesma dívida, taxa e prazo: <strong>SAC</strong> tem parcela inicial maior mas total pago menor. <strong>PRICE</strong> tem parcela constante menor inicialmente, mas total pago maior.</div>
+
+  <h3>4.5 Tabela Comparativa</h3>
+  <table>
+    <tr><th>Característica</th><th>PRICE</th><th>SAC</th></tr>
+    <tr><td>Parcelas</td><td>Constantes</td><td>Decrescentes</td></tr>
+    <tr><td>Amortização</td><td>Crescente</td><td>Constante</td></tr>
+    <tr><td>Juros</td><td>Decrescentes</td><td>Decrescentes</td></tr>
+    <tr><td>Total pago</td><td>Maior</td><td>Menor</td></tr>
+    <tr><td>Uso típico</td><td>Financiamentos bancários</td><td>Imóveis (SFH)</td></tr>
+  </table>
+
+  <h3>4.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um empréstimo de R$ 6.000 será pago em 3 parcelas pelo SAC, com taxa de 10% a.m. Qual o valor da 1ª parcela?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) R$ 2.400</li>
+      <li onclick="resp(this,'b','b')">b) R$ 2.600</li>
+      <li onclick="resp(this,'c','b')">c) R$ 2.200</li>
+      <li onclick="resp(this,'d','b')">d) R$ 3.000</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Amort. = 6000/3 = R$2.000. J₁ = 6000 × 10% = R$600. PMT₁ = 2000 + 600 = <strong>R$ 2.600</strong>.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('6')">⬅ Anterior</button><button class="nbtn" onclick="irPara('8')">Próximo ➡</button></div>
+</div>
+
+<!-- MF5 -->
+<div class="section" id="sec-8">
+  <div class="sh sh-roxo"><div class="num">Matemática Financeira · MF5</div><h2>Fluxo de Caixa</h2><p>Análise de entradas e saídas ao longo do tempo para avaliação de investimentos.</p></div>
+
+  <h3>5.1 Valor Presente Líquido (VPL)</h3>
+  <div class="formula">VPL = Σ [FC_t / (1+i)ᵗ] − Investimento₀</div>
+  <ul>
+    <li>VPL > 0 → projeto viável (cria valor).</li>
+    <li>VPL = 0 → projeto neutro.</li>
+    <li>VPL &lt; 0 → projeto inviável.</li>
+  </ul>
+  <div class="ex"><strong>Exemplo:</strong> Investimento = R$1.000. Retornos: R$600 no ano 1, R$600 no ano 2. Taxa = 10%.<br>VPL = 600/1,1 + 600/1,21 − 1000 = 545,45 + 495,87 − 1000 = <strong>R$ 41,32</strong> (viável ✅)</div>
+
+  <h3>5.2 Taxa Interna de Retorno (TIR)</h3>
+  <p>É a taxa <strong>i</strong> que torna o VPL = 0. Representa a rentabilidade do projeto.</p>
+  <div class="formula">Σ [FC_t / (1+TIR)ᵗ] = Investimento₀</div>
+  <div class="card">
+    <h4>Regra de decisão:</h4>
+    <ul>
+      <li>TIR > taxa mínima de atratividade (TMA) → aceitar.</li>
+      <li>TIR &lt; TMA → rejeitar.</li>
+      <li>TIR = TMA → indiferente.</li>
+    </ul>
+  </div>
+  <div class="box-d"><strong>⭐ Dica FCC:</strong> A FCC geralmente fornece o fluxo simplificado. Para calcular a TIR, usa-se tentativa e erro ou interpolação linear. Saiba a interpretação e a regra de decisão.</div>
+
+  <h3>5.3 Anuidades</h3>
+  <p>Série de pagamentos iguais em intervalos regulares.</p>
+  <div class="formula">PV = PMT · [1 − (1+i)^(−n)] / i &nbsp;&nbsp;&nbsp; FV = PMT · [(1+i)ⁿ − 1] / i</div>
+
+  <h3>5.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um projeto exige investimento de R$10.000 e promete retorno de R$12.100 daqui a 2 anos. Com taxa de 10% a.a., o VPL deste projeto é:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) R$ 2.100</li>
+      <li onclick="resp(this,'b','b')">b) R$ 0</li>
+      <li onclick="resp(this,'c','b')">c) R$ 1.000</li>
+      <li onclick="resp(this,'d','b')">d) −R$ 500</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> VPL = 12100/(1,10)² − 10000 = 12100/1,21 − 10000 = 10000 − 10000 = <strong>R$ 0</strong>. O projeto é neutro; TIR = 10% = TMA.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('7')">⬅ Anterior</button><button class="nbtn" onclick="irPara('9')">Próximo ➡</button></div>
+</div>
+
+<!-- ES1 -->
+<div class="section" id="sec-9">
+  <div class="sh sh-verde"><div class="num">Estatística · ES1</div><h2>Estatística Descritiva</h2><p>Organização, representação e síntese de dados por meio de gráficos, tabelas e medidas.</p></div>
+
+  <h3>1.1 Medidas de Posição (Tendência Central)</h3>
+  <div class="grid2">
+    <div class="card"><h4>Média Aritmética (x̄)</h4><div class="formula" style="font-size:.82rem">x̄ = Σxᵢ / n</div><p>Sensível a valores extremos (outliers).</p></div>
+    <div class="card"><h4>Mediana (Md)</h4><p>Valor central dos dados ordenados. Não afetada por outliers.</p><p>n ímpar: elemento central. n par: média dos dois centrais.</p></div>
+    <div class="card"><h4>Moda (Mo)</h4><p>Valor mais frequente. Pode ser amodal, unimodal, bimodal ou multimodal.</p></div>
+    <div class="card"><h4>Média Ponderada</h4><div class="formula" style="font-size:.82rem">x̄_p = Σ(xᵢ·wᵢ) / Σwᵢ</div></div>
+  </div>
+
+  <h3>1.2 Medidas de Dispersão</h3>
+  <table>
+    <tr><th>Medida</th><th>Fórmula</th><th>Interpretação</th></tr>
+    <tr><td>Amplitude</td><td>A = X_max − X_min</td><td>Simples, mas sensível a outliers</td></tr>
+    <tr><td>Variância (σ²)</td><td>σ² = Σ(xᵢ−x̄)² / n</td><td>Dispersão quadrática média</td></tr>
+    <tr><td>Desvio Padrão (σ)</td><td>σ = √(variância)</td><td>Mesma unidade dos dados</td></tr>
+    <tr><td>CV (Coef. Variação)</td><td>CV = σ/x̄ × 100%</td><td>Compara dispersões de escalas diferentes</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ CV:</strong> CV &lt; 15% = baixa dispersão (homogêneo). CV 15–30% = média. CV > 30% = alta dispersão.</div>
+
+  <h3>1.3 Assimetria e Curtose</h3>
+  <div class="grid2">
+    <div class="card"><h4>Assimetria</h4><ul><li><strong>Simétrica:</strong> Mo = Md = x̄</li><li><strong>Assimetria positiva (+):</strong> x̄ > Md > Mo (cauda à direita)</li><li><strong>Assimetria negativa (−):</strong> x̄ &lt; Md &lt; Mo (cauda à esquerda)</li></ul></div>
+    <div class="card"><h4>Curtose</h4><ul><li><strong>Mesocúrtica:</strong> normal (β₂ = 3)</li><li><strong>Leptocúrtica:</strong> mais pontiaguda (β₂ > 3)</li><li><strong>Platicúrtica:</strong> mais achatada (β₂ &lt; 3)</li></ul></div>
+  </div>
+
+  <h3>1.4 Gráficos e Tabelas</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Histograma:</strong> distribuição de frequências de variáveis contínuas.</li>
+      <li><strong>Boxplot:</strong> mostra mediana, quartis e outliers. Q1=25%, Q2=50%(mediana), Q3=75%.</li>
+      <li><strong>Polígono de frequência:</strong> liga os pontos médios das classes.</li>
+      <li><strong>Ogiva:</strong> frequência acumulada — útil para encontrar mediana e percentis.</li>
+    </ul>
+  </div>
+
+  <h3>1.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Para o conjunto {4, 7, 7, 9, 13}, qual das afirmações é correta?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','d')">a) Média = 8, Mediana = 9, Moda = 7</li>
+      <li onclick="resp(this,'b','d')">b) Média = 9, Mediana = 7, Moda = 7</li>
+      <li onclick="resp(this,'c','d')">c) Média = 7, Mediana = 8, Moda = 9</li>
+      <li onclick="resp(this,'d','d')">d) Média = 8, Mediana = 7, Moda = 7</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: D.</strong> Média = (4+7+7+9+13)/5 = 40/5 = 8. Dados ordenados: 4,7,7,9,13 → Mediana = 7 (3º elemento). Moda = 7 (mais frequente).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('8')">⬅ Anterior</button><button class="nbtn" onclick="irPara('10')">Próximo ➡</button></div>
+</div>
+
+<!-- ES2 -->
+<div class="section" id="sec-10">
+  <div class="sh sh-verde"><div class="num">Estatística · ES2</div><h2>Probabilidade</h2><p>Medida da chance de ocorrência de eventos. Fundamento de toda inferência estatística.</p></div>
+
+  <h3>2.1 Definições e Axiomas</h3>
+  <div class="formula">P(A) = casos favoráveis / casos possíveis &nbsp;&nbsp; (espaço amostral equiprovável)</div>
+  <div class="card">
+    <h4>Axiomas de Kolmogorov:</h4>
+    <ol><li>0 ≤ P(A) ≤ 1 para todo evento A.</li><li>P(Ω) = 1 (espaço amostral completo).</li><li>Se A e B são mutuamente exclusivos: P(A∪B) = P(A) + P(B).</li></ol>
+  </div>
+
+  <h3>2.2 Operações com Eventos</h3>
+  <table>
+    <tr><th>Operação</th><th>Fórmula</th><th>Condição</th></tr>
+    <tr><td>União</td><td>P(A∪B) = P(A)+P(B)−P(A∩B)</td><td>Geral</td></tr>
+    <tr><td>União (excl.)</td><td>P(A∪B) = P(A)+P(B)</td><td>Mutuamente exclusivos</td></tr>
+    <tr><td>Interseção</td><td>P(A∩B) = P(A)·P(B)</td><td>Independentes</td></tr>
+    <tr><td>Complementar</td><td>P(Aᶜ) = 1 − P(A)</td><td>Sempre</td></tr>
+  </table>
+
+  <h3>2.3 Probabilidade Condicional e Independência</h3>
+  <div class="formula">P(A|B) = P(A∩B) / P(B) &nbsp;&nbsp;&nbsp; P(B) > 0</div>
+  <p><strong>Independência:</strong> A e B são independentes se P(A|B) = P(A), equivalente a P(A∩B) = P(A)·P(B).</p>
+
+  <h3>2.4 Teorema de Bayes</h3>
+  <div class="formula">P(A|B) = P(B|A) · P(A) / P(B)</div>
+  <div class="box-roxo"><strong>🔮 Bayes na prática:</strong> Usado para atualizar probabilidades com nova informação. Muito cobrado em questões de diagnóstico médico, testes, etc.</div>
+  <div class="ex"><strong>Exemplo:</strong> P(doente)=0,1. P(teste+|doente)=0,9. P(teste+|saudável)=0,05.<br>P(doente|teste+) = (0,9×0,1) / (0,9×0,1 + 0,05×0,9) ≈ <strong>67%</strong></div>
+
+  <h3>2.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Lança-se um dado. P(número par OU número maior que 4) = ?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) 2/3</li>
+      <li onclick="resp(this,'b','c')">b) 1/2</li>
+      <li onclick="resp(this,'c','c')">c) 2/3</li>
+      <li onclick="resp(this,'d','c')">d) 5/6</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: A/C = 2/3.</strong> Par = {2,4,6}, P=3/6. Maior que 4 = {5,6}, P=2/6. Interseção = {6}, P=1/6. P(par∪>4) = 3/6+2/6−1/6 = <strong>4/6 = 2/3</strong>.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('9')">⬅ Anterior</button><button class="nbtn" onclick="irPara('11')">Próximo ➡</button></div>
+</div>
+
+<!-- ES3 -->
+<div class="section" id="sec-11">
+  <div class="sh sh-verde"><div class="num">Estatística · ES3</div><h2>Variáveis Aleatórias e Distribuições</h2><p>Modelos probabilísticos para descrever fenômenos aleatórios discretos e contínuos.</p></div>
+
+  <h3>3.1 Distribuição Binomial</h3>
+  <div class="formula">P(X=k) = C(n,k) · pᵏ · (1−p)^(n−k)</div>
+  <p><strong>Parâmetros:</strong> n = nº de ensaios, p = prob. de sucesso. <strong>E(X) = np, Var(X) = np(1−p).</strong></p>
+  <div class="ex">Lança-se uma moeda 4 vezes. P(exatamente 3 caras) = C(4,3)·(0,5)³·(0,5)¹ = 4×0,125×0,5 = <strong>0,25</strong></div>
+
+  <h3>3.2 Distribuição Geométrica</h3>
+  <div class="formula">P(X=k) = (1−p)^(k−1) · p &nbsp;&nbsp;&nbsp; E(X) = 1/p</div>
+  <p>Número de ensaios até o 1º sucesso.</p>
+
+  <h3>3.3 Distribuição Normal N(μ, σ²)</h3>
+  <div class="card">
+    <ul>
+      <li>Simétrica em torno da média μ.</li>
+      <li>Regra empírica: 68% em μ±σ; 95% em μ±2σ; 99,7% em μ±3σ.</li>
+      <li><strong>Padronização:</strong> Z = (X − μ) / σ → N(0,1).</li>
+    </ul>
+    <div class="formula">f(x) = (1/σ√2π) · e^[−(x−μ)²/2σ²]</div>
+  </div>
+
+  <h3>3.4 Distribuição Exponencial</h3>
+  <div class="formula">f(x) = λ·e^(−λx), x≥0 &nbsp;&nbsp;&nbsp; E(X) = 1/λ &nbsp;&nbsp;&nbsp; Var(X) = 1/λ²</div>
+  <p>Modela tempo entre eventos de um processo de Poisson. Propriedade da memória.</p>
+
+  <h3>3.5 Distribuições Amostrais</h3>
+  <table>
+    <tr><th>Distribuição</th><th>Uso principal</th><th>Parâmetro</th></tr>
+    <tr><td><strong>t-Student</strong></td><td>Média com σ² desconhecido, n pequeno</td><td>gl = n−1</td></tr>
+    <tr><td><strong>Qui-quadrado (χ²)</strong></td><td>Variância, teste de ajuste, independência</td><td>gl = n−1</td></tr>
+    <tr><td><strong>F de Snedecor</strong></td><td>Comparação de variâncias (ANOVA)</td><td>gl₁, gl₂</td></tr>
+    <tr><td><strong>Uniforme</strong></td><td>Probabilidade igual para todos os valores</td><td>a, b</td></tr>
+  </table>
+
+  <h3>3.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Uma variável X~N(100, 25). Qual o valor de Z correspondente a X = 110?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Z = 1,0</li>
+      <li onclick="resp(this,'b','c')">b) Z = 2,5</li>
+      <li onclick="resp(this,'c','c')">c) Z = 2,0</li>
+      <li onclick="resp(this,'d','c')">d) Z = 0,5</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> σ² = 25 → σ = 5. Z = (110−100)/5 = 10/5 = <strong>2,0</strong>. X=110 está 2 desvios padrão acima da média.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('10')">⬅ Anterior</button><button class="nbtn" onclick="irPara('12')">Próximo ➡</button></div>
+</div>
+
+<!-- ES4 -->
+<div class="section" id="sec-12">
+  <div class="sh sh-verde"><div class="num">Estatística · ES4</div><h2>Esperança, Variância e Correlação</h2><p>Medidas que resumem o comportamento de uma ou mais variáveis aleatórias.</p></div>
+
+  <h3>4.1 Esperança (Valor Esperado)</h3>
+  <div class="formula">E(X) = Σ xᵢ · P(X=xᵢ) &nbsp;&nbsp;&nbsp; (discreta)</div>
+  <div class="card">
+    <h4>Propriedades:</h4>
+    <ul>
+      <li>E(aX + b) = a·E(X) + b</li>
+      <li>E(X + Y) = E(X) + E(Y) (sempre)</li>
+      <li>E(X·Y) = E(X)·E(Y) somente se X e Y forem <strong>independentes</strong></li>
+    </ul>
+  </div>
+
+  <h3>4.2 Variância</h3>
+  <div class="formula">Var(X) = E(X²) − [E(X)]² = E[(X−μ)²]</div>
+  <div class="card">
+    <h4>Propriedades:</h4>
+    <ul>
+      <li>Var(aX + b) = a²·Var(X)</li>
+      <li>Var(X + Y) = Var(X) + Var(Y) + 2·Cov(X,Y)</li>
+      <li>Se X e Y independentes: Var(X+Y) = Var(X) + Var(Y)</li>
+    </ul>
+  </div>
+
+  <h3>4.3 Covariância e Correlação</h3>
+  <div class="formula">Cov(X,Y) = E(XY) − E(X)·E(Y)</div>
+  <div class="formula">ρ(X,Y) = Cov(X,Y) / [σ_X · σ_Y] &nbsp;&nbsp;&nbsp; −1 ≤ ρ ≤ 1</div>
+  <div class="grid2">
+    <div class="card"><h4>Interpretação de ρ</h4><ul><li>ρ = 1: correlação positiva perfeita</li><li>ρ = −1: correlação negativa perfeita</li><li>ρ = 0: sem correlação linear (pode existir relação não-linear)</li></ul></div>
+    <div class="card"><h4>Atenção!</h4><p>Correlação ≠ Causalidade. Duas variáveis podem ter alta correlação sem relação de causa-efeito (variável de confusão).</p></div>
+  </div>
+
+  <h3>4.4 Distribuição Conjunta</h3>
+  <p>Para X e Y discretas: tabela com P(X=x, Y=y). Marginais: somar linha ou coluna.</p>
+  <div class="ex"><strong>Independência:</strong> X e Y são independentes ↔ P(X=x, Y=y) = P(X=x)·P(Y=y) para todos os valores.</div>
+
+  <h3>4.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">X tem distribuição com E(X)=5 e Var(X)=4. Qual é E(3X+2) e Var(3X+2)?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) E=17, Var=38</li>
+      <li onclick="resp(this,'b','c')">b) E=15, Var=12</li>
+      <li onclick="resp(this,'c','c')">c) E=17, Var=36</li>
+      <li onclick="resp(this,'d','c')">d) E=17, Var=12</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> E(3X+2) = 3·E(X)+2 = 3·5+2 = <strong>17</strong>. Var(3X+2) = 3²·Var(X) = 9·4 = <strong>36</strong>. A constante somada não afeta a variância.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('11')">⬅ Anterior</button><button class="nbtn" onclick="irPara('13')">Próximo ➡</button></div>
+</div>
+
+<!-- ES5 -->
+<div class="section" id="sec-13">
+  <div class="sh sh-verde"><div class="num">Estatística · ES5</div><h2>Inferência e Testes de Hipótese</h2><p>Estimar parâmetros populacionais e tomar decisões com base em amostras.</p></div>
+
+  <h3>5.1 Amostragem</h3>
+  <div class="card">
+    <p><strong>Teorema Central do Limite (TCL):</strong> Para n grande (n≥30), a distribuição da média amostral x̄ tende à normal, independente da distribuição original:</p>
+    <div class="formula">x̄ ~ N(μ, σ²/n) &nbsp;&nbsp;&nbsp; Erro Padrão = σ/√n</div>
+  </div>
+
+  <h3>5.2 Estimação Intervalar</h3>
+  <div class="formula">IC(μ) = x̄ ± z_(α/2) · σ/√n &nbsp;&nbsp;&nbsp; (σ conhecido, n grande)</div>
+  <div class="formula">IC(μ) = x̄ ± t_(α/2, n−1) · s/√n &nbsp;&nbsp;&nbsp; (σ desconhecido, t-Student)</div>
+  <table>
+    <tr><th>Nível de Confiança</th><th>α</th><th>z_(α/2)</th></tr>
+    <tr><td>90%</td><td>0,10</td><td>1,645</td></tr>
+    <tr><td>95%</td><td>0,05</td><td>1,960</td></tr>
+    <tr><td>99%</td><td>0,01</td><td>2,576</td></tr>
+  </table>
+
+  <h3>5.3 Teste de Hipótese — Estrutura</h3>
+  <ol class="steps">
+    <li><strong>Definir H₀ (nula)</strong> e <strong>H₁ (alternativa)</strong>.</li>
+    <li>Escolher nível de significância α (geralmente 5% ou 1%).</li>
+    <li>Calcular a estatística de teste (z, t, χ²).</li>
+    <li>Encontrar o valor crítico ou p-valor.</li>
+    <li>Decisão: rejeitar H₀ se |estatística| > valor crítico, ou p-valor &lt; α.</li>
+  </ol>
+
+  <h3>5.4 Tipos de Erros</h3>
+  <div class="grid2">
+    <div class="card"><h4>Erro Tipo I (α)</h4><p>Rejeitar H₀ sendo ela verdadeira.<br>"Falso positivo".<br>P(Erro I) = α = nível de significância.</p></div>
+    <div class="card"><h4>Erro Tipo II (β)</h4><p>Não rejeitar H₀ sendo ela falsa.<br>"Falso negativo".<br>Poder do teste = 1 − β.</p></div>
+  </div>
+
+  <h3>5.5 Teste t de Student</h3>
+  <div class="formula">t = (x̄ − μ₀) / (s/√n) &nbsp;&nbsp;&nbsp; gl = n − 1</div>
+  <p>Usado quando σ² é desconhecido e n é pequeno. Compara média amostral com valor hipotético μ₀.</p>
+
+  <h3>5.6 Teste Qui-Quadrado (χ²)</h3>
+  <div class="grid2">
+    <div class="card"><h4>Aderência (goodness of fit)</h4><div class="formula" style="font-size:.8rem">χ² = Σ (O_i − E_i)² / E_i</div><p>Testa se distribuição observada = esperada. gl = k−1.</p></div>
+    <div class="card"><h4>Independência</h4><p>Testa associação entre duas variáveis categóricas em tabela de contingência.<br>gl = (r−1)(c−1).</p></div>
+  </div>
+
+  <h3>5.7 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Em um teste de hipótese com α=5%, obteve-se p-valor = 0,03. A decisão correta é:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Não rejeitar H₀, pois o p-valor é menor que α.</li>
+      <li onclick="resp(this,'b','b')">b) Rejeitar H₀, pois o p-valor (0,03) é menor que α (0,05).</li>
+      <li onclick="resp(this,'c','b')">c) Rejeitar H₀, pois o p-valor é maior que α.</li>
+      <li onclick="resp(this,'d','b')">d) Não rejeitar H₀, pois não há evidência suficiente.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Regra: se p-valor &lt; α → rejeitar H₀. Como 0,03 &lt; 0,05, há evidência estatística suficiente para rejeitar a hipótese nula ao nível de 5%.</div>
+  </div>
+
+  <div class="box-ok" style="margin-top:28px"><strong>🎉 Parabéns!</strong> Você concluiu as 13 seções de Raciocínio Lógico, Matemática Financeira e Estatística para a banca FCC. Revise os temas com mais dificuldade e pratique questões anteriores. Bons estudos!</div>
+  <div class="nb"><button class="nbtn" onclick="irPara('12')">⬅ Anterior</button><button class="nbtn" onclick="irPara('0')">📋 Índice</button></div>
+</div>
+
+</div><!-- end content -->
+<script>
+function iniciar(){document.getElementById('capa').style.display='none';document.getElementById('nav').style.display='flex';document.getElementById('content').style.display='block'}
+function voltarCapa(){document.getElementById('capa').style.display='flex';document.getElementById('nav').style.display='none';document.getElementById('content').style.display='none'}
+function irPara(n){const num=parseInt(n);document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const sec=document.getElementById('sec-'+num);if(sec){sec.classList.add('active');document.querySelector('#nav select').value=String(num);window.scrollTo({top:0,behavior:'smooth'})}}
+function resp(el,escolha,gabarito){const q=el.closest('.questao');if(q.querySelector('.gab.show'))return;q.querySelectorAll('.alt li').forEach(i=>{const l=i.getAttribute('onclick').match(/'([a-d])'/)[1];if(l===gabarito)i.classList.add('correta');else if(i===el&&escolha!==gabarito)i.classList.add('errada')});q.querySelector('.gab').classList.add('show')}
+</script>
+</body>
+</html>

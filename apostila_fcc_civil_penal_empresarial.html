@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apostila FCC – Dir. Civil, Penal e Empresarial</title>
+<style>
+:root{--az:#1a3a5c;--azm:#2563a8;--azc:#dbeafe;--vd:#15803d;--vdc:#dcfce7;--vm:#b91c1c;--vmc:#fee2e2;--am:#b45309;--amc:#fef3c7;--ro:#7c3aed;--roc:#ede9fe;--la:#0e7490;--lac:#cffafe;--es:#065f46;--esc:#d1fae5;--cz:#f1f5f9;--tx:#1e293b;--bd:#cbd5e1;--in:#1d4ed8;--inc:#eff6ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f8fafc;color:var(--tx)}
+#capa{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 40%,#0f3460 70%,#533483 100%);color:#fff;text-align:center;padding:60px 20px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#capa .badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 20px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+#capa h1{font-size:2.3rem;font-weight:800;line-height:1.2;margin-bottom:8px}
+#capa h2{font-size:1rem;font-weight:400;opacity:.85;margin-bottom:28px}
+#capa .areas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+#capa .area{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:14px 20px;font-size:.85rem;font-weight:600;min-width:130px}
+#capa .pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:720px}
+#capa .pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:5px;padding:4px 10px;font-size:.72rem}
+#capa .btn-s{margin-top:36px;background:#fff;color:#1a1a2e;padding:12px 36px;border-radius:50px;border:none;font-size:1rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+#capa .btn-s:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.4)}
+#nav{background:var(--az);color:#fff;padding:9px 14px;display:none;align-items:center;gap:10px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
+#nav .nt{font-weight:700;font-size:.82rem;white-space:nowrap}
+#nav select{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 9px;font-size:.8rem;cursor:pointer;flex:1;min-width:200px}
+#nav select option{background:#1a3a5c}
+#nav .bc{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:5px 11px;font-size:.77rem;cursor:pointer;white-space:nowrap}
+#content{display:none;max-width:940px;margin:0 auto;padding:26px 16px 70px}
+.section{display:none}.section.active{display:block}
+.sh{border-radius:12px;padding:24px 28px;margin-bottom:24px;color:#fff}
+.sh .num{font-size:.75rem;opacity:.7;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.sh h2{font-size:1.6rem;font-weight:800}
+.sh p{margin-top:6px;opacity:.85;font-size:.9rem}
+.sh-cv{background:linear-gradient(135deg,#1a3a5c,#0e7490)}
+.sh-cp{background:linear-gradient(135deg,#7c0a02,#b91c1c)}
+.sh-ce{background:linear-gradient(135deg,#3b1f6b,#7c3aed)}
+h3{color:var(--az);font-size:1.03rem;margin:22px 0 9px;padding-bottom:5px;border-bottom:2px solid var(--azc)}
+h4{color:var(--azm);font-size:.91rem;margin:12px 0 6px;font-weight:700}
+p{line-height:1.75;margin-bottom:8px;font-size:.91rem}
+ul,ol{padding-left:19px;margin-bottom:10px}
+li{line-height:1.75;font-size:.91rem;margin-bottom:3px}
+.card{background:#fff;border-radius:10px;padding:16px 20px;border:1px solid var(--bd);margin-bottom:13px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.box-d{background:var(--amc);border-left:4px solid var(--am);border-radius:0 8px 8px 0;padding:12px 15px;margin:13px 0}
+.box-d strong{color:var(--am)}
+.box-a{background:var(--vmc);border-left:4px solid var(--vm);border-radius:0 8px 8px 0;padding:12px 15px;margin:13px 0}
+.box-a strong{color:var(--vm)}
+.box-i{background:var(--azc);border-left:4px solid var(--azm);border-radius:0 8px 8px 0;padding:12px 15px;margin:13px 0}
+.box-i strong{color:var(--azm)}
+.box-ok{background:var(--vdc);border-left:4px solid var(--vd);border-radius:0 8px 8px 0;padding:12px 15px;margin:13px 0}
+.box-ok strong{color:var(--vd)}
+.box-ro{background:var(--roc);border-left:4px solid var(--ro);border-radius:0 8px 8px 0;padding:12px 15px;margin:13px 0}
+.box-ro strong{color:var(--ro)}
+.box-la{background:var(--lac);border-left:4px solid var(--la);border-radius:0 8px 8px 0;padding:12px 15px;margin:13px 0}
+.box-la strong{color:var(--la)}
+.ex{background:var(--cz);border-radius:8px;padding:12px 15px;margin:8px 0;font-size:.89rem;border:1px solid var(--bd)}
+.artigo{background:#fff;border:2px solid var(--azc);border-radius:8px;padding:12px 17px;margin:9px 0;font-size:.89rem;line-height:1.7}
+.artigo .an{font-weight:800;color:var(--azm);font-size:.8rem;display:block;margin-bottom:3px}
+table{width:100%;border-collapse:collapse;margin:10px 0 13px;font-size:.86rem}
+th{background:var(--az);color:#fff;padding:8px 12px;text-align:left}
+td{padding:7px 12px;border-bottom:1px solid var(--bd);vertical-align:top}
+tr:nth-child(even) td{background:var(--cz)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+.questao{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin:12px 0}
+.questao .en{font-weight:600;margin-bottom:10px;line-height:1.6;font-size:.91rem}
+.questao .alt{list-style:none;padding:0}
+.questao .alt li{padding:6px 10px;border-radius:6px;margin:4px 0;cursor:pointer;border:1.5px solid var(--bd);transition:all .15s;font-size:.88rem}
+.questao .alt li:hover{border-color:var(--azm);background:var(--azc)}
+.questao .alt li.correta{background:var(--vdc);border-color:var(--vd)}
+.questao .alt li.errada{background:var(--vmc);border-color:var(--vm)}
+.questao .gab{display:none;margin-top:10px;padding:10px;background:var(--cz);border-radius:8px;font-size:.85rem;line-height:1.65}
+.questao .gab.show{display:block}
+.nb{display:flex;gap:10px;margin-top:36px;justify-content:space-between}
+.nbtn{background:var(--az);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;font-size:.86rem;font-weight:600;transition:background .2s}
+.nbtn:hover{background:var(--azm)}
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:16px 0}
+.ii{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;text-align:center}
+.ii:hover{border-color:var(--azm);background:var(--azc);transform:translateY(-2px)}
+.ii .n{font-size:1.1rem;font-weight:800;color:var(--az)}
+.ii .nm{font-size:.74rem;color:#64748b;margin-top:2px;line-height:1.3}
+.tag{display:inline-block;border-radius:4px;padding:1px 7px;font-size:.72rem;font-weight:700;margin-right:3px}
+.t-cv{background:var(--lac);color:var(--la)}
+.t-cp{background:var(--vmc);color:var(--vm)}
+.t-ce{background:var(--roc);color:var(--ro)}
+.prazo-box{background:#fff;border:2px solid var(--azc);border-radius:8px;padding:10px 16px;margin:8px 0;display:flex;align-items:center;gap:12px}
+.prazo-num{font-size:1.6rem;font-weight:900;color:var(--azm);min-width:60px;text-align:center}
+.prazo-desc{font-size:.88rem;line-height:1.5}
+</style>
+</head>
+<body>
+<!-- CAPA -->
+<div id="capa">
+  <div class="badge">Banca FCC</div>
+  <h1>Direito Civil, Penal e Empresarial</h1>
+  <h2>Apostila Completa para Concursos Públicos</h2>
+  <div class="areas">
+    <div class="area">⚖️ Direito Civil<br><small style="opacity:.7">LINDB · CC/2002</small></div>
+    <div class="area">🔒 Direito Penal<br><small style="opacity:.7">CP · Leis Especiais</small></div>
+    <div class="area">🏢 Dir. Empresarial<br><small style="opacity:.7">CC · LSA · LFRE</small></div>
+  </div>
+  <div class="pills">
+    <span class="pill">LINDB</span><span class="pill">Pessoas Naturais e Jurídicas</span>
+    <span class="pill">Negócio Jurídico</span><span class="pill">Prescrição e Decadência</span>
+    <span class="pill">Obrigações e Contratos</span><span class="pill">Responsabilidade Civil</span>
+    <span class="pill">Lei Penal no Tempo/Espaço</span><span class="pill">Teoria do Crime</span>
+    <span class="pill">Crimes contra a Adm. Pública</span><span class="pill">Crimes Tributários</span>
+    <span class="pill">Empresário e Sociedades</span><span class="pill">Falência e Recuperação</span>
+  </div>
+  <button class="btn-s" onclick="iniciar()">📚 Começar a Estudar</button>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <span class="nt">📚 FCC</span>
+  <select onchange="irPara(this.value)">
+    <option value="0">📋 Índice Geral</option>
+    <optgroup label="6.1 Direito Civil">
+      <option value="1">CV1 – LINDB</option>
+      <option value="2">CV2 – Pessoas Naturais e Jurídicas</option>
+      <option value="3">CV3 – Bens, Fatos e Negócios Jurídicos</option>
+      <option value="4">CV4 – Prescrição, Decadência e Obrigações</option>
+      <option value="5">CV5 – Contratos, Resp. Civil e Direitos Reais</option>
+    </optgroup>
+    <optgroup label="6.2 Direito Penal">
+      <option value="6">CP1 – Lei Penal, Legalidade e Anterioridade</option>
+      <option value="7">CP2 – Teoria do Crime</option>
+      <option value="8">CP3 – Crimes contra a Fé Pública</option>
+      <option value="9">CP4 – Crimes contra a Adm. Pública</option>
+      <option value="10">CP5 – Crimes Tributários e Abuso de Autoridade</option>
+    </optgroup>
+    <optgroup label="6.3 Direito Empresarial">
+      <option value="11">CE1 – Empresário e Registro de Empresa</option>
+      <option value="12">CE2 – Direito Societário</option>
+      <option value="13">CE3 – Falência e Recuperação Judicial</option>
+    </optgroup>
+  </select>
+  <button class="bc" onclick="voltarCapa()">⬅ Capa</button>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<!-- ÍNDICE -->
+<div class="section active" id="sec-0">
+  <div class="sh" style="background:linear-gradient(135deg,#1a1a2e,#533483)"><div class="num">Apostila FCC</div><h2>📋 Índice Geral</h2><p>13 seções cobrindo Direito Civil, Penal e Empresarial conforme o edital da FCC.</p></div>
+  <h3><span class="tag t-cv">Direito Civil</span> Seções CV1 a CV5</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('1')"><div class="n">CV1</div><div class="nm">LINDB – Lei de Introdução</div></div>
+    <div class="ii" onclick="irPara('2')"><div class="n">CV2</div><div class="nm">Pessoas Naturais e Jurídicas</div></div>
+    <div class="ii" onclick="irPara('3')"><div class="n">CV3</div><div class="nm">Bens, Fatos e Negócios Jurídicos</div></div>
+    <div class="ii" onclick="irPara('4')"><div class="n">CV4</div><div class="nm">Prescrição, Decadência e Obrigações</div></div>
+    <div class="ii" onclick="irPara('5')"><div class="n">CV5</div><div class="nm">Contratos, Resp. Civil e Direitos Reais</div></div>
+  </div>
+  <h3><span class="tag t-cp">Direito Penal</span> Seções CP1 a CP5</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('6')"><div class="n">CP1</div><div class="nm">Lei Penal, Legalidade e Anterioridade</div></div>
+    <div class="ii" onclick="irPara('7')"><div class="n">CP2</div><div class="nm">Teoria do Crime</div></div>
+    <div class="ii" onclick="irPara('8')"><div class="n">CP3</div><div class="nm">Crimes contra a Fé Pública</div></div>
+    <div class="ii" onclick="irPara('9')"><div class="n">CP4</div><div class="nm">Crimes contra a Adm. Pública</div></div>
+    <div class="ii" onclick="irPara('10')"><div class="n">CP5</div><div class="nm">Crimes Tributários e Abuso de Autoridade</div></div>
+  </div>
+  <h3><span class="tag t-ce">Direito Empresarial</span> Seções CE1 a CE3</h3>
+  <div class="ig">
+    <div class="ii" onclick="irPara('11')"><div class="n">CE1</div><div class="nm">Empresário e Registro</div></div>
+    <div class="ii" onclick="irPara('12')"><div class="n">CE2</div><div class="nm">Direito Societário</div></div>
+    <div class="ii" onclick="irPara('13')"><div class="n">CE3</div><div class="nm">Falência e Recuperação Judicial</div></div>
+  </div>
+</div>
+
+<!-- CV1 – LINDB -->
+<div class="section" id="sec-1">
+  <div class="sh sh-cv"><div class="num">Direito Civil · CV1</div><h2>LINDB – Lei de Introdução às Normas do Direito Brasileiro</h2><p>Dec.-Lei 4.657/1942 — regras sobre vigência, aplicação e conflito de leis no tempo e no espaço.</p></div>
+
+  <h3>1.1 Vigência e Obrigatoriedade</h3>
+  <div class="g2">
+    <div class="prazo-box"><div class="prazo-num">45<br><small style="font-size:.6rem">dias</small></div><div class="prazo-desc"><strong>Vacatio legis padrão (Brasil)</strong><br>Se a lei não fixar prazo, vigora 45 dias após a publicação no Brasil e 3 meses no exterior.</div></div>
+    <div class="prazo-box"><div class="prazo-num">→</div><div class="prazo-desc"><strong>Vigência contínua:</strong> a lei entra em vigor e permanece até outra lei expressamente revogá-la ou ser incompatível com lei posterior.</div></div>
+  </div>
+  <div class="card">
+    <h4>Repristinação (art. 2º, §3º LINDB):</h4>
+    <p>A lei revogada não se restaura automaticamente pela revogação da lei revogadora — a repristinação <strong>não ocorre automaticamente</strong>, sendo necessária expressa previsão legal.</p>
+  </div>
+
+  <h3>1.2 Interpretação e Integração</h3>
+  <div class="card">
+    <h4>Lacunas — Art. 4º LINDB: na ausência de lei, o juiz decide com base em:</h4>
+    <p style="text-align:center;font-weight:600;color:var(--azm)">Analogia → Costumes → Princípios Gerais do Direito</p>
+    <ul style="margin-top:8px">
+      <li><strong>Analogia legis:</strong> aplicação de lei a caso semelhante não regulado.</li>
+      <li><strong>Analogia iuris:</strong> extração de princípio de várias normas para aplicar ao caso.</li>
+      <li><strong>Equidade:</strong> usada quando a própria lei permitir (não integra lacunas por si).</li>
+    </ul>
+  </div>
+
+  <h3>1.3 Conflito das Leis no Tempo</h3>
+  <table>
+    <tr><th>Princípio</th><th>Conteúdo</th></tr>
+    <tr><td><strong>Irretroatividade</strong></td><td>A lei nova não pode prejudicar ato jurídico perfeito, direito adquirido e coisa julgada (art. 6º LINDB + art. 5º, XXXVI CF).</td></tr>
+    <tr><td><strong>Ato jurídico perfeito</strong></td><td>Já consumado sob a lei antiga; a nova lei não o afeta.</td></tr>
+    <tr><td><strong>Direito adquirido</strong></td><td>Direito incorporado ao patrimônio jurídico do titular; a lei nova não pode suprimi-lo.</td></tr>
+    <tr><td><strong>Coisa julgada</strong></td><td>Decisão judicial da qual não caiba mais recurso; intangível pela lei nova.</td></tr>
+  </table>
+
+  <h3>1.4 Eficácia das Leis no Espaço (Art. 7º a 17)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Estatuto pessoal:</strong> a lei do domicílio regula a capacidade, os direitos de família e os direitos sucessórios.</li>
+      <li><strong>Locus regit actum:</strong> o lugar do ato rege sua forma (art. 9º).</li>
+      <li><strong>Lex rei sitae:</strong> os bens imóveis são regidos pela lei do lugar onde situados (art. 8º).</li>
+      <li><strong>Ordem pública e bons costumes:</strong> normas estrangeiras não se aplicam quando ofenderem a soberania nacional, a ordem pública ou os bons costumes (art. 17).</li>
+    </ul>
+  </div>
+  <div class="box-d"><strong>⭐ EC 45/2004 e LINDB:</strong> A Lei 13.655/2018 acrescentou artigos à LINDB sobre segurança jurídica, motivação e responsabilidade nas decisões de autoridades públicas — muito cobrado na FCC após 2019.</div>
+
+  <h3>1.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a LINDB, quando uma lei não dispõe sobre o prazo para entrada em vigor, ela começa a vigorar:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Imediatamente após a publicação no Diário Oficial.</li>
+      <li onclick="resp(this,'b','b')">b) 45 dias após a publicação no Brasil e 3 meses no exterior.</li>
+      <li onclick="resp(this,'c','b')">c) 30 dias após a publicação, conforme prazo geral do Código Civil.</li>
+      <li onclick="resp(this,'d','b')">d) Na data indicada pelo Poder Executivo por decreto regulamentador.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 1º da LINDB: "Salvo disposição contrária, a lei começa a vigorar em todo o país quarenta e cinco dias depois de oficialmente publicada." Para vigorar no exterior: 3 meses.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('0')">⬅ Índice</button><button class="nbtn" onclick="irPara('2')">Próximo ➡</button></div>
+</div>
+
+<!-- CV2 – PESSOAS -->
+<div class="section" id="sec-2">
+  <div class="sh sh-cv"><div class="num">Direito Civil · CV2</div><h2>Pessoas Naturais e Jurídicas</h2><p>Personalidade, capacidade, direitos da personalidade, domicílio e classificação das pessoas jurídicas.</p></div>
+
+  <h3>2.1 Pessoas Naturais</h3>
+  <div class="artigo"><span class="an">Art. 1º – CC/2002</span>Toda pessoa é capaz de direitos e deveres na ordem civil. A personalidade civil começa com o nascimento com vida; a lei põe a salvo, desde a concepção, os direitos do nascituro.</div>
+  <div class="g2">
+    <div class="card"><h4>Capacidade de Direito (Gozo)</h4><p>Universal — toda pessoa natural possui desde o nascimento com vida. Não pode ser retirada.</p></div>
+    <div class="card"><h4>Capacidade de Fato (Exercício)</h4><p>Aptidão para praticar atos sem representação ou assistência. Pode ser plena, restrita ou inexistente.</p></div>
+  </div>
+
+  <h3>2.2 Incapacidade — Art. 3º e 4º CC/2002 (após EPCD – Lei 13.146/2015)</h3>
+  <table>
+    <tr><th>Tipo</th><th>Quem</th><th>Regime</th></tr>
+    <tr><td><strong>Absolutamente incapazes</strong></td><td>Apenas menores de 16 anos (após EPCD)</td><td>Representação — atos são nulos</td></tr>
+    <tr><td><strong>Relativamente incapazes</strong></td><td>16–18 anos; ébrios habituais; viciados em tóxicos; pródigos; aqueles que não puderem exprimir vontade (transitoriamente)</td><td>Assistência — atos são anuláveis</td></tr>
+  </table>
+  <div class="box-a"><strong>⚠ Mudança do Estatuto da Pessoa com Deficiência:</strong> A pessoa com deficiência NÃO é mais absolutamente incapaz. Tem plena capacidade; poderá usar curatela de forma excepcional e limitada.</div>
+
+  <h3>2.3 Direitos da Personalidade (Arts. 11–21 CC)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Características:</strong> absolutos, intransmissíveis, irrenunciáveis, extrapatrimoniais, ilimitados (rol exemplificativo), vitalícios, imprescritíveis.</li>
+      <li>Abrangem: nome, imagem, honra, privacidade, integridade física e psíquica.</li>
+      <li><strong>Exceção de limitação voluntária:</strong> pode-se limitar o exercício de direito da personalidade em caso de interesse privado e não permanente (ex.: contrato de cessão de imagem).</li>
+    </ul>
+  </div>
+
+  <h3>2.4 Domicílio</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Civil (art. 70):</strong> local onde a pessoa reside com ânimo definitivo.</li>
+      <li><strong>Profissional (art. 72):</strong> onde exerce profissão, para obrigações dela decorrentes.</li>
+      <li><strong>Múltiplo domicílio:</strong> possível — considera-se domicílio qualquer dos lugares onde habita.</li>
+      <li><strong>Domicílio necessário:</strong> incapaz = domicílio do representante; servidor público = lugar de exercício.</li>
+    </ul>
+  </div>
+
+  <h3>2.5 Pessoas Jurídicas</h3>
+  <table>
+    <tr><th>Tipo</th><th>Características</th><th>Exemplos</th></tr>
+    <tr><td><strong>Associações</strong></td><td>Sem fins econômicos; estatuto; assembleia geral soberana</td><td>Clubes, OAB, entidades beneficentes</td></tr>
+    <tr><td><strong>Sociedades</strong></td><td>Com fins econômicos (lucro); simples ou empresária</td><td>Ltda., S/A, cooperativa</td></tr>
+    <tr><td><strong>Fundações</strong></td><td>Patrimônio afetado a fim específico; fins religiosos, morais, culturais, assistenciais; MP fiscaliza</td><td>Fundação Getúlio Vargas, Funbio</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Fundações:</strong> O Ministério Público vela pelas fundações (art. 66 CC). Fins lucrativos são <strong>proibidos</strong> às fundações. Para alteração estatutária: aprovação pela maioria absoluta + MP não se opõe + juiz homologa.</div>
+
+  <h3>2.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme o Código Civil após o Estatuto da Pessoa com Deficiência (Lei 13.146/2015), são absolutamente incapazes:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Os menores de 18 anos e as pessoas com deficiência mental.</li>
+      <li onclick="resp(this,'b','b')">b) Somente os menores de 16 anos.</li>
+      <li onclick="resp(this,'c','b')">c) Os menores de 16 anos e os ébrios habituais.</li>
+      <li onclick="resp(this,'d','b')">d) Os menores de 16 anos e as pessoas que não puderem exprimir sua vontade.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Após a Lei 13.146/2015 (EPCD), o art. 3º do CC prevê como absolutamente incapazes <em>apenas</em> os menores de 16 anos. As pessoas com deficiência não são mais incapazes absolutas; ébrios e viciados em tóxicos são relativamente incapazes (art. 4º, II).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('1')">⬅ Anterior</button><button class="nbtn" onclick="irPara('3')">Próximo ➡</button></div>
+</div>
+
+<!-- CV3 – BENS, FATOS E NEGÓCIOS -->
+<div class="section" id="sec-3">
+  <div class="sh sh-cv"><div class="num">Direito Civil · CV3</div><h2>Bens, Fatos e Negócios Jurídicos</h2><p>Classificação dos bens, teoria do fato jurídico e requisitos do negócio jurídico.</p></div>
+
+  <h3>3.1 Classificação dos Bens</h3>
+  <table>
+    <tr><th>Critério</th><th>Tipo</th><th>Exemplos</th></tr>
+    <tr><td>Mobilidade</td><td>Imóveis / Móveis</td><td>Terreno; automóvel, energia elétrica</td></tr>
+    <tr><td>Fungibilidade</td><td>Fungíveis / Infungíveis</td><td>Dinheiro; obra de arte</td></tr>
+    <tr><td>Consumibilidade</td><td>Consumíveis / Inconsumíveis</td><td>Alimentos; livro</td></tr>
+    <tr><td>Divisibilidade</td><td>Divisíveis / Indivisíveis</td><td>Sacas de café; animal vivo</td></tr>
+    <tr><td>Singularidade</td><td>Singulares / Coletivos (universalidades)</td><td>Livro; biblioteca (universitas rerum)</td></tr>
+    <tr><td>Titularidade</td><td>Públicos / Privados</td><td>Praças; bens particulares</td></tr>
+  </table>
+  <div class="box-i"><strong>ℹ Bens imóveis por força de lei (art. 80 CC):</strong> direito à sucessão aberta e os direitos reais sobre imóveis — mesmo sendo incorpóreos, são tratados como imóveis para fins jurídicos.</div>
+
+  <h3>3.2 Fato Jurídico</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Fato jurídico em sentido amplo:</strong> todo evento que produz efeitos jurídicos.</li>
+      <li><strong>Fato natural (stricto sensu):</strong> independe da vontade humana (morte, nascimento, decurso do tempo).</li>
+      <li><strong>Fato humano (ato jurídico):</strong> decorre da vontade humana; subdivide-se em:<br>→ <em>Ato jurídico lícito:</em> simples (efeitos legais automáticos) ou negócio jurídico (efeitos desejados).<br>→ <em>Ato ilícito:</em> gera responsabilidade civil/penal.</li>
+    </ul>
+  </div>
+
+  <h3>3.3 Negócio Jurídico — Requisitos</h3>
+  <div class="g2">
+    <div class="card"><h4>Plano da Existência</h4><p>Declaração de vontade, agente, objeto e forma. Sem esses elementos, o negócio inexiste juridicamente.</p></div>
+    <div class="card"><h4>Plano da Validade (art. 104 CC)</h4><ul><li>Agente <strong>capaz</strong></li><li>Objeto <strong>lícito, possível, determinado ou determinável</strong></li><li>Forma <strong>prescrita ou não defesa em lei</strong></li></ul></div>
+  </div>
+  <div class="card"><h4>Plano da Eficácia</h4><p>Elementos acidentais: <strong>condição</strong> (evento futuro e incerto), <strong>termo</strong> (evento futuro e certo), <strong>encargo/modo</strong> (ônus imposto ao beneficiário de liberalidade).</p></div>
+
+  <h3>3.4 Invalidade do Negócio Jurídico</h3>
+  <table>
+    <tr><th>Vício</th><th>Consequência</th><th>Prazo</th><th>Legitimidade</th></tr>
+    <tr><td><strong>Nulidade absoluta</strong> (arts. 166–167)</td><td>Nulo — sem efeitos desde o início (ex tunc)</td><td>Imprescritível</td><td>Qualquer interessado ou MP; juiz de ofício</td></tr>
+    <tr><td><strong>Anulabilidade</strong> (arts. 171–172)</td><td>Anulável — produz efeitos até ser anulado</td><td>4 anos (regra) ou 2 anos</td><td>Somente o prejudicado</td></tr>
+  </table>
+  <div class="card">
+    <h4>Vícios do consentimento (anulabilidade):</h4>
+    <p>Erro (falsa percepção da realidade) · Dolo (induzimento malicioso) · Coação (ameaça grave) · Estado de perigo · Lesão · Fraude contra credores.</p>
+    <h4>Simulação — art. 167:</h4>
+    <p>É causa de <strong>nulidade absoluta</strong> (diferentemente dos demais vícios do consentimento, que geram anulabilidade).</p>
+  </div>
+
+  <h3>3.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um negócio jurídico praticado com simulação é:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Anulável, com prazo de 4 anos para arguição.</li>
+      <li onclick="resp(this,'b','c')">b) Válido, se as partes consentiram expressamente.</li>
+      <li onclick="resp(this,'c','c')">c) Nulo de pleno direito, podendo ser declarado de ofício pelo juiz.</li>
+      <li onclick="resp(this,'d','c')">d) Ineficaz perante terceiros, mas válido entre as partes.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 167 do CC: "É nulo o negócio jurídico simulado, mas subsistirá o que se dissimulou, se válido for na substância e na forma." A simulação é vício social que gera nulidade absoluta — o juiz pode declará-la de ofício, e o prazo é imprescritível.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('2')">⬅ Anterior</button><button class="nbtn" onclick="irPara('4')">Próximo ➡</button></div>
+</div>
+
+<!-- CV4 – PRESCRIÇÃO, DECADÊNCIA E OBRIGAÇÕES -->
+<div class="section" id="sec-4">
+  <div class="sh sh-cv"><div class="num">Direito Civil · CV4</div><h2>Prescrição, Decadência e Obrigações</h2><p>Extinção de direitos pelo tempo e o regime das obrigações civis.</p></div>
+
+  <h3>4.1 Prescrição × Decadência</h3>
+  <table>
+    <tr><th>Característica</th><th>Prescrição</th><th>Decadência</th></tr>
+    <tr><td>O que extingue</td><td>A pretensão (direito de ação)</td><td>O próprio direito subjetivo</td></tr>
+    <tr><td>Origem do prazo</td><td>Violação do direito (lesão)</td><td>Nascimento do direito</td></tr>
+    <tr><td>Arguição</td><td>Pelo réu; juiz pode de ofício</td><td>Juiz pode de ofício (decadência legal)</td></tr>
+    <tr><td>Suspensão/interrupção</td><td>Admite (arts. 197–202)</td><td>Só admite se previsto em lei</td></tr>
+    <tr><td>Renúncia</td><td>Após consumada, pode ser renunciada</td><td>Decadência legal: irrenunciável</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Prazos de prescrição mais cobrados (CC):</strong> 10 anos (regra geral — art. 205); 5 anos (prestações periódicas, honorários, créditos de atividade profissional — art. 206 §5º); 3 anos (reparação civil, enriquecimento sem causa — art. 206 §3º); 1 ano (cobrança de seguro, hospedagem — art. 206 §1º).</div>
+
+  <h3>4.2 Causas de Impedimento/Suspensão da Prescrição</h3>
+  <div class="card">
+    <h4>Art. 197 — Não corre prescrição:</h4>
+    <ul>
+      <li>Entre cônjuges na constância da sociedade conjugal.</li>
+      <li>Entre ascendentes e descendentes, durante o poder familiar.</li>
+      <li>Entre tutelados/curatelados e seus representantes durante tutela/curatela.</li>
+    </ul>
+    <h4>Art. 198 — Não corre também contra:</h4>
+    <p>Absolutamente incapazes; ausentes; militares em serviço de guerra.</p>
+  </div>
+
+  <h3>4.3 Obrigações — Características e Espécies</h3>
+  <div class="g2">
+    <div class="card"><h4>Quanto ao objeto</h4><ul><li><strong>Dar:</strong> coisa certa ou incerta.</li><li><strong>Fazer:</strong> infungível (pessoal) ou fungível.</li><li><strong>Não fazer:</strong> abstenção.</li></ul></div>
+    <div class="card"><h4>Quanto à pluralidade</h4><ul><li><strong>Divisível / Indivisível:</strong> pode ou não ser fracionada.</li><li><strong>Solidária ativa:</strong> qualquer credor pode exigir tudo.</li><li><strong>Solidária passiva:</strong> qualquer devedor pode ser cobrado pelo todo.</li></ul></div>
+  </div>
+
+  <h3>4.4 Inadimplemento e Mora</h3>
+  <div class="card">
+    <table>
+      <tr><th>Conceito</th><th>Definição</th><th>Efeitos</th></tr>
+      <tr><td><strong>Mora</strong></td><td>Não cumprir no tempo, lugar e forma devidos</td><td>Juros, correção, perdas e danos</td></tr>
+      <tr><td><strong>Mora ex re</strong></td><td>Decorre do próprio vencimento (termo certo)</td><td>Interpelação desnecessária</td></tr>
+      <tr><td><strong>Mora ex persona</strong></td><td>Requer interpelação do devedor</td><td>Necessária notificação prévia</td></tr>
+      <tr><td><strong>Inadimplemento absoluto</strong></td><td>Prestação inútil ao credor</td><td>Resolução + perdas e danos</td></tr>
+    </table>
+  </div>
+
+  <h3>4.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Qual é o prazo geral de prescrição previsto no Código Civil, aplicável quando não houver prazo específico?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) 5 anos.</li>
+      <li onclick="resp(this,'b','b')">b) 10 anos.</li>
+      <li onclick="resp(this,'c','b')">c) 20 anos.</li>
+      <li onclick="resp(this,'d','b')">d) 3 anos.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 205 do CC/2002: "A prescrição ocorre em dez anos, quando a lei não lhe haja fixado prazo menor." Os prazos especiais (3, 5 anos etc.) só se aplicam quando expressamente previstos nos artigos 206 e seguintes.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('3')">⬅ Anterior</button><button class="nbtn" onclick="irPara('5')">Próximo ➡</button></div>
+</div>
+
+<!-- CV5 – CONTRATOS, RESPONSABILIDADE E DIREITOS REAIS -->
+<div class="section" id="sec-5">
+  <div class="sh sh-cv"><div class="num">Direito Civil · CV5</div><h2>Contratos, Responsabilidade Civil e Direitos Reais</h2><p>Princípios contratuais, responsabilidade civil e principais formas de exploração de propriedades.</p></div>
+
+  <h3>5.1 Princípios dos Contratos</h3>
+  <div class="g2">
+    <div class="card"><h4>Autonomia Privada</h4><p>Liberdade de contratar e definir o conteúdo. Limitada pela função social, boa-fé e ordem pública.</p></div>
+    <div class="card"><h4>Função Social (art. 421 CC)</h4><p>Os contratos devem observar os limites impostos pelo interesse social. Não pode prejudicar terceiros ou a coletividade.</p></div>
+    <div class="card"><h4>Boa-fé Objetiva (art. 422 CC)</h4><p>Conduta leal, honesta e diligente nas fases pré-contratual, contratual e pós-contratual.</p></div>
+    <div class="card"><h4>Relatividade e Força Obrigatória</h4><p>O contrato vincula as partes (pacta sunt servanda). Terceiros podem ser atingidos quando a lei prevê ou pela função social.</p></div>
+  </div>
+
+  <h3>5.2 Responsabilidade Civil</h3>
+  <table>
+    <tr><th>Modalidade</th><th>Fundamento</th><th>Elementos</th></tr>
+    <tr><td><strong>Subjetiva</strong></td><td>Art. 186 CC — ato ilícito por dolo ou culpa</td><td>Ato ilícito + dano + nexo causal + <strong>culpa</strong></td></tr>
+    <tr><td><strong>Objetiva</strong></td><td>Art. 927 CC — risco da atividade</td><td>Ato + dano + nexo causal (<strong>sem necessidade de culpa</strong>)</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Responsabilidade objetiva:</strong> aplica-se quando a atividade normalmente desenvolvida implica risco para terceiros (cláusula geral — art. 927, parágrafo único) ou quando a lei expressamente prevê (ex.: CDC, Código do Consumidor, responsabilidade do Estado).</div>
+
+  <h3>5.3 Principais Contratos Cobrados pela FCC</h3>
+  <table>
+    <tr><th>Contrato</th><th>Essência</th><th>Ponto-chave</th></tr>
+    <tr><td><strong>Compra e Venda</strong></td><td>Transferência de propriedade por preço</td><td>Coisas imóveis: escritura pública + registro; perfeito com acordo sobre coisa e preço</td></tr>
+    <tr><td><strong>Comodato</strong></td><td>Empréstimo gratuito de bem infungível</td><td>Unilateral; comodatário arca com despesas ordinárias; restituição ao final</td></tr>
+    <tr><td><strong>Arrendamento Rural</strong></td><td>Cessão onerosa de imóvel rural para exploração</td><td>Prazo mínimo legal; Estatuto da Terra; diferente do parceria rural</td></tr>
+    <tr><td><strong>Locação</strong></td><td>Cessão onerosa de uso e gozo de coisa</td><td>Res. 8.245/91 para imóveis urbanos; CC para demais</td></tr>
+  </table>
+
+  <h3>5.4 Direitos Reais de Gozo</h3>
+  <div class="g2">
+    <div class="card"><h4>Posse</h4><p>Exercício de fato de algum dos poderes inerentes à propriedade. Posse direta (detentor) × indireta (proprietário). Efeitos: usucapião, ações possessórias, frutos.</p></div>
+    <div class="card"><h4>Usufruto</h4><p>Direito real de usar e gozar coisa alheia, conservando sua substância. Temporário; intuitu personae; extingue-se pela morte do usufrutuário.</p></div>
+  </div>
+
+  <h3>5.5 Inventário</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Judicial:</strong> obrigatório se houver herdeiro incapaz, testamento ou desacordo entre herdeiros.</li>
+      <li><strong>Extrajudicial (cartório):</strong> todos maiores e capazes, consenso, sem testamento, com advogado.</li>
+      <li><strong>Prazo:</strong> deve ser aberto em até 2 meses da abertura da sucessão e concluído em 12 meses (prorrogáveis).</li>
+    </ul>
+  </div>
+
+  <h3>5.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A responsabilidade civil subjetiva, nos termos do art. 186 do Código Civil, pressupõe a presença dos seguintes elementos:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Dano, nexo causal e risco da atividade.</li>
+      <li onclick="resp(this,'b','c')">b) Ato lícito, dano patrimonial e nexo causal.</li>
+      <li onclick="resp(this,'c','c')">c) Ação ou omissão voluntária, negligência ou imprudência, nexo causal e dano.</li>
+      <li onclick="resp(this,'d','c')">d) Dano, nexo causal, independentemente de culpa ou dolo.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 186 CC: "Aquele que, por ação ou omissão voluntária, negligência ou imprudência, violar direito e causar dano a outrem, ainda que exclusivamente moral, comete ato ilícito." Elementos: conduta (ação/omissão) + culpa lato sensu (dolo ou culpa) + nexo causal + dano.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('4')">⬅ Anterior</button><button class="nbtn" onclick="irPara('6')">Próximo ➡</button></div>
+</div>
+
+<!-- CP1 – LEI PENAL -->
+<div class="section" id="sec-6">
+  <div class="sh sh-cp"><div class="num">Direito Penal · CP1</div><h2>Lei Penal, Legalidade e Anterioridade</h2><p>Fundamentos constitucionais do Direito Penal e aplicação da lei penal no tempo e no espaço.</p></div>
+
+  <h3>6.1 Princípios Fundamentais</h3>
+  <div class="g2">
+    <div class="card"><h4>Legalidade (art. 5º, XXXIX CF + art. 1º CP)</h4><p><em>Nullum crimen, nulla poena sine lege.</em> Não há crime sem lei anterior que o defina; não há pena sem prévia cominação legal. Quatro dimensões: <strong>lex scripta, lex stricta, lex praevia, lex certa.</strong></p></div>
+    <div class="card"><h4>Anterioridade</h4><p>A lei penal deve ser <em>anterior</em> ao fato punível. É vedada a retroatividade <em>in malam partem</em>. Mas a lei mais benéfica (<em>novatio legis in mellius</em>) retroage para beneficiar o réu, mesmo após a sentença transitada em julgado.</p></div>
+  </div>
+
+  <h3>6.2 Lei Penal no Tempo</h3>
+  <table>
+    <tr><th>Situação</th><th>Efeito</th></tr>
+    <tr><td><strong>Abolitio criminis</strong></td><td>Lei nova deixa de considerar crime → retroage; extingue a punibilidade e apaga os efeitos penais (não os civis)</td></tr>
+    <tr><td><strong>Novatio legis in pejus</strong></td><td>Lei nova mais grave → NÃO retroage; aplica-se a lei anterior mais benéfica ao réu</td></tr>
+    <tr><td><strong>Novatio legis in mellius</strong></td><td>Lei nova mais benéfica → retroage, mesmo após sentença transitada em julgado (Súmula 611 STF)</td></tr>
+    <tr><td><strong>Lei temporária/excepcional</strong></td><td>Ultra-ativa — aplica-se aos fatos ocorridos durante sua vigência, mesmo após sua expiração (art. 3º CP)</td></tr>
+  </table>
+
+  <h3>6.3 Lei Penal no Espaço — Territorialidade</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Princípio da territorialidade (art. 5º CP):</strong> aplica-se a lei brasileira aos crimes cometidos no território nacional. Brasil adota a territorialidade <em>temperada</em> (admite exceções por convenção e tratados).</li>
+      <li><strong>Território por extensão:</strong> embarcações e aeronaves brasileiras de guerra; aeronaves e embarcações mercantes em espaços neutros.</li>
+      <li><strong>Extraterritorialidade (art. 7º CP):</strong> aplica-se a lei brasileira a crimes cometidos fora do Brasil em hipóteses taxativas (crimes contra a vida do PR, contra o patrimônio nacional, etc.).</li>
+    </ul>
+  </div>
+
+  <h3>6.4 Tempo e Lugar do Crime</h3>
+  <div class="g2">
+    <div class="card"><h4>Tempo do Crime (art. 4º CP)</h4><p><strong>Teoria da atividade:</strong> considera-se praticado o crime no momento da ação ou omissão, <em>ainda que outro seja o momento do resultado.</em></p></div>
+    <div class="card"><h4>Lugar do Crime (art. 6º CP)</h4><p><strong>Teoria da ubiquidade:</strong> considera-se praticado o crime no lugar em que ocorreu a ação ou omissão, <em>no todo ou em parte</em>, bem como onde se produziu ou devia produzir-se o resultado.</p></div>
+  </div>
+
+  <h3>6.5 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Uma lei penal posterior ao fato, mais benéfica ao réu (novatio legis in mellius), deve ser aplicada:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Somente a fatos futuros, em respeito ao princípio da anterioridade.</li>
+      <li onclick="resp(this,'b','c')">b) Apenas enquanto o processo estiver em andamento, não após sentença transitada em julgado.</li>
+      <li onclick="resp(this,'c','c')">c) Retroativamente, inclusive para beneficiar réu já condenado por sentença transitada em julgado.</li>
+      <li onclick="resp(this,'d','c')">d) Somente quando expressamente previsto na nova lei.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 5º, XL, CF e art. 2º, parágrafo único, CP: a lei penal mais benéfica retroage para beneficiar o réu, mesmo após a sentença transitada em julgado. A execução da pena é ajustada pelo juízo das execuções penais (Súmula 611 STF).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('5')">⬅ Anterior</button><button class="nbtn" onclick="irPara('7')">Próximo ➡</button></div>
+</div>
+
+<!-- CP2 – TEORIA DO CRIME -->
+<div class="section" id="sec-7">
+  <div class="sh sh-cp"><div class="num">Direito Penal · CP2</div><h2>Teoria do Crime</h2><p>Conceito analítico: fato típico, ilicitude e culpabilidade — base de todas as questões penais da FCC.</p></div>
+
+  <h3>7.1 Conceito Analítico de Crime</h3>
+  <div class="card" style="text-align:center;padding:20px">
+    <p style="font-size:1.1rem;font-weight:800;color:var(--az)">Crime = Fato Típico + Ilicitude (Antijuridicidade) + Culpabilidade</p>
+    <p style="margin-top:8px;font-size:.88rem">Teoria tripartite — majoritária na doutrina e adotada pela FCC.</p>
+  </div>
+
+  <h3>7.2 Fato Típico</h3>
+  <div class="g2">
+    <div class="card"><h4>Elementos</h4><ul><li>Conduta (ação ou omissão — dolosa ou culposa)</li><li>Resultado naturalístico (nos crimes materiais)</li><li>Nexo causal (teoria da equivalência dos antecedentes — art. 13 CP)</li><li>Tipicidade (formal + material)</li></ul></div>
+    <div class="card"><h4>Dolo × Culpa</h4><ul><li><strong>Dolo direto:</strong> agente quer o resultado.</li><li><strong>Dolo eventual:</strong> assume o risco de produzi-lo.</li><li><strong>Culpa consciente:</strong> prevê mas confia que não ocorrerá.</li><li><strong>Culpa inconsciente:</strong> não prevê o que era previsível.</li></ul></div>
+  </div>
+
+  <h3>7.3 Excludentes de Ilicitude (Antijuridicidade) — Art. 23 CP</h3>
+  <div class="g2">
+    <div class="card"><h4>Estado de necessidade (art. 24)</h4><p>Sacrifica bem jurídico para salvar outro de perigo atual não provocado voluntariamente, quando não havia outro meio.</p></div>
+    <div class="card"><h4>Legítima defesa (art. 25)</h4><p>Repele agressão injusta, atual ou iminente, a direito próprio ou alheio, usando meios moderados.</p></div>
+    <div class="card"><h4>Estrito cumprimento do dever legal</h4><p>Agente público que age dentro dos limites da lei (ex.: policial em prisão em flagrante).</p></div>
+    <div class="card"><h4>Exercício regular de direito</h4><p>Uso de uma faculdade legal (ex.: intervenção cirúrgica, esportes violentos dentro das regras).</p></div>
+  </div>
+
+  <h3>7.4 Excludentes de Culpabilidade</h3>
+  <table>
+    <tr><th>Excludente</th><th>Fundamento</th></tr>
+    <tr><td><strong>Inimputabilidade</strong></td><td>Menor de 18 anos (art. 228 CF); doença mental ou desenvolvimento mental incompleto/retardado (art. 26 CP)</td></tr>
+    <tr><td><strong>Erro de proibição inevitável</strong></td><td>Agente não sabe que a conduta é ilícita e não podia saber (art. 21 CP) — isenta de pena</td></tr>
+    <tr><td><strong>Coação moral irresistível</strong></td><td>Agente age sob coação que não pode resistir — isenta de pena; responde o coator</td></tr>
+    <tr><td><strong>Obediência hierárquica</strong></td><td>Ordem não manifestamente ilegal de superior hierárquico — isenta subordinado</td></tr>
+    <tr><td><strong>Inexigibilidade de conduta diversa</strong></td><td>Supralegal — não se pode exigir outra conduta nas circunstâncias</td></tr>
+  </table>
+
+  <h3>7.5 Extinção da Punibilidade — Art. 107 CP</h3>
+  <div class="box-a"><strong>⚠ Hipóteses de extinção:</strong> morte do agente · anistia/graça/indulto · abolitio criminis · prescrição · decadência · perempção · renúncia/perdão (crimes de ação privada) · retratação · casamento da vítima com o agente (revogado) · perdão judicial.</div>
+
+  <h3>7.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Responderá pelo crime quem, agindo em legítima defesa, atingir terceiro inocente (aberratio ictus). Nesse caso, o erro na execução:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Exclui completamente a responsabilidade penal do agente.</li>
+      <li onclick="resp(this,'b','c')">b) Configura crime doloso em relação ao terceiro atingido.</li>
+      <li onclick="resp(this,'c','c')">c) Considera-se que o agente atingiu a pessoa visada para fins de excludente; mas responde por culpa pelo dano ao terceiro inocente.</li>
+      <li onclick="resp(this,'d','c')">d) Elimina a antijuridicidade apenas em relação ao terceiro atingido.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 73 CP (aberratio ictus): o agente que, por erro na execução, atinge pessoa diversa da pretendida responde como se tivesse praticado o crime contra a vítima original. Pela legítima defesa, é como se tivesse atingido o agressor; mas responde por culpa em relação ao terceiro inocente — salvo dolo eventual.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('6')">⬅ Anterior</button><button class="nbtn" onclick="irPara('8')">Próximo ➡</button></div>
+</div>
+
+<!-- CP3 – CRIMES CONTRA A FÉ PÚBLICA -->
+<div class="section" id="sec-8">
+  <div class="sh sh-cp"><div class="num">Direito Penal · CP3</div><h2>Crimes contra a Fé Pública</h2><p>Arts. 289 a 311-A do CP — falsidade de documentos e títulos públicos.</p></div>
+
+  <h3>8.1 Bem Jurídico Protegido</h3>
+  <p>A <strong>fé pública</strong> — confiança que a sociedade deposita nos documentos, moedas, títulos e sinais públicos. Tutela a autenticidade e veracidade dos atos.</p>
+
+  <h3>8.2 Falsidade de Títulos e Papéis Públicos</h3>
+  <table>
+    <tr><th>Crime</th><th>Art.</th><th>Essência</th><th>Pena base</th></tr>
+    <tr><td>Moeda falsa</td><td>289</td><td>Falsificar, fabricar ou alterar moeda metálica ou papel-moeda</td><td>3 a 12 anos</td></tr>
+    <tr><td>Falsificação de papéis públicos</td><td>293</td><td>Falsificar: selos, estampilhas, papel selado, cautela de penhor, etc.</td><td>2 a 8 anos</td></tr>
+    <tr><td>Petrechos de falsificação</td><td>294</td><td>Fabricar/possuir instrumentos para falsificar moeda</td><td>2 a 6 anos</td></tr>
+  </table>
+
+  <h3>8.3 Falsidade Documental</h3>
+  <table>
+    <tr><th>Crime</th><th>Art.</th><th>Descrição</th><th>Pena</th></tr>
+    <tr><td><strong>Falsificação de documento público</strong></td><td>297</td><td>Falsificar no todo ou em parte, ou alterar documento público</td><td>2 a 6 anos</td></tr>
+    <tr><td><strong>Falsificação de documento particular</strong></td><td>298</td><td>Falsificar documento particular</td><td>1 a 5 anos</td></tr>
+    <tr><td><strong>Falsidade ideológica</strong></td><td>299</td><td>Inserir/fazer inserir declaração falsa em documento (conteúdo falso, forma verdadeira)</td><td>1 a 5 anos</td></tr>
+    <tr><td><strong>Falsidade de atestado médico</strong></td><td>302</td><td>Médico que emite atestado falso</td><td>1 mês a 1 ano</td></tr>
+    <tr><td><strong>Uso de documento falso</strong></td><td>304</td><td>Usar documento falsificado por outrem</td><td>Mesma pena da falsificação</td></tr>
+    <tr><td><strong>Falsa identidade</strong></td><td>307</td><td>Atribuir-se identidade falsa para obter vantagem ou causar dano</td><td>3 meses a 1 ano</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Dica FCC — Falsidade material × ideológica:</strong> Na <em>falsidade material</em> (arts. 297–298), o documento em si é falso (forma adulterada). Na <em>falsidade ideológica</em> (art. 299), o documento é formal e fisicamente verdadeiro, mas contém <em>declaração falsa</em>. Funcionário público tem pena maior.</div>
+
+  <h3>8.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um servidor público que insere declaração falsa em certidão pública, fazendo constar fato que não ocorreu, pratica o crime de:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Falsificação de documento público (art. 297 CP).</li>
+      <li onclick="resp(this,'b','b')">b) Falsidade ideológica (art. 299 CP), na forma qualificada por ser funcionário público.</li>
+      <li onclick="resp(this,'c','b')">c) Uso de documento falso (art. 304 CP).</li>
+      <li onclick="resp(this,'d','b')">d) Falsa identidade (art. 307 CP).</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Inserir declaração falsa em documento cujo suporte físico é verdadeiro caracteriza falsidade ideológica (art. 299 CP). Como o agente é funcionário público, aplica-se a forma qualificada do parágrafo único (pena de 1 a 5 anos, além de multa). Falsificação material (art. 297) ocorre quando o próprio documento é alterado na forma.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('7')">⬅ Anterior</button><button class="nbtn" onclick="irPara('9')">Próximo ➡</button></div>
+</div>
+
+<!-- CP4 – CRIMES CONTRA A ADM. PÚBLICA -->
+<div class="section" id="sec-9">
+  <div class="sh sh-cp"><div class="num">Direito Penal · CP4</div><h2>Crimes contra a Administração Pública</h2><p>Arts. 312 a 359-H do CP — crimes de funcionários públicos e de particulares + crimes fiscais.</p></div>
+
+  <h3>9.1 Crimes Praticados por Funcionário Público</h3>
+  <table>
+    <tr><th>Crime</th><th>Art.</th><th>Essência</th><th>Pena</th></tr>
+    <tr><td><strong>Peculato-apropriação</strong></td><td>312, caput</td><td>Apropriar-se de bem/valor que tem em razão do cargo</td><td>2 a 12 anos</td></tr>
+    <tr><td><strong>Peculato-desvio</strong></td><td>312, caput</td><td>Desviar bem/valor em proveito próprio ou alheio</td><td>2 a 12 anos</td></tr>
+    <tr><td><strong>Peculato culposo</strong></td><td>312, §2º</td><td>Concorre culposamente para subtração por terceiro</td><td>3 meses a 1 ano</td></tr>
+    <tr><td><strong>Concussão</strong></td><td>316</td><td>Exigir vantagem indevida em razão do cargo</td><td>2 a 8 anos</td></tr>
+    <tr><td><strong>Corrupção passiva</strong></td><td>317</td><td>Solicitar/receber/aceitar vantagem indevida para ato de ofício</td><td>2 a 12 anos</td></tr>
+    <tr><td><strong>Prevaricação</strong></td><td>319</td><td>Retardar/deixar de praticar ato de ofício para satisfazer interesse pessoal</td><td>3 meses a 1 ano</td></tr>
+    <tr><td><strong>Emprego irregular de verbas</strong></td><td>315</td><td>Dar destinação diversa à verba pública</td><td>3 meses a 1 ano</td></tr>
+  </table>
+
+  <h3>9.2 Crimes Praticados por Particular contra a Adm. Pública</h3>
+  <table>
+    <tr><th>Crime</th><th>Art.</th><th>Essência</th></tr>
+    <tr><td><strong>Corrupção ativa</strong></td><td>333</td><td>Oferecer ou prometer vantagem a funcionário público</td></tr>
+    <tr><td><strong>Resistência</strong></td><td>329</td><td>Opor resistência mediante violência ou ameaça à execução de ato legal</td></tr>
+    <tr><td><strong>Desobediência</strong></td><td>330</td><td>Desobedecer ordem legal de funcionário público</td></tr>
+    <tr><td><strong>Desacato</strong></td><td>331</td><td>Desacatar funcionário no exercício da função</td></tr>
+  </table>
+  <div class="box-d"><strong>⭐ Concussão × Corrupção passiva:</strong> Na concussão (art. 316), o funcionário <em>exige</em> (compele, impõe) a vantagem. Na corrupção passiva (art. 317), ele <em>solicita</em> ou <em>recebe</em> sem coação. A concussão tem pena menor mas tutela situação mais grave de constrangimento.</div>
+
+  <h3>9.3 Crimes contra as Finanças Públicas (Arts. 359-A a 359-H)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Contratação de operação de crédito (359-A):</strong> contrair empréstimo sem autorização legal ou contrário à LRF. Pena: 1 a 2 anos.</li>
+      <li><strong>Inscrição em restos a pagar (359-B):</strong> inscever despesas não liquidadas para fugir ao limite com pessoal. Pena: 1 a 2 anos.</li>
+      <li><strong>Assunção de obrigação (359-C):</strong> assumir obrigação nos 2 últimos quadrimestres do mandato sem dotação suficiente. Pena: 1 a 4 anos.</li>
+      <li><strong>Ordenação de despesa não autorizada (359-D):</strong> pena 1 a 4 anos.</li>
+      <li><strong>Oferta pública irregular (359-E):</strong> fazer oferta pública de títulos sem autorização. Pena: 1 a 2 anos.</li>
+    </ul>
+  </div>
+
+  <h3>9.4 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">O funcionário público que retarda ato de ofício com intuito de satisfazer interesse pessoal pratica o crime de:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Peculato (art. 312 CP).</li>
+      <li onclick="resp(this,'b','c')">b) Corrupção passiva (art. 317 CP).</li>
+      <li onclick="resp(this,'c','c')">c) Prevaricação (art. 319 CP).</li>
+      <li onclick="resp(this,'d','c')">d) Concussão (art. 316 CP).</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 319 CP — Prevaricação: "Retardar ou deixar de praticar, indevidamente, ato de ofício, ou praticá-lo contra disposição expressa de lei, para satisfazer interesse ou sentimento pessoal." Elemento subjetivo especial: satisfazer <em>interesse ou sentimento pessoal</em> (não necessariamente vantagem econômica).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('8')">⬅ Anterior</button><button class="nbtn" onclick="irPara('10')">Próximo ➡</button></div>
+</div>
+
+<!-- CP5 – CRIMES TRIBUTÁRIOS E ABUSO DE AUTORIDADE -->
+<div class="section" id="sec-10">
+  <div class="sh sh-cp"><div class="num">Direito Penal · CP5</div><h2>Crimes Tributários e Abuso de Autoridade</h2><p>Lei 8.137/1990 e Lei 13.869/2019 — legislações de alta incidência no concurso da SEFAZ-GO.</p></div>
+
+  <h3>10.1 Lei 8.137/1990 — Crimes contra a Ordem Tributária</h3>
+  <table>
+    <tr><th>Crime</th><th>Art.</th><th>Conduta</th><th>Pena</th></tr>
+    <tr><td>Supressão/redução de tributo</td><td>1º</td><td>Omitir, inserir elementos inexatos, falsificar documentos, elaborar sistema de ocultação — DOLO ESPECÍFICO</td><td>2 a 5 anos + multa</td></tr>
+    <tr><td>Redução de tributo — forma culposa</td><td>2º, II</td><td>Deixar de recolher no prazo contribuição previdenciária descontada</td><td>6 meses a 2 anos</td></tr>
+    <tr><td>Cobrança ilegal de tributo</td><td>3º, I</td><td>Exigir tributo além do que a lei permite — crime de funcionário</td><td>3 a 8 anos</td></tr>
+    <tr><td>Extravio de documento fiscal</td><td>3º, III</td><td>Extraviar/inutilizar documento de interesse tributário</td><td>3 a 8 anos</td></tr>
+  </table>
+  <div class="box-a"><strong>⚠ Extinção da punibilidade pelo pagamento:</strong> O pagamento integral do tributo antes do oferecimento da denúncia extingue a punibilidade (art. 34). Após o recebimento da denúncia: reduz a pena.</div>
+  <div class="box-i"><strong>ℹ Crime material × formal:</strong> Os crimes do art. 1º são <strong>materiais</strong> — exigem efetiva supressão/redução do tributo como resultado. Antes da constituição definitiva do crédito tributário, não há justa causa para a ação penal (Súmula Vinculante 24 STF).</div>
+
+  <h3>10.2 Lei 13.869/2019 — Crimes de Abuso de Autoridade</h3>
+  <div class="card">
+    <h4>Características gerais:</h4>
+    <ul>
+      <li>Sujeito ativo: agente público (servidor ou não, eleito ou não) no exercício de função pública.</li>
+      <li><strong>Elemento subjetivo específico:</strong> finalidade de prejudicar outrem, beneficiar a si mesmo ou a terceiro, ou de mero capricho ou satisfação pessoal (art. 1º, §1º). Não basta o dolo genérico.</li>
+      <li>Ação penal: pública incondicionada.</li>
+      <li>Sanções: administrativas (suspensão, perda do cargo), civis (indenização) e penais.</li>
+    </ul>
+  </div>
+  <table>
+    <tr><th>Crime</th><th>Art.</th><th>Pena</th></tr>
+    <tr><td>Decretação ilegal de prisão preventiva</td><td>9º</td><td>1 a 4 anos + multa</td></tr>
+    <tr><td>Submeter detento a condições degradantes</td><td>13</td><td>1 a 4 anos + multa</td></tr>
+    <tr><td>Deixar de liberar preso após ordem judicial</td><td>12</td><td>1 a 4 anos + multa</td></tr>
+    <tr><td>Violação de domicílio por motivo injustificado</td><td>22</td><td>1 a 4 anos + multa</td></tr>
+    <tr><td>Impedir o preso de comunicar-se com advogado</td><td>20</td><td>1 a 4 anos + multa</td></tr>
+    <tr><td>Divulgar gravação/escuta ilícita</td><td>10</td><td> 1 a 4 anos + multa</td></tr>
+  </table>
+
+  <h3>10.3 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Conforme a Lei 8.137/1990, os crimes do art. 1º (supressão ou redução de tributo) são crimes materiais. Isso implica que:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Prescindем de resultado e se consumam com a simples conduta fraudulenta.</li>
+      <li onclick="resp(this,'b','c')">b) O pagamento do tributo é irrelevante para a persecução penal.</li>
+      <li onclick="resp(this,'c','c')">c) A ação penal somente tem justa causa após a constituição definitiva do crédito tributário (SV 24 STF).</li>
+      <li onclick="resp(this,'d','c')">d) A extinção da punibilidade pelo pagamento somente ocorre antes do trânsito em julgado da sentença.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Súmula Vinculante 24 STF: "Não se tipifica crime material contra a ordem tributária, previsto no art. 1º, incisos I a IV, da Lei 8.137/90, antes do lançamento definitivo do tributo." O lançamento definitivo (esgotamento do processo administrativo fiscal) é condição objetiva de punibilidade.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('9')">⬅ Anterior</button><button class="nbtn" onclick="irPara('11')">Próximo ➡</button></div>
+</div>
+
+<!-- CE1 – EMPRESÁRIO -->
+<div class="section" id="sec-11">
+  <div class="sh sh-ce"><div class="num">Direito Empresarial · CE1</div><h2>Empresário e Registro de Empresa</h2><p>Teoria da empresa, empresário individual, ME/EPP e Junta Comercial.</p></div>
+
+  <h3>11.1 Teoria da Empresa e Empresário</h3>
+  <div class="artigo"><span class="an">Art. 966 – CC/2002</span>Considera-se empresário quem exerce profissionalmente atividade econômica organizada para a produção ou a circulação de bens ou de serviços. Parágrafo único: Não se considera empresário quem exerce profissão intelectual, de natureza científica, literária ou artística, ainda que com o concurso de auxiliares ou colaboradores, salvo se o exercício da profissão constituir elemento de empresa.</div>
+  <div class="box-d"><strong>⭐ Elementos do empresário:</strong> profissionalidade + habitualidade + organização + atividade econômica (produção/circulação de bens/serviços). Falta um elemento → não é empresário.</div>
+
+  <h3>11.2 Capacidade para Ser Empresário</h3>
+  <div class="card">
+    <ul>
+      <li>Pode ser empresário: pessoa com plena capacidade civil (18 anos ou emancipado).</li>
+      <li><strong>Menor emancipado:</strong> pode exercer a empresa, mas não pode registrar firma individual se não for emancipado.</li>
+      <li><strong>Incapaz pode continuar a empresa:</strong> por autorização judicial, mediante representação ou assistência.</li>
+      <li><strong>Impedidos:</strong> funcionários públicos federais (Lei 8.112); magistrados; militares da ativa; falidos não reabilitados.</li>
+    </ul>
+  </div>
+
+  <h3>11.3 Empresário Individual × EIRELI × SLU</h3>
+  <table>
+    <tr><th>Figura</th><th>Capital mínimo</th><th>Responsabilidade</th><th>Obs.</th></tr>
+    <tr><td><strong>Empresário Individual</strong></td><td>Sem mínimo</td><td>Ilimitada (responde com patrimônio pessoal)</td><td>Pessoa natural; sem separação patrimonial</td></tr>
+    <tr><td><strong>EIRELI</strong></td><td>100 salários-mínimos</td><td>Limitada ao capital</td><td>Extinta pela Lei 14.195/2021 — convertida em SLU</td></tr>
+    <tr><td><strong>Sociedade Limitada Unipessoal (SLU)</strong></td><td>Sem mínimo</td><td>Limitada ao capital</td><td>Uma única pessoa; substituiu a EIRELI</td></tr>
+    <tr><td><strong>MEI</strong></td><td>—</td><td>Ilimitada</td><td>Faturamento até R$ 81 mil/ano; LC 123/06</td></tr>
+  </table>
+
+  <h3>11.4 Microempresa e EPP — LC 123/2006</h3>
+  <div class="g2">
+    <div class="card"><h4>ME – Microempresa</h4><p>Receita bruta anual ≤ R$ 360 mil. Simples Nacional; benefícios fiscais e administrativos.</p></div>
+    <div class="card"><h4>EPP – Empresa de Pequeno Porte</h4><p>Receita bruta anual entre R$ 360 mil e R$ 4,8 milhões. Também no Simples Nacional.</p></div>
+  </div>
+
+  <h3>11.5 Registro de Empresa</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Junta Comercial:</strong> órgão de registro das sociedades empresárias e empresários individuais. Subordinação híbrida: administrativa ao Estado; técnica ao DNPRC/DREI (federal).</li>
+      <li><strong>Atos registráveis:</strong> matrícula, arquivamento, autenticação.</li>
+      <li><strong>Inatividade:</strong> empresa sem movimento há 10 anos → cancelamento do registro pela JC, ex officio ou a requerimento.</li>
+      <li><strong>Empresa irregular:</strong> não registrada → sócio responde ilimitada e solidariamente.</li>
+    </ul>
+  </div>
+
+  <h3>11.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Um médico que exerce individualmente a medicina em consultório próprio é considerado:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Empresário, pois obtém lucro com sua atividade profissional.</li>
+      <li onclick="resp(this,'b','c')">b) Empresário, pois exerce atividade econômica habitual.</li>
+      <li onclick="resp(this,'c','c')">c) Não empresário, pois exerce profissão de natureza científica/intelectual, salvo se o elemento de empresa predominar.</li>
+      <li onclick="resp(this,'d','c')">d) Empresário irregular, pois não se registrou na Junta Comercial.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 966, parágrafo único, CC: profissões intelectuais (médico, advogado, engenheiro) não são empresários, pois não se enquadram na teoria da empresa. Só se tornam empresários se o elemento organizacional predominar sobre o intelectual (ex.: rede de clínicas com gestão empresarial complexa).</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('10')">⬅ Anterior</button><button class="nbtn" onclick="irPara('12')">Próximo ➡</button></div>
+</div>
+
+<!-- CE2 – DIREITO SOCIETÁRIO -->
+<div class="section" id="sec-12">
+  <div class="sh sh-ce"><div class="num">Direito Empresarial · CE2</div><h2>Direito Societário</h2><p>Sociedades empresárias, Ltda., S/A, operações societárias e desconsideração da personalidade jurídica.</p></div>
+
+  <h3>12.1 Tipos Societários</h3>
+  <table>
+    <tr><th>Sociedade</th><th>Responsabilidade dos sócios</th><th>Registro</th></tr>
+    <tr><td><strong>Simples</strong></td><td>Ilimitada (regra) ou limitada (contrato)</td><td>Cartório</td></tr>
+    <tr><td><strong>Nome Coletivo</strong></td><td>Ilimitada e solidária (todos)</td><td>Junta Comercial</td></tr>
+    <tr><td><strong>Comandita Simples</strong></td><td>Sócio comanditado: ilimitada; comanditário: limitada à cota</td><td>Junta Comercial</td></tr>
+    <tr><td><strong>Limitada (Ltda.)</strong></td><td>Limitada ao valor das cotas; todos respondem pela integralização</td><td>Junta Comercial</td></tr>
+    <tr><td><strong>Anônima (S/A)</strong></td><td>Limitada ao preço de emissão das ações</td><td>Junta Comercial</td></tr>
+    <tr><td><strong>Cooperativa</strong></td><td>Limitada ou ilimitada (conforme estatuto)</td><td>Junta Comercial</td></tr>
+  </table>
+
+  <h3>12.2 Sociedade Limitada (Ltda.)</h3>
+  <div class="card">
+    <ul>
+      <li>Ato constitutivo: <strong>contrato social</strong>.</li>
+      <li>Administração: por sócio ou não sócio designado no contrato ou por ato separado.</li>
+      <li>Deliberações: quórum qualificado para alteração do contrato (3/4 do capital social).</li>
+      <li>Exclusão de sócio: deliberação de 3/4 do capital social por justa causa.</li>
+      <li>Regime supletivo: normas da S/A ou das sociedades simples — o contrato escolhe.</li>
+    </ul>
+  </div>
+
+  <h3>12.3 Sociedade Anônima — Lei 6.404/1976</h3>
+  <div class="g2">
+    <div class="card"><h4>Tipos de S/A</h4><ul><li><strong>Aberta:</strong> valores mobiliários negociados em bolsa ou mercado de balcão; sujeita à CVM.</li><li><strong>Fechada:</strong> capital não distribuído ao público; só cessão privada.</li></ul></div>
+    <div class="card"><h4>Órgãos societários</h4><ul><li><strong>Assembleia Geral:</strong> órgão soberano (ordinária e extraordinária).</li><li><strong>Conselho de Administração:</strong> obrigatório nas abertas; mín. 3 membros.</li><li><strong>Diretoria:</strong> representação e gestão.</li><li><strong>Conselho Fiscal:</strong> fiscalização dos atos de gestão.</li></ul></div>
+  </div>
+  <div class="card">
+    <h4>Tipos de Ações:</h4>
+    <ul>
+      <li><strong>Ordinárias (ON):</strong> direito de voto nas assembleias.</li>
+      <li><strong>Preferenciais (PN):</strong> preferência no recebimento de dividendos ou no reembolso do capital; pode não ter voto (ou ter voto restrito).</li>
+      <li>Limite de ações preferenciais sem voto: até <strong>50%</strong> do total das ações emitidas.</li>
+    </ul>
+  </div>
+
+  <h3>12.4 Desconsideração da Personalidade Jurídica</h3>
+  <div class="g2">
+    <div class="card"><h4>Teoria Maior (CC, art. 50)</h4><p>Requer <strong>abuso da personalidade jurídica</strong>: desvio de finalidade OU confusão patrimonial. Não basta o mero inadimplemento.</p></div>
+    <div class="card"><h4>Teoria Menor (CDC, art. 28)</h4><p>Basta o simples prejuízo ao consumidor. Hipóteses mais amplas; aplica-se também nas relações trabalhistas e ambientais.</p></div>
+  </div>
+  <div class="box-la"><strong>ℹ Desconsideração inversa:</strong> Ao contrário da desconsideração clássica (sócio responde por dívida da sociedade), na <em>inversa</em> a <em>sociedade</em> responde por dívida do <em>sócio</em>, quando ele usa a PJ para ocultar patrimônio. Admitida pelo STJ e pelo CC (art. 50, §3º).</div>
+
+  <h3>12.5 Operações Societárias</h3>
+  <table>
+    <tr><th>Operação</th><th>Resultado</th><th>Continuidade</th></tr>
+    <tr><td><strong>Transformação</strong></td><td>Muda o tipo societário (Ltda. → S/A)</td><td>Mesma PJ; sem extinção</td></tr>
+    <tr><td><strong>Incorporação</strong></td><td>Uma absorve outra; incorporada é extinta</td><td>Incorporadora subsiste</td></tr>
+    <tr><td><strong>Fusão</strong></td><td>Duas se unem; ambas extintas; nova PJ criada</td><td>Nova sociedade criada</td></tr>
+    <tr><td><strong>Cisão</strong></td><td>Sociedade transfere parte/todo do patrimônio para uma ou mais sociedades</td><td>Total: cindida extinta; Parcial: cindida subsiste</td></tr>
+  </table>
+
+  <h3>12.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">A desconsideração da personalidade jurídica prevista no art. 50 do Código Civil (teoria maior) exige:</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','c')">a) Apenas o inadimplemento reiterado da sociedade.</li>
+      <li onclick="resp(this,'b','c')">b) Que a sociedade seja insolvente e não tenha patrimônio para quitar a dívida.</li>
+      <li onclick="resp(this,'c','c')">c) Abuso da personalidade jurídica, caracterizado pelo desvio de finalidade ou pela confusão patrimonial entre sócio e sociedade.</li>
+      <li onclick="resp(this,'d','c')">d) Simples requerimento do credor ao juiz, sem necessidade de demonstrar abuso.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: C.</strong> Art. 50 do CC (redação pela Lei 13.874/2019): a desconsideração requer abuso da personalidade jurídica, que se manifesta por desvio de finalidade (utilização da PJ para atos contrários à sua finalidade) ou por confusão patrimonial (intermingling — mistura de ativos do sócio e da sociedade). Mero inadimplemento não autoriza a desconsideração.</div>
+  </div>
+  <div class="nb"><button class="nbtn" onclick="irPara('11')">⬅ Anterior</button><button class="nbtn" onclick="irPara('13')">Próximo ➡</button></div>
+</div>
+
+<!-- CE3 – FALÊNCIA E RECUPERAÇÃO -->
+<div class="section" id="sec-13">
+  <div class="sh sh-ce"><div class="num">Direito Empresarial · CE3</div><h2>Falência e Recuperação Judicial</h2><p>Lei 11.101/2005 (com alterações da Lei 14.112/2020) — LFRE.</p></div>
+
+  <h3>13.1 Sujeitos</h3>
+  <div class="g2">
+    <div class="card"><h4>Podem se sujeitar à LFRE</h4><p>Empresários e sociedades empresárias em geral. ME e EPP seguem o mesmo regime.</p></div>
+    <div class="card"><h4>Excluídos da LFRE</h4><p>Empresas públicas e SEM; instituições financeiras (Lei Complementar 101/01); seguradoras; câmaras de liquidação; entidades de previdência complementar.</p></div>
+  </div>
+
+  <h3>13.2 Recuperação Judicial</h3>
+  <ol class="steps">
+    <li><strong>Requisitos para requerer (art. 48):</strong> exercer atividade há mais de 2 anos; não ser falido; não ter obtido RJ nos últimos 5 anos; não ter sido condenado por crimes falimentares.</li>
+    <li><strong>Despacho de processamento:</strong> juiz defere o processamento → suspensão de ações e execuções por 180 dias (stay period).</li>
+    <li><strong>Plano de recuperação:</strong> devedor apresenta em 60 dias; aprovado pela Assembleia Geral de Credores.</li>
+    <li><strong>Concessão da RJ:</strong> após aprovação do plano; fiscalização por 2 anos.</li>
+    <li><strong>Encerramento:</strong> cumprido o plano, o juiz encerra a RJ.</li>
+  </ol>
+  <div class="box-d"><strong>⭐ Créditos NÃO sujeitos à RJ (art. 49, §3º):</strong> Proprietário fiduciário, arrendador mercantil, comprador em contrato de promessa de compra e venda (com cláusula de irretratabilidade) — esses credores não integram o plano e podem retomar seus bens.</div>
+
+  <h3>13.3 Falência</h3>
+  <div class="card">
+    <h4>Hipóteses de decretação de falência (art. 94):</h4>
+    <ul>
+      <li>Impontualidade injustificada — dívida ≥ 40 salários-mínimos não paga no vencimento.</li>
+      <li>Execução frustrada — executado não paga, não deposita e não nomeia bens à penhora.</li>
+      <li>Atos de falência — fraudes, desvio de bens, simulação de abandono, fuga.</li>
+    </ul>
+    <h4>Efeitos da decretação de falência:</h4>
+    <ul>
+      <li>Arrecadação dos bens; nomeação do administrador judicial.</li>
+      <li>Suspensão das ações individuais (exceto trabalhistas e fiscais).</li>
+      <li>Inabilitação do falido para exercer atividade empresarial.</li>
+    </ul>
+  </div>
+
+  <h3>13.4 Ordem de Preferência dos Créditos (Art. 83)</h3>
+  <div class="card">
+    <ol>
+      <li>Créditos <strong>extraconcursais</strong> (despesas da massa falida).</li>
+      <li>Créditos <strong>trabalhistas</strong> (até 150 salários-mínimos por credor) e acidentários.</li>
+      <li>Créditos com garantia <strong>real</strong> (até o valor do bem gravado).</li>
+      <li>Créditos <strong>tributários</strong> (exceto multas tributárias).</li>
+      <li>Créditos <strong>quirografários</strong> (sem garantia).</li>
+      <li>Multas contratuais e tributárias.</li>
+      <li>Créditos <strong>subordinados</strong> (sócios e administradores).</li>
+    </ol>
+  </div>
+
+  <h3>13.5 Recuperação Extrajudicial</h3>
+  <div class="card">
+    <p>Negociação direta com credores, sem intervenção prévia do juiz. Requisitos semelhantes à RJ. O devedor negocia com credores que representem mais de <strong>50%</strong> dos créditos da espécie sujeita ao plano, levando o acordo ao juiz para homologação.</p>
+  </div>
+
+  <h3>13.6 Questão de Fixação</h3>
+  <div class="questao">
+    <div class="en">Na falência, qual a ordem correta de preferência no pagamento dos créditos?</div>
+    <ul class="alt">
+      <li onclick="resp(this,'a','b')">a) Tributários → Trabalhistas → Garantia real → Quirografários.</li>
+      <li onclick="resp(this,'b','b')">b) Extraconcursais → Trabalhistas (até 150 SM) → Garantia real → Tributários → Quirografários → Multas → Subordinados.</li>
+      <li onclick="resp(this,'c','b')">c) Trabalhistas → Extraconcursais → Tributários → Garantia real → Quirografários.</li>
+      <li onclick="resp(this,'d','b')">d) Garantia real → Trabalhistas → Tributários → Extraconcursais → Quirografários.</li>
+    </ul>
+    <div class="gab">✅ <strong>Gabarito: B.</strong> Art. 83 da LFRE (Lei 11.101/2005): 1º extraconcursais (despesas da massa) → 2º trabalhistas até 150 SM e acidentários → 3º garantia real → 4º tributários → 5º quirografários → 6º multas → 7º subordinados. Os créditos trabalhistas que excedam 150 SM por credor são tratados como quirografários na parte excedente.</div>
+  </div>
+
+  <div class="box-ok" style="margin-top:28px"><strong>🎉 Parabéns!</strong> Você concluiu as 13 seções de Direito Civil, Penal e Empresarial para a banca FCC. Revise com atenção: LINDB, Teoria do Crime, crimes contra a Administração Pública, Lei 8.137/90 (muito cobrada na SEFAZ-GO), desconsideração da personalidade jurídica e a ordem de preferência na falência. Bons estudos!</div>
+  <div class="nb"><button class="nbtn" onclick="irPara('12')">⬅ Anterior</button><button class="nbtn" onclick="irPara('0')">📋 Índice</button></div>
+</div>
+
+</div>
+<script>
+function iniciar(){document.getElementById('capa').style.display='none';document.getElementById('nav').style.display='flex';document.getElementById('content').style.display='block'}
+function voltarCapa(){document.getElementById('capa').style.display='flex';document.getElementById('nav').style.display='none';document.getElementById('content').style.display='none'}
+function irPara(n){const num=parseInt(n);document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const s=document.getElementById('sec-'+num);if(s){s.classList.add('active');document.querySelector('#nav select').value=String(num);window.scrollTo({top:0,behavior:'smooth'})}}
+function resp(el,escolha,gabarito){const q=el.closest('.questao');if(q.querySelector('.gab.show'))return;q.querySelectorAll('.alt li').forEach(i=>{const m=i.getAttribute('onclick').match(/'([a-d])'/);if(m&&m[1]===gabarito)i.classList.add('correta');else if(i===el&&escolha!==gabarito)i.classList.add('errada')});q.querySelector('.gab').classList.add('show')}
+</script>
+</body>
+</html>

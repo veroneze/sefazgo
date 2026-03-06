@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apostila FCC — Contabilidade Avançada e de Custos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0f1e3c;
+  --navy2:   #162447;
+  --navy3:   #1e3a6e;
+  --blue:    #2563eb;
+  --blue2:   #3b82f6;
+  --gold:    #d4a017;
+  --gold2:   #f0c040;
+  --cream:   #fdf8ee;
+  --cream2:  #f5efe0;
+  --gray1:   #f1f5f9;
+  --gray2:   #e2e8f0;
+  --gray3:   #94a3b8;
+  --text:    #1e293b;
+  --text2:   #475569;
+  --red:     #dc2626;
+  --green:   #16a34a;
+  --amber:   #d97706;
+  --sidebar: 300px;
+  --radius:  8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--cream);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar);
+  height: 100vh;
+  background: var(--navy);
+  overflow-y: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s ease;
+}
+
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--navy3); border-radius: 4px; }
+
+.sidebar-header {
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(135deg, var(--navy2), var(--navy3));
+}
+
+.sidebar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.3;
+}
+
+.sidebar-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+}
+
+.sidebar-search {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.sidebar-search input {
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 10px;
+  font-family: 'Source Serif 4', serif;
+  outline: none;
+  transition: border-color .2s;
+}
+.sidebar-search input::placeholder { color: rgba(255,255,255,0.3); }
+.sidebar-search input:focus { border-color: var(--gold); }
+
+.nav-section {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 6px 16px 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.nav-link {
+  display: block;
+  padding: 6px 16px 6px 18px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: all .15s;
+  line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+  border-left-color: var(--gold);
+}
+
+.nav-link.sub {
+  padding-left: 28px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+}
+.nav-link.sub:hover, .nav-link.sub.active {
+  color: rgba(255,255,255,0.85);
+  border-left-color: var(--blue2);
+}
+
+/* ── MAIN ── */
+#main {
+  margin-left: var(--sidebar);
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 50%, #0a3060 100%);
+  padding: 80px 64px 72px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(212,160,23,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 200px;
+  width: 500px; height: 200px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.15) 0%, transparent 70%);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(212,160,23,0.2);
+  border: 1px solid rgba(212,160,23,0.4);
+  color: var(--gold2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 22px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  max-width: 680px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title span {
+  color: var(--gold);
+  display: block;
+}
+
+.hero-desc {
+  margin-top: 18px;
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  max-width: 540px;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.chip {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── PART HEADER ── */
+.part-header {
+  background: var(--navy2);
+  padding: 36px 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-top: 3px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
+}
+
+.part-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.part-info { flex: 1; }
+
+.part-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.part-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 2px;
+}
+
+/* ── CONTENT AREA ── */
+.content {
+  padding: 48px 64px 64px;
+  max-width: 960px;
+}
+
+/* ── CHAPTER ── */
+.chapter {
+  margin-bottom: 64px;
+  border-top: 1px solid var(--gray2);
+  padding-top: 48px;
+}
+
+.chapter:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.ch-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+h1.ch-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--gold);
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy2);
+  margin: 36px 0 14px;
+  padding-left: 14px;
+  border-left: 4px solid var(--blue);
+}
+
+h3 {
+  font-family: 'Source Serif 4', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy3);
+  margin: 28px 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+}
+
+p {
+  margin-bottom: 14px;
+  color: var(--text);
+  text-align: justify;
+}
+
+strong { color: var(--navy); }
+
+/* ── BOXES ── */
+.info-box {
+  background: #eef4ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 20px 0;
+}
+
+.info-box .box-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.info-box .box-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #1e3a5f;
+}
+
+.info-box .box-body code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: rgba(37,99,235,0.08);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.alert-box {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 20px 0;
+}
+
+.alert-box .box-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.alert-box .box-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #78350f;
+}
+
+.strategy-box {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 20px 0;
+}
+
+.strategy-box .box-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.strategy-box .box-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #14532d;
+}
+
+.formula-box {
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+
+.formula-box .box-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.formula-box .box-body {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.85;
+}
+
+.formula-box .box-body .highlight {
+  color: var(--gold2);
+  font-weight: 600;
+}
+
+/* ── TABLES ── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead tr {
+  background: var(--navy2);
+  color: #fff;
+}
+
+thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+tbody tr:nth-child(odd)  { background: #fff; }
+tbody tr:nth-child(even) { background: var(--gray1); }
+tbody tr:hover           { background: #dbeafe; transition: background .15s; }
+
+tbody td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--gray2);
+  vertical-align: top;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+tbody td:first-child {
+  font-weight: 600;
+  color: var(--navy2);
+  white-space: nowrap;
+}
+
+/* ── LISTS ── */
+ul, ol {
+  margin: 10px 0 14px 22px;
+}
+
+li {
+  margin-bottom: 6px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+li strong { color: var(--navy2); }
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.compare-card {
+  background: #fff;
+  border: 1px solid var(--gray2);
+  border-top: 3px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.compare-card.right {
+  border-top-color: var(--gold);
+}
+
+.compare-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray2);
+}
+
+.compare-card ul {
+  margin-left: 16px;
+}
+
+.compare-card li {
+  font-size: 13.5px;
+}
+
+/* ── FORMULA INLINE ── */
+.formula {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--navy);
+  color: var(--gold2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* ── HIERARCHY LEVELS ── */
+.hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 16px 0;
+}
+
+.hier-item {
+  display: flex;
+  align-items: stretch;
+}
+
+.hier-num {
+  width: 36px;
+  flex-shrink: 0;
+  background: var(--navy2);
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hier-content {
+  flex: 1;
+  background: #f8fafc;
+  border: 1px solid var(--gray2);
+  border-left: none;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.hier-item:first-child .hier-num { border-radius: var(--radius) 0 0 0; }
+.hier-item:first-child .hier-content { border-radius: 0 var(--radius) 0 0; border-top: 1px solid var(--gray2); }
+.hier-item:last-child .hier-num { border-radius: 0 0 0 var(--radius); }
+.hier-item:last-child .hier-content { border-radius: 0 0 var(--radius) 0; }
+
+/* ── LEVEL BADGES ── */
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin: 4px 0;
+  width: 100%;
+}
+
+.badge-num {
+  background: var(--navy2);
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.badge-num.l2 { background: var(--blue); color: #fff; }
+.badge-num.l3 { background: var(--gray3); color: #fff; }
+
+/* ── FLOW DIAGRAM ── */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+.flow-item {
+  background: var(--navy2);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.flow-arrow {
+  color: var(--gold);
+  font-size: 18px;
+  padding: 0 6px;
+  font-weight: bold;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  background: rgba(253,248,238,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--gray2);
+  padding: 10px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 50;
+}
+
+.topbar-breadcrumb {
+  font-size: 12px;
+  color: var(--text2);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.topbar-breadcrumb span {
+  color: var(--blue);
+}
+
+.btn-print {
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background .2s;
+}
+
+.btn-print:hover { background: var(--navy3); }
+
+/* ── TOGGLE SIDEBAR ── */
+.toggle-btn {
+  display: none;
+  position: fixed;
+  top: 12px; left: 12px;
+  z-index: 200;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ── PROGRESS BAR ── */
+#progress {
+  position: fixed;
+  top: 0; left: var(--sidebar);
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--blue));
+  width: 0%;
+  z-index: 999;
+  transition: width .1s;
+}
+
+/* ── SUMMARY TABLE ── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.summary-card {
+  background: #fff;
+  border: 1px solid var(--gray2);
+  border-top: 3px solid var(--navy2);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.summary-card .sc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gray3);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.summary-card .sc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.summary-card .sc-body {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  border-top: 1px dashed var(--gray2);
+  margin: 32px 0;
+}
+
+/* ── PRINT ── */
+@media print {
+  #sidebar, #progress, .topbar, .toggle-btn { display: none !important; }
+  #main { margin-left: 0; }
+  .content { padding: 20px; }
+  .hero { padding: 30px 40px; }
+  .part-header { padding: 20px 40px; }
+  body { font-size: 11pt; }
+  h1.ch-title { font-size: 18pt; page-break-after: avoid; }
+  h2 { font-size: 14pt; page-break-after: avoid; }
+  .chapter { page-break-inside: avoid; }
+  .table-wrap { page-break-inside: avoid; }
+  .info-box, .alert-box, .formula-box, .strategy-box { page-break-inside: avoid; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  :root { --sidebar: 260px; }
+  .content { padding: 32px 28px; }
+  .hero { padding: 48px 28px; }
+  .topbar { padding: 10px 28px; }
+  .part-header { padding: 28px 28px; }
+}
+
+@media (max-width: 640px) {
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.open { transform: translateX(0); }
+  #main { margin-left: 0; }
+  #progress { left: 0; }
+  .toggle-btn { display: block; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .topbar { padding: 10px 16px 10px 60px; }
+  .content { padding: 28px 16px; }
+  .hero { padding: 40px 16px; }
+  .part-header { padding: 24px 16px; }
+  .hero-title { font-size: 26px; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chapter {
+  animation: fadeUp .4s ease both;
+}
+
+.chapter:nth-child(1)  { animation-delay: .05s; }
+.chapter:nth-child(2)  { animation-delay: .10s; }
+.chapter:nth-child(3)  { animation-delay: .15s; }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">Apostila FCC<br>Contabilidade</div>
+    <div class="sidebar-sub">Módulo 12 · Avançada &amp; Custos</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="searchInput" placeholder="Buscar tópico…" oninput="filterNav(this.value)">
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Parte 1 · Avançada</div>
+    <a class="nav-link" href="#cap1">1. Políticas Contábeis</a>
+    <a class="nav-link sub" href="#cap1-1">— Mudança de Estimativa</a>
+    <a class="nav-link sub" href="#cap1-2">— Retificação de Erro</a>
+    <a class="nav-link" href="#cap2">2. Valor Justo (CPC 46)</a>
+    <a class="nav-link sub" href="#cap2-1">— Hierarquia de Inputs</a>
+    <a class="nav-link" href="#cap3">3. Ajuste a Valor Presente</a>
+    <a class="nav-link" href="#cap4">4. Instrumentos Financeiros</a>
+    <a class="nav-link sub" href="#cap4-1">— Classificação CPC 48</a>
+    <a class="nav-link sub" href="#cap4-2">— ECL / Debêntures</a>
+    <a class="nav-link" href="#cap5">5. Propriedade p/ Investimento</a>
+    <a class="nav-link" href="#cap6">6. Arrendamento Mercantil</a>
+    <a class="nav-link" href="#cap7">7. Participações Societárias</a>
+    <a class="nav-link sub" href="#cap7-1">— MEP e LNR</a>
+    <a class="nav-link sub" href="#cap7-2">— Dividendos</a>
+    <a class="nav-link" href="#cap8">8. Reorganização Societária</a>
+    <a class="nav-link sub" href="#cap8-1">— Goodwill e Mais-valia</a>
+    <a class="nav-link" href="#cap9">9. Subvenção Governamental</a>
+    <a class="nav-link" href="#cap10">10. Câmbio (CPC 02)</a>
+    <a class="nav-link" href="#cap11">11. DFC e DVA</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Parte 2 · Custos</div>
+    <a class="nav-link" href="#cap12">12. Terminologia</a>
+    <a class="nav-link" href="#cap13">13. Classificação dos Custos</a>
+    <a class="nav-link" href="#cap14">14. Apropriação e Rateio</a>
+    <a class="nav-link" href="#cap15">15. Departamentalização</a>
+    <a class="nav-link" href="#cap16">16. Taxa de CIF</a>
+    <a class="nav-link" href="#cap17">17. Fluxo de Produção</a>
+    <a class="nav-link" href="#cap18">18. Equivalentes de Produção</a>
+    <a class="nav-link" href="#cap19">19. Tipos de Produção</a>
+    <a class="nav-link" href="#cap20">20. Tipos de Custeio</a>
+    <a class="nav-link" href="#cap21">21. Custo Padrão e Variações</a>
+    <a class="nav-link" href="#cap22">22. Margem de Contribuição</a>
+    <a class="nav-link" href="#cap23">23. Análise CVL e PE</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Resumo</div>
+    <a class="nav-link" href="#resumo">Resumo Estratégico FCC</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Banca FCC · Módulo 12</div>
+    <h1 class="hero-title">
+      Contabilidade
+      <span>Avançada e de Custos</span>
+    </h1>
+    <p class="hero-desc">Apostila completa com normas CPC/IFRS, cálculos, lançamentos contábeis e dicas estratégicas para provas da Fundação Carlos Chagas.</p>
+    <div class="hero-chips">
+      <span class="chip">CPC 23 · 46 · 12 · 48</span>
+      <span class="chip">CPC 28 · 06-R2 · 18-R2</span>
+      <span class="chip">CPC 15 · 07 · 02 · 03</span>
+      <span class="chip">Custeio por Absorção</span>
+      <span class="chip">Custeio Variável</span>
+      <span class="chip">CVL · Ponto de Equilíbrio</span>
+      <span class="chip">GAO · Custo Padrão</span>
+    </div>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-breadcrumb">Apostila FCC / <span>Contabilidade Avançada e de Custos</span></div>
+    <button class="btn-print" onclick="window.print()">⎙ Imprimir</button>
+  </div>
+
+  <!-- ═══════════════════════════════ PARTE 1 ════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-number">01</div>
+    <div class="part-info">
+      <div class="part-label">Seção</div>
+      <div class="part-title">Contabilidade Avançada</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- CAP 1 -->
+    <div class="chapter" id="cap1">
+      <div class="ch-num">Capítulo 01</div>
+      <h1 class="ch-title">Políticas Contábeis, Mudança de Estimativa e Retificação de Erro (CPC 23)</h1>
+
+      <h2>1.1 Políticas Contábeis</h2>
+      <p>Políticas contábeis são os <strong>princípios, bases, convenções, regras e práticas</strong> específicos aplicados pela entidade na elaboração e na apresentação de suas demonstrações contábeis. O CPC 23 regulamenta o tema e determina quando e como as políticas devem ser alteradas.</p>
+
+      <h3>Hierarquia de Normas</h3>
+      <div class="hierarchy">
+        <div class="hier-item"><div class="hier-num">1</div><div class="hier-content">Pronunciamentos, orientações e interpretações do <strong>CPC</strong></div></div>
+        <div class="hier-item"><div class="hier-num">2</div><div class="hier-content">Pronunciamentos do <strong>IASB (IFRS/IAS)</strong> não adotados pelo CPC</div></div>
+        <div class="hier-item"><div class="hier-num">3</div><div class="hier-content">Outras normas contábeis e guias de auditoria aceitos</div></div>
+        <div class="hier-item"><div class="hier-num">4</div><div class="hier-content">Literaturas contábeis e práticas aceitas no setor</div></div>
+      </div>
+
+      <h3 id="cap1-1">Mudança de Política Contábil</h3>
+      <p>A mudança de política contábil <strong>só é permitida</strong> quando: (a) exigida por pronunciamento do CPC; ou (b) resultar em informação <strong>mais confiável e relevante</strong>. Deve ser aplicada <strong>retrospectivamente</strong>, ajustando os saldos de abertura do período mais antigo apresentado.</p>
+
+      <div class="info-box">
+        <div class="box-title">📌 Exceções à Aplicação Retrospectiva</div>
+        <div class="box-body">
+          <strong>Impraticabilidade:</strong> quando não é possível determinar os efeitos acumulados.<br>
+          <strong>Aplicação prospectiva:</strong> quando exigido por disposição transitória específica do CPC.
+        </div>
+      </div>
+
+      <h3>Mudança de Estimativa Contábil</h3>
+      <p>Decorre de novas informações ou desenvolvimentos que alteram a base de mensuração. Exemplos: vida útil de ativo imobilizado, percentual de devedores duvidosos, valor residual de ativos.</p>
+      <ul>
+        <li>Aplicação: <strong>PROSPECTIVA</strong> — afeta apenas o período corrente e futuros.</li>
+        <li>Não requer ajuste retroativo.</li>
+        <li>Se difícil distinguir mudança de política de mudança de estimativa → tratar como <strong>mudança de estimativa</strong>.</li>
+      </ul>
+
+      <h3 id="cap1-2">Retificação de Erro</h3>
+      <p>Erros são omissões ou declarações incorretas em demonstrações anteriores. Podem ser: erros aritméticos, aplicação incorreta de política contábil, má interpretação de fatos ou fraudes.</p>
+      <ul>
+        <li><strong>Erro material:</strong> deve ser retificado de forma <strong>retrospectiva</strong>, reapresentando comparativos.</li>
+        <li><strong>Erro imaterial:</strong> pode ser reconhecido no resultado do período corrente (prospectivo).</li>
+      </ul>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Situação</th><th>Aplicação</th><th>Detalhe</th></tr></thead>
+          <tbody>
+            <tr><td>Mudança de Política Contábil (voluntária ou obrigatória)</td><td>RETROSPECTIVA</td><td>Ajusta saldos de abertura</td></tr>
+            <tr><td>Mudança de Estimativa Contábil</td><td>PROSPECTIVA</td><td>Afeta período atual e futuros</td></tr>
+            <tr><td>Retificação de Erro Material</td><td>RETROSPECTIVA</td><td>Reapresenta demonstrações anteriores</td></tr>
+            <tr><td>Retificação de Erro Imaterial</td><td>PROSPECTIVA</td><td>Reconhece no resultado corrente</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC — Palavras-chave</div>
+        <div class="box-body">
+          • <strong>"Reapresentar"</strong> ou <strong>"ajustar saldos de abertura"</strong> = RETROSPECTIVO<br>
+          • <strong>"Afetar daqui para frente"</strong> = PROSPECTIVO<br>
+          • <strong>"Desvio intencional das normas"</strong> ou <strong>"omissão que induza a erro"</strong> = ERRO (não mudança de estimativa)<br>
+          • A FCC frequentemente cobra a diferença entre as três situações em questões de múltipla escolha.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 2 -->
+    <div class="chapter" id="cap2">
+      <div class="ch-num">Capítulo 02</div>
+      <h1 class="ch-title">Mensuração a Valor Justo (CPC 46 / IFRS 13)</h1>
+
+      <h2>2.1 Conceito e Definição</h2>
+      <p><strong>Valor Justo</strong> é o <em>preço que seria recebido para vender um ativo ou pago para transferir um passivo</em> em uma transação não forçada entre participantes do mercado na data de mensuração. É uma mensuração baseada em <strong>preço de saída</strong>.</p>
+
+      <ul>
+        <li><strong>Mercado principal:</strong> mercado com maior volume e nível de atividade para o ativo ou passivo.</li>
+        <li><strong>Mercado mais vantajoso:</strong> mercado que maximiza o valor do ativo (somente quando não há mercado principal).</li>
+        <li><strong>Participantes do mercado:</strong> compradores e vendedores independentes, conhecedores e dispostos a negociar.</li>
+      </ul>
+
+      <h2 id="cap2-1">2.2 Hierarquia de Inputs (Níveis)</h2>
+
+      <div style="margin: 16px 0; display:flex; flex-direction:column; gap:10px;">
+        <div class="level-badge">
+          <span class="badge-num">Nível 1</span>
+          <div><strong>Preços cotados em mercados ativos</strong> para ativos ou passivos <em>idênticos</em>. Ex.: ações em bolsa, títulos públicos negociados.</div>
+        </div>
+        <div class="level-badge">
+          <span class="badge-num l2">Nível 2</span>
+          <div><strong>Inputs observáveis</strong> além dos preços cotados do L1: preços de ativos similares, taxas de mercado. Ex.: imóveis (preço de comparáveis), swap de taxa de juros.</div>
+        </div>
+        <div class="level-badge">
+          <span class="badge-num l3">Nível 3</span>
+          <div><strong>Inputs não observáveis</strong> — baseados nas premissas da entidade. Ex.: goodwill, instrumentos financeiros complexos sem mercado ativo.</div>
+        </div>
+      </div>
+
+      <h2>2.3 Abordagens de Mensuração</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Abordagem</th><th>Método</th><th>Exemplos</th></tr></thead>
+          <tbody>
+            <tr><td>Mercado</td><td>Preços e informações de transações de mercado comparáveis</td><td>Compraveis de imóveis, transações de M&amp;A</td></tr>
+            <tr><td>Renda</td><td>DCF — converte fluxos futuros em valor presente</td><td>Avaliação de empresas, intangíveis</td></tr>
+            <tr><td>Custo</td><td>Custo de reposição corrente da capacidade de serviço do ativo</td><td>Máquinas, equipamentos especializados</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-box">
+        <div class="box-title">Exemplo Prático — FCC Estilo</div>
+        <div class="box-body">
+Ações cotadas em bolsa: custo de aquisição <span class="highlight">R$ 120.000</span> → VJ em 31/12: <span class="highlight">R$ 150.000</span><br><br>
+<span class="highlight">Lançamento (FVTPL):</span><br>
+  D — Ações (Ativo)....................R$ 30.000<br>
+  C — Ganho a VJ (Resultado).......R$ 30.000<br><br>
+<span class="highlight">Lançamento (FVOCI):</span><br>
+  D — Ações (Ativo)....................R$ 30.000<br>
+  C — Ajuste de Avaliação Patrimonial (PL)...R$ 30.000
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 3 -->
+    <div class="chapter" id="cap3">
+      <div class="ch-num">Capítulo 03</div>
+      <h1 class="ch-title">Ajuste a Valor Presente — AVP (CPC 12)</h1>
+
+      <h2>3.1 Objetivo e Conceito</h2>
+      <p>O CPC 12 exige o reconhecimento do <strong>efeito temporal do dinheiro</strong> (time value of money), trazendo a valor presente elementos monetários de longo prazo — e de curto prazo quando o efeito for <strong>material</strong>.</p>
+      <ul>
+        <li><strong>Taxa de desconto:</strong> reflete as avaliações de mercado correntes sobre o valor temporal do dinheiro e os riscos específicos do ativo ou passivo.</li>
+        <li><strong>Materialidade:</strong> operações de curto prazo (≤ 1 ano) geralmente dispensam AVP, exceto quando o efeito for material.</li>
+      </ul>
+
+      <h2>3.2 Aplicação — Ativos e Passivos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Elemento</th><th>Tratamento do AVP</th></tr></thead>
+          <tbody>
+            <tr><td>Contas a receber de longo prazo</td><td>Registra pelo VPL; diferença = receita financeira ao longo do tempo (taxa efetiva)</td></tr>
+            <tr><td>Fornecedores de longo prazo</td><td>Registra pelo VPL; diferença = despesa financeira ao longo do tempo</td></tr>
+            <tr><td>Receitas de longo prazo</td><td>Receita reconhecida pelo VP; componente de juros separado</td></tr>
+            <tr><td>Impostos a pagar parcelados</td><td>Passivo pelo VPL; adicional = encargo financeiro</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-box">
+        <div class="box-title">Exemplo Prático — AVP em Venda a Prazo</div>
+        <div class="box-body">
+Venda: <span class="highlight">R$ 100.000</span> para receber em 12 meses | Taxa de mercado: <span class="highlight">10% a.a.</span><br>
+VP = 100.000 / 1,10 = <span class="highlight">R$ 90.909</span><br><br>
+<span class="highlight">Reconhecimento inicial:</span><br>
+  D — Contas a Receber...........R$ 100.000<br>
+  C — Receita de Vendas..........R$  90.909<br>
+  C — AVP s/ Contas a Receber.. R$   9.091  ← retificadora do ativo<br><br>
+<span class="highlight">Competência (baixa da retificadora):</span><br>
+  D — AVP s/ Contas a Receber...R$ 9.091<br>
+  C — Receitas Financeiras.......R$ 9.091
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC</div>
+        <div class="box-body">
+          • O AVP é aplicado na <strong>mensuração inicial</strong> do elemento.<br>
+          • A conta retificadora do ativo <em>diminui</em> o valor do ativo até o VP.<br>
+          • A baixa da retificadora é reconhecida como <strong>Receita Financeira</strong> (ativo) ou <strong>Despesa Financeira</strong> (passivo).<br>
+          • <strong>NÃO confundir com VJ:</strong> AVP usa a taxa de mercado da operação; VJ usa perspectiva de saída.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 4 -->
+    <div class="chapter" id="cap4">
+      <div class="ch-num">Capítulo 04</div>
+      <h1 class="ch-title">Instrumentos Financeiros (CPC 48 / IFRS 9)</h1>
+
+      <h2>4.1 Conceito</h2>
+      <p>Instrumento financeiro é qualquer contrato que dê origem a um <strong>ativo financeiro</strong> para uma entidade e a um <strong>passivo financeiro ou instrumento patrimonial</strong> para outra.</p>
+
+      <h2 id="cap4-1">4.2 Classificação dos Ativos Financeiros</h2>
+      <p>A classificação depende do <strong>modelo de negócio</strong> da entidade e das <strong>características dos fluxos de caixa contratuais</strong> (teste SPPI — Solely Payments of Principal and Interest):</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Categoria</th><th>Modelo de Negócio</th><th>Teste SPPI</th><th>Variações</th></tr></thead>
+          <tbody>
+            <tr><td>Custo Amortizado (CA)</td><td>Manter para receber</td><td>Sim</td><td>Nenhuma (mantém CA)</td></tr>
+            <tr><td>FVOCI — com reciclagem</td><td>Manter para receber E vender</td><td>Sim</td><td>OCI → reciclado para resultado na baixa</td></tr>
+            <tr><td>FVOCI — sem reciclagem</td><td>Instrumentos patrimoniais (opção irrevogável)</td><td>N/A</td><td>OCI → NÃO reciclado</td></tr>
+            <tr><td>FVTPL</td><td>Demais / opção para eliminar inconsistência</td><td>Não / opção</td><td>Resultado (lucros e perdas)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="cap4-2">4.3 Modelo ECL — Perdas de Crédito Esperadas</h2>
+      <p>O modelo ECL substituiu o modelo de <em>perda incorrida</em>. A provisão para perdas é reconhecida desde o início.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Estágio</th><th>Critério</th><th>Base do ECL</th></tr></thead>
+          <tbody>
+            <tr><td>Stage 1</td><td>Sem deterioração significativa do risco desde o reconhecimento inicial</td><td>ECL de 12 meses</td></tr>
+            <tr><td>Stage 2</td><td>Houve deterioração significativa do risco de crédito</td><td>ECL durante toda a vida do ativo</td></tr>
+            <tr><td>Stage 3</td><td>Ativo impaired (em default)</td><td>ECL vida toda + juros sobre valor líquido</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>4.4 Debêntures — Aspectos Contábeis</h2>
+      <p>Debêntures são títulos de dívida emitidos por S.A. Registradas pelo <strong>custo amortizado</strong> (método da taxa efetiva), separando prêmio/deságio e custos de transação.</p>
+
+      <div class="formula-box">
+        <div class="box-title">Exemplo — Debênture com Deságio</div>
+        <div class="box-body">
+VF = <span class="highlight">R$ 1.000.000</span> | Cupom: 10% a.a. | Captação: <span class="highlight">R$ 950.000</span> | Vencimento: 5 anos<br>
+Deságio = R$ 50.000 | Taxa efetiva &gt; 10% a.a.<br><br>
+<span class="highlight">Registro inicial:</span><br>
+  D — Caixa.............................R$ 950.000<br>
+  D — Deságio s/ Debêntures......R$  50.000<br>
+  C — Debêntures a Pagar..........R$ 1.000.000<br><br>
+O deságio é amortizado via <span class="highlight">método da taxa efetiva</span> → aumenta a despesa financeira anual.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 5 -->
+    <div class="chapter" id="cap5">
+      <div class="ch-num">Capítulo 05</div>
+      <h1 class="ch-title">Propriedade para Investimento (CPC 28 / IAS 40)</h1>
+
+      <h2>5.1 Conceito e Escopo</h2>
+      <p>Propriedade para investimento (PI) é a propriedade (terreno, edifício ou parte) mantida para <strong>auferir aluguel</strong> ou para <strong>valorização do capital</strong> — e não para uso nas operações ou venda no curso ordinário.</p>
+
+      <h3>O que NÃO é PI</h3>
+      <ul>
+        <li>Propriedade usada pelo proprietário → <strong>CPC 27 (Imobilizado)</strong></li>
+        <li>Propriedade mantida para venda → <strong>CPC 16 (Estoques)</strong></li>
+        <li>Propriedade em construção para futura PI → classifica como imobilizado até a conclusão</li>
+      </ul>
+
+      <h2>5.2 Modelos de Mensuração Pós-reconhecimento</h2>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Modelo do Valor Justo</h4>
+          <ul>
+            <li>Ganhos/perdas reconhecidos no <strong>resultado</strong></li>
+            <li><strong>NÃO há depreciação</strong></li>
+            <li>Requer mensuração periódica do VJ</li>
+          </ul>
+        </div>
+        <div class="compare-card right">
+          <h4>Modelo do Custo</h4>
+          <ul>
+            <li>Idêntico ao CPC 27 (custo − depreciação − impairment)</li>
+            <li><strong>Divulga o VJ nas notas</strong></li>
+            <li>Mais objetivo e verificável</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC — Transferências</div>
+        <div class="box-body">
+          • <strong>PI → Imobilizado:</strong> quando inicia uso pelo proprietário.<br>
+          • <strong>PI → Estoque:</strong> quando inicia desenvolvimento para venda.<br>
+          • <strong>Imobilizado → PI (modelo VJ):</strong> diferença entre VJ e VC → reavaliação (OCI se excedente; resultado se déficit).<br>
+          • Propriedade parcialmente alugada e parcialmente usada: PI somente se as partes puderem ser vendidas separadamente.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 6 -->
+    <div class="chapter" id="cap6">
+      <div class="ch-num">Capítulo 06</div>
+      <h1 class="ch-title">Arrendamento Mercantil (CPC 06-R2 / IFRS 16)</h1>
+
+      <h2>6.1 Conceito — Mudança Central do CPC 06-R2</h2>
+      <p>O CPC 06-R2 (vigente desde 2019) <strong>aboliu a distinção</strong> entre arrendamento financeiro e operacional para o <strong>arrendatário</strong>. Todos os arrendamentos, com exceções abaixo, geram reconhecimento de ativo (ADU) e passivo.</p>
+
+      <h2>6.2 Reconhecimento pelo Arrendatário</h2>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Ativo de Direito de Uso (ADU)</h4>
+          <ul>
+            <li>VP dos pagamentos futuros</li>
+            <li>+ Custos diretos iniciais</li>
+            <li>+ Estimativa de desmontagem/restauração</li>
+            <li>+ Pagamentos antes do início</li>
+            <li>Depreciado ao longo da vigência (ou vida útil se menor)</li>
+          </ul>
+        </div>
+        <div class="compare-card right">
+          <h4>Passivo de Arrendamento</h4>
+          <ul>
+            <li>VP dos pagamentos não pagos</li>
+            <li>Taxa: implícita (ou incremental se desconhecida)</li>
+            <li>Acrescido de juros (taxa efetiva)</li>
+            <li>Reduzido pelos pagamentos realizados</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="box-title">Exemplo — Arrendamento 4 anos, R$100k/ano, 10% a.a.</div>
+        <div class="box-body">
+VP = 100.000/1,10 + 100.000/1,21 + 100.000/1,331 + 100.000/1,4641<br>
+   = 90.909 + 82.645 + 75.131 + 68.301 = <span class="highlight">R$ 316.986</span><br><br>
+<span class="highlight">Reconhecimento:</span><br>
+  D — ADU..........................R$ 316.986<br>
+  C — Passivo Arrendamento....R$ 316.986<br><br>
+<span class="highlight">Ano 1 — Juros:</span> 316.986 × 10% = R$ 31.699<br>
+  D — Desp. Financeira.........R$ 31.699<br>
+  C — Passivo Arrendamento....R$ 31.699<br><br>
+<span class="highlight">Ano 1 — Pagamento:</span><br>
+  D — Passivo Arrendamento....R$ 100.000<br>
+  C — Caixa.......................R$ 100.000
+        </div>
+      </div>
+
+      <h2>6.3 Isenções de Reconhecimento</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Isenção</th><th>Critério</th><th>Tratamento</th></tr></thead>
+          <tbody>
+            <tr><td>Arrendamento de curto prazo</td><td>Prazo ≤ 12 meses (incluindo opções de renovação)</td><td>Despesa linear no resultado</td></tr>
+            <tr><td>Ativo de baixo valor</td><td>Ativo subjacente de pequeno valor (≈ USD 5.000)</td><td>Despesa linear no resultado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>6.4 Contabilidade do Arrendador</h2>
+      <p>O arrendador <strong>mantém a distinção</strong> entre arrendamento financeiro e operacional:</p>
+      <ul>
+        <li><strong>Financeiro:</strong> desreconhece o ativo e reconhece recebível; receita = juros pela taxa efetiva.</li>
+        <li><strong>Operacional:</strong> mantém o ativo; reconhece receita de arrendamento de forma <strong>linear</strong>.</li>
+      </ul>
+    </div>
+
+    <!-- CAP 7 -->
+    <div class="chapter" id="cap7">
+      <div class="ch-num">Capítulo 07</div>
+      <h1 class="ch-title">Participações Societárias</h1>
+
+      <h2>7.1 Conceitos Fundamentais</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Critério</th><th>Norma</th></tr></thead>
+          <tbody>
+            <tr><td>Controlada</td><td>Poder + exposição a retornos variáveis + capacidade de usar o poder</td><td>CPC 36</td></tr>
+            <tr><td>Coligada</td><td>Influência significativa (≥ 20% do capital votante, sem controle)</td><td>CPC 18-R2</td></tr>
+            <tr><td>Joint Venture</td><td>Controle conjunto por acordo contratual</td><td>CPC 19-R2</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        <div class="box-title">📌 Influência Significativa — Presunções</div>
+        <div class="box-body">
+          <strong>≥ 20% do capital votante:</strong> presume influência significativa (pode ser ilidida com prova em contrário).<br>
+          <strong>&lt; 20%:</strong> pode haver influência significativa se houver representação no conselho, participação em políticas, transações materiais, intercâmbio de pessoal ou fornecimento de informações técnicas essenciais.
+        </div>
+      </div>
+
+      <h2 id="cap7-1">7.2 Método da Equivalência Patrimonial (MEP)</h2>
+      <p>Pelo MEP, o investimento é registrado inicialmente pelo custo e, posteriormente, ajustado para refletir a <strong>participação do investidor nas mutações do PL da investida</strong>.</p>
+
+      <div class="formula-box">
+        <div class="box-title">Fórmulas do MEP</div>
+        <div class="box-body">
+Resultado de Equivalência = <span class="highlight">% participação × Lucro (Prejuízo) líquido da investida</span><br><br>
+Investimento (novo) = Investimento (anterior) + Resultado de Equivalência ± Outros ajustes de PL<br><br>
+<span class="highlight">Lucro da investida:</span><br>
+  D — Investimento em Coligadas | C — Resultado de Equivalência (Receita)<br><br>
+<span class="highlight">Prejuízo da investida:</span><br>
+  D — Resultado de Equivalência (Despesa) | C — Investimento em Coligadas
+        </div>
+      </div>
+
+      <h3>Lucros Não Realizados (LNR)</h3>
+      <p>Eliminados para evitar duplicidade de reconhecimento. Surgem em transações entre investidor e investida enquanto os ativos não foram realizados (vendidos a terceiros).</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Direção</th><th>Eliminação</th></tr></thead>
+          <tbody>
+            <tr><td>Downstream (investidor → investida)</td><td>Elimina proporcional à participação no LNR gerado</td></tr>
+            <tr><td>Upstream (investida → investidor)</td><td>Elimina proporcional à participação no LNR gerado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-box">
+        <div class="box-title">Exemplo — LNR Downstream</div>
+        <div class="box-body">
+Investidora (40% na coligada) vende MP para coligada: PV = <span class="highlight">R$ 50.000</span> | Custo = R$ 30.000<br>
+Lucro não realizado = R$ 20.000 | Eliminação = 40% × 20.000 = <span class="highlight">R$ 8.000</span><br><br>
+  D — Resultado de Equivalência...R$ 8.000<br>
+  C — Investimento em Coligadas...R$ 8.000
+        </div>
+      </div>
+
+      <h2 id="cap7-2">7.3 Dividendos Recebidos</h2>
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC — Dividendos: MEP × Custo</div>
+        <div class="box-body">
+          • <strong>MEP:</strong> dividendos recebidos → <strong>REDUZEM o investimento</strong> (não é receita — já foi reconhecida via equivalência).<br>
+          &nbsp;&nbsp;D — Dividendos a Receber | C — Investimento em Coligadas<br><br>
+          • <strong>Custo:</strong> dividendos recebidos → <strong>RECEITA</strong> de dividendos.<br>
+          &nbsp;&nbsp;D — Dividendos a Receber | C — Receita de Dividendos<br><br>
+          Esta distinção é <strong>muito cobrada pela FCC</strong>!
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 8 -->
+    <div class="chapter" id="cap8">
+      <div class="ch-num">Capítulo 08</div>
+      <h1 class="ch-title">Reorganização e Reestruturação de Empresas</h1>
+
+      <h2>8.1 Modalidades (Lei 6.404/76)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Modalidade</th><th>Conceito</th><th>Empresas Extintas</th></tr></thead>
+          <tbody>
+            <tr><td>Fusão</td><td>União de duas ou mais sociedades formando sociedade nova</td><td>Todas as participantes</td></tr>
+            <tr><td>Incorporação</td><td>Absorção de uma ou mais sociedades por outra existente</td><td>Apenas a incorporada</td></tr>
+            <tr><td>Cisão total</td><td>Transferência de todo o patrimônio para outras sociedades</td><td>A cindida</td></tr>
+            <tr><td>Cisão parcial</td><td>Transferência de parcela do patrimônio para outra sociedade</td><td>Nenhuma</td></tr>
+            <tr><td>Transformação</td><td>Mudança de tipo societário (ex.: Ltda. → S.A.)</td><td>Nenhuma</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>8.2 Combinação de Negócios — CPC 15 (IFRS 3)</h2>
+      <p>Utiliza o <strong>método da aquisição</strong> como única abordagem aceita:</p>
+      <div class="hierarchy">
+        <div class="hier-item"><div class="hier-num">1</div><div class="hier-content">Identificar o adquirente</div></div>
+        <div class="hier-item"><div class="hier-num">2</div><div class="hier-content">Determinar a data de aquisição</div></div>
+        <div class="hier-item"><div class="hier-num">3</div><div class="hier-content">Reconhecer e mensurar ativos identificáveis, passivos assumidos e PNC da adquirida pelo <strong>valor justo</strong></div></div>
+        <div class="hier-item"><div class="hier-num">4</div><div class="hier-content">Reconhecer e mensurar o <strong>goodwill ou ganho por compra vantajosa</strong></div></div>
+      </div>
+
+      <h2 id="cap8-1">8.3 Mais-Valia, Goodwill e Deságio</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Elemento</th><th>Conceito</th><th>Tratamento Contábil</th></tr></thead>
+          <tbody>
+            <tr><td>Mais-valia de Ativos Líquidos</td><td>VJ &gt; VC dos ativos líquidos identificáveis</td><td>Amortizada ao longo da vida útil restante do ativo correspondente</td></tr>
+            <tr><td>Goodwill (Ágio por Expectativa)</td><td>Contraprestação − VJ dos ativos líquidos identificáveis</td><td><strong>NÃO amortiza</strong> → teste de impairment anual (CPC 01)</td></tr>
+            <tr><td>Deságio (Compra Vantajosa)</td><td>VJ dos ativos líquidos &gt; preço pago</td><td>Reconhecido como <strong>receita imediatamente</strong> no resultado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-box">
+        <div class="box-title">Exemplo — Cálculo do Goodwill</div>
+        <div class="box-body">
+Preço pago = <span class="highlight">R$ 1.200.000</span><br>
+PL contábil da adquirida = R$ 800.000<br>
+Mais-valia (imóvel VJ &gt; VC) = R$ 150.000<br>
+VJ dos ativos líquidos = <span class="highlight">R$ 950.000</span><br>
+Goodwill = 1.200.000 − 950.000 = <span class="highlight">R$ 250.000</span><br><br>
+Desdobramento do custo:<br>
+  PL contábil: R$ 800k + Mais-valia: R$ 150k + Goodwill: R$ 250k = R$ 1.200k ✓
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 9 -->
+    <div class="chapter" id="cap9">
+      <div class="ch-num">Capítulo 09</div>
+      <h1 class="ch-title">Subvenção e Assistência Governamentais (CPC 07 / IAS 20)</h1>
+
+      <h2>9.1 Conceito e Tipos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Conceito</th><th>Tratamento</th></tr></thead>
+          <tbody>
+            <tr><td>Subvenção para Ativo</td><td>Condição primária: adquirir ativos de longo prazo</td><td>Deduzida do ativo (reduz depreciação) OU receita diferida</td></tr>
+            <tr><td>Subvenção para Receita (custeio)</td><td>Todas as demais — compensação de despesas/perdas</td><td>Reconhecida no resultado no mesmo período das despesas relacionadas</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>9.2 Reconhecimento</h2>
+      <p>Somente reconhece quando houver <strong>razoável segurança</strong> de que: (a) a entidade <em>cumprirá as condições</em> da subvenção; e (b) a subvenção <em>será recebida</em>.</p>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Atenção — Lei 14.789/2023 (Tributário)</div>
+        <div class="box-body">
+          A partir de 2024, subvenções de <strong>ICMS</strong> passaram a compor a base de cálculo do IRPJ/CSLL, salvo crédito fiscal apurado. A FCC pode cobrar o aspecto contábil (CPC 07) e o novo tratamento tributário. Fique atento ao enunciado da questão!
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 10 -->
+    <div class="chapter" id="cap10">
+      <div class="ch-num">Capítulo 10</div>
+      <h1 class="ch-title">Conversão de Demonstrações e Efeitos de Câmbio (CPC 02 / IAS 21)</h1>
+
+      <h2>10.1 Moeda Funcional × Moeda de Apresentação</h2>
+      <ul>
+        <li><strong>Moeda funcional:</strong> moeda do ambiente econômico principal. Determinada por fatores primários (preços de venda, mão de obra, materiais) e secundários.</li>
+        <li><strong>Moeda de apresentação:</strong> moeda em que as demonstrações são apresentadas — pode diferir da funcional.</li>
+      </ul>
+
+      <h2>10.2 Transações em Moeda Estrangeira</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Elemento</th><th>Taxa Utilizada</th><th>Variação Cambial</th></tr></thead>
+          <tbody>
+            <tr><td>Reconhecimento inicial</td><td>Taxa à vista na data da transação</td><td>—</td></tr>
+            <tr><td>Itens monetários (encerrament)</td><td>Taxa de fechamento</td><td>→ RESULTADO</td></tr>
+            <tr><td>Itens não monetários (custo histórico)</td><td>Taxa histórica (data da transação)</td><td>Nenhuma</td></tr>
+            <tr><td>Itens não monetários (VJ)</td><td>Taxa na data de determinação do VJ</td><td>Incluída na variação do VJ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>10.3 Conversão de Demonstrações para Moeda de Apresentação</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Elemento</th><th>Taxa de Conversão</th></tr></thead>
+          <tbody>
+            <tr><td>Ativos e Passivos</td><td>Taxa de fechamento (data do balanço)</td></tr>
+            <tr><td>PL (exceto resultado)</td><td>Taxa histórica</td></tr>
+            <tr><td>Receitas, Custos e Despesas (DRE)</td><td>Taxa média do período</td></tr>
+            <tr><td>Diferença de conversão</td><td>→ OCI (Ajuste Acumulado de Conversão — conta do PL)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC — Câmbio</div>
+        <div class="box-body">
+          • Variação cambial em <strong>itens monetários</strong> = sempre no <strong>RESULTADO</strong>.<br>
+          • Diferença de <strong>conversão de DCs</strong> = vai para <strong>OCI</strong> (Patrimônio Líquido).<br>
+          • "Ajuste Acumulado de Conversão" = conta do PL — não impacta o resultado até a alienação da entidade estrangeira.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 11 -->
+    <div class="chapter" id="cap11">
+      <div class="ch-num">Capítulo 11</div>
+      <h1 class="ch-title">Demonstrações dos Fluxos de Caixa e do Valor Adicionado</h1>
+
+      <h2>11.1 DFC (CPC 03 / IAS 7)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Atividade</th><th>Exemplos de Entradas</th><th>Exemplos de Saídas</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Operacional</strong></td><td>Recebimentos de clientes</td><td>Pagamentos a fornecedores, salários, impostos operacionais</td></tr>
+            <tr><td><strong>Investimento</strong></td><td>Venda de imobilizado, recebimento de empréstimos a terceiros</td><td>Aquisição de imobilizado, concessão de empréstimos</td></tr>
+            <tr><td><strong>Financiamento</strong></td><td>Emissão de ações, captação de empréstimos</td><td>Pagamento de empréstimos, dividendos pagos, amortização de arrendamento</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Método Indireto — Ajustes ao Lucro Líquido</h3>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Somam (+)</h4>
+          <ul>
+            <li>Depreciação, amortização, exaustão</li>
+            <li>Provisões (devedores duvidosos, férias etc.)</li>
+            <li>Resultado de equiv. patrimonial negativo</li>
+            <li>Perdas na venda de ativos</li>
+            <li>Aumento de passivos circulantes</li>
+            <li>Redução de ativos circulantes</li>
+          </ul>
+        </div>
+        <div class="compare-card right">
+          <h4>Subtraem (−)</h4>
+          <ul>
+            <li>Resultado de equiv. patrimonial positivo</li>
+            <li>Ganhos na venda de ativos</li>
+            <li>Aumento de ativos circulantes</li>
+            <li>Redução de passivos circulantes</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>11.2 DVA (CPC 09)</h2>
+      <p>Evidencia o <strong>valor econômico gerado pela entidade</strong> e sua distribuição entre pessoal, governo, credores e acionistas. Obrigatória para companhias abertas.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Linha da DVA</th><th>Descrição</th></tr></thead>
+          <tbody>
+            <tr><td>(+) Receitas</td><td>Vendas + outras receitas ± PCLD</td></tr>
+            <tr><td>(−) Insumos de terceiros</td><td>CPV/CSV + materiais + energia + serviços</td></tr>
+            <tr><td>(−) Retenções</td><td>Depreciação, amortização e exaustão</td></tr>
+            <tr><td>(+) VA recebido em transferência</td><td>Resultado de equivalência + receitas financeiras</td></tr>
+            <tr><td>= VA TOTAL A DISTRIBUIR</td><td></td></tr>
+            <tr><td>Pessoal</td><td>Salários, benefícios, FGTS, PLR</td></tr>
+            <tr><td>Governo</td><td>Impostos, taxas, contribuições (inclui IR/CSLL)</td></tr>
+            <tr><td>Credores (Capital de Terceiros)</td><td>Juros, aluguéis, outras despesas financeiras</td></tr>
+            <tr><td>Acionistas (Capital Próprio)</td><td>JCP, dividendos, lucros retidos/prejuízos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC — DVA</div>
+        <div class="box-body">
+          • Resultado de equiv. patrimonial → <strong>VA recebido em transferência</strong> (não gerado pela empresa).<br>
+          • Depreciação → <strong>reduz</strong> o VA gerado (é retenção).<br>
+          • IR/CSLL → distribuição para o <strong>Governo</strong> na DVA.<br>
+          • Tributos sobre vendas (ICMS, PIS/COFINS) → deduzem as receitas no cálculo do VA.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ═══════════════════════════════ PARTE 2 ════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-number">02</div>
+    <div class="part-info">
+      <div class="part-label">Seção</div>
+      <div class="part-title">Contabilidade de Custos</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- CAP 12 -->
+    <div class="chapter" id="cap12">
+      <div class="ch-num">Capítulo 12</div>
+      <h1 class="ch-title">Conceitos Gerais e Terminologia</h1>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Termo</th><th>Definição</th><th>Destino</th></tr></thead>
+          <tbody>
+            <tr><td>Gasto</td><td>Sacrifício financeiro para obtenção de bem/serviço. Gênero dos demais.</td><td>Ativo, Custo ou Despesa</td></tr>
+            <tr><td>Custo</td><td>Gasto relativo a bem/serviço utilizado na <strong>produção</strong> de outros bens/serviços.</td><td>Estoque → CPV</td></tr>
+            <tr><td>Despesa</td><td>Bem/serviço consumido para <strong>obter receitas</strong>. Não vinculado à produção.</td><td>Resultado imediato</td></tr>
+            <tr><td>Perda</td><td>Consumo anormal e involuntário (incêndio, furto, sinistro).</td><td>Resultado imediato</td></tr>
+            <tr><td>Desembolso</td><td>Pagamento (pode ocorrer antes, durante ou após o gasto).</td><td>Financeiro</td></tr>
+            <tr><td>Investimento</td><td>Gasto ativado em função de vida útil ou benefício futuro.</td><td>Ativo (imobilizado etc.)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC — Custo × Despesa</div>
+        <div class="box-body">
+          • Matéria-prima, MOD, depreciação do maquinário, energia da fábrica → <strong>CUSTO</strong><br>
+          • Salário do diretor comercial, propaganda, comissões de vendas, financeiras → <strong>DESPESA</strong><br>
+          • Incêndio destrói estoque → <strong>PERDA</strong> (não é custo nem despesa normal)<br>
+          • Distinção fundamental: custo está ligado à <strong>PRODUÇÃO</strong>; despesa à <strong>VENDA/ADMINISTRAÇÃO</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 13 -->
+    <div class="chapter" id="cap13">
+      <div class="ch-num">Capítulo 13</div>
+      <h1 class="ch-title">Conceitos e Classificação dos Custos</h1>
+
+      <h2>13.1 Quanto à Apropriação ao Produto</h2>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Custos Diretos</h4>
+          <ul>
+            <li>Identificados diretamente no produto</li>
+            <li><strong>Não necessitam de rateio</strong></li>
+            <li>Ex.: Matéria-Prima (MP), Mão de Obra Direta (MOD)</li>
+          </ul>
+        </div>
+        <div class="compare-card right">
+          <h4>Custos Indiretos (CIF)</h4>
+          <ul>
+            <li>Não identificáveis diretamente</li>
+            <li><strong>Necessitam de critério de rateio</strong></li>
+            <li>Ex.: aluguel da fábrica, energia, depreciação de máquinas, salários de supervisores</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>13.2 Quanto ao Volume de Produção</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Classificação</th><th>Comportamento</th><th>Exemplos</th></tr></thead>
+          <tbody>
+            <tr><td>Custos Fixos (CF)</td><td>Não variam com o volume no curto prazo</td><td>Aluguel, depreciação linear, salários fixos da fábrica</td></tr>
+            <tr><td>Custos Variáveis (CV)</td><td>Variam proporcionalmente ao volume</td><td>Matéria-prima, embalagens, comissões de produção</td></tr>
+            <tr><td>Semivariáveis</td><td>Parcela fixa + parcela variável</td><td>Energia elétrica (mínimo + consumo)</td></tr>
+            <tr><td>Semifixos (degrau)</td><td>Fixos por intervalos; sobem em degraus</td><td>Supervisores (1 para cada X unidades)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>13.3 Outras Classificações</h2>
+      <ul>
+        <li><strong>Custos Primários:</strong> MP + MOD (os dois custos diretos por excelência)</li>
+        <li><strong>Custos de Transformação/Conversão:</strong> MOD + CIF (excluem MP; representam o esforço de transformação)</li>
+        <li><strong>Custos Evitáveis:</strong> podem ser eliminados se uma linha/produto for descontinuado</li>
+        <li><strong>Custos Irrecuperáveis (sunk costs):</strong> já ocorreram e não podem ser revertidos — <em>irrelevantes para decisões futuras</em></li>
+      </ul>
+    </div>
+
+    <!-- CAP 14 -->
+    <div class="chapter" id="cap14">
+      <div class="ch-num">Capítulo 14</div>
+      <h1 class="ch-title">Apropriação dos Custos à Produção</h1>
+
+      <h2>14.1 Critérios de Atribuição</h2>
+      <ul>
+        <li><strong>Rastreamento (direcionamento):</strong> alocação com base em relação de causa e efeito verificável. Preferível ao rateio.</li>
+        <li><strong>Rateio:</strong> distribuição de custo comum por critério estimado/arbitrário. Usado para CIF.</li>
+        <li><strong>Absorção direta:</strong> para custos identificáveis diretamente no produto (MP e MOD).</li>
+      </ul>
+
+      <h2>14.2 Critérios de Rateio dos CIF</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Critério</th><th>Indicado Para</th></tr></thead>
+          <tbody>
+            <tr><td>Horas-máquina trabalhadas</td><td>Ambientes automatizados (mais técnico)</td></tr>
+            <tr><td>Horas de mão de obra direta (HMOD)</td><td>Ambientes manuais</td></tr>
+            <tr><td>Custo da mão de obra direta</td><td>Ambientes manuais (mais simples)</td></tr>
+            <tr><td>Custo da matéria-prima</td><td>Quando MP é o principal custo</td></tr>
+            <tr><td>Custo primo (MP + MOD)</td><td>Ponderação dos dois principais custos diretos</td></tr>
+            <tr><td>Unidades produzidas</td><td>Quando os produtos são homogêneos</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAP 15 -->
+    <div class="chapter" id="cap15">
+      <div class="ch-num">Capítulo 15</div>
+      <h1 class="ch-title">Departamentalização</h1>
+
+      <h2>15.1 Conceito e Tipos de Departamento</h2>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Departamento de Produção</h4>
+          <ul>
+            <li>Trabalha diretamente no produto</li>
+            <li>Ex.: usinagem, montagem, acabamento</li>
+            <li>Seus custos são repassados <strong>diretamente aos produtos</strong></li>
+          </ul>
+        </div>
+        <div class="compare-card right">
+          <h4>Departamento de Serviços (Apoio)</h4>
+          <ul>
+            <li>Apoia os departamentos de produção</li>
+            <li>Ex.: manutenção, almoxarifado, RH, refeitório</li>
+            <li>Seus custos são <strong>redistribuídos para a produção</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>15.2 Sequência de Apropriação</h2>
+      <div class="hierarchy">
+        <div class="hier-item"><div class="hier-num">1</div><div class="hier-content"><strong>Alocação primária:</strong> separação dos CIF por departamento (produção e serviços)</div></div>
+        <div class="hier-item"><div class="hier-num">2</div><div class="hier-content"><strong>Alocação secundária:</strong> redistribuição dos custos dos deptos de serviços para os de produção</div></div>
+        <div class="hier-item"><div class="hier-num">3</div><div class="hier-content"><strong>Apropriação ao produto:</strong> custos acumulados nos deptos de produção → produtos</div></div>
+      </div>
+
+      <h2>15.3 Métodos de Redistribuição</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Método</th><th>Característica</th><th>Precisão</th></tr></thead>
+          <tbody>
+            <tr><td>Alocação Direta</td><td>Ignora serviços prestados entre deptos de serviços; vai direto para produção</td><td>Menor</td></tr>
+            <tr><td>Alocação Sequencial (Escalonado)</td><td>Fecha cada depto de serviço em ordem (geralmente do que presta mais ao que presta menos)</td><td>Intermediária</td></tr>
+            <tr><td>Alocação Recíproca (Simultânea)</td><td>Reconhece prestação mútua; usa equações simultâneas</td><td>Maior</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAP 16 -->
+    <div class="chapter" id="cap16">
+      <div class="ch-num">Capítulo 16</div>
+      <h1 class="ch-title">Taxa de Aplicação dos Custos Indiretos de Produção</h1>
+
+      <h2>16.1 Conceito e Cálculo</h2>
+      <p>A taxa predeterminada evita flutuações nos custos unitários causadas por variações no volume de produção.</p>
+
+      <div class="formula-box">
+        <div class="box-title">Fórmulas</div>
+        <div class="box-body">
+Taxa de CIF = <span class="highlight">CIF Orçado / Base de Atividade Estimada</span><br><br>
+Ex.: R$ 240.000 / 12.000 h-máquina = <span class="highlight">R$ 20 / hora-máquina</span><br><br>
+CIF Aplicado = Taxa × Atividade Real do Período
+        </div>
+      </div>
+
+      <h2>16.2 Variações de CIF</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Variação</th><th>Fórmula</th><th>Impacto</th></tr></thead>
+          <tbody>
+            <tr><td>CIF Sub-aplicado</td><td>CIF Real &gt; CIF Aplicado</td><td>Custo real maior → débito no resultado</td></tr>
+            <tr><td>CIF Super-aplicado</td><td>CIF Real &lt; CIF Aplicado</td><td>Custo real menor → crédito no resultado</td></tr>
+            <tr><td>Var. de Orçamento (Gastos)</td><td>CIF Real − CIF Orçado (p/ atividade real)</td><td>Eficiência no controle de gastos</td></tr>
+            <tr><td>Var. de Volume (Capacidade)</td><td>(Atividade Real − Atividade Normal) × Taxa Fixa</td><td>Uso da capacidade instalada</td></tr>
+            <tr><td>Var. de Eficiência</td><td>(Atividade Real − Padrão p/ produção real) × Taxa</td><td>Eficiência no uso do insumo-base</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAP 17 -->
+    <div class="chapter" id="cap17">
+      <div class="ch-num">Capítulo 17</div>
+      <h1 class="ch-title">Apuração da Produção Acabada, Produtos em Elaboração e Vendidos</h1>
+
+      <h2>17.1 Fluxo dos Custos de Produção</h2>
+      <div class="flow">
+        <div class="flow-item">MP</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">Almoxarifado</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">Prod. em Elaboração (PE)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">Produtos Acabados (PA)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">CPV</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="box-title">Fórmulas Fundamentais</div>
+        <div class="box-body">
+<span class="highlight">Produção Acabada</span> = PE Inicial + Custos do Período − PE Final<br><br>
+<span class="highlight">CPV</span> = PA Inicial + Produção Acabada − PA Final<br><br>
+Ou diretamente:<br>
+CPV = PE Inicial + Custos do Período − PE Final − PA Final
+        </div>
+      </div>
+
+      <h2>17.2 Avaliação dos Estoques</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Método</th><th>Descrição</th><th>Aceito pelo CPC 16?</th></tr></thead>
+          <tbody>
+            <tr><td>PEPS (FIFO)</td><td>Primeiro que entra, primeiro que sai. Estoque final = custos mais recentes.</td><td>✓ Sim</td></tr>
+            <tr><td>Custo Médio Ponderado</td><td>Média ponderada dos custos disponíveis</td><td>✓ Sim</td></tr>
+            <tr><td>UEPS (LIFO)</td><td>Último que entra, primeiro que sai</td><td>✗ Não (proibido pelo IFRS)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAP 18 -->
+    <div class="chapter" id="cap18">
+      <div class="ch-num">Capítulo 18</div>
+      <h1 class="ch-title">Utilização de Equivalentes de Produção</h1>
+
+      <h2>18.1 Conceito</h2>
+      <p>Equivalentes de produção (unidades equivalentes) permitem distribuir custos entre produtos acabados e produtos em elaboração, considerando o grau de conclusão dos PE.</p>
+
+      <div class="formula-box">
+        <div class="box-title">Fórmulas</div>
+        <div class="box-body">
+UE = Unidades Acabadas + (Unidades em Elaboração × <span class="highlight">% de Conclusão</span>)<br><br>
+Exemplo: 1.000 acabadas + 400 PE (50% concluídas) = 1.000 + 200 = <span class="highlight">1.200 UE</span><br><br>
+Custo por UE = Custo Total do Período / UE<br>
+Custo dos Acabados = 1.000 × Custo por UE<br>
+Custo dos PE = 200 × Custo por UE
+        </div>
+      </div>
+
+      <h2>18.2 Ponto de Adição de Materiais</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Ponto de Adição da MP</th><th>% de MP nos PE</th></tr></thead>
+          <tbody>
+            <tr><td>Adicionada no INÍCIO do processo</td><td>100% da MP (independente do % de conversão)</td></tr>
+            <tr><td>Adicionada ao FINAL do processo</td><td>0% da MP nos PE (somente nos acabados)</td></tr>
+            <tr><td>Adicionada de forma UNIFORME</td><td>Igual ao % de conclusão</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAP 19 -->
+    <div class="chapter" id="cap19">
+      <div class="ch-num">Capítulo 19</div>
+      <h1 class="ch-title">Tipos de Produção</h1>
+
+      <h2>19.1 Produção por Ordem</h2>
+      <p>Produção sob encomenda. Cada ordem é um <strong>centro de custo específico</strong>. Custo acumulado por ordem, calculado ao final dela.</p>
+      <ul>
+        <li>Exemplos: construção civil, aviões, móveis sob medida, equipamentos especiais.</li>
+        <li>Instrumento: <strong>Ficha de Custo por Ordem</strong> (acumula MP, MOD e CIF por ordem).</li>
+      </ul>
+
+      <h2>19.2 Produção Contínua (Por Processo)</h2>
+      <p>Grandes volumes, produção homogênea e contínua. Custos acumulados por <strong>período</strong> e divididos pelas unidades equivalentes.</p>
+      <ul>
+        <li>Exemplos: indústria química, refinaria de petróleo, usinas de açúcar, cimento.</li>
+        <li>Utiliza <strong>equivalentes de produção</strong>.</li>
+      </ul>
+
+      <h2>19.3 Produção Conjunta</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Descrição</th><th>Métodos de Rateio</th></tr></thead>
+          <tbody>
+            <tr><td>Co-produtos (Produtos Conjuntos)</td><td>Todos têm valor de venda relevante e são objetivo da produção</td><td>Valor de mercado, unidades físicas, VPL</td></tr>
+            <tr><td>Subprodutos</td><td>Valor de venda pequeno em relação ao produto principal</td><td>Deduz do custo do produto principal (ou pelo VR na produção)</td></tr>
+            <tr><td>Sucata</td><td>Sem valor de mercado relevante</td><td>Valor na venda reduz os custos do período</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAP 20 -->
+    <div class="chapter" id="cap20">
+      <div class="ch-num">Capítulo 20</div>
+      <h1 class="ch-title">Tipos de Custeio</h1>
+
+      <h2>20.1 Custeio por Absorção</h2>
+      <p>Todos os custos de produção (fixos e variáveis) são incorporados ao custo dos produtos. <strong>Aceito pelo CPC 16 e pela legislação fiscal</strong>.</p>
+
+      <div class="formula-box">
+        <div class="box-title">Estrutura — Absorção</div>
+        <div class="box-body">
+Custo do Produto = <span class="highlight">MP + MOD + CIF (fixos + variáveis)</span><br>
+Todos os custos fabris → Estoque → CPV quando vendido<br>
+Resultado = Receita − CPV − Despesas do Período
+        </div>
+      </div>
+
+      <h2>20.2 Custeio Variável (Direto)</h2>
+      <p>Somente custos variáveis de produção incorporam o produto. <strong>CIF fixo é despesa do período</strong> (encargo de estrutura). Método gerencial — <strong>não aceito para fins externos</strong>.</p>
+
+      <div class="formula-box">
+        <div class="box-title">Estrutura — Variável</div>
+        <div class="box-body">
+Custo do Produto = <span class="highlight">MP + MOD + CIF Variável</span><br>
+CIF Fixo → Despesa do Período (não vai para o estoque)<br>
+Resultado = Receita − CPV(variável) − Margem de Contribuição − CF − Despesas
+        </div>
+      </div>
+
+      <h2>20.3 Comparação — Absorção × Variável</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Aspecto</th><th>Absorção</th><th>Variável</th></tr></thead>
+          <tbody>
+            <tr><td>Custo do produto</td><td>MP + MOD + CIF total</td><td>MP + MOD + CIF variável</td></tr>
+            <tr><td>CIF fixo</td><td>No estoque / CPV</td><td>Despesa do período</td></tr>
+            <tr><td>Aceitação fiscal</td><td>✓ SIM (obrigatório)</td><td>✗ NÃO (gerencial)</td></tr>
+            <tr><td>Lucro quando Produção &gt; Vendas</td><td><strong>MAIOR</strong> (CIF fixo fica no estoque)</td><td>Menor</td></tr>
+            <tr><td>Lucro quando Produção &lt; Vendas</td><td><strong>MENOR</strong></td><td>Maior</td></tr>
+            <tr><td>Lucro quando Produção = Vendas</td><td colspan="2" style="text-align:center;"><strong>IGUAL</strong> nos dois métodos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>20.4 Custeio ABC (Activity-Based Costing)</h2>
+      <p>Rastreia custos às <strong>atividades</strong> e destas aos produtos com base no consumo de atividades. Reduz distorções do rateio arbitrário.</p>
+      <ul>
+        <li><strong>Direcionador de custo:</strong> fator que determina o consumo de uma atividade (ex.: número de ordens de compra, horas de setup, número de inspeções).</li>
+      </ul>
+
+      <h2>20.5 Custeio RKW (Pleno / Integral)</h2>
+      <p>Incorpora ao custo dos produtos <em>todos</em> os gastos: custos de produção + despesas operacionais (comerciais, administrativas e financeiras). <strong>NÃO aceito pelas normas para fins externos</strong>.</p>
+    </div>
+
+    <!-- CAP 21 -->
+    <div class="chapter" id="cap21">
+      <div class="ch-num">Capítulo 21</div>
+      <h1 class="ch-title">Controle dos Custos e Custo Padrão</h1>
+
+      <h2>21.1 Tipos de Padrão</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Descrição</th><th>Uso Prático</th></tr></thead>
+          <tbody>
+            <tr><td>Padrão Ideal (Perfeito)</td><td>Melhores condições possíveis, sem desperdícios</td><td>Desmotiva — raramente alcançado</td></tr>
+            <tr><td>Padrão Corrente (Esperado)</td><td>Considera ineficiências normais; meta realista</td><td>✓ Mais utilizado na prática</td></tr>
+            <tr><td>Padrão Normal</td><td>Média de desempenho de longo prazo com paradas e refugos normais</td><td>Planos de médio prazo</td></tr>
+            <tr><td>Padrão Básico</td><td>Custo base histórico, raramente atualizado</td><td>Utilidade limitada</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>21.2 Análise das Variações</h2>
+
+      <h3>Variações de Matéria-Prima</h3>
+      <div class="formula-box">
+        <div class="box-title">Fórmulas — Variações de MP</div>
+        <div class="box-body">
+<span class="highlight">Variação de Preço (VP)</span> = (Preço Real − Preço Padrão) × Qtde Real Comprada<br>
+<span class="highlight">Variação de Quantidade/Consumo (VQ)</span> = (Qtde Real − Qtde Padrão p/ prod. real) × Preço Padrão<br>
+<span class="highlight">Variação Total</span> = VP + VQ<br><br>
+Variação <span class="highlight">FAVORÁVEL</span>: Real &lt; Padrão (sinal negativo convencionalmente)<br>
+Variação <span class="highlight">DESFAVORÁVEL</span>: Real &gt; Padrão (sinal positivo)
+        </div>
+      </div>
+
+      <h3>Variações de Mão de Obra Direta (MOD)</h3>
+      <div class="formula-box">
+        <div class="box-title">Fórmulas — Variações de MOD</div>
+        <div class="box-body">
+<span class="highlight">Variação de Taxa (Salário)</span> = (Taxa Real − Taxa Padrão) × Horas Reais Trabalhadas<br>
+<span class="highlight">Variação de Eficiência</span> = (Horas Reais − Horas Padrão p/ prod. real) × Taxa Padrão<br>
+<span class="highlight">Variação Total MOD</span> = Var. Taxa + Var. Eficiência
+        </div>
+      </div>
+
+      <h3>Variações de CIF (Duas Variações)</h3>
+      <div class="formula-box">
+        <div class="box-title">Fórmulas — Variações de CIF</div>
+        <div class="box-body">
+<span class="highlight">Variação de Orçamento (Gastos)</span> = CIF Real − CIF Orçado p/ atividade real<br>
+<span class="highlight">Variação de Volume</span> = (Atividade Real − Atividade Normal) × Taxa Fixa Padrão<br>
+<span class="highlight">Variação Total CIF</span> = Var. Orçamento + Var. Volume
+        </div>
+      </div>
+    </div>
+
+    <!-- CAP 22 -->
+    <div class="chapter" id="cap22">
+      <div class="ch-num">Capítulo 22</div>
+      <h1 class="ch-title">Margem de Contribuição</h1>
+
+      <h2>22.1 Conceito e Cálculos</h2>
+      <p>A <strong>Margem de Contribuição (MC)</strong> é o valor que sobra das receitas após a dedução dos custos e despesas variáveis — contribuindo para cobrir os custos fixos e gerar lucro.</p>
+
+      <div class="formula-box">
+        <div class="box-title">Fórmulas Essenciais</div>
+        <div class="box-body">
+<span class="highlight">MC Unitária (MCU)</span> = PVU − CVU (custos e despesas variáveis unitárias)<br>
+<span class="highlight">MC Total</span> = MCU × Quantidade vendida<br>
+<span class="highlight">Índice de MC (%)</span> = MCU / PVU × 100  ←→  Razão de contribuição<br>
+<span class="highlight">Lucro</span> = MC Total − Custos e Despesas Fixas Totais<br><br>
+Exemplo:<br>
+PVU = R$ 100 | CVU = R$ 60 | CF = R$ 50.000<br>
+MCU = R$ 40 | Índice MC = 40%<br>
+PE (un) = 50.000 / 40 = <span class="highlight">1.250 unidades</span>
+        </div>
+      </div>
+
+      <h2>22.2 Aplicações Gerenciais</h2>
+      <ul>
+        <li><strong>Mix de produtos:</strong> priorizar o produto com maior MCU (unidades limitadas) ou maior índice de MC (fator escasso em R$)</li>
+        <li><strong>Ponto de equilíbrio:</strong> PEC = CF / MCU</li>
+        <li><strong>Decisão de aceitar/rejeitar pedido especial:</strong> aceitar se o preço cobrir os custos variáveis (MCU positiva)</li>
+        <li><strong>Terceirização:</strong> comparar custo variável de fabricar × custo de comprar</li>
+      </ul>
+    </div>
+
+    <!-- CAP 23 -->
+    <div class="chapter" id="cap23">
+      <div class="ch-num">Capítulo 23</div>
+      <h1 class="ch-title">Análise Custo × Volume × Lucro (CVL)</h1>
+
+      <h2>23.1 Ponto de Equilíbrio</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Fórmula</th><th>Significado</th></tr></thead>
+          <tbody>
+            <tr><td>PE Contábil — Unid. (PEC)</td><td>CF / MCU</td><td>Quantidade para lucro contábil = zero</td></tr>
+            <tr><td>PE Contábil — Receita (PEC$)</td><td>CF / Índice de MC</td><td>Receita para lucro contábil = zero</td></tr>
+            <tr><td>PE Econômico (PEE)</td><td>(CF + Lucro Desejado) / MCU</td><td>Inclui remuneração mínima do capital</td></tr>
+            <tr><td>PE Financeiro (PEF)</td><td>(CF − Depreciação + Amortiz. de dívidas) / MCU</td><td>Foco no caixa (exclui itens não desembolsáveis)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>23.2 Margem de Segurança</h2>
+      <div class="formula-box">
+        <div class="box-title">Fórmulas — Margem de Segurança</div>
+        <div class="box-body">
+<span class="highlight">MS (unidades)</span> = Vendas Reais − Ponto de Equilíbrio (unidades)<br>
+<span class="highlight">MS (%)</span> = (Vendas Reais − PE) / Vendas Reais × 100<br><br>
+Quanto as vendas podem <span class="highlight">cair</span> antes de a empresa ter prejuízo.<br>
+Quanto maior a MS → menor o risco operacional.
+        </div>
+      </div>
+
+      <h2>23.3 Grau de Alavancagem Operacional (GAO)</h2>
+      <div class="formula-box">
+        <div class="box-title">Fórmulas — GAO</div>
+        <div class="box-body">
+<span class="highlight">GAO</span> = MC Total / Lucro Operacional<br>
+<span class="highlight">GAO</span> = 1 / MS%  ← relação inversa com a margem de segurança<br><br>
+Interpretação: GAO = 4 significa que para cada <span class="highlight">1%</span> de variação nas vendas, o lucro varia <span class="highlight">4%</span>.<br>
+Quanto maior o GAO → maior a alavancagem → maior o risco e o potencial de ganho.
+        </div>
+      </div>
+
+      <h2>23.4 Exemplo Completo CVL</h2>
+      <div class="formula-box">
+        <div class="box-title">Exemplo Integrado</div>
+        <div class="box-body">
+Receita = R$ 500.000 | CVT = R$ 300.000 | CF = R$ 120.000<br><br>
+MC = 500.000 − 300.000 = <span class="highlight">R$ 200.000</span><br>
+Lucro = 200.000 − 120.000 = <span class="highlight">R$ 80.000</span><br>
+Índice MC = 200.000 / 500.000 = <span class="highlight">40%</span><br><br>
+PEC$ = 120.000 / 0,40 = <span class="highlight">R$ 300.000</span><br>
+MS = 500.000 − 300.000 = R$ 200.000 → MS% = <span class="highlight">40%</span><br>
+GAO = 200.000 / 80.000 = <span class="highlight">2,5</span><br><br>
+Interpretação: Se as vendas caírem 40% → lucro = zero (atinge o PE).<br>
+Para cada 1% de aumento nas vendas → lucro sobe <span class="highlight">2,5%</span>.
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <div class="box-title">⚠️ Dica FCC — Ponto de Equilíbrio</div>
+        <div class="box-body">
+          • A FCC cobra muito o <strong>PE em Receita ($)</strong>, não só em unidades.<br>
+          • <strong>PE Financeiro:</strong> despreza depreciação (não é desembolso) e inclui amortizações de dívida.<br>
+          • <strong>PE Econômico:</strong> contempla o lucro mínimo desejado (custo de oportunidade do capital).<br>
+          • A relação <strong>GAO = 1 / MS%</strong> é frequentemente cobrada em alternativas.
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUMO FINAL -->
+    <div class="chapter" id="resumo">
+      <div class="ch-num">Resumo Estratégico</div>
+      <h1 class="ch-title">Principais Pontos para a Prova FCC</h1>
+
+      <h2>Contabilidade Avançada — Flash Cards</h2>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="sc-label">CPC 23</div>
+          <div class="sc-title">Políticas vs Estimativas vs Erros</div>
+          <div class="sc-body">Política: RETROSPECTIVA. Estimativa: PROSPECTIVA. Erro material: RETROSPECTIVA.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 46</div>
+          <div class="sc-title">Hierarquia do Valor Justo</div>
+          <div class="sc-body">L1 (cotado) → L2 (observável) → L3 (não observável). Mensuração de saída.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 12</div>
+          <div class="sc-title">Ajuste a Valor Presente</div>
+          <div class="sc-body">Obrigatório para longo prazo e quando material no curto. Taxa efetiva para juros.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 48</div>
+          <div class="sc-title">Instrumentos Financeiros</div>
+          <div class="sc-body">Ativos: CA, FVOCI, FVTPL. ECL: 3 estágios. Passivos: custo amortizado.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 28</div>
+          <div class="sc-title">Propriedade para Investimento</div>
+          <div class="sc-body">Modelo VJ: sem depreciação, variação no resultado. Modelo custo: com depreciação, divulga VJ.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 06-R2</div>
+          <div class="sc-title">Arrendamento — Arrendatário</div>
+          <div class="sc-body">ADU + Passivo para todos os contratos (exceto curto prazo e baixo valor).</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 18-R2</div>
+          <div class="sc-title">MEP — Dividendos</div>
+          <div class="sc-body">Dividendos (MEP) = REDUZEM o investimento. Dividendos (custo) = RECEITA.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 15</div>
+          <div class="sc-title">Combinação de Negócios</div>
+          <div class="sc-body">Goodwill: não amortiza → impairment. Mais-valia: amortiza. Deságio: receita imediata.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 07</div>
+          <div class="sc-title">Subvenção Governamental</div>
+          <div class="sc-body">Reconhece quando há segurança de cumprimento. Para ativo: deduz ativo ou receita diferida.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 02</div>
+          <div class="sc-title">Câmbio</div>
+          <div class="sc-body">Monetários → resultado. Não monetários → taxa histórica. Conversão de DCs → OCI.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 03</div>
+          <div class="sc-title">DFC</div>
+          <div class="sc-body">Método direto (preferencial). Juros e dividendos: classificação livre (operacional, invest. ou financ.).</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CPC 09</div>
+          <div class="sc-title">DVA</div>
+          <div class="sc-body">Equival. patrimonial = VA recebido. Depreciação = retenção. IR/CSLL = distribuição ao governo.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h2>Contabilidade de Custos — Flash Cards</h2>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="sc-label">Classificação</div>
+          <div class="sc-title">Custo × Despesa</div>
+          <div class="sc-body">Custo: ligado à produção (vai para o estoque). Despesa: ligado a venda/administração (resultado).</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">Custeio</div>
+          <div class="sc-title">Absorção × Variável</div>
+          <div class="sc-body">Lucros iguais quando produção = vendas. Absorção maior quando produção > vendas.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CIF</div>
+          <div class="sc-title">Sub × Super Aplicado</div>
+          <div class="sc-body">Sub-aplicado: CIF real > aplicado → débito no resultado. Super-aplicado: CIF real < aplicado → crédito.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">Equivalentes</div>
+          <div class="sc-title">Produção</div>
+          <div class="sc-body">UE = acabados + PE × % conclusão. MP adicionada no início: 100% da MP nos PE.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">Custo Padrão</div>
+          <div class="sc-title">Variações</div>
+          <div class="sc-body">Favorável: real < padrão. MP: preço e quantidade. MOD: taxa e eficiência. CIF: orçamento e volume.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">CVL</div>
+          <div class="sc-title">Ponto de Equilíbrio</div>
+          <div class="sc-body">PEC = CF / MCU. PEC$ = CF / Índice MC. PEE inclui lucro desejado. PEF exclui depreciação.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">GAO</div>
+          <div class="sc-title">Alavancagem Operacional</div>
+          <div class="sc-body">GAO = MC / Lucro = 1 / MS%. Quanto maior o GAO, maior o risco e o potencial de ganho.</div>
+        </div>
+        <div class="summary-card">
+          <div class="sc-label">MC</div>
+          <div class="sc-title">Margem de Contribuição</div>
+          <div class="sc-body">MCU = PVU − CVU. Índice MC = MCU / PVU. Lucro = MC total − CF total.</div>
+        </div>
+      </div>
+
+      <div class="strategy-box" style="margin-top:32px;">
+        <div class="box-title">🎯 Estratégia de Estudos para a FCC</div>
+        <div class="box-body">
+          <strong>1.</strong> A FCC valoriza o <strong>cálculo numérico</strong> — pratique muitos exercícios com números.<br>
+          <strong>2.</strong> Memorize as fórmulas de margem de contribuição, PE e GAO — aparecem em quase todas as provas.<br>
+          <strong>3.</strong> Domine a tabela <strong>Absorção × Variável</strong> — o efeito no lucro com diferentes volumes é clássico.<br>
+          <strong>4.</strong> Em Contabilidade Avançada, foque em <strong>MEP</strong> (lançamentos) e <strong>combinação de negócios</strong> (goodwill).<br>
+          <strong>5.</strong> Na DFC, saiba quais itens vão em cada atividade e os ajustes do método indireto.<br>
+          <strong>6.</strong> Revise os conceitos do <strong>CPC 48</strong> — instrumentos financeiros são recorrentes nas provas recentes.<br>
+          <strong>7.</strong> Custo Padrão: pratique cálculos de variações (VP, VQ, taxa MOD, eficiência MOD).<br>
+          <strong>8.</strong> Departamentalização: entenda os três métodos de redistribuição e quando usar cada um.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('progress');
+  const main = document.getElementById('main');
+  const scrolled = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  el.style.width = (scrolled / total * 100) + '%';
+});
+
+// Active nav link
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.chapter, [id]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(l => {
+        l.classList.remove('active');
+        if (l.getAttribute('href') === '#' + id) l.classList.add('active');
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+document.querySelectorAll('[id]').forEach(el => observer.observe(el));
+
+// Sidebar toggle
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Search filter
+function filterNav(q) {
+  q = q.toLowerCase();
+  navLinks.forEach(link => {
+    const text = link.textContent.toLowerCase();
+    link.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+}
+
+// Smooth nav click on mobile
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 640) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>

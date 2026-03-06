@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apostila FCC – Língua Portuguesa</title>
+<style>
+  :root {
+    --azul: #1a3a5c;
+    --azul-medio: #2563a8;
+    --azul-claro: #dbeafe;
+    --verde: #16a34a;
+    --verde-claro: #dcfce7;
+    --vermelho: #b91c1c;
+    --vermelho-claro: #fee2e2;
+    --amarelo: #d97706;
+    --amarelo-claro: #fef3c7;
+    --cinza: #f1f5f9;
+    --texto: #1e293b;
+    --borda: #cbd5e1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; color: var(--texto); }
+
+  /* CAPA */
+  #capa {
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-medio) 100%);
+    color: white; text-align: center; padding: 60px 20px;
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  #capa .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px; padding: 6px 20px; font-size: 0.8rem; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 24px; }
+  #capa h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+  #capa h2 { font-size: 1.3rem; font-weight: 400; opacity: 0.85; margin-bottom: 40px; }
+  #capa .temas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 600px; }
+  #capa .tema-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px; padding: 6px 14px; font-size: 0.78rem; }
+  #capa .btn-start { margin-top: 50px; background: white; color: var(--azul);
+    padding: 14px 40px; border-radius: 50px; border: none; font-size: 1rem;
+    font-weight: 700; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+  #capa .btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+
+  /* NAV */
+  #nav {
+    background: var(--azul); color: white; padding: 12px 20px;
+    display: none; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100;
+    flex-wrap: wrap;
+  }
+  #nav .nav-title { font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
+  #nav select { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px; padding: 6px 12px; font-size: 0.85rem; cursor: pointer; flex: 1; min-width: 200px; }
+  #nav select option { background: var(--azul); }
+  #nav .btn-capa { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    color: white; border-radius: 6px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; white-space: nowrap; }
+
+  /* CONTENT */
+  #content { display: none; max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .sec-header { background: linear-gradient(135deg, var(--azul), var(--azul-medio));
+    color: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; }
+  .sec-header .num { font-size: 0.8rem; opacity: 0.7; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .sec-header h2 { font-size: 1.8rem; font-weight: 800; }
+  .sec-header p { margin-top: 8px; opacity: 0.85; font-size: 0.95rem; }
+
+  h3 { color: var(--azul); font-size: 1.1rem; margin: 28px 0 12px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--azul-claro); }
+  h4 { color: var(--azul-medio); font-size: 0.95rem; margin: 16px 0 8px; font-weight: 700; }
+  p { line-height: 1.75; margin-bottom: 10px; font-size: 0.95rem; }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; }
+  li { line-height: 1.75; font-size: 0.95rem; margin-bottom: 4px; }
+
+  .card { background: white; border-radius: 10px; padding: 20px 24px;
+    border: 1px solid var(--borda); margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+
+  .box-dica { background: var(--amarelo-claro); border-left: 4px solid var(--amarelo);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; }
+  .box-dica strong { color: var(--amarelo); }
+  .box-atencao { background: var(--vermelho-claro); border-left: 4px solid var(--vermelho);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; }
+  .box-atencao strong { color: var(--vermelho); }
+  .box-info { background: var(--azul-claro); border-left: 4px solid var(--azul-medio);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; }
+  .box-info strong { color: var(--azul-medio); }
+  .box-ok { background: var(--verde-claro); border-left: 4px solid var(--verde);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; }
+  .box-ok strong { color: var(--verde); }
+
+  .exemplo { background: var(--cinza); border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+    font-style: italic; font-size: 0.92rem; border: 1px solid var(--borda); }
+  .exemplo strong { font-style: normal; color: var(--azul); }
+  .certo { color: var(--verde); font-weight: 700; }
+  .errado { color: var(--vermelho); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 0.9rem; }
+  th { background: var(--azul); color: white; padding: 10px 14px; text-align: left; }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--borda); }
+  tr:nth-child(even) td { background: var(--cinza); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+  @media(max-width:600px){ .grid2 { grid-template-columns: 1fr; } }
+
+  .tag { display: inline-block; background: var(--azul-claro); color: var(--azul);
+    border-radius: 4px; padding: 2px 8px; font-size: 0.78rem; font-weight: 700; margin-right: 4px; }
+
+  /* NAV BOTTOM */
+  .nav-bottom { display: flex; gap: 12px; margin-top: 40px; justify-content: space-between; }
+  .nav-btn { background: var(--azul); color: white; border: none; border-radius: 8px;
+    padding: 12px 24px; cursor: pointer; font-size: 0.9rem; font-weight: 600;
+    transition: background .2s; }
+  .nav-btn:hover { background: var(--azul-medio); }
+  .nav-btn:disabled { background: var(--borda); color: #999; cursor: not-allowed; }
+
+  /* QUESTÕES */
+  .questao { background: white; border: 1px solid var(--borda); border-radius: 10px;
+    padding: 20px 24px; margin: 14px 0; }
+  .questao .enunciado { font-weight: 600; margin-bottom: 12px; line-height: 1.6; }
+  .questao .alternativas { list-style: none; padding: 0; }
+  .questao .alternativas li { padding: 8px 12px; border-radius: 6px; margin: 6px 0;
+    cursor: pointer; border: 1.5px solid var(--borda); transition: all .15s; font-size: 0.92rem; }
+  .questao .alternativas li:hover { border-color: var(--azul-medio); background: var(--azul-claro); }
+  .questao .alternativas li.correta { background: var(--verde-claro); border-color: var(--verde); }
+  .questao .alternativas li.errada { background: var(--vermelho-claro); border-color: var(--vermelho); }
+  .questao .gabarito { display: none; margin-top: 12px; padding: 12px; background: var(--cinza);
+    border-radius: 8px; font-size: 0.88rem; line-height: 1.6; }
+  .questao .gabarito.show { display: block; }
+
+  /* ÍNDICE */
+  .indice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+  .indice-item { background: white; border: 1px solid var(--borda); border-radius: 10px;
+    padding: 16px; cursor: pointer; transition: all .2s; text-align: center; }
+  .indice-item:hover { border-color: var(--azul-medio); background: var(--azul-claro); transform: translateY(-2px); }
+  .indice-item .num { font-size: 1.4rem; font-weight: 800; color: var(--azul); }
+  .indice-item .nome { font-size: 0.82rem; color: #64748b; margin-top: 4px; line-height: 1.3; }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div id="capa">
+  <div class="badge">Banca FCC</div>
+  <h1>Língua Portuguesa</h1>
+  <h2>Apostila Completa para Concursos Públicos</h2>
+  <div class="temas">
+    <span class="tema-badge">Interpretação de Texto</span>
+    <span class="tema-badge">Ortografia &amp; Acentuação</span>
+    <span class="tema-badge">Classes de Palavras</span>
+    <span class="tema-badge">Verbos &amp; Vozes</span>
+    <span class="tema-badge">Concordância</span>
+    <span class="tema-badge">Regência</span>
+    <span class="tema-badge">Crase</span>
+    <span class="tema-badge">Sintaxe</span>
+    <span class="tema-badge">Semântica</span>
+    <span class="tema-badge">Redação Oficial</span>
+  </div>
+  <button class="btn-start" onclick="iniciar()">📖 Começar a Estudar</button>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <span class="nav-title">📘 FCC – Port.</span>
+  <select onchange="irPara(this.value)">
+    <option value="0">📋 Índice Geral</option>
+    <option value="1">1. Interpretação de Texto</option>
+    <option value="2">2. Ortografia Oficial</option>
+    <option value="3">3. Acentuação Gráfica</option>
+    <option value="4">4. Pontuação</option>
+    <option value="5">5. Classes de Palavras</option>
+    <option value="6">6. Vozes Verbais</option>
+    <option value="7">7. Concordância</option>
+    <option value="8">8. Regência</option>
+    <option value="9">9. Sintaxe: Coord. e Subord.</option>
+    <option value="10">10. Crase</option>
+    <option value="11">11. Sinônimos e Antônimos</option>
+    <option value="12">12. Sentido Próprio e Figurado</option>
+    <option value="13">13. Reorganização de Orações</option>
+    <option value="14">14. Redação (frases corretas)</option>
+  </select>
+  <button class="btn-capa" onclick="voltarCapa()">⬅ Capa</button>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+  <!-- ÍNDICE -->
+  <div class="section active" id="sec-0">
+    <div class="sec-header">
+      <div class="num">Apostila FCC</div>
+      <h2>📋 Índice Geral</h2>
+      <p>Selecione um tema para estudar. Cada seção contém teoria, exemplos e questões de fixação.</p>
+    </div>
+    <div class="indice-grid">
+      <div class="indice-item" onclick="irPara('1')"><div class="num">01</div><div class="nome">Interpretação de Texto</div></div>
+      <div class="indice-item" onclick="irPara('2')"><div class="num">02</div><div class="nome">Ortografia Oficial</div></div>
+      <div class="indice-item" onclick="irPara('3')"><div class="num">03</div><div class="nome">Acentuação Gráfica</div></div>
+      <div class="indice-item" onclick="irPara('4')"><div class="num">04</div><div class="nome">Pontuação</div></div>
+      <div class="indice-item" onclick="irPara('5')"><div class="num">05</div><div class="nome">Classes de Palavras</div></div>
+      <div class="indice-item" onclick="irPara('6')"><div class="num">06</div><div class="nome">Vozes Verbais</div></div>
+      <div class="indice-item" onclick="irPara('7')"><div class="num">07</div><div class="nome">Concordância</div></div>
+      <div class="indice-item" onclick="irPara('8')"><div class="num">08</div><div class="nome">Regência</div></div>
+      <div class="indice-item" onclick="irPara('9')"><div class="num">09</div><div class="nome">Sintaxe: Coord. e Subord.</div></div>
+      <div class="indice-item" onclick="irPara('10')"><div class="num">10</div><div class="nome">Crase</div></div>
+      <div class="indice-item" onclick="irPara('11')"><div class="num">11</div><div class="nome">Sinônimos e Antônimos</div></div>
+      <div class="indice-item" onclick="irPara('12')"><div class="num">12</div><div class="nome">Sentido Próprio e Figurado</div></div>
+      <div class="indice-item" onclick="irPara('13')"><div class="num">13</div><div class="nome">Reorganização de Orações</div></div>
+      <div class="indice-item" onclick="irPara('14')"><div class="num">14</div><div class="nome">Redação: Frases Corretas</div></div>
+    </div>
+  </div>
+
+  <!-- 1. INTERPRETAÇÃO DE TEXTO -->
+  <div class="section" id="sec-1">
+    <div class="sec-header">
+      <div class="num">Tema 01</div>
+      <h2>Interpretação de Texto</h2>
+      <p>Habilidade mais cobrada pela FCC — exige leitura crítica e análise do que está explícito e implícito.</p>
+    </div>
+
+    <h3>1.1 Tipos de Questão</h3>
+    <div class="grid2">
+      <div class="card"><h4>📌 Informação Explícita</h4><p>Requer apenas localizar dados diretamente presentes no texto.</p></div>
+      <div class="card"><h4>🔍 Inferência / Implícito</h4><p>Exige conclusão lógica a partir do que o texto sugere, mas não diz diretamente.</p></div>
+      <div class="card"><h4>🎯 Ideia Central</h4><p>Identifica o tema, a tese ou o argumento principal do texto.</p></div>
+      <div class="card"><h4>🔗 Referência Textual</h4><p>Pergunta a que ou a quem se refere determinado pronome, expressão ou palavra.</p></div>
+    </div>
+
+    <h3>1.2 Estratégias de Leitura</h3>
+    <ul>
+      <li><strong>Leia o enunciado antes</strong> de ler o texto: saber o que se pede orienta a leitura.</li>
+      <li><strong>Identifique palavras-chave</strong> e expressões de ênfase (porém, entretanto, além disso).</li>
+      <li><strong>Marque os conectivos</strong>: eles revelam relações lógicas (oposição, causa, conclusão).</li>
+      <li><strong>Atenção aos modalizadores</strong>: "possivelmente", "certamente", "dificilmente" — alteram o sentido.</li>
+      <li><strong>Releia o trecho</strong> citado no enunciado antes de responder.</li>
+    </ul>
+
+    <h3>1.3 Estrutura Argumentativa</h3>
+    <div class="card">
+      <h4>Elementos do texto dissertativo-argumentativo</h4>
+      <ul>
+        <li><strong>Tese:</strong> posição defendida pelo autor.</li>
+        <li><strong>Argumentos:</strong> razões que sustentam a tese.</li>
+        <li><strong>Contra-argumento:</strong> objeção que o autor antecipa e refuta.</li>
+        <li><strong>Conclusão:</strong> retomada e reforço da tese.</li>
+      </ul>
+    </div>
+
+    <div class="box-dica"><strong>⭐ Dica FCC:</strong> A banca adora perguntar sobre o sentido de expressões dentro do contexto e sobre a finalidade de determinado parágrafo. Nunca interprete fora do texto — a resposta sempre está no próprio enunciado.</div>
+
+    <h3>1.4 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Em questões de interpretação, afirmar que algo é "inferência válida" significa que:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','a')">a) A informação está literalmente no texto.</li>
+        <li onclick="responder(this,'b','a')">b) A conclusão pode ser logicamente deduzida do texto, mesmo não estando explícita.</li>
+        <li onclick="responder(this,'c','a')">c) O leitor usou conhecimento externo ao texto.</li>
+        <li onclick="responder(this,'d','a')">d) A afirmação contradiz o texto de forma justificada.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: B.</strong> Inferência é uma conclusão lógica obtida a partir de informações contidas no texto, mesmo sem afirmação direta.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('0')">⬅ Índice</button>
+      <button class="nav-btn" onclick="irPara('2')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 2. ORTOGRAFIA -->
+  <div class="section" id="sec-2">
+    <div class="sec-header">
+      <div class="num">Tema 02</div>
+      <h2>Ortografia Oficial</h2>
+      <p>Regras baseadas no Acordo Ortográfico em vigor. Atenção ao uso do hífen, grafias com S/Z, X/Ch, G/J.</p>
+    </div>
+
+    <h3>2.1 Uso do S e do Z</h3>
+    <table>
+      <tr><th>Escreve-se com S</th><th>Escreve-se com Z</th></tr>
+      <tr><td>Sufixos -oso, -osa: <em>gostoso, bondosa</em></td><td>Sufixo -izar: <em>civilizar, realizar</em></td></tr>
+      <tr><td>Sufixos -ês, -esa: <em>português, inglesa</em></td><td>Sufixo -izar/-ização: <em>hospitalizar</em></td></tr>
+      <tr><td>Palavras com prefixo des-: <em>desejo, descanso</em></td><td>Palavras com sufixo -ez/-eza: <em>frieza, beleza</em></td></tr>
+      <tr><td>Após ditongos: <em>causa, coisa, pouso</em></td><td>Derivados de palavras com z: <em>cruz → cruzeiro</em></td></tr>
+    </table>
+
+    <h3>2.2 Uso do X e do Ch</h3>
+    <ul>
+      <li><strong>X após ditongo:</strong> caixa, feixe, frouxo.</li>
+      <li><strong>X após "en" inicial:</strong> enxame, enxada, enxerto.</li>
+      <li><strong>Ch</strong> em palavras de origem estrangeira ou convencionais: chave, cheque, chá.</li>
+    </ul>
+    <div class="box-atencao"><strong>⚠ Atenção:</strong> <em>Mexer</em> (x) ≠ <em>mecha</em> (ch). Decorar as exceções mais cobradas é fundamental.</div>
+
+    <h3>2.3 Uso do G e do J</h3>
+    <ul>
+      <li>Verbos terminados em <strong>-ger/-gir</strong>: eleger, atingir.</li>
+      <li>Palavras com sufixo <strong>-agem, -igem, -ugem</strong>: viagem, origem, ferrugem.</li>
+      <li><strong>J</strong> em palavras de origem tupi/africana: canjica, jiboia, jabuti.</li>
+    </ul>
+
+    <h3>2.4 Uso do Hífen (Acordo Ortográfico)</h3>
+    <div class="card">
+      <h4>Usa-se hífen:</h4>
+      <ul>
+        <li>Prefixo terminado em vogal + palavra iniciada pela <strong>mesma vogal</strong>: anti-inflamatório, micro-ondas.</li>
+        <li>Prefixos <strong>ex-, sem-, além-, aquém-, recém-, pós-, pré-, pró-</strong> sempre levam hífen: ex-presidente, recém-nascido.</li>
+        <li>Prefixo <strong>sub-</strong> antes de <em>b</em>: sub-base, sub-bibliotecário.</li>
+        <li>Prefixo <strong>mal-</strong> antes de vogal ou <em>h</em>: mal-educado, mal-humorado.</li>
+      </ul>
+      <h4>Não usa hífen:</h4>
+      <ul>
+        <li>Prefixo + palavra com consoante diferente da final do prefixo: antivírus, semicírculo, supermercado.</li>
+        <li>Prefixo terminado em vogal + palavra iniciada por consoante (exceto R e S): anteprojeto, coautor.</li>
+      </ul>
+    </div>
+    <div class="box-dica"><strong>⭐ Dica FCC:</strong> O hífen com <em>re-</em> só é obrigatório diante de <em>e</em>: re-eleger, re-encontrar. Nas demais, sem hífen: reeditar, reescrever (a vogal se duplica).</div>
+
+    <h3>2.5 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Assinale a alternativa em que todas as palavras estão grafadas corretamente:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','c')">a) antiinflamatório, semicírculo, ex-presidente</li>
+        <li onclick="responder(this,'b','c')">b) anti-inflamatório, semicírculo, exprezidente</li>
+        <li onclick="responder(this,'c','c')">c) anti-inflamatório, semicírculo, ex-presidente</li>
+        <li onclick="responder(this,'d','c')">d) antiinflamatório, semi-círculo, ex-presidente</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: C.</strong> "Anti-inflamatório" leva hífen porque o prefixo termina em <em>i</em> e a palavra começa com <em>i</em>. "Semicírculo" não leva hífen. "Ex-presidente" sempre leva hífen.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('1')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('3')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 3. ACENTUAÇÃO -->
+  <div class="section" id="sec-3">
+    <div class="sec-header">
+      <div class="num">Tema 03</div>
+      <h2>Acentuação Gráfica</h2>
+      <p>Regras do Acordo Ortográfico de 1990 (em vigor desde 2009). A FCC cobra muito a perda do acento diferencial e do trema.</p>
+    </div>
+
+    <h3>3.1 Oxítonas</h3>
+    <p>Acentuam-se as oxítonas terminadas em: <strong>A(s), E(s), O(s), EM, ENS</strong>.</p>
+    <div class="exemplo">café, avó, também, armazéns, parabéns</div>
+
+    <h3>3.2 Paroxítonas</h3>
+    <p>Acentuam-se as paroxítonas terminadas em tudo, <strong>exceto</strong> A, E, O, EM, ENS (terminações comuns não acentuadas).</p>
+    <div class="exemplo">fácil, vírus, tórax, hífen, bíceps, tênis, ônibus, álbum</div>
+    <div class="box-atencao"><strong>⚠ Novo acordo:</strong> Paroxítonas com ditongo aberto NÃO se acentuam mais: <span class="errado">idéia, europeu</span> → <span class="certo">ideia, europeu</span>. Exceção: palavras oxítonas ainda se acentuam: <em>chapéu, véu</em>.</div>
+
+    <h3>3.3 Proparoxítonas</h3>
+    <p><strong>Todas</strong> as proparoxítonas são acentuadas, sem exceção.</p>
+    <div class="exemplo">médico, público, lâmpada, ótimo, tráfego</div>
+
+    <h3>3.4 Acento Diferencial</h3>
+    <table>
+      <tr><th>Mantém acento</th><th>Perdeu o acento (Novo Acordo)</th></tr>
+      <tr><td><strong>pôde</strong> (pretérito) × <strong>pode</strong> (presente)</td><td><span class="errado">pêlo, pêra, péla</span> → <span class="certo">pelo, pera, pela</span></td></tr>
+      <tr><td><strong>pôr</strong> (verbo) × <strong>por</strong> (preposição)</td><td><span class="errado">pára, pélo, péla</span> → <span class="certo">para, pelo, pela</span></td></tr>
+      <tr><td><strong>fôrma</strong> (opcional) × <strong>forma</strong></td><td><span class="errado">fêz, fêz</span> → <span class="certo">fez</span></td></tr>
+    </table>
+
+    <h3>3.5 Trema</h3>
+    <p>O trema foi <strong>abolido</strong> em palavras vernáculas e aportuguesadas. Permanece apenas em nomes próprios estrangeiros e seus derivados: <em>Müller, mülleriano</em>.</p>
+    <div class="exemplo"><span class="errado">lingüiça, agüentar, seqüência</span> → <span class="certo">linguiça, aguentar, sequência</span></div>
+
+    <h3>3.6 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Conforme o Acordo Ortográfico em vigor, qual alternativa apresenta grafia correta em todas as palavras?</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','d')">a) idéia, freio, assembléia</li>
+        <li onclick="responder(this,'b','d')">b) lingüiça, juízo, heroína</li>
+        <li onclick="responder(this,'c','d')">c) sequência, pára (verbo), boia</li>
+        <li onclick="responder(this,'d','d')">d) sequência, para (verbo parar), boia</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: D.</strong> "Sequência" sem trema, "para" sem acento diferencial (novo acordo) e "boia" sem acento (ditongo aberto em paroxítona).</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('2')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('4')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 4. PONTUAÇÃO -->
+  <div class="section" id="sec-4">
+    <div class="sec-header">
+      <div class="num">Tema 04</div>
+      <h2>Pontuação</h2>
+      <p>Saber onde se usa (e onde NÃO se usa) vírgula é a questão mais frequente da FCC neste tema.</p>
+    </div>
+
+    <h3>4.1 Vírgula — Usos Obrigatórios</h3>
+    <ul>
+      <li>Separar o <strong>vocativo</strong>: <em>João, venha aqui.</em></li>
+      <li>Isolar o <strong>aposto explicativo</strong>: <em>Brasília, capital do país, é planejada.</em></li>
+      <li>Isolar expressões e orações <strong>intercaladas</strong>: <em>O livro, devo confessar, era difícil.</em></li>
+      <li>Separar <strong>adjuntos adverbiais</strong> deslocados para o início ou meio da frase.</li>
+      <li>Separar orações <strong>coordenadas assindéticas</strong> e sindéticas (exceto com "e" sem ideia adversativa).</li>
+      <li>Separar orações <strong>adverbiais</strong> antecipadas: <em>Quando chegar, avise.</em></li>
+    </ul>
+
+    <h3>4.2 Vírgula — Proibições Clássicas</h3>
+    <div class="box-atencao">
+      <strong>⚠ NUNCA separe com vírgula:</strong>
+      <ul style="margin-top:8px">
+        <li>Sujeito do predicado: <span class="errado">O aluno<strong>,</strong> estudou muito.</span></li>
+        <li>Verbo de seu objeto direto ou indireto: <span class="errado">Ele comprou<strong>,</strong> o livro.</span></li>
+        <li>Nome de seu complemento nominal ou adjunto adnominal restritivo.</li>
+        <li>Oração principal da subordinada substantiva: <span class="errado">Espero<strong>,</strong> que você venha.</span></li>
+      </ul>
+    </div>
+
+    <h3>4.3 Ponto e Vírgula</h3>
+    <ul>
+      <li>Separar orações coordenadas longas, especialmente quando já contêm vírgulas internas.</li>
+      <li>Separar itens de enumerações complexas.</li>
+    </ul>
+
+    <h3>4.4 Dois-Pontos</h3>
+    <ul>
+      <li>Antes de enumeração ou explicação: <em>Trouxe três coisas: caneta, caderno e borracha.</em></li>
+      <li>Antes de citação direta: <em>Ele disse: "Vou chegar tarde."</em></li>
+    </ul>
+
+    <h3>4.5 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Em qual alternativa o uso da vírgula está INCORRETO?</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','c')">a) Quando saí de casa, estava chovendo muito.</li>
+        <li onclick="responder(this,'b','c')">b) Pedro, meu melhor amigo, chegou ontem.</li>
+        <li onclick="responder(this,'c','c')">c) O diretor, assinou o documento importante.</li>
+        <li onclick="responder(this,'d','c')">d) Comprei pão, queijo e manteiga.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: C.</strong> A vírgula separa indevidamente o sujeito ("O diretor") do predicado ("assinou o documento"). Essa é uma das vírgulas proibidas.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('3')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('5')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 5. CLASSES DE PALAVRAS -->
+  <div class="section" id="sec-5">
+    <div class="sec-header">
+      <div class="num">Tema 05</div>
+      <h2>Classes de Palavras</h2>
+      <p>A FCC avalia o emprego, o sentido e as relações que cada classe estabelece no texto.</p>
+    </div>
+
+    <h3>5.1 Substantivo</h3>
+    <p>Nomeia seres, objetos, lugares, sentimentos, ações ou qualidades.</p>
+    <div class="grid2">
+      <div class="card"><h4>Concreto vs. Abstrato</h4><p><strong>Concreto:</strong> cadeira, rio. <strong>Abstrato:</strong> alegria, coragem.</p></div>
+      <div class="card"><h4>Primitivo vs. Derivado</h4><p><strong>Primitivo:</strong> pedra. <strong>Derivado:</strong> pedreira, pedreiro.</p></div>
+      <div class="card"><h4>Simples vs. Composto</h4><p><strong>Simples:</strong> sol. <strong>Composto:</strong> girassol, passatempo.</p></div>
+      <div class="card"><h4>Comum vs. Próprio</h4><p><strong>Comum:</strong> cidade. <strong>Próprio:</strong> Brasília.</p></div>
+    </div>
+
+    <h3>5.2 Adjetivo</h3>
+    <p>Caracteriza ou modifica o substantivo. Pode ter função de adjunto adnominal ou predicativo.</p>
+    <div class="box-info"><strong>ℹ Locução adjetiva:</strong> preposição + substantivo com valor de adjetivo. Ex.: <em>de ouro = dourado; de pedra = pétreo; de leite = lácteo.</em></div>
+
+    <h3>5.3 Pronome</h3>
+    <table>
+      <tr><th>Tipo</th><th>Exemplos</th><th>Função</th></tr>
+      <tr><td>Pessoal reto</td><td>eu, tu, ele, nós, vós, eles</td><td>Sujeito</td></tr>
+      <tr><td>Pessoal oblíquo</td><td>me, te, se, nos, lhe, o, a</td><td>Objeto / complemento</td></tr>
+      <tr><td>Possessivo</td><td>meu, teu, seu, nosso</td><td>Posse</td></tr>
+      <tr><td>Demonstrativo</td><td>este, esse, aquele</td><td>Localização</td></tr>
+      <tr><td>Relativo</td><td>que, o qual, cujo, onde</td><td>Conecta orações</td></tr>
+      <tr><td>Indefinido</td><td>alguém, ninguém, tudo, cada</td><td>Referência imprecisa</td></tr>
+    </table>
+    <div class="box-dica"><strong>⭐ Este/Esse/Aquele:</strong> Este = próximo de quem fala; Esse = próximo de quem ouve; Aquele = distante de ambos. Em textos escritos: este = o que vai ser mencionado; esse/aquele = o já mencionado.</div>
+
+    <h3>5.4 Verbo — Modos e Tempos</h3>
+    <div class="grid2">
+      <div class="card"><h4>Indicativo</h4><p>Fato real ou certo: <em>Ele estuda todo dia.</em></p></div>
+      <div class="card"><h4>Subjuntivo</h4><p>Fato hipotético, duvidoso, desejado: <em>Espero que ele estude.</em></p></div>
+      <div class="card"><h4>Imperativo</h4><p>Ordem, pedido, conselho: <em>Estude mais!</em></p></div>
+      <div class="card"><h4>Infinitivo / Gerúndio / Particípio</h4><p>Formas nominais: <em>estudar / estudando / estudado.</em></p></div>
+    </div>
+
+    <h3>5.5 Advérbio</h3>
+    <p>Modifica verbo, adjetivo ou outro advérbio. Principais classificações:</p>
+    <ul>
+      <li><strong>Tempo:</strong> ontem, hoje, sempre, ainda, já.</li>
+      <li><strong>Modo:</strong> bem, mal, rapidamente (maioria dos -mente).</li>
+      <li><strong>Lugar:</strong> aqui, ali, lá, onde, atrás.</li>
+      <li><strong>Intensidade:</strong> muito, pouco, bastante, demais.</li>
+      <li><strong>Negação/Afirmação:</strong> não, sim, certamente.</li>
+    </ul>
+
+    <h3>5.6 Preposição e Conjunção</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4>Preposições essenciais</h4>
+        <p>a, ante, até, após, com, contra, de, desde, em, entre, para, perante, por, sem, sob, sobre, trás.</p>
+      </div>
+      <div class="card">
+        <h4>Conjunções Coordenativas</h4>
+        <ul>
+          <li><strong>Aditivas:</strong> e, nem, não só... mas também.</li>
+          <li><strong>Adversativas:</strong> mas, porém, contudo, todavia.</li>
+          <li><strong>Conclusivas:</strong> logo, portanto, então, assim.</li>
+          <li><strong>Explicativas:</strong> pois, porque, que.</li>
+          <li><strong>Alternativas:</strong> ou...ou, ora...ora.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>5.7 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">"Embora chovesse muito, ele saiu sem guarda-chuva." — A conjunção "embora" indica relação de:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','b')">a) Causa</li>
+        <li onclick="responder(this,'b','b')">b) Concessão</li>
+        <li onclick="responder(this,'c','b')">c) Condição</li>
+        <li onclick="responder(this,'d','b')">d) Finalidade</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: B.</strong> "Embora" introduz oração subordinada adverbial concessiva — admite um fato contrário sem impedir a ação principal.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('4')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('6')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 6. VOZES VERBAIS -->
+  <div class="section" id="sec-6">
+    <div class="sec-header">
+      <div class="num">Tema 06</div>
+      <h2>Vozes Verbais</h2>
+      <p>A transformação entre voz ativa e passiva é questão certeira nas provas da FCC.</p>
+    </div>
+
+    <h3>6.1 Voz Ativa</h3>
+    <p>O sujeito pratica a ação: <em>O governo aprovou a lei.</em> (sujeito agente)</p>
+
+    <h3>6.2 Voz Passiva Analítica</h3>
+    <p>O sujeito sofre a ação. Formada por: <strong>verbo ser + particípio</strong>.</p>
+    <div class="exemplo"><strong>Ativa:</strong> O governo aprovou a lei. → <strong>Passiva:</strong> A lei foi aprovada pelo governo.</div>
+    <div class="card">
+      <h4>Regra da transformação:</h4>
+      <ol>
+        <li>Objeto direto da ativa → Sujeito da passiva.</li>
+        <li>Sujeito da ativa → Agente da passiva (por / pelo / pela).</li>
+        <li>Verbo: conjugar "ser" no mesmo tempo + particípio do verbo original.</li>
+      </ol>
+    </div>
+
+    <h3>6.3 Voz Passiva Sintética (ou Pronominal)</h3>
+    <p>Usa-se o pronome <strong>se</strong> como partícula apassivadora com verbo na 3.ª pessoa.</p>
+    <div class="exemplo">Vendem-se casas. = Casas são vendidas. | Aluga-se apartamento. = Apartamento é alugado.</div>
+    <div class="box-atencao"><strong>⚠ Atenção:</strong> O "se" como partícula apassivadora exige que o verbo concorde com o sujeito: <em>Vendem-se <u>casas</u></em> (plural) | <em>Vende-se <u>apartamento</u></em> (singular).</div>
+
+    <h3>6.4 Voz Reflexiva</h3>
+    <p>O sujeito pratica e sofre a ação ao mesmo tempo: <em>Ele se feriu.</em></p>
+
+    <h3>6.5 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">A frase "Os documentos foram entregues pela secretária" está na voz passiva analítica. Sua correspondente na voz ativa é:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','b')">a) Entregaram-se os documentos pela secretária.</li>
+        <li onclick="responder(this,'b','b')">b) A secretária entregou os documentos.</li>
+        <li onclick="responder(this,'c','b')">c) Os documentos entregaram a secretária.</li>
+        <li onclick="responder(this,'d','b')">d) A secretária foi entregue pelos documentos.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: B.</strong> O agente da passiva "pela secretária" vira o sujeito ativo; o sujeito da passiva "os documentos" vira objeto direto.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('5')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('7')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 7. CONCORDÂNCIA -->
+  <div class="section" id="sec-7">
+    <div class="sec-header">
+      <div class="num">Tema 07</div>
+      <h2>Concordância Verbal e Nominal</h2>
+      <p>Um dos temas mais cobrados pela FCC, especialmente nos casos especiais de concordância.</p>
+    </div>
+
+    <h3>7.1 Concordância Verbal — Regra Geral</h3>
+    <p>O verbo concorda em número e pessoa com o sujeito.</p>
+
+    <h3>7.2 Casos Especiais de Concordância Verbal</h3>
+    <div class="card">
+      <h4>Sujeito composto antes do verbo → verbo no plural</h4>
+      <div class="exemplo">Pedro e Maria <strong>vieram</strong> à festa.</div>
+    </div>
+    <div class="card">
+      <h4>Sujeito composto posposto → pode concordar com o mais próximo</h4>
+      <div class="exemplo"><strong>Chegou</strong> o diretor e os funcionários. (concordância atrativa)</div>
+    </div>
+    <div class="card">
+      <h4>Verbo "ser" — concordância especial</h4>
+      <div class="exemplo">A vida <strong>são</strong> alegrias. | Tudo <strong>são</strong> flores. | <strong>Somos</strong> nós os responsáveis.</div>
+    </div>
+    <div class="card">
+      <h4>Partitivos / expressões de quantidade</h4>
+      <div class="exemplo">A maioria dos alunos <strong>chegou</strong>. (ou <strong>chegaram</strong> — ambas aceitas) | Metade dos candidatos <strong>foi</strong> aprovada.</div>
+    </div>
+    <div class="card">
+      <h4>"Haver" e "fazer" impessoais</h4>
+      <div class="exemplo"><strong>Há</strong> muitos anos (não "hão"). | <strong>Faz</strong> dois dias (não "fazem").</div>
+    </div>
+
+    <h3>7.3 Concordância Nominal — Regra Geral</h3>
+    <p>Artigos, adjetivos, pronomes e numerais concordam em gênero e número com o substantivo.</p>
+
+    <h3>7.4 Casos Especiais de Concordância Nominal</h3>
+    <div class="card">
+      <h4>Adjetivo + dois substantivos de gêneros diferentes</h4>
+      <div class="exemplo">Comprei <strong>camisas e calças novas</strong>. (concorda com o mais próximo — feminino) <br>Comprei <strong>calças e camisas novos</strong>. (masculino prevalece quando adjetivo vem depois e há gêneros diferentes — opcional)</div>
+    </div>
+    <div class="card">
+      <h4>É proibido / É necessário</h4>
+      <div class="exemplo">
+        <span class="certo">É proibida a entrada.</span> (com artigo → concorda)<br>
+        <span class="certo">É proibido entrada.</span> (sem artigo → invariável)
+      </div>
+    </div>
+    <div class="card">
+      <h4>Mesmo, próprio, só, obrigado</h4>
+      <p>Concordam com o substantivo a que se referem: <em>Elas mesmas fizeram. | Ela própria decidiu. | Muito obrigada.</em></p>
+    </div>
+
+    <h3>7.5 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Assinale a frase com concordância verbal CORRETA:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','c')">a) Haviam muitos problemas a resolver.</li>
+        <li onclick="responder(this,'b','c')">b) Fazem três anos que não o vejo.</li>
+        <li onclick="responder(this,'c','c')">c) Há muitos anos que não nos falamos.</li>
+        <li onclick="responder(this,'d','c')">d) Existem uma solução simples para isso.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: C.</strong> "Haver" com sentido de existir ou tempo decorrido é impessoal (fica na 3ª pessoa do singular). "Fazer" com ideia de tempo decorrido também é impessoal.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('6')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('8')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 8. REGÊNCIA -->
+  <div class="section" id="sec-8">
+    <div class="sec-header">
+      <div class="num">Tema 08</div>
+      <h2>Regência Verbal e Nominal</h2>
+      <p>Regência determina a relação entre verbo/nome e seus complementos. A FCC cobra os verbos de dupla regência.</p>
+    </div>
+
+    <h3>8.1 Conceito</h3>
+    <p><strong>Regência verbal</strong> define se o verbo exige ou não preposição antes do complemento. <strong>Regência nominal</strong> faz o mesmo para nomes (substantivos, adjetivos, advérbios).</p>
+
+    <h3>8.2 Principais Verbos e suas Regências</h3>
+    <table>
+      <tr><th>Verbo</th><th>Regência</th><th>Exemplo</th></tr>
+      <tr><td><strong>Assistir</strong></td><td>a (algo) → OI; transitivo direto (ajudar)</td><td>Assisti <em>ao</em> filme. / O médico assiste o paciente.</td></tr>
+      <tr><td><strong>Aspirar</strong></td><td>a (almejar) → OI; direto (inalar)</td><td>Aspiro <em>a</em> um cargo melhor. / Aspirou o pó.</td></tr>
+      <tr><td><strong>Visar</strong></td><td>a (objetivar) → OI; direto (mirar, rubricar)</td><td>Visa <em>ao</em> lucro. / Visou o documento.</td></tr>
+      <tr><td><strong>Querer</strong></td><td>direto (desejar); a (estimar)</td><td>Quero paz. / Quero <em>bem</em> a você.</td></tr>
+      <tr><td><strong>Obedecer / Desobedecer</strong></td><td>a → OI (sempre)</td><td>Obedeceu <em>ao</em> regulamento.</td></tr>
+      <tr><td><strong>Preferir</strong></td><td>direto (prefere A) + a (do que B)</td><td>Prefiro café <em>a</em> chá. (nunca "do que")</td></tr>
+      <tr><td><strong>Chegar / Ir</strong></td><td>a (nunca "em")</td><td>Cheguei <em>a</em> casa. / Fui <em>ao</em> mercado.</td></tr>
+      <tr><td><strong>Ir / Morar</strong></td><td>em (cidades): <em>Moro em Brasília.</em></td><td>Mas: Fui <em>a</em> Brasília (movimento).</td></tr>
+    </table>
+
+    <h3>8.3 Regência Nominal — Exemplos Frequentes</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4>+ preposição "a"</h4>
+        <ul>
+          <li>Acessível <em>a</em> todos.</li>
+          <li>Atento <em>ao</em> sinal.</li>
+          <li>Favorável <em>à</em> proposta.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>+ preposição "de"</h4>
+        <ul>
+          <li>Capaz <em>de</em> fazer.</li>
+          <li>Certeza <em>de</em> que virá.</li>
+          <li>Gostar <em>de</em> música.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>+ preposição "em"</h4>
+        <ul>
+          <li>Insistir <em>em</em> tentar.</li>
+          <li>Hábil <em>em</em> negócios.</li>
+          <li>Pensar <em>em</em> alguém.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>+ preposição "com"</h4>
+        <ul>
+          <li>Compatível <em>com</em> o sistema.</li>
+          <li>Satisfeito <em>com</em> o resultado.</li>
+          <li>Implicar <em>com</em> alguém (irritar-se).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>8.4 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Assinale a frase em que a regência verbal está CORRETA segundo a norma culta:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','d')">a) Prefiro estudar do que trabalhar.</li>
+        <li onclick="responder(this,'b','d')">b) Ele aspirava o cargo de gerente.</li>
+        <li onclick="responder(this,'c','d')">c) Eu assisti o filme ontem à noite.</li>
+        <li onclick="responder(this,'d','d')">d) Obedecemos às ordens do comandante.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: D.</strong> "Obedecer" é transitivo indireto — exige preposição "a". As demais: "prefiro a" (não "do que"); "aspirava ao cargo"; "assisti ao filme".</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('7')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('9')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 9. SINTAXE -->
+  <div class="section" id="sec-9">
+    <div class="sec-header">
+      <div class="num">Tema 09</div>
+      <h2>Sintaxe: Coordenação e Subordinação</h2>
+      <p>Identificar o tipo de relação entre orações é essencial para interpretar e produzir textos coesos.</p>
+    </div>
+
+    <h3>9.1 Orações Coordenadas</h3>
+    <p>Orações independentes entre si, de mesmo nível sintático.</p>
+    <table>
+      <tr><th>Tipo</th><th>Conjunções</th><th>Sentido</th></tr>
+      <tr><td>Aditiva</td><td>e, nem, não só...mas</td><td>Adição de ideias</td></tr>
+      <tr><td>Adversativa</td><td>mas, porém, contudo, todavia, entretanto</td><td>Oposição / contraste</td></tr>
+      <tr><td>Conclusiva</td><td>logo, portanto, então, por isso, assim</td><td>Conclusão</td></tr>
+      <tr><td>Explicativa</td><td>pois, porque, que</td><td>Explicação/justificativa</td></tr>
+      <tr><td>Alternativa</td><td>ou...ou, ora...ora, quer...quer</td><td>Alternância</td></tr>
+    </table>
+
+    <h3>9.2 Orações Subordinadas Substantivas</h3>
+    <p>Exercem função de substantivo na oração principal.</p>
+    <table>
+      <tr><th>Tipo</th><th>Função</th><th>Exemplo</th></tr>
+      <tr><td>Subjetiva</td><td>Sujeito</td><td><em>É necessário que você estude.</em></td></tr>
+      <tr><td>Objetiva Direta</td><td>Obj. Direto</td><td><em>Ele disse que viria.</em></td></tr>
+      <tr><td>Objetiva Indireta</td><td>Obj. Indireto</td><td><em>Precisamos de que colaborem.</em></td></tr>
+      <tr><td>Predicativa</td><td>Predicativo</td><td><em>O problema é que não há verba.</em></td></tr>
+      <tr><td>Completiva Nominal</td><td>Complemento Nominal</td><td><em>Tenho certeza de que virá.</em></td></tr>
+    </table>
+
+    <h3>9.3 Orações Subordinadas Adjetivas</h3>
+    <div class="grid2">
+      <div class="card"><h4>Restritiva</h4><p>Restringe, delimita o antecedente. <strong>Sem vírgula.</strong><br><em>O aluno <u>que estudou</u> passou.</em></p></div>
+      <div class="card"><h4>Explicativa</h4><p>Apenas acrescenta info ao antecedente. <strong>Com vírgula.</strong><br><em>O João, <u>que estudou muito</u>, passou.</em></p></div>
+    </div>
+
+    <h3>9.4 Orações Subordinadas Adverbiais</h3>
+    <table>
+      <tr><th>Tipo</th><th>Conjunções/Locuções</th></tr>
+      <tr><td>Causal</td><td>porque, pois, visto que, já que, como</td></tr>
+      <tr><td>Concessiva</td><td>embora, ainda que, mesmo que, apesar de que</td></tr>
+      <tr><td>Condicional</td><td>se, caso, desde que, contanto que</td></tr>
+      <tr><td>Final</td><td>para que, a fim de que, que</td></tr>
+      <tr><td>Temporal</td><td>quando, enquanto, logo que, assim que, antes que</td></tr>
+      <tr><td>Comparativa</td><td>como, assim como, tal qual, mais/menos...do que</td></tr>
+      <tr><td>Consecutiva</td><td>de modo que, de forma que, tanto que</td></tr>
+      <tr><td>Proporcional</td><td>à medida que, à proporção que, quanto mais...mais</td></tr>
+    </table>
+
+    <h3>9.5 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">"Trabalhou tanto que adoeceu." — A oração sublinhada é:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','c')">a) Subordinada adverbial concessiva</li>
+        <li onclick="responder(this,'b','c')">b) Subordinada adverbial causal</li>
+        <li onclick="responder(this,'c','c')">c) Subordinada adverbial consecutiva</li>
+        <li onclick="responder(this,'d','c')">d) Coordenada conclusiva</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: C.</strong> A oração consecutiva expressa uma consequência resultante da intensidade indicada na oração principal ("tanto"). Conjunções típicas: "de modo que", "tanto que", "de forma que".</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('8')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('10')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 10. CRASE -->
+  <div class="section" id="sec-10">
+    <div class="sec-header">
+      <div class="num">Tema 10</div>
+      <h2>Ocorrência de Crase</h2>
+      <p>Crase = fusão da preposição "a" com o artigo definido "a(s)". A FCC cobra muito os casos proibidos.</p>
+    </div>
+
+    <h3>10.1 Regra Básica</h3>
+    <p>Para haver crase, devem coexistir: <strong>preposição "a" exigida pelo termo anterior</strong> + <strong>artigo "a" admitido pelo termo seguinte</strong>.</p>
+    <div class="box-ok"><strong>✅ Teste prático:</strong> Substitua o termo feminino por um masculino. Se aparecer "ao", há crase: <em>Fui à escola</em> → Fui <em>ao colégio</em> ✓ → há crase.</div>
+
+    <h3>10.2 Casos Obrigatórios</h3>
+    <ul>
+      <li>Antes de palavras femininas determinadas: <em>Refiro-me <strong>à</strong> proposta.</em></li>
+      <li>Antes de locuções femininas (adverbiais, prepositivas, conjuntivas): <em><strong>à</strong> tarde, <strong>à</strong> medida que, <strong>às</strong> vezes.</em></li>
+      <li>Antes de pronome demonstrativo "aquela/aquele/aquilo": <em>Refiro-me <strong>àquela</strong> decisão.</em></li>
+    </ul>
+
+    <h3>10.3 Casos Proibidos</h3>
+    <div class="box-atencao">
+      <strong>⚠ NUNCA use crase:</strong>
+      <ul style="margin-top:8px">
+        <li>Antes de palavras masculinas: <em>Andou a <u>pé</u>. Referiu-se a <u>Pedro</u>.</em></li>
+        <li>Antes de verbos: <em>Estava disposto a <u>trabalhar</u>.</em></li>
+        <li>Antes de pronomes pessoais, pronomes de tratamento (exceto "senhora/a"): <em>Disse a <u>ele</u>. Dirijo-me a <u>Vossa Excelência</u>.</em></li>
+        <li>Antes de pronomes indefinidos: <em>Entregue a <u>qualquer</u> funcionário.</em></li>
+        <li>Antes de "uma": <em>Saiu a <u>uma</u> hora.</em></li>
+      </ul>
+    </div>
+
+    <h3>10.4 Casos Facultativos</h3>
+    <ul>
+      <li>Antes de nomes próprios femininos de pessoa: <em>Entreguei <strong>a/à</strong> Maria.</em></li>
+      <li>Antes de pronomes possessivos femininos: <em>Refiro-me <strong>a/à</strong> sua proposta.</em></li>
+      <li>Após a preposição "até": <em>Fui até <strong>a/à</strong> farmácia.</em></li>
+    </ul>
+
+    <h3>10.5 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Em qual alternativa o uso da crase está CORRETO?</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','b')">a) Ele começou à trabalhar cedo.</li>
+        <li onclick="responder(this,'b','b')">b) Cheguei à conclusão de que estava errado.</li>
+        <li onclick="responder(this,'c','b')">c) Dirijo-me à Vossa Excelência com respeito.</li>
+        <li onclick="responder(this,'d','b')">d) Viajarei à São Paulo amanhã.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: B.</strong> "Chegar à conclusão" = preposição "a" + artigo "a" diante de substantivo feminino. Erro A: crase antes de verbo. Erro C: "Vossa Excelência" não admite crase. Erro D: São Paulo não aceita artigo, logo não há crase.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('9')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('11')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 11. SINÔNIMOS E ANTÔNIMOS -->
+  <div class="section" id="sec-11">
+    <div class="sec-header">
+      <div class="num">Tema 11</div>
+      <h2>Sinônimos e Antônimos</h2>
+      <p>A FCC cobra substituição de palavras no contexto sem alteração de sentido, e palavras de sentido oposto.</p>
+    </div>
+
+    <h3>11.1 Sinônimos</h3>
+    <p>Palavras de sentido igual ou muito próximo. Na prova, a banca pede a substituição sem alterar o sentido da frase.</p>
+    <div class="box-atencao"><strong>⚠ Atenção ao contexto!</strong> Sinônimos perfeitos são raros. Uma palavra pode ter vários sentidos: "banco" (assento / instituição financeira). O contexto determina qual sinônimo é adequado.</div>
+    <table>
+      <tr><th>Palavra</th><th>Sinônimos contextuais</th></tr>
+      <tr><td>ávido</td><td>ansioso, desejoso, voraz, ganancioso</td></tr>
+      <tr><td>efêmero</td><td>passageiro, transitório, fugaz, breve</td></tr>
+      <tr><td>veemente</td><td>intenso, ardente, impetuoso, enérgico</td></tr>
+      <tr><td>acerbo</td><td>amargo, áspero, cruel, rigoroso</td></tr>
+      <tr><td>austero</td><td>severo, rígido, sóbrio, rigoroso</td></tr>
+      <tr><td>ínfimo</td><td>mínimo, irrisório, insignificante, menor</td></tr>
+      <tr><td>profícuo</td><td>proveitoso, frutífero, útil, produtivo</td></tr>
+    </table>
+
+    <h3>11.2 Antônimos</h3>
+    <p>Palavras de sentido contrário ou oposto.</p>
+    <table>
+      <tr><th>Palavra</th><th>Antônimo</th></tr>
+      <tr><td>prolixo</td><td>conciso, sucinto</td></tr>
+      <tr><td>ávido</td><td>saciado, indiferente</td></tr>
+      <tr><td>efêmero</td><td>perene, eterno, duradouro</td></tr>
+      <tr><td>parcimônia</td><td>prodigalidade, desperdício</td></tr>
+      <tr><td>diligente</td><td>negligente, preguiçoso</td></tr>
+      <tr><td>altruísta</td><td>egoísta</td></tr>
+    </table>
+
+    <h3>11.3 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">No contexto "A reunião foi profícua, com resultados concretos", a palavra "profícua" pode ser substituída, sem alteração de sentido, por:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','c')">a) tediosa</li>
+        <li onclick="responder(this,'b','c')">b) efêmera</li>
+        <li onclick="responder(this,'c','c')">c) proveitosa</li>
+        <li onclick="responder(this,'d','c')">d) acirrada</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: C.</strong> "Profícuo" significa produtivo, proveitoso. "Proveitosa" é seu sinônimo contextual mais adequado.</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('10')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('12')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 12. SENTIDO PRÓPRIO E FIGURADO -->
+  <div class="section" id="sec-12">
+    <div class="sec-header">
+      <div class="num">Tema 12</div>
+      <h2>Sentido Próprio e Figurado</h2>
+      <p>A FCC avalia a capacidade de perceber quando palavras são usadas literalmente ou de forma conotativa.</p>
+    </div>
+
+    <h3>12.1 Denotação (Sentido Próprio)</h3>
+    <p>Uso literal da palavra, conforme o dicionário, sem carga emocional adicional.</p>
+    <div class="exemplo">A <strong>pedra</strong> caiu do morro e atingiu a estrada. (sentido literal: objeto geológico)</div>
+
+    <h3>12.2 Conotação (Sentido Figurado)</h3>
+    <p>Uso metafórico, simbólico ou expressivo da palavra, carregado de subjetividade.</p>
+    <div class="exemplo">Ele tem um <strong>coração de pedra</strong>. (sentido figurado: insensibilidade)</div>
+
+    <h3>12.3 Figuras de Linguagem mais cobradas</h3>
+    <table>
+      <tr><th>Figura</th><th>Definição</th><th>Exemplo</th></tr>
+      <tr><td><strong>Metáfora</strong></td><td>Comparação implícita</td><td>A vida é uma viagem.</td></tr>
+      <tr><td><strong>Metonímia</strong></td><td>Substituição por relação lógica</td><td>Li Machado de Assis. (= obra)</td></tr>
+      <tr><td><strong>Hipérbole</strong></td><td>Exagero expressivo</td><td>Estou morrendo de fome.</td></tr>
+      <tr><td><strong>Ironia</strong></td><td>Dizer o contrário do que pensa</td><td>Que gentileza a sua! (em contexto negativo)</td></tr>
+      <tr><td><strong>Eufemismo</strong></td><td>Suavizar ideia desagradável</td><td>Ele nos deixou. (= morreu)</td></tr>
+      <tr><td><strong>Antítese</strong></td><td>Oposição de ideias</td><td>Unidos na alegria e na tristeza.</td></tr>
+      <tr><td><strong>Paradoxo</strong></td><td>Ideias contraditórias coexistindo</td><td>Morro de amor pela vida.</td></tr>
+      <tr><td><strong>Personificação</strong></td><td>Dar qualidades humanas a seres inanimados</td><td>O vento sussurou segredos.</td></tr>
+    </table>
+
+    <h3>12.4 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">"O Brasil acordou ontem com a notícia da tragédia." O verbo "acordou" está usado em sentido:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','b')">a) Próprio, pois indica ação de despertar.</li>
+        <li onclick="responder(this,'b','b')">b) Figurado, pois o país não dorme literalmente — indica que a população tomou conhecimento.</li>
+        <li onclick="responder(this,'c','b')">c) Próprio, pois Brasil é sujeito gramatical da oração.</li>
+        <li onclick="responder(this,'d','b')">d) Figurado, pois "acordou" é verbo impessoal aqui.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: B.</strong> "Acordar" é usado metaforicamente — o país não dorme. Trata-se de personificação com sentido conotativo de "tomar consciência".</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('11')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('13')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 13. REORGANIZAÇÃO DE ORAÇÕES -->
+  <div class="section" id="sec-13">
+    <div class="sec-header">
+      <div class="num">Tema 13</div>
+      <h2>Reorganização de Orações e Períodos</h2>
+      <p>Equivalência e transformação de estruturas sintáticas mantendo o mesmo sentido.</p>
+    </div>
+
+    <h3>13.1 Transformações Mais Cobradas</h3>
+    <div class="card">
+      <h4>Voz Ativa ↔ Passiva</h4>
+      <div class="exemplo"><em>O governo publicou o decreto</em> → <em>O decreto foi publicado pelo governo.</em></div>
+    </div>
+    <div class="card">
+      <h4>Oração Reduzida ↔ Desenvolvida</h4>
+      <div class="exemplo"><em>Ao sair, apague a luz.</em> (reduzida de infinitivo) ↔ <em>Quando sair, apague a luz.</em> (desenvolvida temporal)</div>
+      <div class="exemplo"><em>Chegando em casa, dormiu.</em> (reduzida de gerúndio) ↔ <em>Assim que chegou em casa, dormiu.</em></div>
+      <div class="exemplo"><em>Terminada a prova, foi embora.</em> (reduzida de particípio) ↔ <em>Depois que a prova terminou, foi embora.</em></div>
+    </div>
+    <div class="card">
+      <h4>Substituição de Conectivos</h4>
+      <p>Manter o sentido ao trocar conjunções:</p>
+      <div class="exemplo"><em>Embora seja difícil</em> ↔ <em>Apesar de ser difícil</em> ↔ <em>Por mais difícil que seja</em> (todas: concessivas)</div>
+      <div class="exemplo"><em>Porque estudou</em> ↔ <em>Visto que estudou</em> ↔ <em>Já que estudou</em> (todas: causais)</div>
+    </div>
+    <div class="card">
+      <h4>Nominalização</h4>
+      <p>Substituir oração por sintagma nominal equivalente:</p>
+      <div class="exemplo"><em>Como o projeto foi aprovado...</em> ↔ <em>Com a aprovação do projeto...</em></div>
+    </div>
+
+    <h3>13.2 Tabela de Equivalências</h3>
+    <table>
+      <tr><th>Estrutura Original</th><th>Estrutura Equivalente</th><th>Relação</th></tr>
+      <tr><td>embora + subjuntivo</td><td>apesar de + infinitivo</td><td>Concessão</td></tr>
+      <tr><td>para que + subjuntivo</td><td>a fim de + infinitivo</td><td>Finalidade</td></tr>
+      <tr><td>porque + indicativo</td><td>por + infinitivo nominal</td><td>Causa</td></tr>
+      <tr><td>se + subjuntivo</td><td>caso + subjuntivo / desde que</td><td>Condição</td></tr>
+      <tr><td>à medida que</td><td>à proporção que / quanto mais...mais</td><td>Proporção</td></tr>
+    </table>
+
+    <h3>13.3 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">"Embora houvesse protestos, a decisão foi mantida." Mantendo o mesmo sentido, qual transformação é CORRETA?</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','c')">a) Porque havia protestos, a decisão foi mantida.</li>
+        <li onclick="responder(this,'b','c')">b) Se houver protestos, a decisão será mantida.</li>
+        <li onclick="responder(this,'c','c')">c) Apesar dos protestos, a decisão foi mantida.</li>
+        <li onclick="responder(this,'d','c')">d) Desde que houvesse protestos, a decisão foi mantida.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: C.</strong> "Embora houvesse protestos" (concessiva desenvolvida) equivale a "Apesar dos protestos" (concessiva reduzida de preposição + substantivo).</div>
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('12')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('14')">Próximo ➡</button>
+    </div>
+  </div>
+
+  <!-- 14. REDAÇÃO -->
+  <div class="section" id="sec-14">
+    <div class="sec-header">
+      <div class="num">Tema 14</div>
+      <h2>Redação — Reconhecimento de Frases Corretas</h2>
+      <p>A FCC pede identificação de frases corretas/incorretas considerando norma culta, concordância, regência, crase e pontuação.</p>
+    </div>
+
+    <h3>14.1 Checklist da Frase Correta</h3>
+    <div class="card">
+      <ul>
+        <li>✅ Concordância verbal e nominal respeitadas.</li>
+        <li>✅ Regência dos verbos obedecida.</li>
+        <li>✅ Crase usada apenas onde obrigatória.</li>
+        <li>✅ Ortografia e acentuação corretas.</li>
+        <li>✅ Vírgulas apenas onde permitidas (não entre sujeito e verbo, nem entre verbo e objeto).</li>
+        <li>✅ Pronomes em posição adequada (próclise, ênclise, mesóclise).</li>
+        <li>✅ Sentido sem ambiguidade ou contradição.</li>
+      </ul>
+    </div>
+
+    <h3>14.2 Colocação Pronominal</h3>
+    <table>
+      <tr><th>Tipo</th><th>Posição</th><th>Contexto</th></tr>
+      <tr><td><strong>Próclise</strong></td><td>Antes do verbo</td><td>Palavra atrativa: não, nunca, pronome relativo, conj. subordinativa, advérbio: <em>Não <strong>me</strong> diga.</em></td></tr>
+      <tr><td><strong>Ênclise</strong></td><td>Depois do verbo</td><td>Início de frase, após pausa (vírgula), verbo no imperativo afirmativo: <em>Diga-<strong>me</strong>.</em></td></tr>
+      <tr><td><strong>Mesóclise</strong></td><td>Dentro do verbo</td><td>Futuro do presente e futuro do pretérito: <em>Dir-<strong>te</strong>-ei a verdade.</em></td></tr>
+    </table>
+    <div class="box-dica"><strong>⭐ Dica FCC:</strong> A banca cobra que pronome oblíquo NÃO inicia período: <span class="errado">Me diga a verdade.</span> → <span class="certo">Diga-me a verdade.</span> Porém com palavra atrativa antes é próclise: <em>Não me diga a verdade.</em></div>
+
+    <h3>14.3 Paralelismo Sintático</h3>
+    <p>Elementos coordenados devem pertencer à mesma classe gramatical ou estrutura:</p>
+    <div class="exemplo"><span class="errado">Gosto de ler, de esportes e passear.</span> (paralelo quebrado)<br><span class="certo">Gosto de ler, de praticar esportes e de passear.</span></div>
+
+    <h3>14.4 Erros Clássicos da FCC</h3>
+    <table>
+      <tr><th>Erro</th><th>Incorreto</th><th>Correto</th></tr>
+      <tr><td>Pleonasmo vicioso</td><td>subir para cima</td><td>subir</td></tr>
+      <tr><td>Regência</td><td>obedecer a lei</td><td>obedecer à lei</td></tr>
+      <tr><td>Concordância</td><td>haviam muitas pessoas</td><td>havia muitas pessoas</td></tr>
+      <tr><td>Crase indevida</td><td>começou à trabalhar</td><td>começou a trabalhar</td></tr>
+      <tr><td>Pronome no início</td><td>Me disseram que...(início)</td><td>Disseram-me que...</td></tr>
+      <tr><td>Gerúndio desvinculado</td><td>Saindo de casa, a chuva começou.</td><td>Saindo de casa, ele encontrou chuva.</td></tr>
+    </table>
+
+    <h3>14.5 Questões de Fixação</h3>
+    <div class="questao">
+      <div class="enunciado">Assinale a alternativa em que a frase está CORRETA segundo a norma culta:</div>
+      <ul class="alternativas">
+        <li onclick="responder(this,'a','d')">a) Haviam muitos candidatos inscritos no concurso.</li>
+        <li onclick="responder(this,'b','d')">b) Me disseram que a prova foi adiada.</li>
+        <li onclick="responder(this,'c','d')">c) Prefiro café do que chá pela manhã.</li>
+        <li onclick="responder(this,'d','d')">d) Informaram-nos que os resultados seriam divulgados em breve.</li>
+      </ul>
+      <div class="gabarito">✅ <strong>Gabarito: D.</strong> "Informaram-nos" está correto (ênclise após forma verbal sem palavra atrativa). Erro A: "haver" impessoal (havia). Erro B: pronome oblíquo iniciando frase. Erro C: "preferir A do que B" — o correto é "preferir A a B".</div>
+    </div>
+
+    <div class="box-ok" style="margin-top:30px">
+      <strong>🎉 Parabéns!</strong> Você concluiu todos os 14 temas da apostila de Língua Portuguesa para a banca FCC. Revise os pontos em que errou e refaça as questões. Bons estudos e boa prova!
+    </div>
+    <div class="nav-bottom">
+      <button class="nav-btn" onclick="irPara('13')">⬅ Anterior</button>
+      <button class="nav-btn" onclick="irPara('0')">📋 Índice</button>
+    </div>
+  </div>
+
+</div><!-- end content -->
+
+<script>
+let secAtual = 0;
+
+function iniciar() {
+  document.getElementById('capa').style.display = 'none';
+  document.getElementById('nav').style.display = 'flex';
+  document.getElementById('content').style.display = 'block';
+}
+function voltarCapa() {
+  document.getElementById('capa').style.display = 'flex';
+  document.getElementById('nav').style.display = 'none';
+  document.getElementById('content').style.display = 'none';
+}
+function irPara(n) {
+  const num = parseInt(n);
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const sec = document.getElementById('sec-' + num);
+  if (sec) {
+    sec.classList.add('active');
+    secAtual = num;
+    document.querySelector('#nav select').value = String(num);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
+function responder(el, escolha, gabarito) {
+  const questao = el.closest('.questao');
+  if (questao.querySelector('.gabarito.show')) return;
+  const itens = questao.querySelectorAll('.alternativas li');
+  itens.forEach(i => {
+    const letra = i.getAttribute('onclick').match(/'([a-d])'/)[1];
+    if (letra === gabarito) i.classList.add('correta');
+    else if (i === el && escolha !== gabarito) i.classList.add('errada');
+  });
+  questao.querySelector('.gabarito').classList.add('show');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apostila FCC - Tecnologias da Informação</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --ink: #1f2937;
+      --muted: #4b5563;
+      --line: #dbe3ee;
+      --accent: #1d4ed8;
+      --accent-2: #0f766e;
+      --warn: #92400e;
+      --soft: #eff6ff;
+      --soft-2: #ecfeff;
+      --soft-3: #fff7ed;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: 100vh;
+    }
+    aside {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      overflow: auto;
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 24px 18px 40px;
+      border-right: 1px solid #1e293b;
+    }
+    aside h1 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+      line-height: 1.3;
+    }
+    aside p {
+      margin: 0 0 18px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    nav a {
+      display: block;
+      color: #dbeafe;
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+    nav a:hover { background: #1e3a8a; }
+    main {
+      max-width: 1100px;
+      padding: 28px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero, section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+    }
+    .hero h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--accent);
+      border: 1px solid #bfdbfe;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+    }
+    h2, h3, h4 { color: #111827; }
+    h2 { margin-top: 0; font-size: 1.7rem; }
+    h3 {
+      margin-top: 28px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--line);
+      font-size: 1.25rem;
+    }
+    h4 {
+      margin-top: 22px;
+      margin-bottom: 8px;
+      font-size: 1.06rem;
+    }
+    p { margin: 10px 0; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 7px 0; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: #fcfdff;
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .note, .tip, .warning {
+      border-left: 5px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    .note { background: var(--soft); }
+    .tip {
+      background: var(--soft-2);
+      border-left-color: var(--accent-2);
+    }
+    .warning {
+      background: var(--soft-3);
+      border-left-color: #f59e0b;
+      color: var(--warn);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.96rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f8fafc;
+    }
+    code, pre {
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.92rem;
+    }
+    pre {
+      background: #0b1220;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 12px;
+      overflow: auto;
+      border: 1px solid #1f2937;
+    }
+    .checklist li::marker { content: "✓ "; color: var(--accent-2); }
+    .footer {
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+      padding: 12px 0 24px;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      aside {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #1e293b;
+      }
+      .grid-2 { grid-template-columns: 1fr; }
+      main { padding: 16px; }
+      .hero, section { padding: 20px; }
+    }
+    @media print {
+      aside { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      body { background: #fff; }
+      .hero, section {
+        box-shadow: none;
+        border: 1px solid #cbd5e1;
+        break-inside: avoid;
+      }
+      a { color: #000; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <h1>Apostila FCC</h1>
+      <p>Tecnologias da Informação — resumo teórico, pontos de prova, quadros comparativos e revisão.</p>
+      <nav>
+        <a href="#orientacoes">Como estudar</a>
+        <a href="#banco-dados">10.1 Fundamentos de Banco de Dados</a>
+        <a href="#sql">SQL, T-SQL, PL/pgSQL e PL/SQL</a>
+        <a href="#modelagem">Modelagem relacional e multidimensional</a>
+        <a href="#adm-sgbd">Administração de SGBDs</a>
+        <a href="#pipeline">Pipeline de Dados, ETL e ELT</a>
+        <a href="#olap">OLAP e bases multidimensionais</a>
+        <a href="#datalake">Data Lake, DW, Data Mining e Big Data</a>
+        <a href="#nosql">Bancos Não Relacionais</a>
+        <a href="#projetos">10.2 Gestão de Projetos</a>
+        <a href="#dados">10.3 Ciência e Análise de Dados</a>
+        <a href="#questoes">Roteiro de revisão</a>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <span class="badge">Material em HTML</span>
+        <h2>Apostila de Estudos para Concursos — Banca FCC</h2>
+        <p><strong>Eixo:</strong> Tecnologias da Informação</p>
+        <p>Este material foi organizado com foco em revisão objetiva, vocabulário técnico, distinções conceituais e tópicos que a FCC costuma explorar: definições, comparações, aplicações práticas, vantagens, limitações, governança, desempenho e integração entre tecnologias.</p>
+        <div class="tip">
+          <strong>Estratégia:</strong> leia primeiro os quadros comparativos, depois os resumos, e finalize cada bloco respondendo mentalmente: <em>o que é, para que serve, quando usar, vantagens, limitações e diferenças para conceitos próximos</em>.
+        </div>
+      </section>
+
+      <section id="orientacoes">
+        <h2>Como estudar este conteúdo</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Foco da FCC</h4>
+            <ul>
+              <li>Conceitos centrais e terminologia exata.</li>
+              <li>Distinções entre tecnologias parecidas.</li>
+              <li>Aplicação prática em contexto organizacional.</li>
+              <li>Governança, segurança, integridade e desempenho.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Método de revisão</h4>
+            <ul>
+              <li>Estudo teórico curto e recorrente.</li>
+              <li>Revisões em 24h, 7 dias e 30 dias.</li>
+              <li>Resolução de questões por assunto.</li>
+              <li>Produção de mapas mentais e flashcards.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="banco-dados">
+        <h2>10.1 Fundamentos de Banco de Dados</h2>
+        <p>Banco de dados é um conjunto organizado de dados relacionados, persistidos e gerenciados por um Sistema Gerenciador de Banco de Dados (SGBD). O SGBD oferece mecanismos para armazenamento, consulta, segurança, controle de concorrência, integridade e recuperação.</p>
+
+        <h3>Conceitos fundamentais</h3>
+        <ul>
+          <li><strong>Dado:</strong> elemento bruto, sem contexto completo.</li>
+          <li><strong>Informação:</strong> dado interpretado e contextualizado.</li>
+          <li><strong>Metadado:</strong> dado sobre o dado, como tipo, origem e significado.</li>
+          <li><strong>Instância:</strong> conteúdo atual do banco em um momento específico.</li>
+          <li><strong>Esquema:</strong> estrutura lógica estável do banco.</li>
+        </ul>
+
+        <h3>Arquitetura em três níveis</h3>
+        <table>
+          <thead>
+            <tr><th>Nível</th><th>Descrição</th><th>Objetivo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Interno</td><td>Forma física de armazenamento</td><td>Eficiência e implementação</td></tr>
+            <tr><td>Conceitual</td><td>Estrutura lógica global do banco</td><td>Representar entidades, relacionamentos e restrições</td></tr>
+            <tr><td>Externo</td><td>Visões específicas para usuários ou aplicações</td><td>Abstração e segurança</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <strong>Ponto de prova:</strong> independência de dados significa que alterações em um nível não devem obrigar mudanças em níveis superiores. Pode ser <em>física</em> ou <em>lógica</em>.
+        </div>
+      </section>
+
+      <section id="sql">
+        <h2>SQL, T-SQL, PL/pgSQL e PL/SQL</h2>
+        <p>Em SGBDs relacionais, a linguagem principal é a SQL. Ela se divide em subconjuntos conforme a finalidade.</p>
+
+        <h3>Subconjuntos da SQL</h3>
+        <table>
+          <thead>
+            <tr><th>Categoria</th><th>Função</th><th>Comandos típicos</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DDL</td><td>Definição da estrutura</td><td>CREATE, ALTER, DROP, TRUNCATE</td></tr>
+            <tr><td>DML</td><td>Manipulação dos dados</td><td>INSERT, UPDATE, DELETE, MERGE</td></tr>
+            <tr><td>DQL</td><td>Consulta</td><td>SELECT</td></tr>
+            <tr><td>DCL</td><td>Controle de acesso</td><td>GRANT, REVOKE</td></tr>
+            <tr><td>TCL</td><td>Controle de transações</td><td>COMMIT, ROLLBACK, SAVEPOINT</td></tr>
+          </tbody>
+        </table>
+
+        <h3>SQL padrão e extensões procedurais</h3>
+        <ul>
+          <li><strong>SQL:</strong> linguagem declarativa padrão para definição e manipulação em bancos relacionais.</li>
+          <li><strong>T-SQL:</strong> extensão da SQL usada no Microsoft SQL Server. Inclui variáveis, blocos de controle, tratamento de erros e recursos procedurais.</li>
+          <li><strong>PL/pgSQL:</strong> linguagem procedural do PostgreSQL para funções, procedimentos e gatilhos.</li>
+          <li><strong>PL/SQL:</strong> linguagem procedural do Oracle, integrando SQL com estruturas de programação.</li>
+        </ul>
+
+        <h3>Exemplos básicos</h3>
+        <pre>-- DDL
+CREATE TABLE cliente (
+  id INT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  limite_credito DECIMAL(10,2)
+);
+
+-- DML
+INSERT INTO cliente (id, nome, limite_credito)
+VALUES (1, 'Ana', 1500.00);
+
+-- DQL
+SELECT nome, limite_credito
+FROM cliente
+WHERE limite_credito &gt; 1000;
+
+-- TCL
+BEGIN;
+UPDATE cliente SET limite_credito = 1800 WHERE id = 1;
+COMMIT;</pre>
+
+        <h3>Objetos programáveis</h3>
+        <ul>
+          <li><strong>Views:</strong> consultas armazenadas; podem restringir acesso a colunas e linhas.</li>
+          <li><strong>Stored Procedures:</strong> rotinas reutilizáveis para regras de negócio ou administração.</li>
+          <li><strong>Functions:</strong> retornam valor ou conjunto de valores.</li>
+          <li><strong>Triggers:</strong> executadas automaticamente em resposta a eventos como INSERT, UPDATE ou DELETE.</li>
+        </ul>
+
+        <div class="warning">
+          <strong>Atenção:</strong> a FCC pode cobrar diferença entre linguagem <em>declarativa</em> e <em>procedural</em>. SQL descreve <em>o que</em> se deseja. PL/SQL, T-SQL e PL/pgSQL permitem detalhar <em>como</em> processar, com laços, condições e exceções.
+        </div>
+      </section>
+
+      <section id="modelagem">
+        <h2>Modelagem de Dados: modelos relacional e multidimensional</h2>
+
+        <h3>Modelo relacional</h3>
+        <p>Organiza dados em relações (tabelas), compostas por linhas (tuplas) e colunas (atributos). Baseia-se em chaves, restrições e operações relacionais.</p>
+        <ul>
+          <li><strong>Chave primária:</strong> identifica unicamente cada tupla.</li>
+          <li><strong>Chave estrangeira:</strong> implementa relacionamento entre tabelas.</li>
+          <li><strong>Domínio:</strong> conjunto de valores permitidos para um atributo.</li>
+          <li><strong>Integridade de entidade:</strong> chave primária não pode ser nula.</li>
+          <li><strong>Integridade referencial:</strong> chave estrangeira deve apontar para valor existente ou ser nula, conforme regra.</li>
+        </ul>
+
+        <h4>Normalização</h4>
+        <p>Processo de organização do esquema para reduzir redundância e evitar anomalias de inserção, atualização e exclusão.</p>
+        <table>
+          <thead>
+            <tr><th>Forma Normal</th><th>Ideia central</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1FN</td><td>Atributos atômicos, sem grupos repetitivos</td></tr>
+            <tr><td>2FN</td><td>Elimina dependência parcial da chave composta</td></tr>
+            <tr><td>3FN</td><td>Elimina dependências transitivas</td></tr>
+            <tr><td>BCNF</td><td>Refina dependências funcionais com maior rigor</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Modelo multidimensional</h3>
+        <p>Voltado a análise gerencial e apoio à decisão. Organiza dados em <strong>fatos</strong> e <strong>dimensões</strong>.</p>
+        <ul>
+          <li><strong>Tabela fato:</strong> armazena medidas quantitativas, como valor vendido, quantidade, custo.</li>
+          <li><strong>Tabelas dimensão:</strong> armazenam contexto descritivo, como tempo, produto, cliente, região.</li>
+          <li><strong>Granularidade:</strong> nível de detalhe do fato.</li>
+        </ul>
+
+        <h4>Esquemas típicos</h4>
+        <table>
+          <thead>
+            <tr><th>Esquema</th><th>Características</th><th>Vantagem</th><th>Limitação</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Estrela</td><td>Fato central e dimensões desnormalizadas</td><td>Consultas simples e rápidas</td><td>Mais redundância</td></tr>
+            <tr><td>Floco de neve</td><td>Dimensões normalizadas</td><td>Menor redundância</td><td>Consultas mais complexas</td></tr>
+            <tr><td>Constelação</td><td>Múltiplas tabelas fato compartilhando dimensões</td><td>Flexibilidade analítica</td><td>Modelagem mais complexa</td></tr>
+          </tbody>
+        </table>
+
+        <div class="tip">
+          <strong>Resumo prático:</strong> modelo relacional é mais associado ao processamento transacional (OLTP). Modelo multidimensional é mais associado ao processamento analítico (OLAP).
+        </div>
+      </section>
+
+      <section id="adm-sgbd">
+        <h2>Administração de banco de dados relacionais</h2>
+
+        <h3>3.1 Projeto e implantação de SGBDs relacionais</h3>
+        <p>O projeto passa por levantamento de requisitos, modelagem conceitual, lógica e física, definição de restrições, índices, particionamento, políticas de segurança e estratégias de disponibilidade.</p>
+        <ul>
+          <li>Escolha do SGBD conforme custo, suporte, volume e requisitos de negócio.</li>
+          <li>Definição de armazenamento, tablespaces, logs e parâmetros de instância.</li>
+          <li>Planejamento de capacidade e crescimento.</li>
+          <li>Documentação de esquemas, rotinas e dependências.</li>
+        </ul>
+
+        <h3>3.2 Administração de usuários e perfis de acesso</h3>
+        <p>Envolve autenticação, autorização e segregação de funções.</p>
+        <ul>
+          <li><strong>Usuários:</strong> identidades individuais ou de serviço.</li>
+          <li><strong>Roles/perfis:</strong> conjuntos de permissões reutilizáveis.</li>
+          <li><strong>Princípio do menor privilégio:</strong> conceder apenas o necessário.</li>
+          <li><strong>Auditoria:</strong> registrar ações sensíveis.</li>
+        </ul>
+
+        <h3>3.3 Controle de proteção, integridade e concorrência</h3>
+        <h4>Proteção e integridade</h4>
+        <ul>
+          <li>Restrições <code>NOT NULL</code>, <code>UNIQUE</code>, <code>CHECK</code>, <code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>.</li>
+          <li>Validações em regras de negócio e triggers.</li>
+          <li>Criptografia em repouso e em trânsito.</li>
+        </ul>
+
+        <h4>Concorrência e transações</h4>
+        <p>Transação é uma unidade lógica de trabalho. Deve obedecer às propriedades <strong>ACID</strong>:</p>
+        <ul>
+          <li><strong>Atomicidade:</strong> tudo ou nada.</li>
+          <li><strong>Consistência:</strong> leva o banco de um estado válido a outro.</li>
+          <li><strong>Isolamento:</strong> transações concorrentes não devem interferir indevidamente.</li>
+          <li><strong>Durabilidade:</strong> após confirmação, os dados persistem.</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr><th>Problema de concorrência</th><th>Descrição</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dirty Read</td><td>Leitura de dado ainda não confirmado</td></tr>
+            <tr><td>Non-repeatable Read</td><td>Mesma consulta retorna valores diferentes na mesma transação</td></tr>
+            <tr><td>Phantom Read</td><td>Reexecução da consulta retorna novas linhas</td></tr>
+            <tr><td>Lost Update</td><td>Atualização de uma transação sobrescreve outra</td></tr>
+          </tbody>
+        </table>
+
+        <p>O controle pode ocorrer por bloqueios, MVCC (controle de concorrência multiversão) e níveis de isolamento.</p>
+
+        <h3>3.4 Backup e restauração de dados</h3>
+        <ul>
+          <li><strong>Backup completo:</strong> cópia integral.</li>
+          <li><strong>Incremental:</strong> copia alterações desde o último backup.</li>
+          <li><strong>Diferencial:</strong> copia alterações desde o último backup completo.</li>
+          <li><strong>Snapshot:</strong> fotografia lógica ou física em certo instante.</li>
+          <li><strong>Point-in-time recovery:</strong> recuperação para momento específico.</li>
+        </ul>
+        <div class="warning">
+          Backup sem teste de restauração é falsa segurança. A política deve prever RPO e RTO.
+        </div>
+
+        <h3>3.5 Monitoramento e otimização de desempenho</h3>
+        <ul>
+          <li>Análise de planos de execução.</li>
+          <li>Criação e revisão de índices.</li>
+          <li>Estatísticas atualizadas do otimizador.</li>
+          <li>Tuning de consultas e parametrização do SGBD.</li>
+          <li>Monitoramento de CPU, memória, I/O, locks e crescimento de tabelas.</li>
+          <li>Particionamento, cache e materialized views conforme cenário.</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr><th>Recurso</th><th>Impacto</th><th>Observação</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Índice</td><td>Acelera leitura seletiva</td><td>Pode prejudicar escrita e ocupar espaço</td></tr>
+            <tr><td>Particionamento</td><td>Melhora gerenciamento e acesso segmentado</td><td>Útil em grandes volumes</td></tr>
+            <tr><td>Cache</td><td>Reduz acesso a disco</td><td>Depende de memória disponível</td></tr>
+            <tr><td>Materialized View</td><td>Agiliza consultas complexas</td><td>Exige atualização periódica</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="pipeline">
+        <h2>Pipeline de Dados: fundamentos, orquestração, integração, ETL, ELT e ferramentas</h2>
+        <p>Pipeline de dados é o fluxo automatizado pelo qual dados são coletados, transformados, validados, transportados e disponibilizados para consumo analítico ou operacional.</p>
+
+        <h3>Etapas comuns</h3>
+        <ol>
+          <li>Ingestão de dados</li>
+          <li>Validação e qualidade</li>
+          <li>Transformação</li>
+          <li>Armazenamento</li>
+          <li>Disponibilização para consumo</li>
+          <li>Monitoramento e reprocessamento</li>
+        </ol>
+
+        <h3>ETL x ELT</h3>
+        <table>
+          <thead>
+            <tr><th>Modelo</th><th>Fluxo</th><th>Uso comum</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ETL</td><td>Extrair → Transformar → Carregar</td><td>Quando a transformação deve ocorrer antes do destino</td></tr>
+            <tr><td>ELT</td><td>Extrair → Carregar → Transformar</td><td>Ambientes analíticos modernos com alto poder de processamento</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Orquestração</h3>
+        <p>Orquestrar é coordenar dependências, agendamentos, retries, monitoramento e observabilidade do pipeline.</p>
+        <ul>
+          <li>Controle de DAGs (grafos acíclicos dirigidos).</li>
+          <li>Agendamento e execução de tarefas.</li>
+          <li>Tratamento de falhas e reprocessamento.</li>
+          <li>Rastreabilidade e auditoria.</li>
+        </ul>
+
+        <h3>Ferramentas e ecossistema</h3>
+        <ul>
+          <li><strong>Orquestração:</strong> Airflow, Prefect, Luigi.</li>
+          <li><strong>Integração:</strong> Talend, Pentaho, SSIS, dbt.</li>
+          <li><strong>Streaming:</strong> Kafka, Spark Streaming, Flink.</li>
+          <li><strong>Processamento:</strong> Spark, Hive, Beam.</li>
+        </ul>
+
+        <div class="note">
+          <strong>Ponto-chave:</strong> integração de dados envolve interoperabilidade entre fontes heterogêneas, resolução de formatos, padronização, qualidade e consistência semântica.
+        </div>
+      </section>
+
+      <section id="olap">
+        <h2>OLAP: conceitos e aplicações</h2>
+        <p>OLAP (Online Analytical Processing) é o processamento analítico multidimensional voltado a consultas complexas, agregações e exploração interativa de dados.</p>
+
+        <h3>Operações típicas de OLAP</h3>
+        <ul>
+          <li><strong>Roll-up:</strong> agregação em nível mais alto.</li>
+          <li><strong>Drill-down:</strong> detalhamento em nível mais fino.</li>
+          <li><strong>Slice:</strong> seleção de uma fatia do cubo.</li>
+          <li><strong>Dice:</strong> seleção de subcubo com múltiplos critérios.</li>
+          <li><strong>Pivot:</strong> rotação da visualização.</li>
+        </ul>
+
+        <h3>Modelagem e otimização de bases multidimensionais</h3>
+        <ul>
+          <li>Definir granularidade correta das tabelas fato.</li>
+          <li>Escolher dimensões conformadas quando compartilhadas.</li>
+          <li>Usar agregados pré-computados em cenários de alta demanda analítica.</li>
+          <li>Aplicar particionamento, compressão e indexação apropriada.</li>
+          <li>Gerenciar Slowly Changing Dimensions (SCD).</li>
+        </ul>
+
+        <h4>Tipos de SCD</h4>
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Tratamento de alteração na dimensão</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tipo 1</td><td>Sobrescreve o valor antigo</td></tr>
+            <tr><td>Tipo 2</td><td>Cria novo registro com histórico</td></tr>
+            <tr><td>Tipo 3</td><td>Mantém valor atual e anterior em colunas separadas</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="datalake">
+        <h2>Pré-processamento, Data Lake, Data Warehouse, Data Mining e Big Data</h2>
+
+        <h3>Pré-processamento de dados</h3>
+        <p>Etapa de preparação para análise ou modelagem. Busca elevar qualidade, consistência e adequação dos dados.</p>
+        <ul>
+          <li>Limpeza de dados e tratamento de inconsistências.</li>
+          <li>Tratamento de valores ausentes.</li>
+          <li>Padronização e normalização.</li>
+          <li>Codificação de variáveis categóricas.</li>
+          <li>Redução de dimensionalidade.</li>
+          <li>Detecção de outliers.</li>
+          <li>Transformações logarítmicas, discretização e escalonamento.</li>
+        </ul>
+
+        <h3>Data Lake</h3>
+        <p>Repositório centralizado capaz de armazenar dados estruturados, semiestruturados e não estruturados em grande escala, geralmente em formato bruto.</p>
+        <ul>
+          <li>Alta flexibilidade de ingestão.</li>
+          <li>Suporte a múltiplos formatos.</li>
+          <li>Schema-on-read: o esquema é aplicado no consumo.</li>
+        </ul>
+
+        <h3>Data Warehouse</h3>
+        <p>Repositório integrado, histórico e orientado a assunto para suporte à decisão. Em geral, trabalha com dados consolidados e modelados para análise.</p>
+        <ul>
+          <li><strong>Orientado por assunto</strong></li>
+          <li><strong>Integrado</strong></li>
+          <li><strong>Não volátil</strong></li>
+          <li><strong>Variável no tempo</strong></li>
+        </ul>
+
+        <h3>Data Lake x Data Warehouse</h3>
+        <table>
+          <thead>
+            <tr><th>Aspecto</th><th>Data Lake</th><th>Data Warehouse</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dados</td><td>Brutos ou pouco tratados</td><td>Tratados e integrados</td></tr>
+            <tr><td>Esquema</td><td>Schema-on-read</td><td>Schema-on-write</td></tr>
+            <tr><td>Usuário típico</td><td>Cientistas e engenheiros de dados</td><td>Analistas e gestores</td></tr>
+            <tr><td>Objetivo</td><td>Flexibilidade e exploração</td><td>Consistência analítica</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Data Mining</h3>
+        <p>Mineração de dados é o processo de descoberta de padrões úteis, correlações, agrupamentos, regras e tendências em grandes conjuntos de dados.</p>
+        <h4>Tarefas comuns</h4>
+        <ul>
+          <li>Classificação</li>
+          <li>Regressão</li>
+          <li>Clusterização</li>
+          <li>Regras de associação</li>
+          <li>Detecção de anomalias</li>
+          <li>Sumarização</li>
+        </ul>
+
+        <h3>Big Data</h3>
+        <p>Big Data trata de dados com grande volume, alta velocidade de geração e grande variedade, exigindo arquiteturas escaláveis e técnicas específicas de armazenamento e análise.</p>
+        <ul>
+          <li><strong>3 Vs clássicos:</strong> volume, velocidade e variedade.</li>
+          <li><strong>Outros Vs frequentes:</strong> veracidade, valor e variabilidade.</li>
+          <li>Uso de processamento distribuído e escalabilidade horizontal.</li>
+        </ul>
+
+        <div class="tip">
+          Em prova, Big Data costuma ser associado a ecossistemas distribuídos, tolerância a falhas, paralelismo e tratamento de dados massivos estruturados e não estruturados.
+        </div>
+      </section>
+
+      <section id="nosql">
+        <h2>Bancos de Dados Não Relacionais</h2>
+        <p>Os bancos não relacionais surgem para atender requisitos como escalabilidade horizontal, baixa latência, flexibilidade de esquema e tratamento de grandes volumes ou estruturas de dados específicas.</p>
+
+        <h3>11.1 Fundamentos, administração, desempenho e configuração</h3>
+        <ul>
+          <li>Escalabilidade horizontal por particionamento (sharding).</li>
+          <li>Replicação para disponibilidade e leitura distribuída.</li>
+          <li>Modelagem orientada ao acesso, não necessariamente à normalização.</li>
+          <li>Trade-offs entre consistência, disponibilidade e tolerância a partições.</li>
+        </ul>
+
+        <h4>CAP e consistência</h4>
+        <p>O teorema CAP afirma que, diante de partições de rede, um sistema distribuído precisa priorizar consistência ou disponibilidade. Muitos bancos NoSQL adotam consistência eventual em certos cenários.</p>
+
+        <h3>11.2 Tipos</h3>
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Estrutura</th><th>Uso típico</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Chave-valor</td><td>Pares chave → valor</td><td>Cache, sessões, alta performance</td></tr>
+            <tr><td>Documentos</td><td>Documentos JSON/BSON/XML</td><td>Aplicações flexíveis e catálogos</td></tr>
+            <tr><td>Grafos</td><td>Nós e arestas</td><td>Redes sociais, recomendação, fraude</td></tr>
+          </tbody>
+        </table>
+
+        <h3>11.3 Bancos NoSQL: MongoDB, Redis e Neo4j</h3>
+        <h4>MongoDB</h4>
+        <ul>
+          <li>Banco orientado a documentos.</li>
+          <li>Armazena documentos BSON em coleções.</li>
+          <li>Esquema flexível.</li>
+          <li>Suporta índices, agregações, replicação e sharding.</li>
+        </ul>
+
+        <h4>Redis</h4>
+        <ul>
+          <li>Banco em memória, do tipo chave-valor.</li>
+          <li>Extremamente rápido.</li>
+          <li>Usado em cache, filas, sessões e contadores.</li>
+          <li>Suporta estruturas como strings, lists, sets, hashes e sorted sets.</li>
+        </ul>
+
+        <h4>Neo4j</h4>
+        <ul>
+          <li>Banco orientado a grafos.</li>
+          <li>Representa entidades como nós e relacionamentos como arestas.</li>
+          <li>Consultas por relações complexas são seu ponto forte.</li>
+          <li>Utiliza linguagem Cypher.</li>
+        </ul>
+
+        <div class="warning">
+          <strong>Erro comum:</strong> NoSQL não significa ausência de SQL nem ausência de estrutura. Significa, em geral, “não apenas relacional”, com outros modelos de dados e trade-offs específicos.
+        </div>
+      </section>
+
+      <section id="projetos">
+        <h2>10.2 Gestão de Projetos</h2>
+
+        <h3>Gerenciamento de Projetos — PMBOK 7ª edição</h3>
+        <p>Projeto é um esforço temporário empreendido para criar um produto, serviço ou resultado único. A 7ª edição do PMBOK desloca o foco de processos prescritivos para princípios e domínios de desempenho.</p>
+
+        <h4>Projetos e a organização</h4>
+        <ul>
+          <li>Projetos implementam mudanças e estratégia.</li>
+          <li>Devem gerar valor e alinhar-se aos objetivos organizacionais.</li>
+          <li>Interagem com operações, programas, portfólios e governança.</li>
+        </ul>
+
+        <h4>Princípios fundamentais</h4>
+        <ol>
+          <li>Ser um administrador diligente, respeitoso e cuidadoso.</li>
+          <li>Criar ambiente colaborativo.</li>
+          <li>Engajar efetivamente as partes interessadas.</li>
+          <li>Focar em valor.</li>
+          <li>Reconhecer, avaliar e responder a interações do sistema.</li>
+          <li>Demonstrar comportamento de liderança.</li>
+          <li>Adaptar com base no contexto.</li>
+          <li>Construir qualidade nos processos e entregas.</li>
+          <li>Navegar na complexidade.</li>
+          <li>Otimizar respostas a riscos.</li>
+          <li>Adotar adaptabilidade e resiliência.</li>
+          <li>Permitir mudanças para alcançar o estado futuro desejado.</li>
+        </ol>
+
+        <h4>Domínios de desempenho</h4>
+        <table>
+          <thead>
+            <tr><th>Domínio</th><th>Foco</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Partes interessadas</td><td>Relacionamento e engajamento</td></tr>
+            <tr><td>Equipe</td><td>Desenvolvimento, colaboração e liderança</td></tr>
+            <tr><td>Abordagem de desenvolvimento e ciclo de vida</td><td>Predição, adaptação ou híbrido</td></tr>
+            <tr><td>Planejamento</td><td>Organização do trabalho</td></tr>
+            <tr><td>Trabalho do projeto</td><td>Execução e coordenação</td></tr>
+            <tr><td>Entrega</td><td>Valor e requisitos</td></tr>
+            <tr><td>Medição</td><td>Desempenho e acompanhamento</td></tr>
+            <tr><td>Incerteza</td><td>Riscos, ambiguidade e complexidade</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Metodologias Ágeis</h3>
+        <p>Abordagens ágeis priorizam adaptação, colaboração, feedback rápido e entregas incrementais.</p>
+
+        <h4>Scrum</h4>
+        <ul>
+          <li><strong>Papéis:</strong> Product Owner, Scrum Master, Developers.</li>
+          <li><strong>Eventos:</strong> Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective.</li>
+          <li><strong>Artefatos:</strong> Product Backlog, Sprint Backlog, Increment.</li>
+        </ul>
+
+        <h4>Kanban</h4>
+        <ul>
+          <li>Gestão visual do fluxo.</li>
+          <li>Limites de trabalho em progresso (WIP).</li>
+          <li>Melhoria contínua do fluxo.</li>
+        </ul>
+
+        <h4>Scrumban</h4>
+        <p>Combina cadência do Scrum com gestão de fluxo do Kanban.</p>
+
+        <h4>Extreme Programming (XP)</h4>
+        <ul>
+          <li>Programação em par.</li>
+          <li>Integração contínua.</li>
+          <li>Testes automatizados.</li>
+          <li>Refatoração frequente.</li>
+          <li>Pequenas entregas.</li>
+        </ul>
+
+        <h4>Lean e Modelagem Ágil</h4>
+        <ul>
+          <li>Eliminar desperdícios.</li>
+          <li>Entregar valor rapidamente.</li>
+          <li>Aprendizado contínuo.</li>
+          <li>Modelar apenas o necessário.</li>
+        </ul>
+
+        <h4>Guia de Prática Ágil do PMI</h4>
+        <p>Integra princípios ágeis com gestão de projetos, reconhecendo abordagens preditivas, iterativas, incrementais e híbridas.</p>
+
+        <div class="tip">
+          Em prova, compare bem: <strong>Scrum</strong> enfatiza papéis e eventos; <strong>Kanban</strong>, fluxo contínuo e WIP; <strong>XP</strong>, práticas técnicas de engenharia de software; <strong>Lean</strong>, eliminação de desperdício e geração de valor.
+        </div>
+      </section>
+
+      <section id="dados">
+        <h2>10.3 Ciência e Análise de Dados</h2>
+
+        <h3>Análise de Agrupamentos (Clusterização)</h3>
+        <p>Técnicas de agrupamento buscam identificar grupos homogêneos sem variável-alvo explícita.</p>
+        <h4>Medidas de distância/semelhança</h4>
+        <ul>
+          <li>Euclidiana</li>
+          <li>Manhattan</li>
+          <li>Minkowski</li>
+          <li>Cosseno</li>
+          <li>Jaccard</li>
+        </ul>
+        <h4>Esquemas</h4>
+        <ul>
+          <li><strong>Hierárquicos:</strong> aglomerativos ou divisivos.</li>
+          <li><strong>Não hierárquicos:</strong> como k-means.</li>
+        </ul>
+
+        <h3>Análise Fatorial por Componentes Principais e correlação de Pearson</h3>
+        <ul>
+          <li><strong>Correlação de Pearson:</strong> mede intensidade e direção de relação linear entre variáveis quantitativas.</li>
+          <li><strong>PCA:</strong> reduz dimensionalidade, transformando variáveis correlacionadas em componentes principais ortogonais.</li>
+        </ul>
+
+        <h3>Análise de Correspondência Simples e Múltipla</h3>
+        <p>Técnicas para explorar associação entre categorias em tabelas de contingência.</p>
+        <ul>
+          <li><strong>Simples:</strong> duas variáveis categóricas.</li>
+          <li><strong>Múltipla:</strong> mais de duas variáveis categóricas.</li>
+        </ul>
+
+        <h3>Modelos Lineares de Regressão</h3>
+        <ul>
+          <li><strong>Regressão simples:</strong> uma variável explicativa.</li>
+          <li><strong>Regressão múltipla:</strong> várias variáveis explicativas.</li>
+          <li><strong>Avaliação:</strong> coeficientes, significância, R², análise de resíduos, multicolinearidade e erro de predição.</li>
+        </ul>
+
+        <h3>Regressão Logística</h3>
+        <ul>
+          <li><strong>Binária:</strong> duas classes.</li>
+          <li><strong>Multinomial:</strong> múltiplas classes nominais.</li>
+          <li>Usa função logística para modelar probabilidades.</li>
+          <li>Métrica comum: acurácia, precisão, recall, F1, ROC-AUC.</li>
+        </ul>
+
+        <h3>Regressão para Dados de Contagem</h3>
+        <ul>
+          <li><strong>Poisson:</strong> contagens com média aproximadamente igual à variância.</li>
+          <li><strong>Binomial Negativa:</strong> útil quando há superdispersão.</li>
+        </ul>
+
+        <h3>Redes Neurais Artificiais e Machine Learning</h3>
+        <ul>
+          <li><strong>Aprendizado supervisionado:</strong> usa rótulos conhecidos.</li>
+          <li><strong>Aprendizado não supervisionado:</strong> busca padrões sem rótulos.</li>
+          <li><strong>TensorFlow e PyTorch:</strong> bibliotecas para deep learning.</li>
+          <li><strong>Python:</strong> linguagem central no ecossistema de ciência de dados.</li>
+        </ul>
+
+        <h4>Exemplos de tarefas</h4>
+        <table>
+          <thead>
+            <tr><th>Tarefa</th><th>Tipo</th><th>Exemplo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Classificação</td><td>Supervisionado</td><td>Prever inadimplência</td></tr>
+            <tr><td>Regressão</td><td>Supervisionado</td><td>Prever arrecadação</td></tr>
+            <tr><td>Clusterização</td><td>Não supervisionado</td><td>Segmentar clientes</td></tr>
+            <tr><td>Redução de dimensionalidade</td><td>Não supervisionado</td><td>Compressão de variáveis</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Visualização e Análise Exploratória de Dados</h3>
+        <ul>
+          <li>Resumo estatístico inicial.</li>
+          <li>Identificação de padrões, anomalias e distribuições.</li>
+          <li>Uso de histogramas, boxplots, dispersão, séries temporais e mapas quando pertinentes.</li>
+          <li>EDA antecede modelagem e ajuda a formular hipóteses.</li>
+        </ul>
+
+        <h3>Business Intelligence</h3>
+        <p>BI reúne processos e tecnologias para coleta, organização, análise e compartilhamento de informações com foco na tomada de decisão.</p>
+        <ul>
+          <li>Dashboards e relatórios analíticos.</li>
+          <li>Indicadores de desempenho.</li>
+          <li>Integração com DW, cubos e visualizações.</li>
+          <li><strong>Power BI:</strong> ferramenta de visualização, modelagem e publicação de relatórios.</li>
+        </ul>
+
+        <h3>Séries Temporais</h3>
+        <ul>
+          <li><strong>Tendência:</strong> direção de longo prazo.</li>
+          <li><strong>Sazonalidade:</strong> padrão periódico.</li>
+          <li><strong>Estacionariedade:</strong> propriedades estatísticas estáveis ao longo do tempo.</li>
+        </ul>
+
+        <h4>Modelos</h4>
+        <ul>
+          <li><strong>ARMA:</strong> para séries estacionárias.</li>
+          <li><strong>ARIMA:</strong> inclui diferenciação para estacionariedade.</li>
+          <li><strong>ETS:</strong> erro, tendência e sazonalidade em suavização exponencial.</li>
+        </ul>
+
+        <h4>Avaliação de modelos</h4>
+        <ul>
+          <li>MAE, MSE, RMSE, MAPE.</li>
+          <li>Análise de resíduos.</li>
+          <li>Capacidade preditiva fora da amostra.</li>
+        </ul>
+
+        <div class="note">
+          <strong>Aplicação cobrada:</strong> previsão de arrecadação pode exigir entendimento de tendência, sazonalidade, eventos excepcionais e escolha apropriada do modelo temporal.
+        </div>
+      </section>
+
+      <section id="questoes">
+        <h2>Roteiro final de revisão</h2>
+        <ol class="checklist">
+          <li>Diferenciar OLTP, OLAP, Data Lake e Data Warehouse.</li>
+          <li>Revisar DDL, DML, DCL, TCL e objetos programáveis.</li>
+          <li>Fixar ACID, controle de concorrência e níveis de isolamento.</li>
+          <li>Comparar ETL e ELT com exemplos de uso.</li>
+          <li>Memorizar estrela, floco de neve e constelação.</li>
+          <li>Distinguir MongoDB, Redis e Neo4j.</li>
+          <li>Revisar PMBOK 7: princípios e domínios de desempenho.</li>
+          <li>Diferenciar Scrum, Kanban, Scrumban, XP e Lean.</li>
+          <li>Fixar regressão linear, logística, Poisson e binomial negativa.</li>
+          <li>Revisar clusterização, PCA, correspondência, BI e séries temporais.</li>
+        </ol>
+
+        <div class="warning">
+          Faça questões logo após revisar cada bloco. Leitura passiva dá falsa sensação de domínio.
+        </div>
+      </section>
+
+      <div class="footer">
+        Apostila em HTML preparada para estudo, leitura em navegador e impressão em PDF.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
